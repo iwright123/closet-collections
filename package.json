@@ -21,6 +21,7 @@
       "eslint --fix"
     ]
   },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Most-Valuable-Programmers/closet-collections.git"
