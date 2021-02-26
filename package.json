@@ -1,0 +1,68 @@
+{
+  "name": "thesis",
+  "version": "1.0.0",
+  "description": "senior immersion thesis app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js",
+    "dev": "webpack",
+    "lint": "eslint . --ext .js,.jsx --fix",
+    "format": "prettier --write ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Most-Valuable-Programmers/closet-collections.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Most-Valuable-Programmers/closet-collections/issues"
+  },
+  "homepage": "https://github.com/Most-Valuable-Programmers/closet-collections#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "eslint-config-airbnb": "^18.2.1",
+    "cloudinary": "^1.24.0",
+    "cloudinary-react": "^1.6.8",
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sequelize": "^6.5.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.1",
+    "@babel/preset-env": "^7.13.5",
+    "@babel/preset-react": "^7.12.13",
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^5.1.1",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "socket-io": "^1.0.0",
+    "ts-loader": "^8.0.17",
+    "typescript": "^4.2.2",
+    "typescript-loader": "^1.1.3",
+    "webpack": "^5.24.2",
+    "webpack-cli": "^4.5.0"
+  }
+}
