@@ -6,16 +6,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/index.js",
-    "dev": "webpack"
+    "dev": "webpack",
+    "lint": "eslint . --ext .js,.jsx --fix",
+    "format": "prettier --write ."
   },
   "husky": {
     "hooks": {
       "applypatch-msg": "echo \"[Husky] applypatch-msg\"",
-        "pre-applypatch": "echo \"[Husky] pre-applypatch\"",
-        "post-applypatch": "echo \"[Husky] post-applypatch\"",
-        "pre-commit": "echo \"[Husky] pre-commit\""
+      "pre-applypatch": "echo \"[Husky] pre-applypatch\"",
+      "post-applypatch": "echo \"[Husky] post-applypatch\"",
+      "pre-commit": "echo \"[Husky] pre-commit\""
     }
   },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Most-Valuable-Programmers/closet-collections.git"
@@ -43,6 +46,7 @@
     "@babel/preset-react": "^7.12.13",
     "eslint": "^7.20.0",
     "husky": "^5.1.1",
+    "prettier": "^2.2.1",
     "socket-io": "^1.0.0",
     "ts-loader": "^8.0.17",
     "typescript": "^4.2.2",
