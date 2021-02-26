@@ -12,13 +12,9 @@
   },
   "husky": {
     "hooks": {
-      "applypatch-msg": "echo \"[Husky] applypatch-msg\"",
-      "pre-applypatch": "echo \"[Husky] pre-applypatch\"",
-      "post-applypatch": "echo \"[Husky] post-applypatch\"",
-      "pre-commit": "echo \"[Husky] pre-commit\""
+      "pre-commit": "eslint src --fix"
     }
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Most-Valuable-Programmers/closet-collections.git"
@@ -32,6 +28,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "eslint-config-airbnb": "^18.2.1",
+    "cloudinary": "^1.24.0",
+    "cloudinary-react": "^1.6.8",
     "express": "^4.17.1",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
