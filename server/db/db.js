@@ -20,6 +20,93 @@ const Users = db.define('Users', {
   }
 });
 
+const Items = db.define('Items', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  shirts: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+  pants: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+  shoes: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+  dresses: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+  accessories: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+});
+
+const WhiteboardPost = db.define('WhiteboardPost', {
+  id_user: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  outfit_id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  likes: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+  },
+  dislikes: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+  },
+  comments: {
+    type: Sequelize.STRING,
+    unique: true
+  }
+});
+
+const Outfit = db.define('Outfit', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  outfit: {
+    type: Sequelize.STRING,
+    unique: true
+  }
+});
+
+const Calendar = db.define('Calendar', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  date: {
+    type: Sequelize.STRING
+  }
+})
+
+
+
+
+
 
 // db.sync({ force: true })
 //   .then(() => {
@@ -29,4 +116,8 @@ const Users = db.define('Users', {
 module.exports = {
   db,
   Users,
+  Items,
+  WhiteboardPost,
+  Outfit,
+
 };
