@@ -4,7 +4,6 @@
   "description": "senior immersion thesis app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/index.js",
     "dev": "webpack",
     "lint": "eslint . --ext .js,.jsx --fix",
