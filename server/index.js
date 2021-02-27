@@ -4,15 +4,21 @@ const { GoogleStrategy } = require('./passport.js');
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv');
 const app = express();
+
+dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
 const port = 3000;
 const dist = path.resolve(__dirname, '..', 'client', 'dist');
 
-
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(express.static(dist));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(cookieParser());
-
+///////////GOOGLE AUTH ///////////
 app.use(
   session({
     secret: process.env.clientSecret,
@@ -54,7 +60,7 @@ app.delete('/logout', (req, res) => {
   res.clearCookie('thesis');
   res.json(false);
 });
-
+///////////GOOGLE AUTH ^^^^^^///////////
 
 app.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
