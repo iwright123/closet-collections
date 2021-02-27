@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const { db } = require('./db/db.js');
 const { GoogleStrategy } = require('./passport.js');
 const passport = require('passport');
 const session = require('express-session');
