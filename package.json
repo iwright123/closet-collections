@@ -49,5 +49,17 @@
     "typescript-loader": "^1.1.3",
     "webpack": "^5.24.2",
     "webpack-cli": "^4.5.0"
+  },
+
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
