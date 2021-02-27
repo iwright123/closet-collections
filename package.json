@@ -5,22 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "dev": "webpack",
-    "lint": "eslint . --ext .js,.jsx --fix",
-    "format": "prettier --write ."
+    "dev": "webpack"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier --write",
-      "eslint --fix"
-    ]
-  },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Most-Valuable-Programmers/closet-collections.git"
