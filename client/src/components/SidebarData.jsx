@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import HomeIcon from '@material-ui/icons/Home';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
@@ -27,6 +27,6 @@ export const SidebarData = [
     icon: <EventAvailableIcon />,
     link: '/calendar'
   },
-]
+];
 
 
