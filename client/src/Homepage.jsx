@@ -8,18 +8,18 @@ import Calendar from './components/Calendar.jsx';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
-// function App() {
-//   return (
-//    <div className='App'>
-//      <Router>
+const Homepage = () => {
+  return (
+    <div className='App'>
+      <Router>
 
-// <Sidebar />
-// <Switch>
+        <Sidebar />
+        <Switch>
 
-// </Switch>
-//      </Router>
-//    </div>
-//   );
-// }
+        </Switch>
+      </Router>
+    </div>
+  );
+};
 
-// export default App;
+export default Homepage;
