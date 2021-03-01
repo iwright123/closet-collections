@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-function Closet() {
+const Closet = () => {
   return (
     <div>
       <h1>Closet</h1>
     </div>
-  )
-}
+  );
+};
 
-export default Closet
+export default Closet;

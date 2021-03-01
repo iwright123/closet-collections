@@ -1,5 +1,6 @@
 import React from 'react';
 import GoogleButton from 'react-google-button';
+import Homepage from '../Homepage.jsx';
 
 const App = () => {
 
@@ -7,6 +8,7 @@ const App = () => {
     <div>
       <h1>MADE IT!</h1>
       <a className='loginButton' href="/auth/google"> <GoogleButton /></a>
+      <Homepage />
     </div>
 
   );
