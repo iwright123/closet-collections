@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const { db } = require('./db/db.js');
+const { db, addItem } = require('./db/db.js');
 const { GoogleStrategy } = require('./passport.js');
 const passport = require('passport');
 const session = require('express-session');
@@ -12,6 +12,7 @@ dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
 const port = 3000;
 const dist = path.resolve(__dirname, '..', 'client', 'dist');
+const items = require('./routes/items');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -19,6 +20,7 @@ app.use(express.static(dist));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
+app.use('items', items);
 ///////////GOOGLE AUTH ///////////
 app.use(
   session({
@@ -62,6 +64,8 @@ app.delete('/logout', (req, res) => {
   res.json(false);
 });
 ///////////GOOGLE AUTH ^^^^^^///////////
+
+
 
 app.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);

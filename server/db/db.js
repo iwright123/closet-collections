@@ -32,26 +32,18 @@ const Items = db.define('Items', {
     allowNull: false,
     primaryKey: true
   },
-  shirts: {
+  clothingType: {
     type: Sequelize.STRING,
     unique: true
   },
-  pants: {
+  description: {
     type: Sequelize.STRING,
     unique: true
   },
-  shoes: {
-    type: Sequelize.STRING,
+  price: {
+    type: Sequelize.INTEGER,
     unique: true
-  },
-  dresses: {
-    type: Sequelize.STRING,
-    unique: true
-  },
-  accessories: {
-    type: Sequelize.STRING,
-    unique: true
-  },
+  }
 });
 
 const WhiteboardPost = db.define('WhiteboardPost', {
@@ -123,6 +115,22 @@ const Vote = db.define('Vote', {
   }
 });
 
+const addItem = async(body, user) => {
+  const { type, description, price } = body;
+  console.log('LOOK HERE LINE 5.....', body);
+  const newItem = await Items.findOrCreate({
+    username: user,
+    type: type,
+    description: description,
+    price: price
+  });
+  return newItem.save();
+}
+
+
+
+
+
 
 // db.sync({ force: true })
 //   .then(() => {
@@ -136,5 +144,6 @@ module.exports = {
   WhiteboardPost,
   Outfit,
   Calendar,
-  Vote
+  Vote,
+  addItem
 };
