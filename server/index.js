@@ -7,7 +7,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const app = express();
-const { addItem } = require('./helpers/addItem')
+const { addItem } = require('./helpers/addItem');
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
@@ -25,12 +25,12 @@ app.use(cookieParser());
 app.post('/items', (req, res) => {
   //console.log('LOOK HEREeEEEEEEE', req)
   addItem(req.body)
-  .then(data => {
-    console.log('SUCCESS', data)
-  })
-  .catch((err) => {
-    console.error(err)
-  })
+    .then(data => {
+      console.log('SUCCESS', data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 
 });
 ///////////GOOGLE AUTH ///////////
