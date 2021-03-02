@@ -19,7 +19,7 @@ export const SidebarData = [
     cName: 'nav-text',
     title: 'Outfit',
     icon: <AccessibilityIcon />,
-    link: '/outfit'
+    link: '/outfits'
   },
   {
     cName: 'nav-text',

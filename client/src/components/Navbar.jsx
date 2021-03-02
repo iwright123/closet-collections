@@ -26,14 +26,14 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
+            {/* <Link to='/calendar'>Calendar</Link>
+            <Link to='/closet'>Closet</Link>
+            <Link to='/outfits'>Outfits</Link>
+            <Link exact to='/'>Home</Link> */}
             {SidebarData.map((item, index) => {
               return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path || '/'}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
+
+<Link className={item.cName} key={index} to={item.link}>{item.icon}{item.title}</Link>
               );
             })}
           </ul>
