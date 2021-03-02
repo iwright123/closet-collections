@@ -1,12 +1,13 @@
 const path = require('path');
 const express = require('express');
-const { db, addItem } = require('./db/db.js');
+const { db, } = require('./db/db.js');
 const { GoogleStrategy } = require('./passport.js');
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const app = express();
+const { addItem } = require('./helpers/addItem')
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
@@ -20,7 +21,18 @@ app.use(express.static(dist));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-app.use('items', items);
+//app.use();
+app.post('/items', (req, res) => {
+  //console.log('LOOK HEREeEEEEEEE', req)
+  addItem(req.body)
+  .then(data => {
+    console.log('SUCCESS', data)
+  })
+  .catch((err) => {
+    console.error(err)
+  })
+
+});
 ///////////GOOGLE AUTH ///////////
 app.use(
   session({

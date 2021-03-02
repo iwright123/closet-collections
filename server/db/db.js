@@ -29,7 +29,6 @@ const Items = db.define('Items', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
-    allowNull: false,
     primaryKey: true
   },
   clothingType: {
@@ -115,17 +114,16 @@ const Vote = db.define('Vote', {
   }
 });
 
-const addItem = async(body, user) => {
-  const { type, description, price } = body;
+const addItem = (body) => {
+  const { clothingType, description, price } = body;
   console.log('LOOK HERE LINE 5.....', body);
-  const newItem = await Items.findOrCreate({
-    username: user,
-    type: type,
+  const newItem = Items.create({
+    clothingType: clothingType,
     description: description,
     price: price
   });
   return newItem.save();
-}
+};
 
 
 
