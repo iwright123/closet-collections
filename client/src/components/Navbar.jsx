@@ -26,10 +26,7 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-            {/* <Link to='/calendar'>Calendar</Link>
-            <Link to='/closet'>Closet</Link>
-            <Link to='/outfits'>Outfits</Link>
-            <Link exact to='/'>Home</Link> */}
+
             {SidebarData.map((item, index) => {
               return (
 
