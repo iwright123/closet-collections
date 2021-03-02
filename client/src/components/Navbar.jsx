@@ -30,7 +30,7 @@ function Navbar() {
             {SidebarData.map((item, index) => {
               return (
 
-<Link className={item.cName} key={index} to={item.link}>{item.icon}{item.title}</Link>
+<Link className='nav-text' key={index} to={item.link}>{item.icon}<span>{item.title}</span></Link>
               );
             })}
           </ul>

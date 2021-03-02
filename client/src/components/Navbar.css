@@ -30,6 +30,7 @@
 }
 
 .nav-text {
+  color: #f5f5f5;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -51,6 +52,9 @@
 }
 
 .nav-text a:hover {
+  background-color: #1a83ff;
+}
+.nav-text :hover {
   background-color: #1a83ff;
 }
 
