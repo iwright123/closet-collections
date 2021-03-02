@@ -1,4 +1,14 @@
-import React from 'react';
+// import React from 'react';
+
+
+// const Outfits = () => {
+//   return (
+//     <div>
+//       <h1>Outfits it worked!</h1>
+//     </div>
+//   );
+// };
+
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -112,3 +122,4 @@ const OutfitGrid = () => {
 };
 
 export default OutfitGrid;
+
