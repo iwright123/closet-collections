@@ -1,9 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from './react';
 import './styles.css';
 import { useDetectOutsideClick } from './UseDetectOutsideClick.jsx';
-import GoogleButton from 'react-google-button';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import axios from 'axios';
+import GoogleButton from './react-google-button';
+import { BrowserRouter as Router, Switch, Route, Link } from './react-router-dom';
+import axios from './axios';
 
 const LoggedIn = () => {
   const dropdownRef = useRef(null);
