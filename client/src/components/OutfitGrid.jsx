@@ -10,55 +10,55 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const tileData = [
   {
-  img: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60',
-  title: 'Alyce Bass',
+  img: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTJCm9NymqIf69NrW36uupqJStDBK_Toayo0Z915PvVTeWOaNJiWHWu5CcYT_GPoOT9920L_t-x40k&usqp=CAc',
+  title: 'Christian Louboutin Pigalle Follies',
   },
   {
-  img: 'https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82',
-  title: 'Sabiha Plummer',
+  img: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ9LZukOBHX3rbUQNv-FigZ58LLrCPnHXgSHtxYgjWWhiP8YxNoclGWbFLZvpr-onxGgkTIPWXphjC4unsp92DRPnTA-ZUtyDgSTBQy0L0jugo_Yxj8OcCS&usqp=CAE',
+  title: 'Spike-Sock Men Flat',
   featured: true,
   },
   {
-    img: 'https://uifaces.co/our-content/donated/KtCFjlD4.jpg',
-    title: 'Arthur Stewart',
+    img: 'https://media.bergdorfgoodman.com/images/f_auto,q_auto:low,ar_5:7,c_fill,dpr_2.0,w_720/01/3684296_m/christian-louboutin-hot-chick-100mm-multi-patter',
+    title: 'Stiletto Red Sole Pumps',
     featured: true,
   },
   {
-    img: 'https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
-    title: 'Hebe Harwood',
+    img: 'https://images.us.christianlouboutin.com/media/catalog/product/cache/1/thumbnail/1200x/602f0fa2c1f0d1ba5e241f914e856ff9/3/1/8/1/christianlouboutin-eloisebooty-3181297_BK01_1_1200x1200_1530528686.jpg',
+    title: 'Eloise Booty',
   },
 
   {
-    img: 'https://uifaces.co/our-content/donated/n4Ngwvi7.jpg',
-    title: 'Keanu Hood',
+    img: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ6hhq0ji4UGgHBo5ywRUMspwNPjCxoqwaHtsfAU1wDqwTHUoBd_qoCQgFQeXjzNmKJQL-jPUZZjw&usqp=CAc',
+    title: 'Yeezy Boost 350',
   },
   {
-    img: 'https://uifaces.co/our-content/donated/gPZwCbdS.jpg',
-    title: 'Leonardo Davila',
+    img: 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQYaoIe_w6jO_f5GbGjCg8Uss3waPgHvDKk1Speu3EVH-bk8UgH1XzO-9qtadVk6iOTHXof6LHhOwM&usqp=CAc',
+    title: 'Yeezy Boost 350 V2',
   },
   {
-    img: 'https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&h=350',
-    title: 'Hayleigh Chapman',
+    img: 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTpp9A1Ldhg0g07gz7AF8y0e-_pAKb1xbzv2LaJ_HsNiOsEYXVJbVOnYrRkEiPSou5SeOH2t5th9w&usqp=CAc',
+    title: 'Yeezy Clay Brown shoes',
   },
   {
-    img: 'https://images.pexels.com/photos/1394499/pexels-photo-1394499.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-    title: 'Reema English',
+    img: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTOTxBaxVufocLeFuIxsEMZU8f4sfV1R36au-XAZ0fStIi-Mqc8dx2XZaihtHsDxdHHcHsb4ZmlcFE&usqp=CAc',
+    title: 'Nike Tye-Dye',
   },
   {
-    img: 'https://images.unsplash.com/photo-1456327102063-fb5054efe647?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=f05c14dd4db49f08a789e6449604c490',
-    title: 'Atticus Aldred',
+    img: 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR32CqnB1ZHeHwi0y-B29X3QRX3LAp12QO9CEoscRyvXn3ztHDMRych3-ZjgzQugaaEq5Yo3Cg-RcEq&usqp=CAc',
+    title: 'Yeezy Foam RNNR',
   },
   {
-    img: 'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
-    title: 'Cobie Morin',
+    img: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSdD7p9MjFzPkrfEXgiBrV_Qx3xCYg6oBbkrcG1UcsNOZOo_gilO3aOmXcDF_xqGeDiX0108oTgfMk&usqp=CAc',
+    title: 'Air Jordan Off White',
   },
   {
-    img: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&h=350',
-    title: 'Corinne Mcghee',
+    img: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSatpZSqXWPXWq9CXsWTJuqykIJX0-9mfkHQqwZS7GutpCh2zkKz9ymliKRnn_4sNDDg-VLHoA6YME&usqp=CAc',
+    title: 'Nike Air Max 90',
   },
   {
-    img: 'https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&h=350',
-    title: 'Ali Hendricks',
+    img: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTxQiitKWV4hzzepneb_nym5CI2D-hGDT9VG9Gnv7zM4k6qNtO4cV8MXdKjknFCTk0vcngtcUTexQ&usqp=CAc',
+    title: 'Air Jordan 1 Retro x Balvin',
   },
 ];
 
@@ -88,6 +88,7 @@ const OutfitGrid = () => {
   const classes = useStyles();
 
   return (<div className={classes.root}>
+    <h1>Outfits</h1>
     <GridList cellHeight={300}  spacing={30} className={classes.gridList}>
       <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
         <ListSubheader component="div"></ListSubheader>
