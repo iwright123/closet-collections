@@ -1,54 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import GoogleButton from 'react-google-button';
+import axios from 'axios'
 import Homepage from '../Homepage.jsx';
-import axios from 'axios';
-import LoggedOut from './sidebar/MenuLoggedOut.jsx';
-import LoggedIn from './sidebar/MenuLoggedIn.jsx';
-import Calendar from './Calendar.jsx';
-import Closet from './Closet.jsx';
-import Outfits from './OutfitGrid.jsx';
+import Navbar from './Navbar.jsx'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
+import Home from './Pages/Home.jsx'
+import Closet from './Pages/Closet.jsx'
+import Calendar from './Pages/Calendar.jsx'
+import OutfitGrid from '../components/Pages/OutfitGrid.jsx'
 const App = () => {
+// const [login, setLogin] = useState(false);
 
-  const [login, setLogin] = useState(false);
+// function isLoggedIn(){
+//   setLogin(login => login = !login)
+// }
 
-  useEffect(() => {
-    axios.get('./isloggedin')
-      .then(({ data }) => setLogin(data))
-      .catch((err) => console.warn(err));
-  }, []);
 
-  const logout = () => {
-    axios.delete('/logout')
-      .then(({ data }) => setLogin(data))
-      .catch(err => console.warn(err));
-  };
+//   const [login, setLogin] = useState(false);
+
+//   useEffect(() => {
+//     axios.get('./isloggedin')
+//       .then(({ data }) => setLogin(data))
+//       .catch((err) => console.warn(err));
+//   }, []);
+
+//   const logout = () => {
+//     axios.delete('/logout')
+//       .then(({ data }) => setLogin(data))
+//       .catch(err => console.warn(err));
+//   };
 
   return (
-    <div>
-      {
-        login === false ?
-          <div className='App'>
-            <LoggedIn />
-            <a className='loginButton' href="/auth/google"> <GoogleButton /></a>
-            <Router>
-              {/* <Route path='/' exact component={Home} /> */}
-              <Route path='/calendar' component={Calendar} />
-              <Route path='/outfits' component={Outfits} />
-              <Route path='/closet' component={Closet} />
-            </Router>
-          </div>
-          :
-          <div>
-            <div className='App'>
-              <LoggedIn />
-              <button onClick={() => logout()}>Logout</button>
-            </div>
+    <>
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route path='/' exact component={Home} />
+        <Route path='/calendar' component={Calendar} />
+        <Route path='/outfits' component={OutfitGrid} />
+        <Route path='/closet' component={Closet} />
+        <Route path='/logout'/>
+      </Switch>
+    </Router>
+  </>
 
-          </div>
-      }
-    </div>
   );
 };
 
