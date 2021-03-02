@@ -1,14 +1,4 @@
-// import React from 'react';
-
-
-// const Outfits = () => {
-//   return (
-//     <div>
-//       <h1>Outfits it worked!</h1>
-//     </div>
-//   );
-// };
-
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -20,13 +10,13 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const tileData = [
   {
-  img: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTJCm9NymqIf69NrW36uupqJStDBK_Toayo0Z915PvVTeWOaNJiWHWu5CcYT_GPoOT9920L_t-x40k&usqp=CAc',
-  title: 'Christian Louboutin Pigalle Follies',
+    img: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTJCm9NymqIf69NrW36uupqJStDBK_Toayo0Z915PvVTeWOaNJiWHWu5CcYT_GPoOT9920L_t-x40k&usqp=CAc',
+    title: 'Christian Louboutin Pigalle Follies',
   },
   {
-  img: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ9LZukOBHX3rbUQNv-FigZ58LLrCPnHXgSHtxYgjWWhiP8YxNoclGWbFLZvpr-onxGgkTIPWXphjC4unsp92DRPnTA-ZUtyDgSTBQy0L0jugo_Yxj8OcCS&usqp=CAE',
-  title: 'Spike-Sock Men Flat',
-  featured: true,
+    img: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ9LZukOBHX3rbUQNv-FigZ58LLrCPnHXgSHtxYgjWWhiP8YxNoclGWbFLZvpr-onxGgkTIPWXphjC4unsp92DRPnTA-ZUtyDgSTBQy0L0jugo_Yxj8OcCS&usqp=CAE',
+    title: 'Spike-Sock Men Flat',
+    featured: true,
   },
   {
     img: 'https://media.bergdorfgoodman.com/images/f_auto,q_auto:low,ar_5:7,c_fill,dpr_2.0,w_720/01/3684296_m/christian-louboutin-hot-chick-100mm-multi-patter',
@@ -99,7 +89,7 @@ const OutfitGrid = () => {
 
   return (<div className={classes.root}>
     <h1>Outfits</h1>
-    <GridList cellHeight={300}  spacing={30} className={classes.gridList}>
+    <GridList cellHeight={300} spacing={30} className={classes.gridList}>
       <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
         <ListSubheader component="div"></ListSubheader>
       </GridListTile>
@@ -118,8 +108,7 @@ const OutfitGrid = () => {
       ))}
     </GridList>
   </div>
-);
+  );
 };
 
 export default OutfitGrid;
-
