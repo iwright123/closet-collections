@@ -48,7 +48,7 @@ app.get('/auth/google/callback',
   });
 
 app.get('/isloggedin', (req, res) => {
-  // check to see if the cookie key is headstrong
+  // check to see if the cookie key is thesis
   if (req.cookies.thesis) {
     res.json(true);
   } else {
@@ -57,7 +57,7 @@ app.get('/isloggedin', (req, res) => {
 });
 
 app.delete('/logout', (req, res) => {
-  // delete the cookie key headstrong when logging out
+  // delete the cookie key thesis when logging out
   res.clearCookie('thesis');
   res.json(false);
 });
