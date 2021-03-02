@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-function Home() {
+const Home = () => {
   return (
     <div>
       <div>
-             <h1>This Should Be our Welcome Message or Title</h1>
+        <h1>This Should Be our Welcome Message or Title</h1>
       </div>
       <div>
         <div>
@@ -20,7 +20,7 @@ function Home() {
 
 
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

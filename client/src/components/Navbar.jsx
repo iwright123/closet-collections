@@ -6,7 +6,7 @@ import { SidebarData } from './SidebarData.jsx';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
 
-function Navbar() {
+const Navbar = () => {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -30,7 +30,7 @@ function Navbar() {
             {SidebarData.map((item, index) => {
               return (
 
-<Link className='nav-text' key={index} to={item.link}>{item.icon}<span>{item.title}</span></Link>
+                <Link className='nav-text' key={index} to={item.link}>{item.icon}<span>{item.title}</span></Link>
               );
             })}
           </ul>
@@ -38,6 +38,6 @@ function Navbar() {
       </IconContext.Provider>
     </>
   );
-}
+};
 
 export default Navbar;
