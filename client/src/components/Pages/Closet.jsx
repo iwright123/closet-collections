@@ -1,50 +1,53 @@
 import React from 'react';
-import { Editor, Frame, Element } from '@craftjs/core';
-import {Typography, Paper, Grid, makeStyles} from '@material-ui/core';
+import { Tabs, useTabState, Panel } from '@bumaga/tabs';
 
-import { Toolbox } from './Toolbox.jsx';
-import { SettingsPanel } from './SettingsPanel.jsx';
-import { Topbar } from '../components/Topbar.jsx';
+const cn = (...args) => args.filter(Boolean).join(' ');
 
-import { Container } from './user/Container.jsx';
-import { Button } from './user/Button.jsx';
-import { Card } from './user/Card.jsx';
-import { Text } from './user/Text.jsx';
+const ClosetTab = ({ children }) => {
+  const { isActive, onClick } = useTabState();
 
-const useStyles = makeStyles(() => ({
-  root: {
-    padding: 0,
-    background: 'rgb(252, 253, 253)',
-  },
-}));
-
-export default function Closet() {
-  const classes = useStyles();
   return (
-    <div style={{margin: '0 auto', width: '800px'}}>
-      <Typography variant="h5" align="center">Closet</Typography>
-      <Editor resolver={{Card, Button, Text, Container}}>
-        <Grid container spacing={3}>
-          <Grid item xs>
-            <Frame>
-              <Container>
-                <Card />
-                <Button size="small" variant="outlined">Click</Button>
-                <Text size="small" text="Choose your outfit!" />
-                <Container padding={6} background="#999">
-                  {/* <Text size="small" text="It's me again!" /> */}
-                </Container>
-              </Container>
-            </Frame>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper className={classes.root}>
-              <Toolbox />
-              <SettingsPanel />
-            </Paper>
-          </Grid>
-        </Grid>
-      </Editor>
-    </div>
+    <button className={cn('tab', isActive && 'active')} onClick={onClick}>
+      {children}
+    </button>
   );
-}
+};
+
+export default () => (
+  <Tabs>
+    <div className='tabs'>
+      <div className='tab-list'>
+        <ClosetTab>Create Outfit</ClosetTab>
+
+        <ClosetTab>My Outfits</ClosetTab>
+
+      </div>
+
+      <div className='tab-progress' />
+
+      <Panel>
+        <p>
+          In sociology, anthropology, and linguistics, structuralism is the
+          methodology that implies elements of human culture must be understood
+          by way of their relationship to a broader, overarching system or
+          structure. It works to uncover the structures that underlie all the
+          things that humans do, think, perceive, and feel. Alternatively, as
+          summarized by philosopher Simon Blackburn, structuralism is "the
+          belief that phenomena of human life are not intelligible except
+          through their interrelations. These relations constitute a structure,
+          and behind local variations in the surface phenomena there are
+          constant laws of abstract structure".
+        </p>
+      </Panel>
+
+      <Panel>
+        <p>
+          The input range must be a linear series of numbers. The output range
+          can be any value type supported by Framer Motion: numbers, colors,
+          shadows, etc.
+        </p>
+      </Panel>
+
+    </div>
+  </Tabs>
+);
