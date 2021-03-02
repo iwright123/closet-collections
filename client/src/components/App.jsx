@@ -38,6 +38,7 @@ const App = () => {
         <Route path='/calendar' component={Calendar} />
         <Route path='/outfits' component={OutfitGrid} />
         <Route path='/closet' component={Closet} />
+        <Route path='/logout'/>
       </Switch>
     </Router>
   </>

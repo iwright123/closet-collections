@@ -3,6 +3,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 export const SidebarData = [
   {
     title: 'Home',
@@ -26,6 +27,12 @@ export const SidebarData = [
     title: 'Calendar',
     icon: <EventAvailableIcon />,
     link: '/calendar'
+  },
+  {
+    cName: 'nav-text',
+    title: 'Logout',
+    icon: <ExitToAppIcon />,
+    link: '/logout'
   },
 ];
 
