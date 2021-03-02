@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
-import OutfitGrid from './components/OutfitGrid.jsx';
-import Closet from './components/Closet.jsx';
+import OutfitGrid from './components/Pages/OutfitGrid.jsx';
 const rootElement = document.getElementById('root');
 
-ReactDOM.render(<Closet/>, rootElement);
+ReactDOM.render(<App />, rootElement);
 

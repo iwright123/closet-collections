@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import GoogleButton from 'react-google-button';
-import Homepage from '../Homepage.jsx';
 import axios from 'axios';
-import LoggedOut from './sidebar/MenuLoggedOut.jsx';
-import LoggedIn from './sidebar/MenuLoggedIn.jsx';
-import Calendar from './Calendar.jsx';
-import Closet from './Closet.jsx';
-import Outfits from './OutfitGrid.jsx';
+import Navbar from './Navbar.jsx';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Home from './Pages/Home.jsx';
+import Closet from './Pages/Closet.jsx';
+import Calendar from './Calendar.tsx';
+import OutfitGrid from './Pages/OutfitGrid.jsx';
+import GoogleButton from 'react-google-button';
+import Logs from './logs/login.jsx';
 
 const App = () => {
 
@@ -26,30 +26,21 @@ const App = () => {
   };
 
   return (
-    <div>
-      {
-        login === false ?
-          <div className='App'>
-            <LoggedIn />
-            <a className='loginButton' href="/auth/google"> <GoogleButton /></a>
-            <Router>
-              {/* <Route path='/' exact component={Home} /> */}
-              <Route path='/calendar' component={Calendar} />
-              <Route path='/outfits' component={Outfits} />
-              <Route path='/closet' component={Closet} />
-            </Router>
-          </div>
-          :
-          <div>
-            <div className='App'>
-              <LoggedIn />
-              <button onClick={() => logout()}>Logout</button>
-            </div>
+    <>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path='/' exact component={Home} />
+          <Route path='/calendar' component={Calendar} />
+          <Route path='/outfits' component={OutfitGrid} />
+          <Route path='/closet' component={Closet} />
+          <Route path='/logout' component={Logs} />
+        </Switch>
+      </Router>
+    </>
 
-          </div>
-      }
-    </div>
   );
+
 };
 
 export default App;

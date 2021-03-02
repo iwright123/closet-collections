@@ -1,8 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from './react';
 import './styles.css';
 import { useDetectOutsideClick } from './UseDetectOutsideClick.jsx';
-import GoogleButton from 'react-google-button';
-import axios from 'axios';
+import GoogleButton from './react-google-button';
+import axios from './axios';
+import { SidebarData } from '../SidebarData.jsx'
+import { BrowserRouter as Router, Switch, Route, Link } from './react-router-dom';
 
 const LoggedOut = () => {
   const dropdownRef = useRef(null);
@@ -24,6 +26,7 @@ const LoggedOut = () => {
   // };
 
   return (
+    <Router>
     <div className="container">
       <div className="menu-container">
         <button onClick={onClick} className="menu-trigger">
@@ -38,27 +41,21 @@ const LoggedOut = () => {
           className={`menu ${isActive ? 'active' : 'inactive'}`}
         >
           <ul>
-            <li>
-              <a href="/">Home</a>
-            </li>
-            <li>
-              <a href="/outfits">Outfit</a>
-            </li>
-            <li>
-              <a href="/calendar">Calendar</a>
-            </li>
-            <li>
-              <a href="/closet">Closet</a>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              {/* <a className='loginButton' href="/auth/google"> <GoogleButton /></a> */}
-            </li>
+          {SidebarData.map((item, index) => {
+              return (
+                <li key={index} className={item.cName}>
+                  <Link to={item.path}>
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </div>
     </div>
+    </Router>
   );
 };
 
