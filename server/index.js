@@ -1,12 +1,14 @@
 const path = require('path');
 const express = require('express');
-const { db } = require('./db/db.js');
+const { db, } = require('./db/db.js');
 const { GoogleStrategy } = require('./passport.js');
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const app = express();
+const { addItem, getAllItems, deleteItem } = require('./helpers/Item');
+const bodyParser = require('body-parser');
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
@@ -19,6 +21,31 @@ app.use(express.static(dist));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
+app.use(bodyParser.json());
+/*******************DATABASE ROUTES ************************************/
+
+app.get('/items', (req, res) => {
+  return getAllItems(req.body)
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
+
+app.post('/items', (req, res) => {
+  addItem(req.body)
+    .then(data => {
+      console.log('SUCCESS', data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
+});
+
+app.delete('/items/:id', (req, res) => {
+  deleteItem(req.params)
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
 ///////////GOOGLE AUTH ///////////
 app.use(
   session({
@@ -62,6 +89,8 @@ app.delete('/logout', (req, res) => {
   res.json(false);
 });
 ///////////GOOGLE AUTH ^^^^^^///////////
+
+
 
 app.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);

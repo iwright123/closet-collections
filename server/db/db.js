@@ -1,3 +1,4 @@
+
 const Sequelize = require('sequelize');
 const mysql = require('mysql2');
 
@@ -29,38 +30,33 @@ const Items = db.define('Items', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
-    allowNull: false,
     primaryKey: true
   },
-  shirts: {
+  clothingType: {
     type: Sequelize.STRING,
-    unique: true
+    unique: false
   },
-  pants: {
+  description: {
     type: Sequelize.STRING,
-    unique: true
+    unique: false
   },
-  shoes: {
-    type: Sequelize.STRING,
-    unique: true
+  price: {
+    type: Sequelize.INTEGER,
+    unique: false
   },
-  dresses: {
-    type: Sequelize.STRING,
-    unique: true
-  },
-  accessories: {
-    type: Sequelize.STRING,
-    unique: true
-  },
+  imageUrl: {
+    type: Sequelize.STRING(1000),
+    unique: false
+  }
 });
 
 const WhiteboardPost = db.define('WhiteboardPost', {
-  id_user: {
+  idUser: {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true
   },
-  outfit_id: {
+  outfitId: {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true
@@ -79,6 +75,7 @@ const WhiteboardPost = db.define('WhiteboardPost', {
   }
 });
 
+// saves all items into 1 outfit
 const Outfit = db.define('Outfit', {
   id: {
     type: Sequelize.INTEGER,
@@ -105,12 +102,12 @@ const Calendar = db.define('Calendar', {
 });
 
 const Vote = db.define('Vote', {
-  id_user: {
+  idUser: {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true
   },
-  id_post: {
+  idPost: {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true
@@ -123,11 +120,10 @@ const Vote = db.define('Vote', {
   }
 });
 
-
-// db.sync({ force: true })
-//   .then(() => {
-//     console.log('Database & tables created!');
-//   }).catch((err) => { console.log(err); });
+db.sync({ force: true })
+  .then(() => {
+    console.log('Database & tables created!');
+  }).catch((err) => { console.log(err); });
 
 module.exports = {
   db,
@@ -136,5 +132,6 @@ module.exports = {
   WhiteboardPost,
   Outfit,
   Calendar,
-  Vote
+  Vote,
+
 };
