@@ -1,12 +1,13 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
-  entry: path.resolve(__dirname, 'client', 'src', 'Index.jsx'),
+  entry: path.resolve(__dirname, 'client', 'src', 'Index.tsx'),
   module: {
     rules: [
       {
-        test: /\.(jsx|tsx)$/,
+        test: /\.(tsx|ts|jsx|js)$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },
@@ -22,12 +23,17 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', 'jsx'],
+    alias: {
+      'react-native$': 'react-native-web'
+    },
+    extensions: ['.tsx', '.ts', '.js', 'jsx', '.web.js'],
+
   },
 
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'client', 'dist')
-  }
+  },
+
 
 };

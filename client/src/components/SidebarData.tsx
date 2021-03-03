@@ -1,9 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import HomeIcon from '@material-ui/icons/Home';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
+
 export const SidebarData = [
   {
     title: 'Home',
