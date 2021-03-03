@@ -6,6 +6,9 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 //import tileData from './tileData';
 
 const tileData = [
@@ -59,10 +62,11 @@ const tileData = [
   {
     img: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTxQiitKWV4hzzepneb_nym5CI2D-hGDT9VG9Gnv7zM4k6qNtO4cV8MXdKjknFCTk0vcngtcUTexQ&usqp=CAc',
     title: 'Air Jordan 1 Retro x Balvin',
+
   },
 ];
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }; }) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -93,7 +97,9 @@ const OutfitGrid = () => {
       <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
         <ListSubheader component="div"></ListSubheader>
       </GridListTile>
-      {tileData.map((tile) => (
+      {
+      tileData.map((tile) => (
+        <Zoom>
         <GridListTile key={tile.img}>
           <img src={tile.img} alt={tile.title} />
           <GridListTileBar
@@ -101,10 +107,12 @@ const OutfitGrid = () => {
             actionIcon={
               <IconButton aria-label={`info about ${tile.title}`} className={classes.icon}>
                 <FavoriteIcon />
+
               </IconButton>
             }
           />
         </GridListTile>
+        </Zoom>
       ))}
     </GridList>
   </div>
