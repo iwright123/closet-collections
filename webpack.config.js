@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -6,7 +7,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(jsx|tsx)$/,
+        test: /\.(tsx|ts|jsx|js)$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },
@@ -28,6 +29,6 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'client', 'dist')
-  }
+  },
 
 };
