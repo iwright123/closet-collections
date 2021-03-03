@@ -7,13 +7,13 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const app = express();
-const { addItem, getAllItems } = require('./helpers/Item');
+const { addItem, getAllItems, deleteItem } = require('./helpers/Item');
+const bodyParser = require('body-parser');
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
 const port = 3000;
 const dist = path.resolve(__dirname, '..', 'client', 'dist');
-const items = require('./routes/items');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -21,7 +21,7 @@ app.use(express.static(dist));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-
+app.use(bodyParser.json());
 /*******************DATABASE ROUTES ************************************/
 
 app.get('/items', (req, res) => {
@@ -31,7 +31,6 @@ app.get('/items', (req, res) => {
 });
 
 app.post('/items', (req, res) => {
-  //console.log('LOOK HEREeEEEEEEE', req)
   addItem(req.body)
     .then(data => {
       console.log('SUCCESS', data);
@@ -40,6 +39,12 @@ app.post('/items', (req, res) => {
       console.error(err);
     });
 
+});
+
+app.delete('/items/:id', (req, res) => {
+  deleteItem(req.params)
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
 });
 ///////////GOOGLE AUTH ///////////
 app.use(

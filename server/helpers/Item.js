@@ -3,7 +3,6 @@ const { Items } = require('../db/db');
 
 const addItem = async(body) => {
   const { clothingType, description, price, imageUrl } = body;
-  console.log('LOOK HERE LINE 5.....', body);
   const newItem = await Items.create({
     clothingType: clothingType,
     description: description,
@@ -17,7 +16,17 @@ const getAllItems = () => {
   return Items.findAll();
 };
 
+const deleteItem = (body) => {
+  const { id } = body;
+  return Items.destroy({
+    where: {
+      id: id
+    }
+  });
+};
+
 module.exports = {
   addItem,
-  getAllItems
+  getAllItems,
+  deleteItem
 };

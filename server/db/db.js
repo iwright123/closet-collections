@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+
 const Sequelize = require('sequelize');
 const mysql = require('mysql2');
 
@@ -51,12 +51,12 @@ const Items = db.define('Items', {
 });
 
 const WhiteboardPost = db.define('WhiteboardPost', {
-  id_user: {
+  idUser: {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true
   },
-  outfit_id: {
+  outfitId: {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true
@@ -102,12 +102,12 @@ const Calendar = db.define('Calendar', {
 });
 
 const Vote = db.define('Vote', {
-  id_user: {
+  idUser: {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true
   },
-  id_post: {
+  idPost: {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true
@@ -120,30 +120,18 @@ const Vote = db.define('Vote', {
   }
 });
 
-// const addItem = (body) => {
-//   const { clothingType, description, price, imageUrl } = body;
-//   console.log('LOOK HERE LINE 5.....', body);
-//   const newItem = Items.create({
-//     clothingType: clothingType,
-//     description: description,
-//     price: price,
-//     imageUrl: imageUrl
+// const deleteItem = (body) => {
+//   const { id } = body;
+//   return Items.destroy({
+//     where: {
+//       id: id
+//     }
 //   });
-//   return newItem.save();
 // };
 
-const deleteItem = (body) => {
-  const { id } = body;
-  return Items.destroy({
-    where: {
-      id: id
-    }
-  });
-};
-
-const getAllItems = () => {
-  return Items.findAll();
-};
+// const getAllItems = () => {
+//   return Items.findAll();
+// };
 
 // db.sync({ force: true })
 //   .then(() => {
