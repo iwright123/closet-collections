@@ -3,8 +3,6 @@ import * as React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { not } from 'sequelize/types/lib/operators';
 
-
-
 const items = [
   {
     img: 'https://static.nike.com/a/images/t_prod_ss/w_960,c_limit,f_auto/ca0d4ca0-bf29-4e7c-811e-ee2a6219acdc/air-jordan-1-university-blue-release-date.jpg',
@@ -45,17 +43,23 @@ const items = [
 ]
 
 export interface Props {
-  items: Object,
-  img: string
+  items: object
 }
-
-
-
 
 const Calendar: React.FC<Props> = (props) => {
 
-const [notify, setNotify] = React.useState(false);
+const [notify, setNotify] = React.useState<boolean>(false);
+    // or can be React.useState(false);
     //console.info(notify);
+
+    const styles = StyleSheet.create({
+      container: {
+        backgroundColor: 'white',
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+      }
+    })
 
   return (
     <>
@@ -70,14 +74,17 @@ const [notify, setNotify] = React.useState(false);
         items.map((item, v) => {
         return <View
           key={v}>
-            {/* <Image source={item.img}/> */}
+            <Image
+            style={{width: 250, height: 250}}
+            source={{uri: item.img}}
+            />
             <Text>{item.title}</Text>
             <Text>{item.subTitle}</Text>
             <Text>{item.release}</Text>
-            {/* <Button
+            <Button
             onPress={() => setNotify(true)}
             title='Notify Me!'
-            /> */}
+            />
           </View>
         })
       }
