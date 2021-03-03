@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+//import React, { useState } from 'react';
+import * as React from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { SidebarData } from './SidebarData.jsx';
+ import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
 
 const Navbar = () => {
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = React.useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
 
