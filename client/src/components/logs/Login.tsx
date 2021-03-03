@@ -5,13 +5,13 @@ import GoogleButton from 'react-google-button';
 import { Button } from '@material-ui/core';
 
 const Logs = () => {
-  // const [login, setLogin] = useState(false);
+  const [login, setLogin] = React.useState(false);
 
-  // useEffect(() => {
-  //   axios.get('./isloggedin')
-  //     .then(({ data }) => setLogin(data))
-  //     .catch((err) => console.warn(err));
-  // }, []);
+  React.useEffect(() => {
+    axios.get('./isloggedin')
+      .then(({ data }) => setLogin(data))
+      .catch((err) => console.warn(err));
+  }, []);
 
 
 
