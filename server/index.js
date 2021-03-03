@@ -7,7 +7,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const app = express();
-const { addItem } = require('./helpers/addItem');
+const { addItem, getAllItems } = require('./helpers/Item');
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
@@ -21,7 +21,15 @@ app.use(express.static(dist));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-//app.use();
+
+/*******************DATABASE ROUTES ************************************/
+
+app.get('/items', (req, res) => {
+  return getAllItems(req.body)
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
+
 app.post('/items', (req, res) => {
   //console.log('LOOK HEREeEEEEEEE', req)
   addItem(req.body)

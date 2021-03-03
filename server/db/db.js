@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const Sequelize = require('sequelize');
 const mysql = require('mysql2');
 
@@ -33,15 +34,19 @@ const Items = db.define('Items', {
   },
   clothingType: {
     type: Sequelize.STRING,
-    unique: true
+    unique: false
   },
   description: {
     type: Sequelize.STRING,
-    unique: true
+    unique: false
   },
   price: {
     type: Sequelize.INTEGER,
-    unique: true
+    unique: false
+  },
+  imageUrl: {
+    type: Sequelize.STRING(1000),
+    unique: false
   }
 });
 
@@ -70,6 +75,7 @@ const WhiteboardPost = db.define('WhiteboardPost', {
   }
 });
 
+// saves all items into 1 outfit
 const Outfit = db.define('Outfit', {
   id: {
     type: Sequelize.INTEGER,
@@ -114,21 +120,30 @@ const Vote = db.define('Vote', {
   }
 });
 
-const addItem = (body) => {
-  const { clothingType, description, price } = body;
-  console.log('LOOK HERE LINE 5.....', body);
-  const newItem = Items.create({
-    clothingType: clothingType,
-    description: description,
-    price: price
+// const addItem = (body) => {
+//   const { clothingType, description, price, imageUrl } = body;
+//   console.log('LOOK HERE LINE 5.....', body);
+//   const newItem = Items.create({
+//     clothingType: clothingType,
+//     description: description,
+//     price: price,
+//     imageUrl: imageUrl
+//   });
+//   return newItem.save();
+// };
+
+const deleteItem = (body) => {
+  const { id } = body;
+  return Items.destroy({
+    where: {
+      id: id
+    }
   });
-  return newItem.save();
 };
 
-
-
-
-
+const getAllItems = () => {
+  return Items.findAll();
+};
 
 // db.sync({ force: true })
 //   .then(() => {
@@ -143,5 +158,5 @@ module.exports = {
   Outfit,
   Calendar,
   Vote,
-  addItem
+
 };
