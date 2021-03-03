@@ -51,7 +51,7 @@
   border-radius: 4px;
 }
 
-.nav-text a:hover {
+.nav-text ul:hover {
   background-color: #1a83ff;
 }
 .nav-text :hover {
@@ -73,4 +73,7 @@
 
 span {
   margin-left: 16px;
+}
+a:hover{
+  background-color: #1a83ff;
 }

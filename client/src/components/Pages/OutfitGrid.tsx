@@ -8,7 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 //import tileData from './tileData';
 
 const tileData = [
@@ -99,20 +100,27 @@ const OutfitGrid = () => {
       </GridListTile>
       {
       tileData.map((tile) => (
-        <Zoom>
+
         <GridListTile key={tile.img}>
+           <Zoom>
           <img src={tile.img} alt={tile.title} />
+           </Zoom>
           <GridListTileBar
             title={tile.title}
             actionIcon={
               <IconButton aria-label={`info about ${tile.title}`} className={classes.icon}>
-                <FavoriteIcon />
+                <ThumbUpIcon />
+                  <span></span>
+
+                <ThumbDownIcon />
+                <span></span>
+                  <button>Comment</button>
 
               </IconButton>
             }
           />
         </GridListTile>
-        </Zoom>
+
       ))}
     </GridList>
   </div>
