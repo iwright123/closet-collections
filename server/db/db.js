@@ -120,23 +120,10 @@ const Vote = db.define('Vote', {
   }
 });
 
-// const deleteItem = (body) => {
-//   const { id } = body;
-//   return Items.destroy({
-//     where: {
-//       id: id
-//     }
-//   });
-// };
-
-// const getAllItems = () => {
-//   return Items.findAll();
-// };
-
-// db.sync({ force: true })
-//   .then(() => {
-//     console.log('Database & tables created!');
-//   }).catch((err) => { console.log(err); });
+db.sync({ force: true })
+  .then(() => {
+    console.log('Database & tables created!');
+  }).catch((err) => { console.log(err); });
 
 module.exports = {
   db,
