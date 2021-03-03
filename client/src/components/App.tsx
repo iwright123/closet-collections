@@ -2,10 +2,10 @@ import * as React from 'react';
 // import axios from 'axios';
 // import Navbar from './Navbar.jsx';
 // import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-// import Home from './Pages/Home.jsx';
-// import Closet from './Pages/Closet.jsx';
+// import Home from './Pages/Home';
+// import Closet from './Pages/Closet';
 // import Calendar from './Calendar';
-// import OutfitGrid from './Pages/OutfitGrid.jsx';
+// import OutfitGrid from './Pages/OutfitGrid';
 // import GoogleButton from 'react-google-button';
 // import Logs from './logs/login.jsx';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
@@ -41,27 +41,30 @@ const App = () => {
   //       </Switch>
   //     </Router>
   //   </>
+  <>
+  <h1>Hello</h1>
+  </>
 
-  <View style={styles.container}>
-  <View style={styles.center}>
-    <Text>Hello React Native Web!!!</Text>
-  </View>
-</View>
+//   <View style={styles.container}>
+//   <View style={styles.center}>
+//     <Text>Hello React Native Web!!!</Text>
+//   </View>
+// </View>
 
   );
 };
 
 
-const styles = StyleSheet.create({
-  container: {
-    height,
-  },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     height,
+//   },
+//   center: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+// });
 
 
 export default App;
