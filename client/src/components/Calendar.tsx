@@ -1,5 +1,7 @@
+//mport { Button } from '@material-ui/core';
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { not } from 'sequelize/types/lib/operators';
 
 
 
@@ -7,45 +9,83 @@ const items = [
   {
     img: 'https://static.nike.com/a/images/t_prod_ss/w_960,c_limit,f_auto/ca0d4ca0-bf29-4e7c-811e-ee2a6219acdc/air-jordan-1-university-blue-release-date.jpg',
     title: 'Air Jordan 1',
-    subTitle: 'University Blue'
+    subTitle: 'University Blue',
+    release: 'March 6th, 2021'
   },
   {
     img: 'https://static.nike.com/a/images/t_prod_ss/w_960,c_limit,f_auto/207e15e6-c6f5-4737-abd9-15bc0f19b0d3/womens-air-max-90-love-letter-release-date.jpg',
     title: 'Women Air Max 90',
-    subTitle: 'Love Letter'
+    subTitle: 'Love Letter',
+    release: 'March 3rd, 2021'
   },
   {
     img: 'https://static.nike.com/a/images/t_prod_ss/w_960,c_limit,f_auto/5384f2ef-6cdf-4928-bb56-71d10bda3ee5/blazer-mid-x-readymade-black-release-date.jpg',
     title: 'Blazer Mid',
-    subtitle: 'Ready Made'
+    subTitle: 'Ready Made',
+    release: 'March 3rd, 2021'
   },
   {
     img: 'https://static.nike.com/a/images/t_prod_ss/w_960,c_limit,f_auto/28179175-135b-4f40-b509-53445d7a7162/sb-dunk-high-x-carpet-company-royal-pulse-release-date.jpg',
     title: 'SB Dunk High',
-    subTitle: 'Carpet Company'
+    subTitle: 'Carpet Company',
+    release: 'March 12th, 2021'
   },
   {
     img: 'https://static.nike.com/a/images/t_prod_ss/w_960,c_limit,f_auto/7a270b0d-fecd-41f3-8c74-77b4f0ed1aaf/dunk-high-dark-curry-release-date.jpg',
     title: 'Dunk High',
-    subTitle: 'Dark Curry'
+    subTitle: 'Dark Curry',
+    release: 'March 5th, 2021'
   },
   {
     img: 'https://static.nike.com/a/images/t_prod_ss/w_960,c_limit,f_auto/c56710a9-d4a1-472b-b6e3-a4042d68dcae/dunk-low-city-market-release-date.jpg',
     title: 'Dunk Low',
-    subTitle: 'City Market'
+    subTitle: 'City Market',
+    release: 'March 4th, 2021'
   }
 ]
 
-interface Props {
-  items: Object
+export interface Props {
+  items: Object,
+  img: string
 }
+
+
 
 
 const Calendar: React.FC<Props> = (props) => {
 
+const [notify, setNotify] = React.useState(false);
+    //console.info(notify);
+
   return (
     <>
-
+<View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+      }}>
+      <Text>Upcoming Releases!</Text>
+      {
+        items.map((item, v) => {
+        return <View
+          key={v}>
+            {/* <Image source={item.img}/> */}
+            <Text>{item.title}</Text>
+            <Text>{item.subTitle}</Text>
+            <Text>{item.release}</Text>
+            {/* <Button
+            onPress={() => setNotify(true)}
+            title='Notify Me!'
+            /> */}
+          </View>
+        })
+      }
+      {/* <Button
+      onPress={() => setNotify(true)}
+      title='Notify Me!'
+      /> */}
+    </View>
     </>
   );
 };
