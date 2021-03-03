@@ -1,4 +1,6 @@
 import React from 'react';
+import CreateOutfit from './CreateOutfit.jsx';
+import OutfitGrid from './OutfitGrid';
 import { Tabs, useTabState, Panel } from '@bumaga/tabs';
 
 const cn = (...args) => args.filter(Boolean).join(' ');
@@ -26,26 +28,11 @@ export default () => (
       <div className='tab-progress' />
 
       <Panel>
-        <p>
-          In sociology, anthropology, and linguistics, structuralism is the
-          methodology that implies elements of human culture must be understood
-          by way of their relationship to a broader, overarching system or
-          structure. It works to uncover the structures that underlie all the
-          things that humans do, think, perceive, and feel. Alternatively, as
-          summarized by philosopher Simon Blackburn, structuralism is "the
-          belief that phenomena of human life are not intelligible except
-          through their interrelations. These relations constitute a structure,
-          and behind local variations in the surface phenomena there are
-          constant laws of abstract structure".
-        </p>
+        <CreateOutfit />
       </Panel>
 
       <Panel>
-        <p>
-          The input range must be a linear series of numbers. The output range
-          can be any value type supported by Framer Motion: numbers, colors,
-          shadows, etc.
-        </p>
+        <OutfitGrid />
       </Panel>
 
     </div>
