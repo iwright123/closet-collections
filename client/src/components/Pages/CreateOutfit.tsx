@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { DragEvent, MouseEvent } from 'react';
 import { render } from 'react-dom';
 import { Stage, Layer, Image } from 'react-konva';
 import useImage from 'use-image';
+import ImageUrl from '../models/ImageUrl';
+import * as $ from 'jquery';
 
 const URLImage = ({ image }) => {
   const [img] = useImage(image.src);
@@ -18,26 +20,42 @@ const URLImage = ({ image }) => {
 };
 
 const CreateOutfit = () => {
-  const dragUrl = React.useRef();
-  const stageRef = React.useRef();
-  const [images, setImages] = React.useState([]);
+  const dragUrl = React.useRef<any>();
+  const stageRef = React.useRef<any>();
+  console.log(stageRef, dragUrl);
+  const [images, setImages] = React.useState<ImageUrl[]>([]);
+
+
   return (
     <div>
-      Create Your Outfit
+     Create Your Outfit
       <br />
       <img
-        alt="lion"
-        src="https://konvajs.org/assets/lion.png"
+        height="150px"
+        width="150px"
+        alt="boot"
+        src="https://www.converse.com/dw/image/v2/BCZC_PRD/on/demandware.static/-/Sites-cnv-master-catalog/default/dw59062d66/images/a_1205/170588C_A_1205X1.jpg?sw=964"
         draggable="true"
-        onDragStart={(e) => {
-          dragUrl.current = e.target.src;
+        onDragStart={(event: DragEvent) => {
+          const imageSrc = $('img').attr('src');
+          console.log(imageSrc)
+          if (dragUrl){
+            dragUrl.current = imageSrc;
+
+
+          }
+
         }}
       />
       <div
         onDrop={(e) => {
           e.preventDefault();
           // register event position
-          stageRef.current.setPointersPositions(e);
+          console.log(stageRef);
+          if (stageRef && stageRef.current) {
+            stageRef.current.setPointersPositions(e);
+
+          }
           // add image
           setImages(
             images.concat([
@@ -64,10 +82,11 @@ const CreateOutfit = () => {
         </Stage>
       </div>
     </div>
-  );
+  );;
 };
 
 render(<CreateOutfit />, document.getElementById('root'));
+
 
 export default CreateOutfit;
 

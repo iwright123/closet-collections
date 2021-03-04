@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
     "outDir": "./client/dist/bundle.ts",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "module": "es6",
     "target": "esnext",
     "jsx": "react",
     "lib": ["es6", "DOM"],
     "allowJs": true,
     "strict": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules",

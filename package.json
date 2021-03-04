@@ -34,6 +34,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "hamburger-react": "^2.4.0",
+    "jquery": "^3.6.0",
     "konva": "^7.2.4",
     "lzutf8": "^0.6.0",
     "material-ui-color-picker": "^3.5.1",

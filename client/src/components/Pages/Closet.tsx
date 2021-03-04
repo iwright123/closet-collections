@@ -1,7 +1,9 @@
-import React from 'react';
-import CreateOutfit from './CreateOutfit.jsx';
+import * as React from 'react';
+import CreateOutfit from './CreateOutfit';
 import OutfitGrid from './OutfitGrid';
 import { Tabs, useTabState, Panel } from '@bumaga/tabs';
+
+
 
 const cn = (...args) => args.filter(Boolean).join(' ');
 
