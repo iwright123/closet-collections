@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 
 const Logsout = () => {
   const [login, setLogin] = React.useState(false);
-  console.log('logsout', login)
 
   React.useEffect(() => {
     axios.get('./isloggedin')

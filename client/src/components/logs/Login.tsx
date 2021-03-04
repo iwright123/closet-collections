@@ -6,7 +6,6 @@ import { Button } from '@material-ui/core';
 
 const Logs = () => {
   const [login, setLogin] = React.useState(false);
-  console.log('logs', login)
 
   React.useEffect(() => {
     axios.get('./isloggedin')
