@@ -79,3 +79,8 @@ body {
   padding: 15px 20px;
   display: block;
 }
+
+.konvajs-content {
+  width: 100px;
+  height: 100px;
+}
