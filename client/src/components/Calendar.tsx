@@ -52,39 +52,23 @@ const [notify, setNotify] = React.useState<boolean>(false);
     // or can be React.useState(false);
     //console.info(notify);
 
-    const styles = StyleSheet.create({
-      container: {
-        backgroundColor: 'white',
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-      }
-    })
-
   return (
     <>
 <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-      }}>
-      <Text>Upcoming Releases!</Text>
+      style={styles.container}>
+      <Text style={styles.title}>Upcoming Releases!</Text>
       {
         items.map((item, v) => {
         return <View
           key={v}>
             <Image
-            style={{width: 250, height: 250}}
-            source={{uri: item.img}}
+              style={{width: 250, height: 250}}
+              source={{uri: item.img}}
             />
             <Text>{item.title}</Text>
             <Text>{item.subTitle}</Text>
             <Text>{item.release}</Text>
-            <Button
-            onPress={() => setNotify(true)}
-            title='Notify Me!'
-            />
+            <Button onPress={() => setNotify(true)} title='Notify Me!'/>
           </View>
         })
       }
@@ -96,5 +80,17 @@ const [notify, setNotify] = React.useState<boolean>(false);
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  title: {
+    fontSize: 35
+  }
+});
 
 export default Calendar;
