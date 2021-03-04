@@ -120,10 +120,10 @@ const Vote = db.define('Vote', {
   }
 });
 
-db.sync({ force: true })
-  .then(() => {
-    console.log('Database & tables created!');
-  }).catch((err) => { console.log(err); });
+// db.sync({ force: true })
+//   .then(() => {
+//     console.log('Database & tables created!');
+//   }).catch((err) => { console.log(err); });
 
 module.exports = {
   db,
