@@ -1,9 +1,11 @@
 import * as React from 'react';
+//import Logs from '../logs/Login'
 
 const Home = () => {
   return (
     <div>
       <div>
+        {/* <Logs /> */}
         <h1>This Should Be our Welcome Message or Title</h1>
       </div>
       <div>

@@ -6,9 +6,19 @@ import { Link } from 'react-router-dom';
  import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import axios from 'axios';
 
 const Navbar = () => {
   const [sidebar, setSidebar] = React.useState(false);
+
+  const [login, setLogin] = React.useState(false);
+
+  React.useEffect(() => {
+    axios.get('/isloggedin')
+    .then(({ data }) => setLogin(data))
+    .catch(err => console.warn(err))
+  });
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -34,6 +44,11 @@ const Navbar = () => {
                 <Link className='nav-text' key={index} to={item.link}>{item.icon}<span>{item.title}</span></Link>
               );
             })}
+            {
+              login === true ?
+              <Link className='nav-text' to='/logout'><ExitToAppIcon />,<span>{'Logout'}</span></Link> :
+              <Link className='nav-text' to='/login'><ExitToAppIcon />,<span>{'Login'}</span></Link>
+            }
           </ul>
         </nav>
       </IconContext.Provider>
