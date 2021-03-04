@@ -10,6 +10,7 @@ import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import * as axios from 'axios';
 //import tileData from './tileData';
 
 const tileData = [
@@ -66,7 +67,13 @@ const tileData = [
 
   },
 ];
-
+interface IPost {
+  userId: number;
+  id?: number;
+  title: string;
+  body: string;
+}
+const defaultProps:IPost[] = [];
 const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }; }) => ({
   root: {
     display: 'flex',
@@ -91,9 +98,14 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
 
 const OutfitGrid = () => {
   const classes = useStyles();
-
+//   const comment = (data: {}) => {
+// axios.post('/comment', data: {})
+// .then(data: {} => console.log(data))
+// .catch(err: {} => console.log('errror', err))
+//   }
   return (<div className={classes.root}>
     <h1>Outfits</h1>
+
     <GridList cellHeight={300} spacing={30} className={classes.gridList}>
       <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
         <ListSubheader component="div"></ListSubheader>
@@ -123,6 +135,13 @@ const OutfitGrid = () => {
 
       ))}
     </GridList>
+    <div>
+      <form>
+      <input type='text' placeholder='Title of Post'></input>
+      <input type='image' placeholder='add outfit'></input>
+      <button>Submit</button>
+      </form>
+      </div>
   </div>
   );
 };

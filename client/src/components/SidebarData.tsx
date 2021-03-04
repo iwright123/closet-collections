@@ -20,7 +20,7 @@ export const SidebarData = [
   },
   {
     cName: 'nav-text',
-    title: 'Outfit',
+    title: 'Outfits',
     icon: <AccessibilityIcon />,
     link: '/outfits'
   },
