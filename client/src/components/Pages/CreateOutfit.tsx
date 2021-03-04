@@ -1,10 +1,14 @@
-import React, { DragEvent, MouseEvent } from 'react';
+import React, { DragEvent, MouseEvent, useEffect, useState } from 'react';
+//import * as React, { DragEvent, MouseEvent } from 'react'
 import { render } from 'react-dom';
 import { Stage, Layer, Image } from 'react-konva';
 import type { Stage as StageType } from 'konva/types/Stage'
 import useImage from 'use-image';
 import ImageUrl from '../models/ImageUrl';
+import Outfit from '../models/Outfit';
 import * as $ from 'jquery';
+import axios from 'axios'
+import { SettingsInputAntennaTwoTone } from '@material-ui/icons';
 
 const tileData = [
   {
@@ -61,7 +65,7 @@ const tileData = [
 ];
 
 const URLImage = ({ image }) => {
-  const [img] = useImage(image.src, 'Anonymous');
+  const [img] = useImage(image.imageUrl, 'Anonymous');
   return (
     <Image
       image={img}
@@ -84,34 +88,46 @@ const CreateOutfit = () => {
 		console.log(stageRef.current!.getStage().toDataURL({ mimeType: 'image/jpeg', quality: 1 }))
 	}
 
+ const [outfits, getOutfits] = React.useState<Outfit[]>([]);;
+
+
+  useEffect(() => {
+    axios.get('/items')
+      .then(({ data }) => getOutfits(data))
+      .catch((err) => console.warn(err))
+  }, []);
 
   return (
     <div>
      Create Your Outfit
       <br />
-      <img
-        crossOrigin="anonymous"
+      {
+        outfits.map((outfit, i) => {
+          console.log(outfit);
+         return <img
+        //crossOrigin="anonymous"
         height="150px"
         width="150px"
+        key={String(i)}
         alt="dress"
-        src="https://i.s-madewell.com/is/image/madewell/AF169_BR0040_ld?wid=500&hei=635&fmt=jpeg&fit=crop&qlt=75,1&resMode=bisharp&op_usm=0.5,1,5,0"
         draggable="true"
+        src={outfit.imageUrl}
         onDragStart={(event: DragEvent) => {
           const imageSrc = $('img').attr('src');
-          console.log(imageSrc)
           if (dragUrl){
             dragUrl.current = imageSrc;
-
-
+            console.log(dragUrl.current)
           }
 
         }}
       />
+        })
+      }
       <div
         onDrop={(e) => {
           e.preventDefault();
           // register event position
-          console.log(stageRef);
+          //console.log(stageRef);
           if (stageRef && stageRef.current) {
             stageRef.current.setPointersPositions(e);
 

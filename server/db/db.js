@@ -30,7 +30,8 @@ const Items = db.define('Items', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
-    primaryKey: true
+    primaryKey: true,
+    allowNull: false,
   },
   clothingType: {
     type: Sequelize.STRING,
@@ -46,7 +47,7 @@ const Items = db.define('Items', {
   },
   imageUrl: {
     type: Sequelize.STRING(1000),
-    unique: false
+    unique: true
   }
 });
 
