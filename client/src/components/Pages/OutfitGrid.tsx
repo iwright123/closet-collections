@@ -135,13 +135,13 @@ const OutfitGrid = () => {
 
       ))}
     </GridList>
-    <div>
+    {/* <div>
       <form>
       <input type='text' placeholder='Title of Post'></input>
       <input type='image' placeholder='add outfit'></input>
       <button>Submit</button>
       </form>
-      </div>
+      </div> */}
   </div>
   );
 };

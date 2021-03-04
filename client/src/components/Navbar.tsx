@@ -6,11 +6,19 @@ import { Link } from 'react-router-dom';
  import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
+import GoogleButton from 'react-google-button';
+import axios from 'axios';
+import { set } from 'js-cookie';
 
 const Navbar = () => {
   const [sidebar, setSidebar] = React.useState(false);
-
+const [login, setLogin] = React.useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+  React.useEffect(() => {
+    axios.get('/isloggedin')
+    .then(({ data }) => setLogin(data))
+    .catch(err => console.log('err', err))
+  }, [])
 
   return (
     <>
@@ -37,6 +45,7 @@ const Navbar = () => {
           </ul>
         </nav>
       </IconContext.Provider>
+
     </>
   );
 };
