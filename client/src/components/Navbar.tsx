@@ -13,6 +13,7 @@ const Navbar = () => {
   const [sidebar, setSidebar] = React.useState(false);
 
   const [login, setLogin] = React.useState(false);
+  console.log('navbar', login)
 
   React.useEffect(() => {
     axios.get('/isloggedin')

@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 
 const Logsout = () => {
   const [login, setLogin] = React.useState(false);
+  console.log('logsout', login)
 
   React.useEffect(() => {
     axios.get('./isloggedin')
@@ -21,15 +22,22 @@ const Logsout = () => {
   };
 
 
-  return (
+   return (
     <div>
       {
-          <div>
-            <button onClick={() => logout()}>logout</button>
-          </div>
+        login === true ?
+        <div>
+            <Button onClick={() => logout()}>logout</Button>
+        </div>
+        :
+        <div>
+            <a className='loginButton' href="/auth/google"> <GoogleButton /></a>
+        </div>
       }
+
     </div>
   );
+
 
 };
 

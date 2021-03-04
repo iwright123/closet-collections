@@ -6,6 +6,7 @@ import { Button } from '@material-ui/core';
 
 const Logs = () => {
   const [login, setLogin] = React.useState(false);
+  console.log('logs', login)
 
   React.useEffect(() => {
     axios.get('./isloggedin')
@@ -30,7 +31,7 @@ const Logs = () => {
           </div>
           :
           <div>
-            <button onClick={() => logout()}>logout</button>
+            <Button onClick={() => logout()}>logout</Button>
           </div>
       }
     </div>
