@@ -1,7 +1,5 @@
-//mport { Button } from '@material-ui/core';
 import * as React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
-import { not } from 'sequelize/types/lib/operators';
 
 const items = [
   {
@@ -62,20 +60,19 @@ const [notify, setNotify] = React.useState<boolean>(false);
         return <View
           key={v}>
             <Image
-              style={{width: 250, height: 250}}
+              style={{width: 250, height: 250, marginVertical: 10}}
               source={{uri: item.img}}
             />
-            <Text>{item.title}</Text>
-            <Text>{item.subTitle}</Text>
-            <Text>{item.release}</Text>
-            <Button onPress={() => setNotify(true)} title='Notify Me!'/>
+            <Text style={styles.itemInfo}>{item.title}</Text>
+            <Text style={styles.subItemInfo}>{item.subTitle}</Text>
+            {/* <Text>{item.release}</Text> */}
+            <Button
+              onPress={() => setNotify(true)}
+              title='Notify Me!'
+            />
           </View>
         })
       }
-      {/* <Button
-      onPress={() => setNotify(true)}
-      title='Notify Me!'
-      /> */}
     </View>
     </>
   );
@@ -88,9 +85,30 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+
   title: {
     fontSize: 35
+  },
+
+  button: {
+    backgroundColor: 'black'
+  },
+
+  itemInfo: {
+    flex: 1,
+    fontSize: 15,
+    textAlign: 'center',
+    marginVertical: -10
+  },
+
+  subItemInfo: {
+    flex: 1,
+    fontSize: 25,
+    textAlign: 'center',
+    marginVertical: 10
   }
+
+
 });
 
 export default Calendar;
