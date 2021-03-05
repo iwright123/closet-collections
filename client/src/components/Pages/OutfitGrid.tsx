@@ -6,6 +6,11 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import * as axios from 'axios';
 //import tileData from './tileData';
 
 const tileData = [
@@ -59,10 +64,17 @@ const tileData = [
   {
     img: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTxQiitKWV4hzzepneb_nym5CI2D-hGDT9VG9Gnv7zM4k6qNtO4cV8MXdKjknFCTk0vcngtcUTexQ&usqp=CAc',
     title: 'Air Jordan 1 Retro x Balvin',
+
   },
 ];
-
-const useStyles = makeStyles((theme) => ({
+interface IPost {
+  userId: number;
+  id?: number;
+  title: string;
+  body: string;
+}
+const defaultProps:IPost[] = [];
+const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }; }) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -86,27 +98,50 @@ const useStyles = makeStyles((theme) => ({
 
 const OutfitGrid = () => {
   const classes = useStyles();
-
+//   const comment = (data: {}) => {
+// axios.post('/comment', data: {})
+// .then(data: {} => console.log(data))
+// .catch(err: {} => console.log('errror', err))
+//   }
   return (<div className={classes.root}>
     <h1>Outfits</h1>
+
     <GridList cellHeight={300} spacing={30} className={classes.gridList}>
       <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
         <ListSubheader component="div"></ListSubheader>
       </GridListTile>
-      {tileData.map((tile) => (
+      {
+      tileData.map((tile) => (
+
         <GridListTile key={tile.img}>
+           <Zoom>
           <img src={tile.img} alt={tile.title} />
+           </Zoom>
           <GridListTileBar
             title={tile.title}
             actionIcon={
               <IconButton aria-label={`info about ${tile.title}`} className={classes.icon}>
-                <FavoriteIcon />
+                <ThumbUpIcon />
+                  <span></span>
+
+                <ThumbDownIcon />
+                <span></span>
+                  <button>Comment</button>
+
               </IconButton>
             }
           />
         </GridListTile>
+
       ))}
     </GridList>
+    {/* <div>
+      <form>
+      <input type='text' placeholder='Title of Post'></input>
+      <input type='image' placeholder='add outfit'></input>
+      <button>Submit</button>
+      </form>
+      </div> */}
   </div>
   );
 };

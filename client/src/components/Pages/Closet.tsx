@@ -4,6 +4,7 @@ import OutfitGrid from './OutfitGrid';
 import AddItems from './AddItems'
 import { Tabs, useTabState, Panel } from '@bumaga/tabs';
 import * as axios from 'axios'
+import MyOutfit from  '../Pages/MyOutfit'
 
 
 const cn = (...args) => args.filter(Boolean).join(' ');
@@ -37,7 +38,8 @@ export default () => (
       </Panel>
 
       <Panel>
-        <OutfitGrid />
+        {/* this is where my closet outfits go */}
+        <MyOutfit />
       </Panel>
 
       <Panel>

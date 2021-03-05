@@ -10,7 +10,13 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 dotenv.config();
-const { addItem, getAllItems, deleteItem, savePost } = require('./db/db.ts');
+////////////////HELPERS////////////////////
+
+const { addItem, getAllItems, deleteItem } = require('./helpers/Item');
+const { addUser } = require('./db/db.ts')
+const { savePost } = require('./helpers/WhiteBoardPost')
+
+////////////////HELPERS////////////////////
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
@@ -84,7 +90,9 @@ app.get('/auth/google/callback',
     const { displayName } = req.user;
     // setting cookie key to thesis and saving the username
     res.cookie('thesis', displayName);
-    res.redirect('/');
+    return addUser(displayName)
+    .then(() =>  res.redirect('/'))
+    .catch((err: string) => console.log('error adding user to db', err))
   });
 
 app.get('/isloggedin', (req, res) => {
