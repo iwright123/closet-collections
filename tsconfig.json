@@ -13,6 +13,7 @@
   //   "moduleResolution": "node"
   // },
   "compilerOptions": {
+    "experimentalDecorators": true,
     "jsx": "react",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

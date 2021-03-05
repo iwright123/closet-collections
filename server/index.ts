@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 dotenv.config();
-//const { addItem, getAllItems, deleteItem } = require('./helpers/Item.ts');
+const { addItem, getAllItems, deleteItem } = require('./db/db');
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
@@ -26,28 +26,28 @@ app.use(bodyParser.json());
 
 /*******************DATABASE ROUTES ************************************/
 
-// app.get('/items', (req, res) => {
-//   return getAllItems(req.body)
-//     .then((data: any) => res.json(data))
-//     .catch((err: any) => console.warn(err));
-// });
+app.get('/items', (req, res) => {
+  return getAllItems(req.body)
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err));
+});
 
-// app.post('/items', (req, res) => {
-//   return addItem(req.body)
-//     .then(data => {
-//       console.log('SUCCESS', data);
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//     });
+app.post('/items', (req, res) => {
+  return addItem(req.body)
+    .then((data: any) => {
+      console.log('SUCCESS', data);
+    })
+    .catch((err: any) => {
+      console.error(err);
+    });
 
-// });
+});
 
-// app.delete('/items/:id', (req, res) => {
-//   deleteItem(req.params)
-//     .then((data) => res.json(data))
-//     .catch((err) => console.warn(err));
-// });
+app.delete('/items/:id', (req, res) => {
+  deleteItem(req.params)
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err));
+});
 
 
 /////////GOOGLE AUTH ///////////
@@ -71,10 +71,10 @@ app.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
+  passport.authenticate('google', { failureRedirect: '/login' }), (req: any, res: any) => {
+    const { displayName } = req.user;
     // setting cookie key to thesis and saving the username
-    res.cookie('thesis', req.user);
+    res.cookie('thesis', displayName);
     res.redirect('/');
   });
 
