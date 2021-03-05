@@ -3,6 +3,7 @@ import axios from 'axios';
 import Navbar from './Navbar';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './Pages/Home';
+import Chat from './Pages/Chat';
 import Closet from './Pages/Closet';
 import Calendar from './Calendar';
 import OutfitGrid from './Pages/OutfitGrid';
@@ -51,6 +52,7 @@ const App = () => {
         <Route path='/calendar' component={Calendar} />
         <Route path='/outfits' component={OutfitGrid} />
         <Route path='/closet' component={Closet} />
+        <Route path='/chat' component={Chat} />
         <Route path='/logout' component={Logsout} />
       </Switch>
     </Router>

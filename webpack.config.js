@@ -10,7 +10,7 @@ module.exports = {
         test: /\.(tsx|ts|jsx|js$|js)$/,
         use: 'ts-loader',
         //not sure if this loader broke anything
-        loader: 'webpack-remove-debug',
+
         exclude: /node_modules/,
       },
       {

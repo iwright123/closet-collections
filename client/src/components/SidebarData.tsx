@@ -4,6 +4,7 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ChatIcon from '@material-ui/icons/Chat';
 
 
 
@@ -30,6 +31,12 @@ export const SidebarData = [
     title: 'Calendar',
     icon: <EventAvailableIcon />,
     link: '/calendar'
+  },
+  {
+    cName: 'nav-text',
+    title: 'Chat Room',
+    icon: <ChatIcon />,
+    link: '/chat'
   },
   // {
   //   cName: 'nav-text',

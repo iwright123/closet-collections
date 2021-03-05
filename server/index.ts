@@ -1,14 +1,20 @@
 const path = require('path');
-import express from 'express';
+import * as express from "express";
+const app = require("express")()
+const server = require("http").createServer(app);
+const port = process.env.PORT || 3000;
+
 const { GoogleStrategy } = require('./passport.ts');
-import passport from 'passport';
-import session from 'express-session';
+import  passport from 'passport';
+import  session from 'express-session';
 const cloudinary = require('cloudinary')
 const cors = require('cors');
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
+import  cookieParser from 'cookie-parser';
+import  bodyParser from 'body-parser';
+import  dotenv from 'dotenv';
 dotenv.config();
+import { Server, Socket } from "socket.io";
+const httpServer = require("http").createServer()
 ////////////////HELPERS////////////////////
 
 import { addItem, getAllItems, deleteItem } from './helpers/Item';
@@ -19,7 +25,7 @@ import { savePost } from './helpers/WhiteBoardPost'
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
-const app = express();
+
 const dist = path.resolve(__dirname, '..', 'client', 'dist');
 
 app.use(express.json());
@@ -35,6 +41,28 @@ cloudinary.config({
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET
   })
+
+  //socketio
+  var http = require("http").Server(app);
+
+  const options = { /* ... */ };
+  const io = require('socket.io')(server);
+
+
+  io.use((socket: any, next: any) => {
+    if (socket.request.user) {
+      next();
+    } else {
+      next(new Error('unauthorized'))
+    }
+  });
+
+  io.on('connect', (socket: any) => {
+    console.log(`new connection ${socket.id}`);
+    socket.on('whoami', (cb: any) => {
+      cb(socket.request.user ? socket.request.user.username : '');
+    });
+  });
 /*******************DATABASE ROUTES ************************************/
 
 app.get('/items', (req: any, res: any) => {
@@ -93,7 +121,7 @@ app.get('/auth/google/callback',
     .catch((err: string) => console.log('error adding user to db', err))
   });
 
-app.get('/isloggedin', (req, res) => {
+app.get('/isloggedin', (req: any, res: any) => {
   // check to see if the cookie key is thesis
   if (req.cookies.thesis) {
     res.json(true);
@@ -102,24 +130,17 @@ app.get('/isloggedin', (req, res) => {
   }
 });
 
-app.delete('/logout', (req, res) => {
+app.delete('/logout', (req: any, res: any) => {
   // delete the cookie key thesis when logging out
   res.clearCookie('thesis');
   res.json(false);
 });
 ///////////GOOGLE AUTH ^^^^^^///////////
 
-//websockets
-// io.on("connection", socket => {
-//   console.log("a user connected :D");
-//   socket.on("chat message", msg => {
-//     console.log(msg);
-//     io.emit("chat message", msg);
-//   });
-// });
 
-const port = 3000;
-app.listen(port, () => {
+
+
+server.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
 
