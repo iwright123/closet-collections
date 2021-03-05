@@ -109,6 +109,14 @@ app.delete('/logout', (req, res) => {
 });
 ///////////GOOGLE AUTH ^^^^^^///////////
 
+//websockets
+// io.on("connection", socket => {
+//   console.log("a user connected :D");
+//   socket.on("chat message", msg => {
+//     console.log(msg);
+//     io.emit("chat message", msg);
+//   });
+// });
 
 const port = 3000;
 app.listen(port, () => {
