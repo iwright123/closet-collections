@@ -143,6 +143,21 @@ const deleteItem = (body: any) => {
   });
 };
 
+const addUser = (name: string) => {
+  return Users.findOrCreate({
+    username: name,
+    where: {
+      username: name
+    }
+  })
+}
+const getFits = () => {
+  return WhiteboardPost.findAll();
+}
+const getTrash = () => {
+  return WhiteboardPost.findAll();
+}
+
 module.exports = {
   Users,
   Items,
@@ -152,7 +167,10 @@ module.exports = {
   Vote,
   addItem,
   getAllItems,
-  deleteItem
+  deleteItem,
+  addUser,
+  getFits,
+  getTrash
 };
 
 // sequelize.sync({ force: true })

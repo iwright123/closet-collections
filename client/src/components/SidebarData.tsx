@@ -21,7 +21,7 @@ export const SidebarData = [
   },
   {
     cName: 'nav-text',
-    title: 'Outfit',
+    title: 'Public Outfits',
     icon: <AccessibilityIcon />,
     link: '/outfits'
   },

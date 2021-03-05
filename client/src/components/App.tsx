@@ -1,7 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './Pages/Home';
 import Closet from './Pages/Closet';
 import Calendar from './Calendar';
@@ -10,7 +10,7 @@ import OutfitGrid from './Pages/OutfitGrid';
 import Logs from './logs/login';
 import Logsout from './logs/Logout'
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
-
+import MyOutfit from '../components/Pages/MyOutfit'
 const { height } = Dimensions.get('screen');
 
 const App = () => {

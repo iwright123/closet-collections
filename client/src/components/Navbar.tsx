@@ -6,8 +6,11 @@ import { Link } from 'react-router-dom';
  import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import GoogleButton from 'react-google-button';
 import axios from 'axios';
+import { set } from 'js-cookie';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 
 const Navbar = () => {
   const [sidebar, setSidebar] = React.useState(false);
@@ -21,6 +24,11 @@ const Navbar = () => {
   });
 
   const showSidebar = () => setSidebar(!sidebar);
+  React.useEffect(() => {
+    axios.get('/isloggedin')
+    .then(({ data }) => setLogin(data))
+    .catch(err => console.log('err', err))
+  }, [])
 
   return (
     <>
@@ -52,8 +60,9 @@ const Navbar = () => {
           </ul>
         </nav>
       </IconContext.Provider>
+
     </>
   );
 };
 
-export default Navbar;
+export default Navbar

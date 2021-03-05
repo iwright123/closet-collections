@@ -26,19 +26,20 @@
     "allowJs": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
+
+  },
     "noImplicitAny": true,
-},
-  "exclude": [
-    "node_modules",
-    "jest.config.js",
-    "babel.config.js"
-  ],
-  "target": "esnext",
-     "baseUrl": ".",
-     "paths": {
-       "*": ["src/*"],
-       "tests": ["tests/*"],
-       "@components/*": ["src/components/*"],
-     },
+    "exclude": [
+      "node_modules",
+      "jest.config.js",
+      "babel.config.js"
+    ],
+    "target": "esnext",
+       "baseUrl": ".",
+       "paths": {
+         "*": ["src/*"],
+         "tests": ["tests/*"],
+         "@components/*": ["src/components/*"],
+       }
 
 }
