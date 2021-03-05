@@ -6,6 +6,7 @@ import Home from './Pages/Home';
 import Closet from './Pages/Closet';
 import Calendar from './Calendar';
 import OutfitGrid from './Pages/OutfitGrid';
+import FindAStore from './Pages/FindAStore';
 // import GoogleButton from 'react-google-button';
 import Logs from './logs/login';
 import Logsout from './logs/Logout'
@@ -40,6 +41,7 @@ const App = () => {
           <Route path='/calendar' component={Calendar} />
           <Route path='/outfits' component={OutfitGrid} />
           <Route path='/closet' component={Closet} />
+          <Route path='/findastore' component={FindAStore} />
           <Route path='/login' component={Logs} />
         </Switch>
       </Router>
@@ -51,6 +53,7 @@ const App = () => {
         <Route path='/calendar' component={Calendar} />
         <Route path='/outfits' component={OutfitGrid} />
         <Route path='/closet' component={Closet} />
+        <Route path='/findastore' component={FindAStore} />
         <Route path='/logout' component={Logsout} />
       </Switch>
     </Router>
