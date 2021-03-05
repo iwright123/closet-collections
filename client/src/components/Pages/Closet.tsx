@@ -5,6 +5,7 @@ import AddItems from './AddItems'
 import { Tabs, useTabState, Panel } from '@bumaga/tabs';
 import * as axios from 'axios'
 import MyOutfit from  '../Pages/MyOutfit'
+import CreateOutfitWhiteBoard from './CreateOutfitWhiteBoard';
 
 
 const cn = (...args) => args.filter(Boolean).join(' ');
@@ -34,7 +35,7 @@ export default () => (
       <div className='tab-progress' />
 
       <Panel>
-        <CreateOutfit />
+        <CreateOutfitWhiteBoard />
       </Panel>
 
       <Panel>
