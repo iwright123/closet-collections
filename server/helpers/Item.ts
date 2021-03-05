@@ -1,6 +1,6 @@
 import { Items } from '../db/db';
 
-const addItem = async(body: any) => {
+export const addItem = async(body: any) => {
   const { clothingType, description, price, imageUrl } = body;
    const newItem = await Items.create({
      clothingType: clothingType,
@@ -11,11 +11,11 @@ const addItem = async(body: any) => {
   return newItem.save();
 };
 
-const getAllItems = () => {
+export const getAllItems = () => {
   return Items.findAll();
 };
 
-const deleteItem = (body: any) => {
+export const deleteItem = (body: any) => {
   const { id } = body;
   return Items.destroy({
     where: {
@@ -24,8 +24,3 @@ const deleteItem = (body: any) => {
   });
 };
 
-module.exports = {
-  addItem,
-  getAllItems,
-  deleteItem
-};

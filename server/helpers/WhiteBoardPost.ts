@@ -1,4 +1,4 @@
-const { WhiteboardPost } = require('../db/db');
+import { WhiteboardPost } from '../db/db';
 
 export const savePost = async(body: any) => {
   const { likes, dislikes, comments } = body;

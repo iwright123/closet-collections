@@ -1,6 +1,5 @@
 const path = require('path');
 import express from 'express';
-const { db, } = require('./db/db.ts');
 const { GoogleStrategy } = require('./passport.ts');
 import passport from 'passport';
 import session from 'express-session';
@@ -12,9 +11,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 ////////////////HELPERS////////////////////
 
-const { addItem, getAllItems, deleteItem } = require('./helpers/Item');
+import { addItem, getAllItems, deleteItem } from './helpers/Item';
 const { addUser } = require('./db/db.ts')
-const { savePost } = require('./helpers/WhiteBoardPost')
+import { savePost } from './helpers/WhiteBoardPost'
 
 ////////////////HELPERS////////////////////
 
@@ -38,27 +37,26 @@ cloudinary.config({
   })
 /*******************DATABASE ROUTES ************************************/
 
-app.get('/items', (req, res) => {
-   getAllItems(req.body)
+app.get('/items', (req: any, res: any) => {
+   getAllItems()
     .then((data: any) => res.json(data))
     .catch((err: any) => console.warn(err));
 });
 
-app.post('/items', (req, res) => {
-  console.log('REQ', req);
+app.post('/items', (req: any, res: any) => {
    addItem(req.body)
     .then((data: any) => res.json(data))
     .catch((err: any) => console.warn('HERE ERROR', err));
 
 });
 
-app.post('/whiteboardpost', (req, res) => {
+app.post('/whiteboardpost', (req: any, res: any) => {
   savePost(req.body)
     .then((data: any) => console.log('Success!', data))
     .catch((err: any) => console.error(err));
 });
 
-app.delete('/items/:id', (req, res) => {
+app.delete('/items/:id', (req: any, res: any) => {
   deleteItem(req.params)
     .then((data: any) => res.json(data))
     .catch((err: any) => console.warn(err));
