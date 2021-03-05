@@ -20,7 +20,7 @@ const Users = sequelize.define('Users', {
   }
 });
 
-const Items = sequelize.define('Items', {
+export const Items = sequelize.define('Items', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -61,7 +61,7 @@ const Outfit = sequelize.define('Outfit', {
   }
 });
 
-const WhiteboardPost = sequelize.define('WhiteboardPost', {
+export const WhiteboardPost = sequelize.define('WhiteboardPost', {
   outfitId: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -119,31 +119,31 @@ const Vote = sequelize.define('Vote', {
 // sequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
 // sequelize.query(`USE \`${database}\`;`);
 
-const addItem = async(body: any) => {
-  const { clothingType, description, price, imageUrl } = body;
-   const newItem = await Items.create({
-     clothingType: clothingType,
-     description: description,
-     price: price,
-     imageUrl: imageUrl
-   });
-  return newItem.save();
-};
+// const addItem = async(body: any) => {
+//   const { clothingType, description, price, imageUrl } = body;
+//    const newItem = await Items.create({
+//      clothingType: clothingType,
+//      description: description,
+//      price: price,
+//      imageUrl: imageUrl
+//    });
+//   return newItem.save();
+// };
 
-const getAllItems = async() => {
-  return await Items.findAll();
-};
+// const getAllItems = async() => {
+//   return await Items.findAll();
+// };
 
-const deleteItem = (body: any) => {
-  const { id } = body;
-  return Items.destroy({
-    where: {
-      id: id
-    }
-  });
-};
+// const deleteItem = (body: any) => {
+//   const { id } = body;
+//   return Items.destroy({
+//     where: {
+//       id: id
+//     }
+//   });
+// };
 
-const addUser = (name: string) => {
+export const addUser = (name: string) => {
   return Users.findOrCreate({
     username: name,
     where: {
@@ -160,15 +160,9 @@ const getTrash = () => {
 
 module.exports = {
   Users,
-  Items,
-  WhiteboardPost,
   Outfit,
   Calendar,
   Vote,
-  addItem,
-  getAllItems,
-  deleteItem,
-  addUser,
   getFits,
   getTrash
 };
