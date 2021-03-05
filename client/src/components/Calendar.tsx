@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import axios from 'axios';
 
 const items = [
   {
@@ -50,6 +51,9 @@ const Calendar: React.FC<Props> = (props) => {
 const [notify, setNotify] = React.useState<boolean>(false);
     // or can be React.useState(false);
     //console.info(notify);
+    const favItem = () => {
+      axios.post('/calendar')
+    }
 
   return (
     <>
