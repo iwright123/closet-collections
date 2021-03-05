@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 dotenv.config();
-const { addItem, getAllItems, deleteItem } = require('./db/db.ts');
+const { addItem, getAllItems, deleteItem, savePost } = require('./db/db.ts');
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
@@ -37,6 +37,12 @@ app.post('/items', (req, res) => {
     .then((data: any) => res.json(data))
     .catch((err: any) => console.warn('HERE ERROR', err));
 
+});
+
+app.post('/whiteboardpost', (req, res) => {
+  savePost(req.body)
+    .then((data: any) => console.log('Success!', data))
+    .catch((err: any) => console.error(err));
 });
 
 app.delete('/items/:id', (req, res) => {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import CreateOutfit from './CreateOutfit';
 import OutfitGrid from './OutfitGrid';
 import { Tabs, useTabState, Panel } from '@bumaga/tabs';
-
+import * as axios from 'axios'
 
 
 const cn = (...args) => args.filter(Boolean).join(' ');
