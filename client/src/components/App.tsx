@@ -1,7 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
-import Navbar from './Navbar.tsx';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Navbar from './Navbar';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './Pages/Home';
 import Closet from './Pages/Closet';
 import Calendar from './Calendar';
