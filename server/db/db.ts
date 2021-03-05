@@ -1,25 +1,10 @@
-
 const { Sequelize } = require('sequelize');
+const mysql = require('mysql2');
 
-// const mysql = require('mysql2');
-
-const sequelize = new Sequelize('btt4kvk4tsp4q222gi6t', 'u9qyiwatcizohnzq', '2PF07QJi3HL9jWDhXb34', {
-  host: 'btt4kvk4tsp4q222gi6t-mysql.services.clever-cloud.com',
+const sequelize = new Sequelize('b7gjvli8tydsaa3jdyaa', 'ugybjn6ukvevp2lb', 'jZxeIwWOFrcxpGFyLn4I', {
+  host: 'b7gjvli8tydsaa3jdyaa-mysql.services.clever-cloud.com',
   dialect: 'mysql'
 });
-
-// const database = 'btt4kvk4tsp4q222gi6t';
-
-// db.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
-// db.query(`USE \`${database}\`;`);
-
-// const sequelize = new Sequelize({
-//   host: 'btt4kvk4tsp4q222gi6t-mysql.services.clever-cloud.com',
-//   database: 'btt4kvk4tsp4q222gi6t',
-//   dialect: 'mysql',
-//   username: 'u9qyiwatcizohnzq',
-//   password: '2PF07QJi3HL9jWDhXb34'
-// });
 
 const Users = sequelize.define('Users', {
   id: {
@@ -129,16 +114,10 @@ const Vote = sequelize.define('Vote', {
   }
 });
 
-// const database = 'btt4kvk4tsp4q222gi6t';
+// const database = 'b7gjvli8tydsaa3jdyaa';
 
 // sequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
 // sequelize.query(`USE \`${database}\`;`);
-
-// // db.sync({ force: true })
-// //   .then(() => {
-// //     console.log('Database & tables created!');
-// //   }).catch((err) => { console.log(err); });
-
 
 const addItem = async(body: any) => {
   const { clothingType, description, price, imageUrl } = body;
@@ -175,140 +154,6 @@ module.exports = {
   getAllItems,
   deleteItem
 };
-
-
-// import { Table } from '@material-ui/core';
-// import { userInfo } from 'os';
-// import {
-//   Model,
-//   ModelDefined,
-//   DataTypes,
-//   HasManyGetAssociationsMixin,
-//   HasManyAddAssociationMixin,
-//   HasManyHasAssociationMixin,
-//   Association,
-//   HasManyCountAssociationsMixin,
-//   HasManyCreateAssociationMixin,
-//   Optional,
-// } from 'sequelize';
-
-// import Sequelize from 'sequelize/types/lib/sequelize';
-
-// const sequelize = new Sequelize({
-//   host: 'btt4kvk4tsp4q222gi6t-mysql.services.clever-cloud.com',
-//   database: 'btt4kvk4tsp4q222gi6t',
-//   dialect: 'mysql',
-//   username: 'u9qyiwatcizohnzq',
-//   password: '2PF07QJi3HL9jWDhXb34'
-// });
-
-// // export interface Users {
-// //   id: {
-// //     type: number,
-// //     autoIncrement: true,
-// //     primaryKey: true
-// //   },
-// //   username: {
-// //     type: string,
-// //     allowNull: false
-// //   }
-// //};
-
-// interface Users {
-//   id: number,
-//   username: string
-// };
-
-//  interface UsersI extends Optional<Users, 'id' | 'username'> {};
-
-
-
-// export interface Items {
-//   id: {
-//     type: number,
-//     autoIncrement: true,
-//     primaryKey: true
-//   },
-//   clothingType: {
-//     type: string,
-//     unique: false
-//   },
-//   description: {
-//     type: string,
-//     unique: false
-//   },
-//   price: {
-//     type: string,
-//     unique: false
-//   },
-//   imageUrl: {
-//     type: string,
-//     unique: false
-//   }
-// };
-
-
-// export interface WhiteboardPost {
-//   idUser: {
-//     type: number,
-//     allowNull: false,
-//     primaryKey: true
-//   },
-//   outfitId: {
-//     type: number,
-//     allowNull: false,
-//     primaryKey: true
-//   },
-//   likes: {
-//     type: number,
-//     allowNull: false,
-//   },
-//   dislikes: {
-//     type: number,
-//     allowNull: false,
-//   },
-//   comments: {
-//     type: string,
-//     unique: true
-//   }
-// };
-
-// export interface Outfit {
-//   id: {
-//     type: number,
-//     autoIncrement: true,
-//     allowNull: false,
-//     primaryKey: true
-//   },
-//   outfit: {
-//     type: string,
-//     unique: true
-//   }
-// };
-
-// export interface Vote {
-//   idUser: {
-//     type: number,
-//     allowNull: false,
-//     primaryKey: true
-//   },
-//   idPost: {
-//     type: number,
-//     allowNull: false,
-//     primaryKey: true
-//   },
-//   like: {
-//     type: number
-//   },
-//   dislike: {
-//     type: number
-//   }
-// };
-
-//  const database = 'btt4kvk4tsp4q222gi6t';
-
-// sequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
-// sequelize.query(`USE \`${database}\`;`);
 
 // sequelize.sync({ force: true })
 //   .then(() => console.log('Database & tables created!'))

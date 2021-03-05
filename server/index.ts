@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 dotenv.config();
-const { addItem, getAllItems, deleteItem } = require('./db/db');
+const { addItem, getAllItems, deleteItem } = require('./db/db.ts');
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
@@ -27,19 +27,15 @@ app.use(bodyParser.json());
 /*******************DATABASE ROUTES ************************************/
 
 app.get('/items', (req, res) => {
-  return getAllItems(req.body)
+   getAllItems(req.body)
     .then((data: any) => res.json(data))
     .catch((err: any) => console.warn(err));
 });
 
 app.post('/items', (req, res) => {
-  return addItem(req.body)
-    .then((data: any) => {
-      console.log('SUCCESS', data);
-    })
-    .catch((err: any) => {
-      console.error(err);
-    });
+   addItem(req.body)
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn('HERE ERROR', err));
 
 });
 
