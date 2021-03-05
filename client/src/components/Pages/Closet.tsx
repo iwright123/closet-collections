@@ -1,6 +1,7 @@
 import * as React from 'react';
 import CreateOutfit from './CreateOutfit';
 import OutfitGrid from './OutfitGrid';
+import AddItems from './AddItems'
 import { Tabs, useTabState, Panel } from '@bumaga/tabs';
 import * as axios from 'axios'
 import MyOutfit from  '../Pages/MyOutfit'
@@ -26,6 +27,8 @@ export default () => (
 
         <ClosetTab>My Outfits</ClosetTab>
 
+        <ClosetTab>Add Items to Closet</ClosetTab>
+
       </div>
 
       <div className='tab-progress' />
@@ -37,6 +40,10 @@ export default () => (
       <Panel>
         {/* this is where my closet outfits go */}
         <MyOutfit />
+      </Panel>
+
+      <Panel>
+        <AddItems />
       </Panel>
 
     </div>

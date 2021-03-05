@@ -3,6 +3,8 @@ import express from 'express';
 const { GoogleStrategy } = require('./passport.ts');
 import passport from 'passport';
 import session from 'express-session';
+const cloudinary = require('cloudinary')
+const cors = require('cors');
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
@@ -27,8 +29,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
 app.use(bodyParser.json());
-
-
+app.use(cors())
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+  })
 /*******************DATABASE ROUTES ************************************/
 
 app.get('/items', (req: any, res: any) => {
