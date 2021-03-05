@@ -1,21 +1,20 @@
 import React, { DragEvent, MouseEvent, useEffect, useState } from 'react';
 import { render } from 'react-dom';
 import { Stage, Layer, Image } from 'react-konva';
-import type { Stage as StageType } from 'konva/types/Stage'
 import useImage from 'use-image';
 import ImageUrl from '../models/ImageUrl';
 import Outfit from '../models/Outfit';
-import * as $ from 'jquery';
+import $ from 'jquery';
 import axios from 'axios'
 
 const URLImage = ({ image }) => {
-  const [img] = useImage(image.src, 'Anonymous');
+  const [img] = useImage(image.imageUrl, 'Anonymous');
   return (
     <Image
+    crossOrigin="anonymous"
       image={img}
       x={image.x}
       y={image.y}
-      // I will use offset to set origin to the center of the image
       offsetX={img ? img.width / 2 : 0}
       offsetY={img ? img.height / 2 : 0}
     />
@@ -40,7 +39,7 @@ const CreateOutfit = () => {
       .then(({ data }) => getOutfits(data))
       .catch((err) => console.warn(err))
   }, []);
-
+console.log(outfits);
   return (
     <div>
      Create Your Outfit
@@ -48,7 +47,7 @@ const CreateOutfit = () => {
       {
         outfits.map((outfit, i) => {
          return <img
-        //crossOrigin="anonymous"
+        crossOrigin="anonymous"
         height="75px"
         width="75px"
         key={String(i)}
@@ -65,22 +64,7 @@ const CreateOutfit = () => {
       />
         })
       }
-      {/* <img
-        //crossOrigin="anonymous"
-        height="150px"
-        width="150px"
-        alt="dress"
-        src="https://i.s-madewell.com/is/image/madewell/AF169_BR0040_ld?wid=500&hei=635&fmt=jpeg&fit=crop&qlt=75,1&resMode=bisharp&op_usm=0.5,1,5,0"
-        draggable="true"
-        onDragStart={(event: DragEvent) => {
-          const imageSrc = $('img').attr('src');
-          console.log(imageSrc)
-          if (dragUrl){
-            dragUrl.current = imageSrc;
-          }
 
-        }}
-      /> */}
       <div
         onDrop={(e) => {
           e.preventDefault();
