@@ -1,10 +1,21 @@
-import * as React from 'react';
+
+import React, { DragEvent, MouseEvent, useEffect, useState } from 'react';
 //import Logs from '../logs/Login'
 import * as axios from 'axios';
 import GoogleButton from 'react-google-button';
 
 
+
 const Home = () => {
+  const [topFits] = React.useState([])
+// useEffect(() => {
+// axios.get('/fits')
+// }, [])
+// const [trash] = React.useState([])
+
+// useEffect(() => {
+//   axios.get('/trash')
+//   }, [])
 
   return (
     <div>

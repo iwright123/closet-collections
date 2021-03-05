@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const items = [
   {
@@ -65,6 +66,7 @@ const [notify, setNotify] = React.useState<boolean>(false);
             />
             <Text style={styles.itemInfo}>{item.title}</Text>
             <Text style={styles.subItemInfo}>{item.subTitle}</Text>
+            <FavoriteIcon />
             {/* <Text>{item.release}</Text> */}
             <Button
               onPress={() => setNotify(true)}
