@@ -143,28 +143,33 @@ const Vote = sequelize.define('Vote', {
 //   });
 // };
 
-export const addUser = (name: string) => {
+const addUser = (name: string) => {
   return Users.findOrCreate({
     username: name,
     where: {
       username: name
     }
-  })
-}
+  });
+};
+
 const getFits = () => {
   return WhiteboardPost.findAll();
-}
+};
+
 const getTrash = () => {
   return WhiteboardPost.findAll();
 }
 
 module.exports = {
+  Items,
+  WhiteboardPost,
   Users,
   Outfit,
   Calendar,
   Vote,
   getFits,
-  getTrash
+  getTrash,
+  addUser
 };
 
 // sequelize.sync({ force: true })
