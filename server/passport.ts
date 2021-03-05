@@ -1,5 +1,5 @@
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+import passport from 'passport';
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 require('dotenv').config();
 
 // Use the GoogleStrategy within Passport.
@@ -11,7 +11,7 @@ passport.use(new GoogleStrategy({
   clientSecret: process.env.clientSecret,
   callbackURL: '/auth/google/callback'
 },
-function(token, tokenSecret, profile, done) {
+function(accessToken: any, refreshToken: any, profile: any, done: any ) {
   console.info(profile);
   // profile is google profile
   // done is being passed to the callback url under key user
