@@ -30,7 +30,8 @@ const Items = db.define('Items', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
-    primaryKey: true
+    primaryKey: true,
+    allowNull: false,
   },
   clothingType: {
     type: Sequelize.STRING,
@@ -46,36 +47,10 @@ const Items = db.define('Items', {
   },
   imageUrl: {
     type: Sequelize.STRING(1000),
-    unique: false
-  }
-});
-
-const WhiteboardPost = db.define('WhiteboardPost', {
-  idUser: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    primaryKey: true
-  },
-  outfitId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    primaryKey: true
-  },
-  likes: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-  },
-  dislikes: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-  },
-  comments: {
-    type: Sequelize.STRING,
     unique: true
   }
 });
 
-// saves all items into 1 outfit
 const Outfit = db.define('Outfit', {
   id: {
     type: Sequelize.INTEGER,
@@ -83,11 +58,39 @@ const Outfit = db.define('Outfit', {
     allowNull: false,
     primaryKey: true
   },
-  outfit: {
+  outfitTitle: {
     type: Sequelize.STRING,
     unique: true
+  },
+  imageUrl: {
+    type: Sequelize.STRING,
   }
 });
+
+const WhiteboardPost = db.define('WhiteboardPost', {
+  outfitId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true
+  },
+  idUser: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+    primaryKey: true
+  },
+  votes: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+  },
+  comments: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+});
+
+WhiteboardPost.belongsTo(Outfit, {as: 'outfitsId'});
+// saves all items into 1 outfit
+//connect votes to whiteboardPost
 
 const Calendar = db.define('Calendar', {
   id: {
@@ -112,12 +115,10 @@ const Vote = db.define('Vote', {
     allowNull: false,
     primaryKey: true
   },
-  like: {
-    type: Sequelize.INTEGER,
+  type: {
+    type: Sequelize.STRING,
   },
-  dislike: {
-    type: Sequelize.INTEGER
-  }
+
 });
 
 // db.sync({ force: true })

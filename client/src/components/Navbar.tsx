@@ -9,10 +9,20 @@ import { IconContext } from 'react-icons';
 import GoogleButton from 'react-google-button';
 import axios from 'axios';
 import { set } from 'js-cookie';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 
 const Navbar = () => {
   const [sidebar, setSidebar] = React.useState(false);
-const [login, setLogin] = React.useState(false);
+
+  const [login, setLogin] = React.useState(false);
+
+  React.useEffect(() => {
+    axios.get('/isloggedin')
+    .then(({ data }) => setLogin(data))
+    .catch(err => console.warn(err))
+  });
+
   const showSidebar = () => setSidebar(!sidebar);
   React.useEffect(() => {
     axios.get('/isloggedin')
@@ -42,6 +52,11 @@ const [login, setLogin] = React.useState(false);
                 <Link className='nav-text' key={index} to={item.link}>{item.icon}<span>{item.title}</span></Link>
               );
             })}
+            {
+              login === true ?
+              <Link className='nav-text' to='/logout'><ExitToAppIcon />,<span>{'Logout'}</span></Link> :
+              <Link className='nav-text' to='/login'><ExitToAppIcon />,<span>{'Login'}</span></Link>
+            }
           </ul>
         </nav>
       </IconContext.Provider>
@@ -50,4 +65,4 @@ const [login, setLogin] = React.useState(false);
   );
 };
 
-export default Navbar;
+export default Navbar

@@ -1,25 +1,16 @@
 import * as React from 'react';
-import GoogleButton from 'react-google-button'
-import axios from 'axios';
+//import Logs from '../logs/Login'
+import * as axios from 'axios';
+import GoogleButton from 'react-google-button';
+
 
 const Home = () => {
-  const [login, setLogin] = React.useState(false);
-  React.useEffect(() => {
-    axios.get('/isloggedin')
-    .then(({ data }) => setLogin(data))
-    .catch(err => console.log('err', err))
-  }, [])
+
   return (
     <div>
-          {
 
-<div>
-  <a className='loginButton' href="/auth/google"> <GoogleButton /></a>
-</div>
-// :
-
-}
       <div>
+        {/* <Logs /> */}
         <h1>This Should Be our Welcome Message or Title</h1>
       </div>
       <div>

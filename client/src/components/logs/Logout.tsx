@@ -1,10 +1,10 @@
-// import React, { useEffect, useState } from 'react';
 import * as React from 'react';
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
 import { Button } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
 
-const Logs = () => {
+const Logsout = () => {
   const [login, setLogin] = React.useState(false);
 
   React.useEffect(() => {
@@ -21,21 +21,23 @@ const Logs = () => {
   };
 
 
-  return (
+   return (
     <div>
       {
-        login === false ?
-          <div>
-            <a className='loginButton' href="/auth/google"> <GoogleButton /></a>
-          </div>
-          :
-          <div>
+        login === true ?
+        <div>
             <Button onClick={() => logout()}>logout</Button>
-          </div>
+        </div>
+        :
+        <div>
+            <a className='loginButton' href="/auth/google"> <GoogleButton /></a>
+        </div>
       }
+
     </div>
   );
 
+
 };
 
-export default Logs;
+export default Logsout;
