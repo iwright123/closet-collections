@@ -1,6 +1,6 @@
 const { WhiteboardPost } = require('../db/db');
 
-const savePost = async(body) => {
+export const savePost = async(body: any) => {
   const { likes, dislikes, comments } = body;
   const newPost = await WhiteboardPost.findOrCreate({
     likes: likes,
@@ -8,8 +8,4 @@ const savePost = async(body) => {
     comments: comments
   });
   return newPost.save();
-};
-
-module.exports = {
-  savePost
 };

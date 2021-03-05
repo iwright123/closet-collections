@@ -8,7 +8,13 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 dotenv.config();
-const { addItem, getAllItems, deleteItem, savePost, addUser } = require('./db/db.ts');
+////////////////HELPERS////////////////////
+
+const { addItem, getAllItems, deleteItem } = require('./helpers/Item');
+const { addUser } = require('./db/db.ts')
+const { savePost } = require('./helpers/WhiteBoardPost')
+
+////////////////HELPERS////////////////////
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
