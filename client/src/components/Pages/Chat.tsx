@@ -14,8 +14,8 @@ chat.push(message)
           <title>Socket.IO chat</title>
 
        <ul id="messages"></ul>
-    <form id="form" action="">
-      <input id="input" /><button>Send</button>
+        <form id="form" action="">
+        <input id="input" /><button>Send</button>
     </form>
 
     </div>

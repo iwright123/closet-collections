@@ -3,3 +3,4 @@ client/dist/bundle.js
 client/dist/bundle.ts
 .eslint*
 .env
+config.ts

@@ -6,6 +6,7 @@ import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ChatIcon from '@material-ui/icons/Chat';
 
+import SearchIcon from '@material-ui/icons/Search';
 
 
 export const SidebarData = [
@@ -38,6 +39,11 @@ export const SidebarData = [
     icon: <ChatIcon />,
     link: '/chat'
   },
+  {
+    title: 'Find A Store',
+    icon: <SearchIcon />,
+    link: '/findastore'
+  }
   // {
   //   cName: 'nav-text',
   //   title: 'Logout',

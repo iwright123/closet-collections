@@ -6,7 +6,7 @@ import { useHoverDirty, useLongPress } from "react-use";
   const CreateOutfitItems = ({ image, onDelete, onDragEnd }) => {
   const imageRef = useRef(null);
   const isHovered = useHoverDirty(imageRef);
-  const [stickerImage] = useImage(image.src);
+  const [stickerImage] = useImage(image.src, 'Anonymous');
   const [deleteImage] = useImage("cancel.svg");
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const onLongPress = () => {
@@ -46,7 +46,7 @@ import { useHoverDirty, useLongPress } from "react-use";
       }}
     >
       <KonvaImage
-         crossOrigin="anonymous"
+        crossOrigin="anonymous"
         ref={imageRef}
         width={image.width}
         height={stickerHeight}

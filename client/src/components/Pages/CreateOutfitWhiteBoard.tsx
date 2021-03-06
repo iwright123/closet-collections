@@ -4,15 +4,35 @@ import { Image as KonvaImage, Layer, Stage } from "react-konva";
 import useImage from "use-image";
 import CreateOutfitItems from './CreateOutfitItems';
 import axios from 'axios';
+import $ from 'jquery';
 
 
 function CreateOutfitWhiteBoard() {
+
   const [images, setImages] = useState([]);
   const [outfits, getOutfits] = useState([]);
   const stageRef = React.useRef<any>();
+  let CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/geonovember/upload';
+
   const handleExportClick = () => {
-		console.log(stageRef.current!.getStage().toDataURL({ mimeType: 'image/jpeg', quality: 1 }))
-	}
+    const baseUrl = stageRef.current!.getStage().toDataURL({ mimeType: 'image/png', quality: 1 })
+
+    let data = {
+      "file": baseUrl,
+      "upload_preset": "smiuh98k"
+    }
+    fetch(CLOUDINARY_URL, {
+      body: JSON.stringify(data),
+      headers: {
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+    }).then(r => {
+      axios.post('/outfit', r)
+    }).catch(err => console.log(err))
+  };
+
+
   const addStickerToPanel = ({ src, width, x, y }) => {
     setImages((currentImages) => [
       ...currentImages,
@@ -34,14 +54,7 @@ function CreateOutfitWhiteBoard() {
     });
   }, [images]);
 
-  const handleCanvasClick = useCallback(
-    (event) => {
-      if (event.target.attrs.id === "backgroundImage") {
-        resetAllButtons();
-      }
-    },
-    [resetAllButtons]
-  );
+
   useEffect(() => {
     axios.get('/items')
       .then(({ data }) => getOutfits(data))
@@ -50,14 +63,13 @@ function CreateOutfitWhiteBoard() {
   return (
     <div>
       <Stage
-        width={600}
+        width={400}
         height={400}
-        onClick={handleCanvasClick}
-        onTap={handleCanvasClick}
         ref={stageRef}
       >
         <Layer>
           {images.map((image, i) => {
+             $('img').attr('crossOrigin', 'anonymous')
             return (
               <CreateOutfitItems
                 onDelete={() => {
@@ -91,7 +103,7 @@ function CreateOutfitWhiteBoard() {
               });
             }}
           >
-            <img alt="item" src={outfit.imageUrl} width={75} />
+            <img alt="item" src={outfit.imageUrl} width={75} crossOrigin="anonymous"/>
           </button>
         );
       })}

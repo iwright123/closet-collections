@@ -2,9 +2,13 @@ const path = require('path');
 import * as express from "express";
 const app = require("express")()
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
-
+const socketIo = require('socket.io')(http);
+const index = require("./routes/index");
+app.use(index);
 const port = process.env.PORT || 3000;
+const server = http.createServer(app);
+const io = socketIo(server); // < Interesting!
+const getApiAndEmit = "TODO";
 
 
 const { GoogleStrategy } = require('./passport.ts');
@@ -23,7 +27,9 @@ const httpServer = require("http").createServer()
 import { addItem, getAllItems, deleteItem } from './helpers/Item';
 const { addUser } = require('./db/db.ts')
 import { savePost } from './helpers/WhiteBoardPost'
+import { saveOutfit } from './helpers/Outfit'
 
+import Find from './api/findastore';
 ////////////////HELPERS////////////////////
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
@@ -43,10 +49,14 @@ cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET
-  })
-
+  });
+app.use('/api/search', Find);
 /*******************DATABASE ROUTES ************************************/
-
+app.post('/outfit', (req: any, res: any) => {
+  saveOutfit(req.body)
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err))
+})
 app.get('/items', (req: any, res: any) => {
    getAllItems()
     .then((data: any) => res.json(data))
@@ -72,6 +82,7 @@ app.delete('/items/:id', (req: any, res: any) => {
     .catch((err: any) => console.warn(err));
 });
 
+/************************************* */
 const CalendarItem = require('./routes/calender');
 
 app.use('/calendar', CalendarItem);
@@ -124,18 +135,23 @@ app.delete('/logout', (req: any, res: any) => {
 ///////////GOOGLE AUTH ^^^^^^///////////
 
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
-io.on('connection', (socket) => {
-  console.log('a user connected');
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
+
+let interval: any;
+
+io.on("connection", (socket: any) => {
+  console.log("New client connected");
+  if (interval) {
+    clearInterval(interval);
+  }
+  interval = setInterval(() => getApiAndEmit(socket), 1000);
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
+    clearInterval(interval);
   });
 });
 
 
-http.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
 
