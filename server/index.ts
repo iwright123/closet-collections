@@ -3,7 +3,6 @@ import express from 'express';
 const { GoogleStrategy } = require('./passport.ts');
 import passport from 'passport';
 import session from 'express-session';
-const cloudinary = require('cloudinary')
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
@@ -32,16 +31,13 @@ app.use(passport.session());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors())
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
-  });
+
 app.use('/api/search', Find);
 /*******************DATABASE ROUTES ************************************/
 app.post('/outfit', (req: any, res: any) => {
+  console.log(req.body)
   saveOutfit(req.body)
-    .then((data: any) => res.json(data))
+    .then((data: any) => console.log('Outfit created', data))
     .catch((err: any) => console.warn(err))
 })
 app.get('/items', (req: any, res: any) => {
