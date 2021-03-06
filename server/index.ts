@@ -7,6 +7,12 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
+
+
 dotenv.config();
 ////////////////HELPERS////////////////////
 
@@ -129,6 +135,20 @@ app.delete('/logout', (req, res) => {
   res.json(false);
 });
 ///////////GOOGLE AUTH ^^^^^^///////////
+
+/////////Twilio//////////
+  // app.post('/sms', (req, res) => {
+  //   const { body } = req.body
+  //   console.log('text?>', body)
+  // client.messages.create({
+  //    body: body,
+  //    from: '+15042852518',
+  //    to: '+15047235163'
+  //  })
+  // .then((message: any) => console.log('message sid', message.sid))
+  // .catch((err: any) => console.warn('twilio error', err))
+  // })
+  /////////Twilio//////////
 
 
 const port = 3000;
