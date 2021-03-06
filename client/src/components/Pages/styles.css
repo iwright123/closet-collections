@@ -103,3 +103,8 @@ body {
   font-family: 'Roboto Slab', serif;
 }
 
+.logo {
+  float: right;
+  padding: 66%;
+  position: relative;
+}

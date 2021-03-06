@@ -132,20 +132,14 @@ useEffect(() => {
             title={tile.title}
             actionIcon={
               <>
-                <Button  className={classes.icon}>
+
                   <DeleteIcon /><span></span>
-                </Button>
-                            <span></span>
-                            <Button  className={classes.icon}>
-<ThumbUpIcon /><span></span>
 
-              </Button>
-              <Button className={classes.icon}>
+  <ThumbUpIcon /><span></span>
               <ThumbDownIcon /><span></span>
-              </Button>
 
 
-                <Button variant="outlined" color="primary"> Comment</Button></>
+                </>
             }
           />
         </GridListTile>
