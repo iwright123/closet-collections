@@ -1,5 +1,4 @@
 import * as React from 'react';
-import CreateOutfit from './CreateOutfit';
 import OutfitGrid from './OutfitGrid';
 import AddItems from './AddItems'
 import { Tabs, useTabState, Panel } from '@bumaga/tabs';
