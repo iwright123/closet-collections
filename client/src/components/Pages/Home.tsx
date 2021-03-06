@@ -1,9 +1,7 @@
 
 import React, { DragEvent, MouseEvent, useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import axios from 'axios';
-import GoogleButton from 'react-google-button';
-
-
 
 const Home = () => {
   const [topFits] = React.useState([])
@@ -57,15 +55,27 @@ const Home = () => {
     });
 
   return (
-    <div>
+    <>
 
-      <div>
-        <h1 id="welcome">Welcome to Closet Collection</h1>
-      </div>
-      <div>
-        <h1><div className="weather">Currently {temp} and {desc}</div></h1>
-      </div>
-      <div>
+      <View style={styles.container}>
+          <Text style={styles.title}>Closet Collections</Text>
+        <View>
+          <Text style={styles.weather}>Currently {temp} and {desc}</Text>
+        </View>
+        <Image
+              style={{width: 200, height: 200, marginVertical: 75}}
+              source={{uri: 'https://media.gq.com/photos/5cf56d75ba72052c30a43177/master/w_1600%2Cc_limit/Chris-Bosh-Weigh-In-GQ-NBA-Most-Stylish-Player-Bracket-Kyrie-Irving.jpg'}}
+            />
+            <Text style={{marginVertical: -75}}>Top Rated by 87%</Text>
+
+            <Image
+              style={{width: 200, height: 200, marginVertical: 100}}
+              source={{uri: 'https://media.gq.com/photos/5cf56d7609bcad6790fdd178/master/w_1600%2Cc_limit/Chris-Bosh-Weigh-In-GQ-NBA-Most-Stylish-Player-Bracket-Dwayne-Wade.jpg'}}
+            />
+            <Text style={{marginVertical: -100}}>Worst Rated by 93%</Text>
+
+      </View>
+      {/* <div>
         <div>
           <h1>This is the section where Top Outfits should be displayed</h1>
         </div>
@@ -75,19 +85,39 @@ const Home = () => {
         <div>
           <h1>This is the section where suggested Outfits should be displayed</h1>
         </div>
-      </div>
+      </div> */}
       <div className='footer'>
         <footer id="footer">
           <div className='footer-text'>
-            Closet Collection
+            Closet Collections
           </div>
           <div className='footer-text'>
             Since 2021
           </div>
         </footer>
           </div>
-    </div>
+    </>
   );
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
+  title: {
+    fontSize: 30,
+    marginVertical: 10
+  },
+
+  weather: {
+    fontSize: 20
+  }
+
+})
 
 export default Home;
