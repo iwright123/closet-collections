@@ -67,4 +67,4 @@ import { useHoverDirty, useLongPress } from "react-use";
     </Group>
   );
 };
-export default CreateOutfitItems;
+export default CreateOutfitItems
