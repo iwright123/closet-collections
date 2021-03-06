@@ -45,7 +45,7 @@ export const Items = sequelize.define('Items', {
   }
 });
 
-const Outfit = sequelize.define('Outfit', {
+export const Outfit = sequelize.define('Outfit', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,

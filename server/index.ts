@@ -13,7 +13,9 @@ dotenv.config();
 
 import { addItem, getAllItems, deleteItem } from './helpers/Item';
 const { addUser } = require('./db/db.ts')
-import { savePost } from './helpers/WhiteBoardPost';
+import { savePost } from './helpers/WhiteBoardPost'
+import { saveOutfit } from './helpers/Outfit'
+
 import Find from './api/findastore';
 ////////////////HELPERS////////////////////
 
@@ -37,7 +39,11 @@ cloudinary.config({
   });
 app.use('/api/search', Find);
 /*******************DATABASE ROUTES ************************************/
-
+app.post('/outfit', (req: any, res: any) => {
+  saveOutfit(req.body)
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err))
+})
 app.get('/items', (req: any, res: any) => {
    getAllItems()
     .then((data: any) => res.json(data))
