@@ -14,6 +14,7 @@ dotenv.config();
 import { addItem, getAllItems, deleteItem } from './helpers/Item';
 const { addUser } = require('./db/db.ts')
 import { savePost } from './helpers/WhiteBoardPost'
+import { saveOutfit } from './helpers/Outfit'
 
 ////////////////HELPERS////////////////////
 
@@ -36,7 +37,11 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
   })
 /*******************DATABASE ROUTES ************************************/
-
+app.post('/outfit', (req: any, res: any) => {
+  saveOutfit(req.body)
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err))
+})
 app.get('/items', (req: any, res: any) => {
    getAllItems()
     .then((data: any) => res.json(data))
