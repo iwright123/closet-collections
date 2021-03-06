@@ -7,3 +7,7 @@ export const saveOutfit = async(body: any) => {
   });
   return newOutfit.save();
 };
+
+export const getAllOutfits = () => {
+  return Outfit.findAll();
+}

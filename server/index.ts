@@ -11,9 +11,10 @@ dotenv.config();
 ////////////////HELPERS////////////////////
 
 import { addItem, getAllItems, deleteItem } from './helpers/Item';
+
 const { addUser } = require('./db/db.ts')
 import { savePost } from './helpers/WhiteBoardPost'
-import { saveOutfit } from './helpers/Outfit'
+import { saveOutfit, getAllOutfits } from './helpers/Outfit'
 
 import Find from './api/findastore';
 ////////////////HELPERS////////////////////
@@ -34,12 +35,19 @@ app.use(cors())
 
 app.use('/api/search', Find);
 /*******************DATABASE ROUTES ************************************/
+
+app.get('/outfit', (req: any, res: any) => {
+  getAllOutfits()
+  .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err));
+})
 app.post('/outfit', (req: any, res: any) => {
   console.log(req.body)
   saveOutfit(req.body)
     .then((data: any) => console.log('Outfit created', data))
     .catch((err: any) => console.warn(err))
 })
+
 app.get('/items', (req: any, res: any) => {
    getAllItems()
     .then((data: any) => res.json(data))
