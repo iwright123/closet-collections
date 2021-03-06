@@ -85,9 +85,14 @@ app.delete('/outfit/:id', (req: any, res: any) => {
     .catch((err: any) => console.warn(err))
 });
 /************************************* */
+
 const CalendarItem = require('./routes/calender');
+const { Weather } = require('./api/weather');
+const { Location } = require('./api/geolocation');
 
 app.use('/calendar', CalendarItem);
+app.use('/api/weather', Weather);
+app.use('/api/location', Location)
 
 
 /////////GOOGLE AUTH ///////////
