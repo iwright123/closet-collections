@@ -1,11 +1,11 @@
-import React, { DragEvent, MouseEvent, useEffect, useState } from 'react';
+import  * as React, {DragEvent, MouseEvent} from 'react';
 import { render } from 'react-dom';
 import { Stage, Layer, Image } from 'react-konva';
 import useImage from 'use-image';
 import ImageUrl from '../models/ImageUrl';
 import Outfit from '../models/Outfit';
-import $ from 'jquery';
-import axios from 'axios'
+const $ = require('jquery');
+const axios = require('axios');
 
 const URLImage = ({ image }) => {
   const [img] = useImage(image.imageUrl, 'Anonymous');
@@ -34,7 +34,7 @@ const CreateOutfit = () => {
  const [outfits, getOutfits] = React.useState<Outfit[]>([]);
 
 
-  useEffect(() => {
+  React.useEffect(() => {
     axios.get('/items')
       .then(({ data }) => getOutfits(data))
       .catch((err) => console.warn(err))

@@ -1,42 +1,35 @@
 const path = require('path');
 import * as express from "express";
 const app = require("express")()
-const http = require('http').Server(app);
-const socketIo = require('socket.io')(http);
 const index = require("./routes/index");
-app.use(index);
 const port = process.env.PORT || 3000;
-const server = http.createServer(app);
-const io = socketIo(server); // < Interesting!
-const getApiAndEmit = "TODO";
-
-
 const { GoogleStrategy } = require('./passport.ts');
-import  passport from 'passport';
-import  session from 'express-session';
-const cloudinary = require('cloudinary')
-import cors from 'cors';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
-dotenv.config();
-import { Server, Socket } from "socket.io";
-const httpServer = require("http").createServer()
+const passport = require('passport');
+const session = require('express-session');
+const cloudinary = require('cloudinary');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const bodyParser  = require('body-parser');
+const dotenv = require('dotenv')
+const { addUser } = require('./db/db.ts')
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
 ////////////////HELPERS////////////////////
 
 import { addItem, getAllItems, deleteItem } from './helpers/Item';
-const { addUser } = require('./db/db.ts')
 import { savePost } from './helpers/WhiteBoardPost'
 import { saveOutfit } from './helpers/Outfit'
-
 import Find from './api/findastore';
+
 ////////////////HELPERS////////////////////
 
+dotenv.config();
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
 
 const dist = path.resolve(__dirname, '..', 'client', 'dist');
 
+app.use(index);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(dist));
@@ -47,9 +40,9 @@ app.use(bodyParser.json());
 app.use(cors())
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
-  });
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
+});
 app.use('/api/search', Find);
 /*******************DATABASE ROUTES ************************************/
 app.post('/outfit', (req: any, res: any) => {
@@ -135,23 +128,23 @@ app.delete('/logout', (req: any, res: any) => {
 ///////////GOOGLE AUTH ^^^^^^///////////
 
 
-
-let interval: any;
-
-io.on("connection", (socket: any) => {
-  console.log("New client connected");
-  if (interval) {
-    clearInterval(interval);
-  }
-  interval = setInterval(() => getApiAndEmit(socket), 1000);
-  socket.on("disconnect", () => {
-    console.log("Client disconnected");
-    clearInterval(interval);
+io.on('connection', (socket: any) => {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+  socket.on('message', ({name, message}) => {
+    console.log('message:', message, 'user', name)
+    io.emit('message', {name, message})
   });
 });
 
 
-server.listen(port, () => {
+
+
+
+
+http.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
 

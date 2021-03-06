@@ -1,5 +1,5 @@
 import * as React from 'react';
-import axios from 'axios';
+
 import Navbar from './Navbar';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './Pages/Home';
@@ -14,7 +14,7 @@ import Logsout from './logs/Logout'
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import MyOutfit from '../components/Pages/MyOutfit'
 const { height } = Dimensions.get('screen');
-
+const axios = require('axios');
 const App = () => {
 
   const [login, setLogin] = React.useState(false);
