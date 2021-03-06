@@ -98,3 +98,7 @@ body {
   background-color: black;
   color: white;
 }
+
+.footer-text {
+  font-family: 'Roboto Slab', serif;
+}

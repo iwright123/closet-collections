@@ -1,8 +1,6 @@
 
 import React, { DragEvent, MouseEvent, useEffect, useState } from 'react';
-import { BottomNavigation } from '@material-ui/core/';
-//import Logs from '../logs/Login'
-import * as axios from 'axios';
+import axios from 'axios';
 import GoogleButton from 'react-google-button';
 
 
@@ -23,7 +21,7 @@ const Home = () => {
 
       <div>
         {/* <Logs /> */}
-        <h1 id="welcome">Welcome to Closet Collections</h1>
+        <h1 id="welcome">Welcome to Closet Collection</h1>
       </div>
       <div>
         <div>
@@ -37,17 +35,15 @@ const Home = () => {
         </div>
       </div>
       <div className='footer'>
-      <BottomNavigation >
         <footer id="footer">
-                <div className='logo2'>
-                     Closet Collection
-                </div>
-                <div className='footer-text'>
-                    Since 2021
-                </div>
-                </footer>
-                </BottomNavigation >
-                </div>
+          <div className='footer-text'>
+            Closet Collection
+          </div>
+          <div className='footer-text'>
+            Since 2021
+          </div>
+        </footer>
+          </div>
     </div>
   );
 };
