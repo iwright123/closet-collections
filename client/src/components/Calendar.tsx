@@ -46,18 +46,36 @@ export interface Props {
   items: object
 }
 
-const Calendar: React.FC<Props> = (props) => {
+const Calendar: React.FC = () => {
 
-const [notify, setNotify] = React.useState<boolean>(false);
+  const [notify, setNotify] = React.useState<boolean>(false);
     // or can be React.useState(false);
     //console.info(notify);
-    const favItem = () => {
-      axios.post('/calendar')
+  const [favItems, setFaveItems] = React.useState([]);
+
+  // const [isFav, setFave] = React.useState<boolean>(false)
+
+    const favItem = async (item) => {
+
+      setFaveItems([item.title, item.subTitle, item.img, item.release])
+
+      const data = {
+        title: item.title,
+        subTitle: item.subTitle,
+        imgUrl: item.img,
+        releaseDate: item.release
+      }
+
+      console.log(data)
+
+      await axios.post('/calendar', data)
+      .then((data: any) => console.log(data) )
+      .catch((err: string) => console.warn('Error here', err))
     }
 
   return (
     <>
-<View
+    <View
       style={styles.container}>
       <Text style={styles.title}>Upcoming Releases!</Text>
       {
@@ -70,7 +88,10 @@ const [notify, setNotify] = React.useState<boolean>(false);
             />
             <Text style={styles.itemInfo}>{item.title}</Text>
             <Text style={styles.subItemInfo}>{item.subTitle}</Text>
-            <FavoriteIcon />
+
+            <FavoriteIcon
+            onClick={() => favItem(item)}
+            />
             {/* <Text>{item.release}</Text> */}
             <Button
               onPress={() => setNotify(true)}
