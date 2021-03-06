@@ -49,9 +49,26 @@ export interface Props {
 
 const Calendar: React.FC = () => {
 
-  const [notify, setNotify] = React.useState<boolean>(false);
-    // or can be React.useState(false);
+  const [notify, setNotify] = React.useState(false);
   const [favItems, setFaveItems] = React.useState([]);
+  const [phone, setNumber] = React.useState('');
+  const [pushNotifications, setNotifications] = React.useState([]);
+
+  const push = async (item) => {
+    setNotify(true);
+
+    setNotifications([item.title, item.Subtitle])
+
+    const message = {
+      body:`You will receive a reminder for the ${item.title} ${item.subTitle}'s, Thank you!`
+    }
+
+    console.log(message)
+
+    await axios.post('/sms', message)
+    .then((data: any) => console.log(data) )
+    .catch((err: string) => console.warn('Error here', err))
+  }
 
     const favItem = async (item) => {
 
@@ -87,7 +104,7 @@ const Calendar: React.FC = () => {
             {/* <Text>{item.release}</Text> */}
             <FavoriteBorderIcon onClick={() => favItem(item)} />
             <Button
-              onPress={() => setNotify(true)}
+              onPress={() => push(item)}
               title='Notify Me!'
             />
           </View>
