@@ -50,10 +50,7 @@ const Calendar: React.FC = () => {
 
   const [notify, setNotify] = React.useState<boolean>(false);
     // or can be React.useState(false);
-    //console.info(notify);
   const [favItems, setFaveItems] = React.useState([]);
-
-  // const [isFav, setFave] = React.useState<boolean>(false)
 
     const favItem = async (item) => {
 
@@ -65,8 +62,6 @@ const Calendar: React.FC = () => {
         imgUrl: item.img,
         releaseDate: item.release
       }
-
-      console.log(data)
 
       await axios.post('/calendar', data)
       .then((data: any) => console.log(data) )
@@ -88,11 +83,8 @@ const Calendar: React.FC = () => {
             />
             <Text style={styles.itemInfo}>{item.title}</Text>
             <Text style={styles.subItemInfo}>{item.subTitle}</Text>
-
-            <FavoriteIcon
-            onClick={() => favItem(item)}
-            />
             {/* <Text>{item.release}</Text> */}
+            <FavoriteIcon onClick={() => favItem(item)} />
             <Button
               onPress={() => setNotify(true)}
               title='Notify Me!'
