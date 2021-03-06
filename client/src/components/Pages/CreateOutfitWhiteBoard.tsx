@@ -27,8 +27,9 @@ function CreateOutfitWhiteBoard() {
         'content-type': 'application/json'
       },
       method: 'POST',
-    }).then(r => {
-      axios.post('/outfit', r)
+    }).then(async r => {
+        let outfitUrl = await r.json()
+      axios.post('/outfit', {imageUrl: outfitUrl.url})
     }).catch(err => console.log(err))
   };
 
