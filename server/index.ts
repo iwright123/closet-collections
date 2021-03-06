@@ -7,6 +7,12 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
+
+
 dotenv.config();
 ////////////////HELPERS////////////////////
 
@@ -14,7 +20,7 @@ import { addItem, getAllItems, deleteItem } from './helpers/Item';
 
 const { addUser } = require('./db/db.ts')
 import { savePost } from './helpers/WhiteBoardPost'
-import { saveOutfit, getAllOutfits } from './helpers/Outfit'
+import { saveOutfit, getAllOutfits, deleteOutfit } from './helpers/Outfit'
 
 import Find from './api/findastore';
 ////////////////HELPERS////////////////////
@@ -73,6 +79,11 @@ app.delete('/items/:id', (req: any, res: any) => {
     .catch((err: any) => console.warn(err));
 });
 
+app.delete('/outfit/:id', (req: any, res: any) => {
+  deleteOutfit(req.params)
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err))
+});
 /************************************* */
 const CalendarItem = require('./routes/calender');
 
@@ -124,6 +135,20 @@ app.delete('/logout', (req, res) => {
   res.json(false);
 });
 ///////////GOOGLE AUTH ^^^^^^///////////
+
+/////////Twilio//////////
+  // app.post('/sms', (req, res) => {
+  //   const { body } = req.body
+  //   console.log('text?>', body)
+  // client.messages.create({
+  //    body: body,
+  //    from: '+15042852518',
+  //    to: '+15047235163'
+  //  })
+  // .then((message: any) => console.log('message sid', message.sid))
+  // .catch((err: any) => console.warn('twilio error', err))
+  // })
+  /////////Twilio//////////
 
 
 const port = 3000;
