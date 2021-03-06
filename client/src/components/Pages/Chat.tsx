@@ -3,27 +3,20 @@ import * as React from "react";
 
 const Chat = () => {
 const [chat, addMessage] = React.useState(['hello'])
-  const sendMessage = (e: any ,message: string) =>{
+  const sendMessage = (e: any ,message: any) =>{
     console.log('msg submitted')
     e.preventDefault();
 const chatBox = document.getElementById('chat-box')
-chatBox.prepend(message)
+chat.push(message)
   }
   return (
     <div>
-          <h1>Chat Room</h1>
-      <div id='chat-box'>
-          <ul id='chat-list'>
-          <h1>Chat Box</h1>
-          {chat.map(message => {
-            <li>message</li>
-          })}
-          <li>Hello</li>
-          </ul>
-       </div>
+          <title>Socket.IO chat</title>
 
-          <input type='text' />
-         <button onClick={() => sendMessage}>Send</button>
+       <ul id="messages"></ul>
+    <form id="form" action="">
+      <input id="input" /><button>Send</button>
+    </form>
 
     </div>
   )

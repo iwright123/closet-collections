@@ -1,8 +1,11 @@
 const path = require('path');
 import * as express from "express";
 const app = require("express")()
-const server = require("http").createServer(app);
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
 const port = process.env.PORT || 3000;
+
 
 const { GoogleStrategy } = require('./passport.ts');
 import  passport from 'passport';
@@ -42,27 +45,6 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
   })
 
-  //socketio
-  var http = require("http").Server(app);
-
-  const options = { /* ... */ };
-  const io = require('socket.io')(server);
-
-
-  io.use((socket: any, next: any) => {
-    if (socket.request.user) {
-      next();
-    } else {
-      next(new Error('unauthorized'))
-    }
-  });
-
-  io.on('connect', (socket: any) => {
-    console.log(`new connection ${socket.id}`);
-    socket.on('whoami', (cb: any) => {
-      cb(socket.request.user ? socket.request.user.username : '');
-    });
-  });
 /*******************DATABASE ROUTES ************************************/
 
 app.get('/items', (req: any, res: any) => {
@@ -138,9 +120,18 @@ app.delete('/logout', (req: any, res: any) => {
 ///////////GOOGLE AUTH ^^^^^^///////////
 
 
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
 
 
-server.listen(port, () => {
+http.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
 
