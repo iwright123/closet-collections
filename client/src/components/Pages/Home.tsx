@@ -1,5 +1,6 @@
 
 import React, { DragEvent, MouseEvent, useEffect, useState } from 'react';
+import { BottomNavigation } from '@material-ui/core/';
 //import Logs from '../logs/Login'
 import * as axios from 'axios';
 import GoogleButton from 'react-google-button';
@@ -22,7 +23,7 @@ const Home = () => {
 
       <div>
         {/* <Logs /> */}
-        <h1>This Should Be our Welcome Message or Title</h1>
+        <h1 id="welcome">Welcome to Closet Collections</h1>
       </div>
       <div>
         <div>
@@ -35,8 +36,18 @@ const Home = () => {
           <h1>This is the section where suggested Outfits should be displayed</h1>
         </div>
       </div>
-
-
+      <div className='footer'>
+      <BottomNavigation >
+        <footer id="footer">
+                <div className='logo2'>
+                     Closet Collection
+                </div>
+                <div className='footer-text'>
+                    Since 2021
+                </div>
+                </footer>
+                </BottomNavigation >
+                </div>
     </div>
   );
 };
