@@ -4,7 +4,7 @@ const { GoogleStrategy } = require('./passport.ts');
 import passport from 'passport';
 import session from 'express-session';
 const cloudinary = require('cloudinary')
-const cors = require('cors');
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
@@ -64,6 +64,10 @@ app.delete('/items/:id', (req: any, res: any) => {
 });
 
 /************************************* */
+const CalendarItem = require('./routes/calender');
+
+app.use('/calendar', CalendarItem);
+
 
 /////////GOOGLE AUTH ///////////
 app.use(

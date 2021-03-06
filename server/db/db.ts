@@ -85,14 +85,27 @@ export const WhiteboardPost = sequelize.define('WhiteboardPost', {
 WhiteboardPost.belongsTo(Outfit, {as: 'outfitsId'});
 // saves all items into 1 outfit
 
-const Calendar = sequelize.define('Calendar', {
+export const Calendar = sequelize.define('Calendar', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
   },
-  date: {
+
+  title: {
+    type: Sequelize.STRING
+  },
+
+  subTitle: {
+    type: Sequelize.STRING
+  },
+
+  imgUrl: {
+    type: Sequelize.STRING
+  },
+
+  releaseDate: {
     type: Sequelize.STRING
   }
 });
