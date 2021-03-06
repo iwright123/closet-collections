@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import axios from 'axios';
 
 const items = [
   {
@@ -45,15 +46,31 @@ export interface Props {
   items: object
 }
 
-const Calendar: React.FC<Props> = (props) => {
+const Calendar: React.FC = () => {
 
-const [notify, setNotify] = React.useState<boolean>(false);
+  const [notify, setNotify] = React.useState<boolean>(false);
     // or can be React.useState(false);
-    //console.info(notify);
+  const [favItems, setFaveItems] = React.useState([]);
+
+    const favItem = async (item) => {
+
+      setFaveItems([item.title, item.subTitle, item.img, item.release])
+
+      const data = {
+        title: item.title,
+        subTitle: item.subTitle,
+        imgUrl: item.img,
+        releaseDate: item.release
+      }
+
+      await axios.post('/calendar', data)
+      .then((data: any) => console.log(data) )
+      .catch((err: string) => console.warn('Error here', err))
+    }
 
   return (
     <>
-<View
+    <View
       style={styles.container}>
       <Text style={styles.title}>Upcoming Releases!</Text>
       {
@@ -66,8 +83,8 @@ const [notify, setNotify] = React.useState<boolean>(false);
             />
             <Text style={styles.itemInfo}>{item.title}</Text>
             <Text style={styles.subItemInfo}>{item.subTitle}</Text>
-            <FavoriteIcon />
             {/* <Text>{item.release}</Text> */}
+            <FavoriteIcon onClick={() => favItem(item)} />
             <Button
               onPress={() => setNotify(true)}
               title='Notify Me!'
