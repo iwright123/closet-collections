@@ -10,7 +10,10 @@ import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
+import Button from '@material-ui/core/Button'
+
 //import tileData from './tileData';
 
 // const tileData = [
@@ -81,6 +84,7 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
+    color: 'white'
   },
   gridList: {
     width: 1000,
@@ -91,8 +95,8 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
   icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
-  },
+    color: 'white',
+  }
 }));
 
 
@@ -118,7 +122,7 @@ useEffect(() => {
         <ListSubheader component="div"></ListSubheader>
       </GridListTile>
       {
-      images.map((tile) => (
+      images.map((tile, i) => (
 
         <GridListTile key={tile.imageUrl}>
            <Zoom>
@@ -127,15 +131,21 @@ useEffect(() => {
           <GridListTileBar
             title={tile.title}
             actionIcon={
-              <IconButton aria-label={`info about ${tile.title}`} className={classes.icon}>
-                <ThumbUpIcon />
-                  <span></span>
+              <>
+                <Button  className={classes.icon}>
+                  <DeleteIcon /><span></span>
+                </Button>
+                            <span></span>
+                            <Button  className={classes.icon}>
+<ThumbUpIcon /><span></span>
 
-                <ThumbDownIcon />
-                <span></span>
-                  <button>Comment</button>
+              </Button>
+              <Button className={classes.icon}>
+              <ThumbDownIcon /><span></span>
+              </Button>
 
-              </IconButton>
+
+                <Button variant="outlined" color="primary"> Comment</Button></>
             }
           />
         </GridListTile>
