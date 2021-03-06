@@ -20,7 +20,7 @@ import { addItem, getAllItems, deleteItem } from './helpers/Item';
 
 const { addUser } = require('./db/db.ts')
 import { savePost } from './helpers/WhiteBoardPost'
-import { saveOutfit, getAllOutfits } from './helpers/Outfit'
+import { saveOutfit, getAllOutfits, deleteOutfit } from './helpers/Outfit'
 
 import Find from './api/findastore';
 ////////////////HELPERS////////////////////
@@ -79,6 +79,11 @@ app.delete('/items/:id', (req: any, res: any) => {
     .catch((err: any) => console.warn(err));
 });
 
+app.delete('/outfit/:id', (req: any, res: any) => {
+  deleteOutfit(req.params)
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err))
+});
 /************************************* */
 const CalendarItem = require('./routes/calender');
 

@@ -84,3 +84,21 @@ body {
   width: 100px;
   height: 100px;
 }
+
+#welcome {
+  font-family: 'Roboto Slab', serif;
+  text-align: center;
+}
+#footer {
+  position:absolute;
+  bottom:0;
+  display:block;
+  width:100%;
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+.footer-text {
+  font-family: 'Roboto Slab', serif;
+}

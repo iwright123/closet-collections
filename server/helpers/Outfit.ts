@@ -11,3 +11,12 @@ export const saveOutfit = async(body: any) => {
 export const getAllOutfits = () => {
   return Outfit.findAll();
 }
+
+export const deleteOutfit = (body: any) => {
+  const { id } = body;
+  return Outfit.destroy({
+    where: {
+      id: id
+    }
+  });
+};
