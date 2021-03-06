@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import axios from 'axios';
 
 const items = [
@@ -84,7 +85,7 @@ const Calendar: React.FC = () => {
             <Text style={styles.itemInfo}>{item.title}</Text>
             <Text style={styles.subItemInfo}>{item.subTitle}</Text>
             {/* <Text>{item.release}</Text> */}
-            <FavoriteIcon onClick={() => favItem(item)} />
+            <FavoriteBorderIcon onClick={() => favItem(item)} />
             <Button
               onPress={() => setNotify(true)}
               title='Notify Me!'
