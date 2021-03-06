@@ -32,10 +32,13 @@ const findAStore = () => {
           if (data) {
             return (
               <div key={String(i)}>
+              <div key={String(i)}>
                 <h2> Name: {data.name}</h2>
                 <h3>Address: {data.location.address1} {data.location.city} {data.location.state} {data.location.zip_code}</h3>
                 <h3>Phone Number: {data.phone}</h3>
                 <h3>Rating: {data.rating}</h3>
+              </div>
+              <br></br>
               </div>
             );
           }
