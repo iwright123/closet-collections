@@ -4,7 +4,7 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-
+import SearchIcon from '@material-ui/icons/Search';
 
 
 export const SidebarData = [
@@ -31,6 +31,12 @@ export const SidebarData = [
     icon: <EventAvailableIcon />,
     link: '/calendar'
   },
+  {
+    cName: 'nav-text',
+    title: 'Find A Store',
+    icon: <SearchIcon />,
+    link: '/findastore'
+  }
   // {
   //   cName: 'nav-text',
   //   title: 'Logout',

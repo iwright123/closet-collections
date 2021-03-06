@@ -13,8 +13,8 @@ dotenv.config();
 
 import { addItem, getAllItems, deleteItem } from './helpers/Item';
 const { addUser } = require('./db/db.ts')
-import { savePost } from './helpers/WhiteBoardPost'
-
+import { savePost } from './helpers/WhiteBoardPost';
+import Find from './api/findastore';
 ////////////////HELPERS////////////////////
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
@@ -34,7 +34,8 @@ cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET
-  })
+  });
+app.use('/api/search', Find);
 /*******************DATABASE ROUTES ************************************/
 
 app.get('/items', (req: any, res: any) => {
@@ -62,6 +63,7 @@ app.delete('/items/:id', (req: any, res: any) => {
     .catch((err: any) => console.warn(err));
 });
 
+/************************************* */
 const CalendarItem = require('./routes/calender');
 
 app.use('/calendar', CalendarItem);
