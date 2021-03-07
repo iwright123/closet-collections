@@ -1,12 +1,24 @@
 const path = require('path');
-import express from 'express';
+import * as express from "express";
+const app = require("express")()
+const index = require("./routes/index");
+const port = process.env.PORT || 3000;
 const { GoogleStrategy } = require('./passport.ts');
-import passport from 'passport';
-import session from 'express-session';
-import cors from 'cors';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
+const passport = require('passport');
+const session = require('express-session');
+
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const bodyParser  = require('body-parser');
+const dotenv = require('dotenv')
+const { addUser } = require('./db/db.ts')
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
+////////////////HELPERS////////////////////
+
+
+
+
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
@@ -18,18 +30,22 @@ dotenv.config();
 
 import { addItem, getAllItems, deleteItem } from './helpers/Item';
 
-const { addUser } = require('./db/db.ts')
+
+
 import { savePost } from './helpers/WhiteBoardPost'
 import { saveOutfit, getAllOutfits, deleteOutfit } from './helpers/Outfit'
 
 import Find from './api/findastore';
+
 ////////////////HELPERS////////////////////
 
+dotenv.config();
 dotenv.config({ path: path.resolve(__dirname, '../.env'), });
 
-const app = express();
+
 const dist = path.resolve(__dirname, '..', 'client', 'dist');
 
+app.use(index);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(dist));
@@ -38,7 +54,6 @@ app.use(passport.session());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors())
-
 app.use('/api/search', Find);
 /*******************DATABASE ROUTES ************************************/
 
@@ -125,7 +140,7 @@ app.get('/auth/google/callback',
     .catch((err: string) => console.log('error adding user to db', err))
   });
 
-app.get('/isloggedin', (req, res) => {
+app.get('/isloggedin', (req: any, res: any) => {
   // check to see if the cookie key is thesis
   if (req.cookies.thesis) {
     res.json(true);
@@ -134,7 +149,7 @@ app.get('/isloggedin', (req, res) => {
   }
 });
 
-app.delete('/logout', (req, res) => {
+app.delete('/logout', (req: any, res: any) => {
   // delete the cookie key thesis when logging out
   res.clearCookie('thesis');
   res.json(false);
@@ -156,8 +171,23 @@ app.delete('/logout', (req, res) => {
   /////////Twilio//////////
 
 
-const port = 3000;
-app.listen(port, () => {
+io.on('connection', (socket: any) => {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+  socket.on('message', ({name, message}) => {
+    console.log('message:', message, 'user', name)
+    io.emit('message', {name, message})
+  });
+});
+
+
+
+
+
+
+http.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
 

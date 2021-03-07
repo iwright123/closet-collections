@@ -1,8 +1,9 @@
 import * as React from 'react';
-import axios from 'axios';
+
 import Navbar from './Navbar';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './Pages/Home';
+import Chat from './Pages/Chat';
 import Closet from './Pages/Closet';
 import Calendar from './Calendar';
 import OutfitGrid from './Pages/OutfitGrid';
@@ -13,7 +14,7 @@ import Logsout from './logs/Logout'
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import MyOutfit from '../components/Pages/MyOutfit'
 const { height } = Dimensions.get('screen');
-
+const axios = require('axios');
 const App = () => {
 
   const [login, setLogin] = React.useState(false);
@@ -53,6 +54,7 @@ const App = () => {
         <Route path='/calendar' component={Calendar} />
         <Route path='/outfits' component={OutfitGrid} />
         <Route path='/closet' component={Closet} />
+        <Route path='/chat' component={Chat} />
         <Route path='/findastore' component={FindAStore} />
         <Route path='/logout' component={Logsout} />
       </Switch>
