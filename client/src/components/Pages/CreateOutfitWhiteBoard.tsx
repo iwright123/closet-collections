@@ -1,6 +1,6 @@
 import React, { createRef, useState, useEffect, useCallback } from "react";
 import "./styles.css";
-import { Image as KonvaImage, Layer, Stage } from "react-konva";
+import { Image as KonvaImage, Layer, Stage, Transformer } from "react-konva";
 import useImage from "use-image";
 import CreateOutfitItems from './CreateOutfitItems';
 import axios from 'axios';
@@ -14,9 +14,9 @@ function CreateOutfitWhiteBoard() {
   const stageRef = React.useRef<any>();
   let CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/geonovember/upload';
 
-  const handleExportClick = () => {
+  const handleExportClick = async() => {
     const baseUrl = stageRef.current!.getStage().toDataURL({ mimeType: 'image/png', quality: 1 })
-
+    await setImages([]);
     let data = {
       "file": baseUrl,
       "upload_preset": "smiuh98k"
@@ -27,10 +27,12 @@ function CreateOutfitWhiteBoard() {
         'content-type': 'application/json'
       },
       method: 'POST',
-    }).then(async r => {
+    })
+    .then(async r => {
         let outfitUrl = await r.json()
       axios.post('/outfit', {imageUrl: outfitUrl.url})
     }).catch(err => console.log(err))
+
   };
 
 
@@ -89,7 +91,8 @@ function CreateOutfitWhiteBoard() {
           })}
         </Layer>
       </Stage>
-      <h4 className="heading">Click/Tap to add item to outfit!</h4>
+      <h4 className="heading">Tap to add item to outfit!</h4>
+      <div className="outfit-item-buttons">
       {outfits.map((outfit, i) => {
         return (
           <button
@@ -108,6 +111,7 @@ function CreateOutfitWhiteBoard() {
           </button>
         );
       })}
+      </div>
         <div id="buttons"><button id="save" onClick={handleExportClick}>Save Outfit</button></div>
     </div>
   );
