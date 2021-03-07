@@ -2,9 +2,19 @@
 Fashion application with the latest releases.
 
 # Description
-Closet Collections is designed to allow the user to curate a collection of clothing items and create/save outfits based on those items. There is also a calendar feature that notifies the user of new and upcoming fashion releases.
+Closet Collections is designed to allow the user to curate a collection of clothing items and create/save outfits based on those items.
 
-The closet feature stores both a users' individual clothes and a collection of created outfits. Users can drag and drop clothes to the whiteboard and the outfit will be saved. Users receive an outfit recommendation based upon their local weather conditions.
+Upon entry to the site, the User is presented with the publics 'Top Rated' and 'Worst Rated' outfit based public opinion, and an outfit based on the weather. Additionally the user may choose to display a live stream chat to engage in conversations regarding upcoming clothing items they are looking forward to.
+
+After the initially entry of the page, the user has the option  to view either their closet, a public chat feed, or a calendar for upcoming releases.
+
+The closet feature stores both a users' individual clothes and a collection of created outfits. Users can drag and drop clothes to the whiteboard and the outfit will be saved.
+
+The calendar feature displays to the user new and upcoming releases based on current trends and highly sought after items. The calendar also has a feature that allows the user to save a certain release item and be notified shortly before the item becomes available.
+
+
+
+
 
 # Dependencies
 ```
@@ -112,6 +122,8 @@ The closet feature stores both a users' individual clothes and a collection of c
   4. Run npm start to start server
 
   5. Run npm run dev to run webpack build
+
+  Closet Collections utilizes Sequelize and the use of Clever-Cloud  for storage needs.
 # APIs
 Google Auth
 IPStack

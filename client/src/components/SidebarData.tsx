@@ -4,6 +4,8 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ChatIcon from '@material-ui/icons/Chat';
+
 import SearchIcon from '@material-ui/icons/Search';
 
 
@@ -33,6 +35,11 @@ export const SidebarData = [
   },
   {
     cName: 'nav-text',
+    title: 'Chat Room',
+    icon: <ChatIcon />,
+    link: '/chat'
+  },
+  {
     title: 'Find A Store',
     icon: <SearchIcon />,
     link: '/findastore'
