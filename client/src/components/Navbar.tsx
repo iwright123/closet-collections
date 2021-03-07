@@ -34,6 +34,13 @@ const Navbar = () => {
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className='navbar'>
+      <header>
+        <div id="logo">
+          <img src="https://i.ibb.co/9vTGQyw/Closet-Collection-Logo.png"
+            alt="CC logo"
+            height="60px" width="auto"/>
+        </div>
+      </header>
           <Link to='#' className='menu-bars'>
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>

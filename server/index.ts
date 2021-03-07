@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 const { GoogleStrategy } = require('./passport.ts');
 const passport = require('passport');
 const session = require('express-session');
-const cloudinary = require('cloudinary');
+
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser  = require('body-parser');
@@ -16,9 +16,25 @@ const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 ////////////////HELPERS////////////////////
 
+
+
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
+
+
+dotenv.config();
+////////////////HELPERS////////////////////
+
 import { addItem, getAllItems, deleteItem } from './helpers/Item';
+
+
+
 import { savePost } from './helpers/WhiteBoardPost'
-import { saveOutfit } from './helpers/Outfit'
+import { saveOutfit, getAllOutfits, deleteOutfit } from './helpers/Outfit'
+
 import Find from './api/findastore';
 
 ////////////////HELPERS////////////////////
@@ -38,18 +54,21 @@ app.use(passport.session());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors())
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET
-});
 app.use('/api/search', Find);
 /*******************DATABASE ROUTES ************************************/
+
+app.get('/outfit', (req: any, res: any) => {
+  getAllOutfits()
+  .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err));
+})
 app.post('/outfit', (req: any, res: any) => {
+  console.log(req.body)
   saveOutfit(req.body)
-    .then((data: any) => res.json(data))
+    .then((data: any) => console.log('Outfit created', data))
     .catch((err: any) => console.warn(err))
 })
+
 app.get('/items', (req: any, res: any) => {
    getAllItems()
     .then((data: any) => res.json(data))
@@ -75,10 +94,20 @@ app.delete('/items/:id', (req: any, res: any) => {
     .catch((err: any) => console.warn(err));
 });
 
+app.delete('/outfit/:id', (req: any, res: any) => {
+  deleteOutfit(req.params)
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err))
+});
 /************************************* */
+
 const CalendarItem = require('./routes/calender');
+const { Weather } = require('./api/weather');
+const { Location } = require('./api/geolocation');
 
 app.use('/calendar', CalendarItem);
+app.use('/api/weather', Weather);
+app.use('/api/location', Location)
 
 
 /////////GOOGLE AUTH ///////////
@@ -126,6 +155,20 @@ app.delete('/logout', (req: any, res: any) => {
   res.json(false);
 });
 ///////////GOOGLE AUTH ^^^^^^///////////
+
+/////////Twilio//////////
+  // app.post('/sms', (req, res) => {
+  //   const { body } = req.body
+  //   console.log('text?>', body)
+  // client.messages.create({
+  //    body: body,
+  //    from: '+15042852518',
+  //    to: '+15047235163'
+  //  })
+  // .then((message: any) => console.log('message sid', message.sid))
+  // .catch((err: any) => console.warn('twilio error', err))
+  // })
+  /////////Twilio//////////
 
 
 io.on('connection', (socket: any) => {

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import axios from 'axios';
 
 const items = [
@@ -48,9 +49,26 @@ export interface Props {
 
 const Calendar: React.FC = () => {
 
-  const [notify, setNotify] = React.useState<boolean>(false);
-    // or can be React.useState(false);
+  const [notify, setNotify] = React.useState(false);
   const [favItems, setFaveItems] = React.useState([]);
+  const [phone, setNumber] = React.useState('');
+  const [pushNotifications, setNotifications] = React.useState([]);
+
+  const push = async (item) => {
+    setNotify(true);
+
+    setNotifications([item.title, item.Subtitle])
+
+    const message = {
+      body:`You will receive a reminder for the ${item.title} ${item.subTitle}'s, Thank you!`
+    }
+
+    console.log(message)
+
+    await axios.post('/sms', message)
+    .then((data: any) => console.log(data) )
+    .catch((err: string) => console.warn('Error here', err))
+  }
 
     const favItem = async (item) => {
 
@@ -84,9 +102,9 @@ const Calendar: React.FC = () => {
             <Text style={styles.itemInfo}>{item.title}</Text>
             <Text style={styles.subItemInfo}>{item.subTitle}</Text>
             {/* <Text>{item.release}</Text> */}
-            <FavoriteIcon onClick={() => favItem(item)} />
+            <FavoriteBorderIcon onClick={() => favItem(item)} />
             <Button
-              onPress={() => setNotify(true)}
+              onPress={() => push(item)}
               title='Notify Me!'
             />
           </View>
