@@ -4,7 +4,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
@@ -12,7 +12,8 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
-import Button from '@material-ui/core/Button'
+import { Icon } from "@material-ui/core";
+
 
 //import tileData from './tileData';
 
@@ -132,11 +133,24 @@ useEffect(() => {
             title={tile.title}
             actionIcon={
               <>
-
-                  <DeleteIcon /><span></span>
-
-  <ThumbUpIcon /><span></span>
-              <ThumbDownIcon /><span></span>
+              <Button>
+                <DeleteIcon
+                className="buttonIcon"
+                style={{ fontSize: 25 }}
+                 />
+              </Button>
+              <Button>
+                <ThumbUpIcon
+                className="buttonIcon"
+                style={{ fontSize: 25 }}
+                  />
+</Button>
+<Button >
+                <ThumbDownIcon
+                className="buttonIcon"
+                style={{ fontSize: 25 }}
+                />
+                </Button>
 
 
                 </>
