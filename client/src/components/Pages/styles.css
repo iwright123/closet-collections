@@ -85,6 +85,14 @@ body {
   height: 100px;
 }
 
+.outfit-item-buttons {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+.AddItem {
+  margin-top: 2em;
+}
 input {
   display: block;
   box-sizing: border-box;
@@ -110,6 +118,9 @@ label {
   margin-top: 1em;
 }
 
+.add-item-btn {
+  margin-top: 1em;
+}
 #welcome {
   font-family: 'Roboto Slab', serif;
   text-align: center;

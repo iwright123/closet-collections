@@ -13,7 +13,7 @@ import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 import { Icon } from "@material-ui/core";
-
+import MessageIcon from '@material-ui/icons/Message';
 
 //import tileData from './tileData';
 
@@ -64,8 +64,8 @@ useEffect(() => {
   return (<div className={classes.root}>
     <h1>Outfits</h1>
 
-    <GridList cellHeight={300} spacing={30} className={classes.gridList}>
-      <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
+    <GridList cellHeight={300} spacing={10} className={classes.gridList}>
+      <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
         <ListSubheader component="div"></ListSubheader>
       </GridListTile>
       {
@@ -79,26 +79,30 @@ useEffect(() => {
             title={tile.title}
             actionIcon={
               <>
-              <Button>
+              {/* <Button>
                 <DeleteIcon
                 className="buttonIcon"
-                style={{ fontSize: 25 }}
+                style={{ fontSize: 15 }}
                  />
-              </Button>
+              </Button> */}
               <Button>
                 <ThumbUpIcon
                 className="buttonIcon"
-                style={{ fontSize: 25 }}
+                style={{ fontSize: 15}}
                   />
-</Button>
-<Button >
+              </Button>
+              <Button>
                 <ThumbDownIcon
                 className="buttonIcon"
-                style={{ fontSize: 25 }}
+                style={{ fontSize: 15 }}
                 />
-                </Button>
-                Comment
-
+              </Button>
+              <Button>
+                <MessageIcon
+                className="buttonIcon"
+                style={{ fontSize: 15 }}
+                  />
+              </Button>
                 </>
             }
           />
