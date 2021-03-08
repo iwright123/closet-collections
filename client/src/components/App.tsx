@@ -8,6 +8,7 @@ import Closet from './Pages/Closet';
 import Calendar from './Calendar';
 import OutfitGrid from './Pages/OutfitGrid';
 import FindAStore from './Pages/FindAStore';
+import Saved from  './Pages/SavedItems';
 // import GoogleButton from 'react-google-button';
 import Logs from './logs/login';
 import Logsout from './logs/Logout'
@@ -40,6 +41,7 @@ const App = () => {
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/calendar' component={Calendar} />
+          <Route path='/savedItems' component={Saved}/>
           <Route path='/outfits' component={OutfitGrid} />
           <Route path='/closet' component={Closet} />
           <Route path='/findastore' component={FindAStore} />
@@ -52,6 +54,7 @@ const App = () => {
       <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/calendar' component={Calendar} />
+        <Route path='/savedItems' component={Saved}/>
         <Route path='/outfits' component={OutfitGrid} />
         <Route path='/closet' component={Closet} />
         <Route path='/chat' component={Chat} />

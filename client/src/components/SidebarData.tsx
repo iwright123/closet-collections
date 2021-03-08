@@ -5,8 +5,8 @@ import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ChatIcon from '@material-ui/icons/Chat';
-
 import SearchIcon from '@material-ui/icons/Search';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 
 export const SidebarData = [
@@ -32,6 +32,12 @@ export const SidebarData = [
     title: 'Calendar',
     icon: <EventAvailableIcon />,
     link: '/calendar'
+  },
+  {
+    cName: 'nav-text',
+    title: 'Saved Items',
+    icon: <FavoriteIcon />,
+    link: '/savedItems'
   },
   {
     cName: 'nav-text',

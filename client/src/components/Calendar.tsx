@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import axios from 'axios';
+
 
 const items = [
   {
@@ -51,10 +53,11 @@ const Calendar: React.FC = () => {
 
   const [notify, setNotify] = React.useState(false);
   const [favItems, setFaveItems] = React.useState([]);
+  const [liked, setLike] = React.useState(false);
   const [phone, setNumber] = React.useState('');
   const [pushNotifications, setNotifications] = React.useState([]);
 
-  const push = async (item) => {
+  const push = (item) => {
     setNotify(true);
 
     setNotifications([item.title, item.Subtitle])
@@ -65,13 +68,13 @@ const Calendar: React.FC = () => {
 
     console.log(message)
 
-    await axios.post('/sms', message)
+    axios.post('/sms', message)
     .then((data: any) => console.log(data) )
     .catch((err: string) => console.warn('Error here', err))
   }
 
-    const favItem = async (item) => {
-
+    const favItem = (item) => {
+      setLike(true);
       setFaveItems([item.title, item.subTitle, item.img, item.release])
 
       const data = {
@@ -81,16 +84,20 @@ const Calendar: React.FC = () => {
         releaseDate: item.release
       }
 
-      await axios.post('/calendar', data)
+      axios.post('/calendar', data)
       .then((data: any) => console.log(data) )
       .catch((err: string) => console.warn('Error here', err))
     }
+
+    const changeColor = liked ? 'red' : 'grey';
+
 
   return (
     <>
     <View
       style={styles.container}>
       <Text style={styles.title}>Upcoming Releases!</Text>
+        <button className='addNumber'>Enter Number</button>
       {
         items.map((item, v) => {
         return <View
@@ -102,7 +109,7 @@ const Calendar: React.FC = () => {
             <Text style={styles.itemInfo}>{item.title}</Text>
             <Text style={styles.subItemInfo}>{item.subTitle}</Text>
             {/* <Text>{item.release}</Text> */}
-            <FavoriteBorderIcon onClick={() => favItem(item)} />
+            <FavoriteBorderIcon style={{backgroundColor: changeColor}} onClick={() => favItem(item)} />
             <Button
               onPress={() => push(item)}
               title='Notify Me!'
@@ -143,7 +150,11 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     marginVertical: 10
-  }
+  },
+
+  saved: {
+    left:0,
+}
 
 
 });
