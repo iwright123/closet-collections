@@ -1,5 +1,6 @@
 import * as React from "react";
 const io = require('socket.io-client')
+const moment = require('moment');
 // const <input  = require('@material-ui/core<input')
 const socket = io.connect('http://localhost:3000')
 const Chat = () => {
@@ -22,21 +23,32 @@ setState({message: '', name})
   const renderChat = () => {
   return chat.map((message) =>{
 <div>
-  <h2>TEST</h2>
+
   <h1>
   {message.message}
     </h1>
     </div>
   } )
 }
+const time = moment().format('h:mm a')
 return (
   <div className="card">
+
     <form onSubmit={onMessageSubmit}>
+
       <h1>Messenger</h1>
       <div className="name-field">
       </div>
       <div>
         <input
+        placeholder='enter username'
+          name="name"
+          onChange={(e) => onTextChange(e)}
+          value={state.name}
+          id="outlined-multiline-static"
+        />
+        <input
+        placeholder='enter message'
           name="message"
           onChange={(e) => onTextChange(e)}
           value={state.message}
@@ -48,8 +60,13 @@ return (
     <div className="render-chat">
       <h1>Chat Log</h1>
       <ul id='message-log'>
-        {chat.map(message => {
-          return <li>{message.message}</li>
+        {chat.map((message,index) => {
+          return <div key={index}>
+            {/* <span id='messagename'>{message.name}</span>
+            <span id='message'>{message.message}</span>
+            <span id='time'>{moment().format('h:mm a')}</span> */}
+            {`${message.name}: ${message.message} ${moment().format('h:mm a')}`}
+            </div>
         })}
       </ul>
     </div>
