@@ -55,6 +55,22 @@ const OutfitGrid = () => {
 // .catch(err: {} => console.log('errror', err))
 //   }
 const [images, setImages] = React.useState([]);
+const [likeColor, setLikeColor] = React.useState({});
+const [dislikeColor, setDislikeColor] = React.useState({});
+
+const colorChange = { color: "yellow"}
+const colorChange2 = { color: "red"}
+
+const handleLikeClick = () => {
+  const color = likeColor ? colorChange : '';
+  setLikeColor(color);
+}
+
+const handleDislikeClick = () => {
+  const color = dislikeColor ? colorChange2 : '';
+  setDislikeColor(color);
+}
+
 useEffect(() => {
   axios.get('/outfit')
     .then(({ data }) => setImages(data))
@@ -85,13 +101,20 @@ useEffect(() => {
                 style={{ fontSize: 15 }}
                  />
               </Button> */}
-              <Button>
+              <Button
+              onClick={handleLikeClick}
+              style={likeColor}
+              >
                 <ThumbUpIcon
                 className="buttonIcon"
                 style={{ fontSize: 15}}
+
                   />
               </Button>
-              <Button>
+              <Button
+                onClick={handleDislikeClick}
+                style={dislikeColor}
+              >
                 <ThumbDownIcon
                 className="buttonIcon"
                 style={{ fontSize: 15 }}
