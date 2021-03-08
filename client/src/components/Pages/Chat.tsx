@@ -1,23 +1,15 @@
-
 import * as React from "react";
-
 const io = require('socket.io-client')
 // const <input  = require('@material-ui/core<input')
-
-
 const socket = io.connect('http://localhost:3000')
 const Chat = () => {
 const [state, setState] = React.useState({message: '', name: ''})
 const [chat, setChat] = React.useState([]);
-
 React.useEffect(() => {
   socket.on('message', ({name, message }) => {
     setChat([...chat, {name, message}])
   })
-
-
 }, [state])
-
 const onTextChange = (e) => {
 setState({...state, [e.target.name]: e.target.value})
 }
@@ -35,17 +27,13 @@ setState({message: '', name})
   {message.message}
     </h1>
     </div>
-
   } )
 }
-
-
 return (
   <div className="card">
     <form onSubmit={onMessageSubmit}>
       <h1>Messenger</h1>
       <div className="name-field">
-
       </div>
       <div>
         <input
@@ -53,8 +41,6 @@ return (
           onChange={(e) => onTextChange(e)}
           value={state.message}
           id="outlined-multiline-static"
-
-
         />
       </div>
       <button>Send Message</button>
@@ -66,11 +52,8 @@ return (
           return <li>{message.message}</li>
         })}
       </ul>
-
     </div>
   </div>
 )
-
 }
-
 export default Chat

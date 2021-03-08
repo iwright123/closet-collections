@@ -97,7 +97,7 @@ useEffect(() => {
                 style={{ fontSize: 25 }}
                 />
                 </Button>
-
+                Comment
 
                 </>
             }
