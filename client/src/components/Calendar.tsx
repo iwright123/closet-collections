@@ -1,8 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import axios from 'axios';
+import Saved from './Pages/SavedItems';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 
 const items = [
   {
@@ -51,10 +55,12 @@ const Calendar: React.FC = () => {
 
   const [notify, setNotify] = React.useState(false);
   const [favItems, setFaveItems] = React.useState([]);
+  const [liked, setLike] = React.useState(false);
   const [phone, setNumber] = React.useState('');
   const [pushNotifications, setNotifications] = React.useState([]);
+  const [page, setPage] = React.useState(false)
 
-  const push = async (item) => {
+  const push = (item) => {
     setNotify(true);
 
     setNotifications([item.title, item.Subtitle])
@@ -65,13 +71,13 @@ const Calendar: React.FC = () => {
 
     console.log(message)
 
-    await axios.post('/sms', message)
+    axios.post('/sms', message)
     .then((data: any) => console.log(data) )
     .catch((err: string) => console.warn('Error here', err))
   }
 
-    const favItem = async (item) => {
-
+    const favItem = (item) => {
+      setLike(true);
       setFaveItems([item.title, item.subTitle, item.img, item.release])
 
       const data = {
@@ -81,35 +87,54 @@ const Calendar: React.FC = () => {
         releaseDate: item.release
       }
 
-      await axios.post('/calendar', data)
+      axios.post('/calendar', data)
       .then((data: any) => console.log(data) )
       .catch((err: string) => console.warn('Error here', err))
     }
+
+    const changeColor = liked ? 'red' : 'grey';
+
 
   return (
     <>
     <View
       style={styles.container}>
-      <Text style={styles.title}>Upcoming Releases!</Text>
-      {
-        items.map((item, v) => {
-        return <View
-          key={v}>
-            <Image
-              style={{width: 250, height: 250, marginVertical: 10}}
-              source={{uri: item.img}}
-            />
-            <Text style={styles.itemInfo}>{item.title}</Text>
-            <Text style={styles.subItemInfo}>{item.subTitle}</Text>
-            {/* <Text>{item.release}</Text> */}
-            <FavoriteBorderIcon onClick={() => favItem(item)} />
-            <Button
-              onPress={() => push(item)}
-              title='Notify Me!'
-            />
-          </View>
-        })
-      }
+
+         <TouchableOpacity onPress={() => setPage(true)}>
+          <Text>Fav Items</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => alert('Add your Number!')}>
+          <Text>Add Number</Text>
+          </TouchableOpacity>
+
+        {
+
+          page === false ?
+
+          items.map((item, v) => {
+            return <View
+              key={v}>
+                <Image
+                  style={{width: 250, height: 250, marginVertical: 10}}
+                  source={{uri: item.img}}
+                />
+                <Text style={styles.itemInfo}>{item.title}</Text>
+                <Text style={styles.subItemInfo}>{item.subTitle}</Text>
+                {/* <Text>{item.release}</Text> */}
+                <FavoriteBorderIcon style={{backgroundColor: changeColor}} onClick={() => favItem(item)} />
+                <Button
+                  onPress={() => push(item)}
+                  title='Notify Me!'
+                />
+              </View>
+            }) :
+            <View>
+               <ExitToAppIcon onClick={() => setPage(false)}/>
+              <Saved />
+            </View>
+
+
+        }
     </View>
     </>
   );
@@ -143,7 +168,11 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     marginVertical: 10
-  }
+  },
+
+  saved: {
+    left:0,
+}
 
 
 });

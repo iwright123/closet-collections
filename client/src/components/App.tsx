@@ -8,6 +8,7 @@ import Closet from './Pages/Closet';
 import Calendar from './Calendar';
 import OutfitGrid from './Pages/OutfitGrid';
 import FindAStore from './Pages/FindAStore';
+import Saved from  './Pages/SavedItems';
 // import GoogleButton from 'react-google-button';
 import Logs from './logs/login';
 import Logsout from './logs/Logout'
