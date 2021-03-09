@@ -55,20 +55,18 @@ const OutfitGrid = () => {
 // .catch(err: {} => console.log('errror', err))
 //   }
 const [images, setImages] = React.useState([]);
-const [likeColor, setLikeColor] = React.useState({});
-const [dislikeColor, setDislikeColor] = React.useState({});
+const [likeColor, setLikeColor] = React.useState(false);
+const [dislikeColor, setDislikeColor] = React.useState(false);
 
 const colorChange = { color: "yellow"}
 const colorChange2 = { color: "red"}
 
-const handleLikeClick = () => {
-  const color = likeColor ? colorChange : '';
-  setLikeColor(color);
+const handleLikeClick = (e) => {
+  setLikeColor(!likeColor);
 }
 
 const handleDislikeClick = () => {
-  const color = dislikeColor ? colorChange2 : '';
-  setDislikeColor(color);
+  setDislikeColor(!dislikeColor);
 }
 
 useEffect(() => {
@@ -87,7 +85,7 @@ useEffect(() => {
       {
       images.map((tile, i) => (
 
-        <GridListTile key={tile.imageUrl}>
+        <GridListTile key={i}>
            <Zoom>
           <img src={tile.imageUrl} />
            </Zoom>
@@ -102,8 +100,8 @@ useEffect(() => {
                  />
               </Button> */}
               <Button
-              onClick={handleLikeClick}
-              style={likeColor}
+              onClick={(() => handleLikeClick(i))}
+              style={likeColor ? colorChange : null}
               >
                 <ThumbUpIcon
                 className="buttonIcon"
@@ -113,7 +111,7 @@ useEffect(() => {
               </Button>
               <Button
                 onClick={handleDislikeClick}
-                style={dislikeColor}
+                style={dislikeColor ? colorChange2 : null}
               >
                 <ThumbDownIcon
                 className="buttonIcon"
@@ -128,6 +126,7 @@ useEffect(() => {
               </Button>
                 </>
             }
+            key={String(i)}
           />
         </GridListTile>
 
