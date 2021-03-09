@@ -35,12 +35,6 @@ export const SidebarData = [
   },
   {
     cName: 'nav-text',
-    title: 'Saved Items',
-    icon: <FavoriteIcon />,
-    link: '/savedItems'
-  },
-  {
-    cName: 'nav-text',
     title: 'Chat Room',
     icon: <ChatIcon />,
     link: '/chat'

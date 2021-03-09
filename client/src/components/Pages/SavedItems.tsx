@@ -1,13 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Alert } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios';
-import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const Saved = () => {
 
   const [item, setItems] = React.useState([]);
+  const [page, setPage] = React.useState(false);
+  const [clickedItem, setClicked] = React.useState([]);
+
+  const display = (item) => {
+    setPage(true)
+
+      setClicked([item.title, item.subTitle, item.imgUrl, item.releaseDate])
+
+  }
 
 
   React.useEffect(() => {
@@ -20,23 +27,33 @@ const Saved = () => {
 return (
  <>
   <View style={styles.container}>
-    {/* <Text style={styles.title}>Favorites</Text> */}
     {
+
+      page === false ?
         item.map((item, v) => {
         return <View
           key={v}>
             <TouchableOpacity
-             onPress={() => <Link to='/info'></Link>}>
+             onPress={() => display(item)}>
               <Image
               style={{width: 185, height: 185, marginVertical: 2, marginLeft: 2}}
               source={{uri: item.imgUrl}}
             />
             </TouchableOpacity>
-            {/* <Text style={styles.itemInfo}>{item.title}</Text>
-            <Text style={styles.subItemInfo}>{item.subTitle}</Text>
-            <Text>{item.releaseDate}</Text> */}
           </View>
-        })
+        }) :
+        <View style={styles.container}>
+         <ExitToAppIcon onClick={() => setPage(false)}/>
+         {
+           console.log(clickedItem)
+         }
+            <Image
+                style={{width: 400, height: 330}}
+               source={{uri: clickedItem[2]}} />
+              <Text style={styles.itemInfo}>{clickedItem[0]}</Text>
+              <Text style={styles.subItemInfo}>{clickedItem[1]}</Text>
+              <Text>{clickedItem[3]}</Text>
+        </View>
       }
 
   </View>
@@ -44,43 +61,6 @@ return (
 )
 
 }
-
-const DetailsScreen = () => {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-    </View>
-  );
-};
-
-const routes = () => {
-
-  return (
-    <Router>
-      <Switch>
-      <Route path='/info' component={DetailsScreen} />
-      </Switch>
-    </Router>
-  )
-
-};
-
-
-
-const Stack = createStackNavigator();
-
-const screen = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name='Saved' component={Saved} options={{ title: 'Saved'}} />
-        <Stack.Screen name='details' component={DetailsScreen} options={{ title: 'details'}} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
-}
-
-
 
 
 const styles = StyleSheet.create({
@@ -101,16 +81,16 @@ const styles = StyleSheet.create({
 
   itemInfo: {
     flex: 1,
-    fontSize: 15,
+    fontSize: 25,
     textAlign: 'center',
-    marginVertical: -10
+    marginVertical: 50
   },
 
   subItemInfo: {
     flex: 1,
     fontSize: 25,
     textAlign: 'center',
-    marginVertical: 10
+    marginVertical: 70
   },
 
   saved: {

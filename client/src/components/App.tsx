@@ -41,7 +41,6 @@ const App = () => {
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/calendar' component={Calendar} />
-          <Route path='/savedItems' component={Saved}/>
           <Route path='/outfits' component={OutfitGrid} />
           <Route path='/closet' component={Closet} />
           <Route path='/findastore' component={FindAStore} />
@@ -54,7 +53,6 @@ const App = () => {
       <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/calendar' component={Calendar} />
-        <Route path='/savedItems' component={Saved}/>
         <Route path='/outfits' component={OutfitGrid} />
         <Route path='/closet' component={Closet} />
         <Route path='/chat' component={Chat} />

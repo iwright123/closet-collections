@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import axios from 'axios';
+import Saved from './Pages/SavedItems';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
 const items = [
@@ -56,6 +58,7 @@ const Calendar: React.FC = () => {
   const [liked, setLike] = React.useState(false);
   const [phone, setNumber] = React.useState('');
   const [pushNotifications, setNotifications] = React.useState([]);
+  const [page, setPage] = React.useState(false)
 
   const push = (item) => {
     setNotify(true);
@@ -96,29 +99,42 @@ const Calendar: React.FC = () => {
     <>
     <View
       style={styles.container}>
-      <Text style={styles.title}>Upcoming Releases!</Text>
-        <TouchableOpacity onPress={() => alert('Add your Number!')}>
-        <Text>Add Number</Text>
-        </TouchableOpacity>
-      {
-        items.map((item, v) => {
-        return <View
-          key={v}>
-            <Image
-              style={{width: 250, height: 250, marginVertical: 10}}
-              source={{uri: item.img}}
-            />
-            <Text style={styles.itemInfo}>{item.title}</Text>
-            <Text style={styles.subItemInfo}>{item.subTitle}</Text>
-            {/* <Text>{item.release}</Text> */}
-            <FavoriteBorderIcon style={{backgroundColor: changeColor}} onClick={() => favItem(item)} />
-            <Button
-              onPress={() => push(item)}
-              title='Notify Me!'
-            />
-          </View>
-        })
-      }
+
+         <TouchableOpacity onPress={() => setPage(true)}>
+          <Text>Fav Items</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => alert('Add your Number!')}>
+          <Text>Add Number</Text>
+          </TouchableOpacity>
+
+        {
+
+          page === false ?
+
+          items.map((item, v) => {
+            return <View
+              key={v}>
+                <Image
+                  style={{width: 250, height: 250, marginVertical: 10}}
+                  source={{uri: item.img}}
+                />
+                <Text style={styles.itemInfo}>{item.title}</Text>
+                <Text style={styles.subItemInfo}>{item.subTitle}</Text>
+                {/* <Text>{item.release}</Text> */}
+                <FavoriteBorderIcon style={{backgroundColor: changeColor}} onClick={() => favItem(item)} />
+                <Button
+                  onPress={() => push(item)}
+                  title='Notify Me!'
+                />
+              </View>
+            }) :
+            <View>
+               <ExitToAppIcon onClick={() => setPage(false)}/>
+              <Saved />
+            </View>
+
+
+        }
     </View>
     </>
   );
