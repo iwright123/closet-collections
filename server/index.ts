@@ -33,7 +33,7 @@ import { addItem, getAllItems, deleteItem } from './helpers/Item';
 
 
 import { getAllWhiteboardPosts, savePost } from './helpers/WhiteBoardPost'
-import { saveOutfit, getAllOutfits, deleteOutfit } from './helpers/Outfit'
+import { saveOutfit, getAllOutfits, deleteOutfit, getUserOutfits } from './helpers/Outfit'
 
 import Find from './api/findastore';
 
@@ -56,15 +56,18 @@ app.use(bodyParser.json());
 app.use(cors())
 app.use('/api/search', Find);
 /*******************DATABASE ROUTES ************************************/
-
+app.get('/outfit/:user', (req: any, res: any) => {
+getUserOutfits(req.cookies.thesis)
+.then((data: any) => res.json(data))
+.catch((err: any) => console.warn(err))
+})
 app.get('/outfit', (req: any, res: any) => {
   getAllOutfits()
   .then((data: any) => res.json(data))
     .catch((err: any) => console.warn(err));
 })
 app.post('/outfit', (req: any, res: any) => {
-  console.log(req.body)
-  saveOutfit(req.body)
+  saveOutfit(req.body, req.cookies.thesis)
     .then((data: any) => console.log('Outfit created', data))
     .catch((err: any) => console.warn(err))
 })

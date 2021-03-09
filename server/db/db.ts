@@ -52,6 +52,11 @@ export const Outfit = sequelize.define('Outfit', {
     allowNull: false,
     primaryKey: true
   },
+  user: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+
   outfitTitle: {
     type: Sequelize.STRING,
     unique: true
