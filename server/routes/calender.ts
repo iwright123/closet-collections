@@ -5,13 +5,13 @@ import { Calendar } from '../db/db';
 import { addFav, getFavs, removeFav } from '../helpers/calendar';
 
 CalendarItem.get('/get', (req: any, res: any) => {
-  return getFavs()
+  return getFavs(req.cookies.thesis)
   .then((data: any) => res.send(data))
   .catch((err: string) => console.warn(err))
 });
 
 CalendarItem.post('/', (req: any, res: any) => {
-  return addFav(req.body)
+  return addFav(req.body, req.cookies.thesis)
   .then((data: any) => res.send(data))
   .catch((err: string) => console.warn(err))
 });

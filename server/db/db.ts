@@ -1,8 +1,8 @@
 const { Sequelize } = require('sequelize');
 const mysql = require('mysql2');
 
-const sequelize = new Sequelize('b7gjvli8tydsaa3jdyaa', 'ugybjn6ukvevp2lb', 'jZxeIwWOFrcxpGFyLn4I', {
-  host: 'b7gjvli8tydsaa3jdyaa-mysql.services.clever-cloud.com',
+const sequelize = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllqetkd', 'vnG2q19b3wbaZXBhVjLY', {
+  host: 'bao0spze4uyjnrjcstlm-mysql.services.clever-cloud.com',
   dialect: 'mysql'
 });
 
@@ -104,16 +104,23 @@ export const Calendar = sequelize.define('Calendar', {
     primaryKey: true
   },
 
+  user: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+
   title: {
     type: Sequelize.STRING
   },
 
   subTitle: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    unique: true
   },
 
   imgUrl: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    unique: true
   },
 
   releaseDate: {
@@ -138,7 +145,7 @@ const Vote = sequelize.define('Vote', {
 
 });
 
-const database = 'b7gjvli8tydsaa3jdyaa';
+const database = 'bao0spze4uyjnrjcstlm';
 
 sequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
 sequelize.query(`USE \`${database}\`;`);
@@ -196,9 +203,9 @@ module.exports = {
   addUser
 };
 
-// sequelize.sync({ force: true })
-//   .then(() => console.log('Database & tables created!'))
-//   .catch((err: any) => console.log(err));
+sequelize.sync({ force: true })
+  .then(() => console.log('Database & tables created!'))
+  .catch((err: any) => console.log(err));
 
 
 sequelize.authenticate()
