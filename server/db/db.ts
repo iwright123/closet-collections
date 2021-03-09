@@ -67,14 +67,6 @@ export const Outfit = sequelize.define('Outfit', {
 });
 
 export const WhiteboardPost = sequelize.define('WhiteboardPost', {
-  outfitId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    references: {
-      model: Outfit,
-    }
-  },
   idUser: {
     type: Sequelize.INTEGER,
     allowNull: true,
@@ -115,12 +107,10 @@ export const Calendar = sequelize.define('Calendar', {
 
   subTitle: {
     type: Sequelize.STRING,
-    unique: true
   },
 
   imgUrl: {
     type: Sequelize.STRING,
-    unique: true
   },
 
   releaseDate: {
@@ -203,9 +193,9 @@ module.exports = {
   addUser
 };
 
-sequelize.sync({ force: true })
-  .then(() => console.log('Database & tables created!'))
-  .catch((err: any) => console.log(err));
+// sequelize.sync({ force: true })
+//   .then(() => console.log('Database & tables created!'))
+//   .catch((err: any) => console.log(err));
 
 
 sequelize.authenticate()
