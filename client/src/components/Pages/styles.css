@@ -85,18 +85,14 @@ body {
   height: 100px;
 }
 
-
-/* Closet--Create Outfit */
 .outfit-item-buttons {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
 }
-/* Closet--Add Item */
 .AddItem {
   margin-top: 2em;
 }
-
 input {
   display: block;
   box-sizing: border-box;
@@ -121,6 +117,7 @@ label {
 .add-item-btn {
   margin-top: 1em;
 }
+
 
 #welcome {
   font-family: 'Roboto Slab', serif;
@@ -185,3 +182,5 @@ h3 {
 .time {
   margin-left: 2px;
 }
+
+

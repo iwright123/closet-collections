@@ -2,7 +2,7 @@
   background-color: #080308;
   height: 80px;
   display: flex;
-  justify-content: start;
+
   align-items: center;
 }
 
@@ -75,6 +75,5 @@
 span {
   margin-left: 16px;
 }
-a:hover{
-  background-color: #1a83ff;
-}
+
+

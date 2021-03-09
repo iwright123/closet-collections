@@ -11,11 +11,6 @@ After the initially entry of the page, the user has the option  to view either t
 The closet feature stores both a users' individual clothes and a collection of created outfits. Users can drag and drop clothes to the whiteboard and the outfit will be saved.
 
 The calendar feature displays to the user new and upcoming releases based on current trends and highly sought after items. The calendar also has a feature that allows the user to save a certain release item and be notified shortly before the item becomes available.
-
-
-
-
-
 # Dependencies
 ```
 "dependencies": {
@@ -123,7 +118,7 @@ The calendar feature displays to the user new and upcoming releases based on cur
 
   5. Run npm run dev to run webpack build
 
-  Closet Collections utilizes Sequelize and the use of Clever-Cloud  for storage needs.
+Closet Collections utilizes Sequelize and the use of Clever-Cloud  for storage needs.
 # APIs
 Google Auth
 IPStack
