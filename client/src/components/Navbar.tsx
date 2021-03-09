@@ -34,17 +34,19 @@ const Navbar = () => {
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className='navbar'>
-      <header>
-        <div id="logo">
-          <img src="https://i.ibb.co/9vTGQyw/Closet-Collection-Logo.png"
-            alt="CC logo"
-            height="60px" width="auto"/>
-        </div>
-      </header>
+
           <Link to='#' className='menu-bars'>
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
+          <header className="logo">
+
+<img src="https://i.ibb.co/9vTGQyw/Closet-Collection-Logo.png"
+  alt="CC logo"
+  height="60px" width="auto" />
+
+</header>
         </div>
+
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items' onClick={showSidebar}>
             <li className='navbar-toggle'>
@@ -65,7 +67,11 @@ const Navbar = () => {
               <Link className='nav-text' to='/login'><ExitToAppIcon />,<span>{'Login'}</span></Link>
             }
           </ul>
-        </nav>
+
+          </nav>
+
+
+
       </IconContext.Provider>
 
     </>

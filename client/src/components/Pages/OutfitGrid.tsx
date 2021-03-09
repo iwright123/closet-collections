@@ -4,13 +4,18 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
+import { Icon } from "@material-ui/core";
+import MessageIcon from '@material-ui/icons/Message';
+
+//import tileData from './tileData';
 
 interface IPost {
   userId: number;
@@ -26,6 +31,7 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
+    color: 'white'
   },
   gridList: {
     width: 1000,
@@ -36,8 +42,8 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
   icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
-  },
+    color: 'white',
+  }
 }));
 
 
@@ -49,6 +55,20 @@ const OutfitGrid = () => {
 // .catch(err: {} => console.log('errror', err))
 //   }
 const [images, setImages] = React.useState([]);
+const [likeColor, setLikeColor] = React.useState(false);
+const [dislikeColor, setDislikeColor] = React.useState(false);
+
+const colorChange = { color: "yellow"}
+const colorChange2 = { color: "red"}
+
+const handleLikeClick = (e) => {
+  setLikeColor(!likeColor);
+}
+
+const handleDislikeClick = () => {
+  setDislikeColor(!dislikeColor);
+}
+
 useEffect(() => {
   axios.get('/outfit')
     .then(({ data }) => setImages(data))
@@ -58,30 +78,55 @@ useEffect(() => {
   return (<div className={classes.root}>
     <h1>Outfits</h1>
 
-    <GridList cellHeight={300} spacing={30} className={classes.gridList}>
-      <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
+    <GridList cellHeight={300} spacing={10} className={classes.gridList}>
+      <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
         <ListSubheader component="div"></ListSubheader>
       </GridListTile>
       {
-      images.map((tile) => (
+      images.map((tile, i) => (
 
-        <GridListTile key={tile.imageUrl}>
+        <GridListTile key={i}>
            <Zoom>
           <img src={tile.imageUrl} />
            </Zoom>
           <GridListTileBar
             title={tile.title}
             actionIcon={
-              <IconButton aria-label={`info about ${tile.title}`} className={classes.icon}>
-                <ThumbUpIcon />
-                  <span></span>
+              <>
+              {/* <Button>
+                <DeleteIcon
+                className="buttonIcon"
+                style={{ fontSize: 15 }}
+                 />
+              </Button> */}
+              <Button
+              onClick={(() => handleLikeClick(i))}
+              style={likeColor ? colorChange : null}
+              >
+                <ThumbUpIcon
+                className="buttonIcon"
+                style={{ fontSize: 15}}
 
-                <ThumbDownIcon />
-                <span></span>
-                  <button>Comment</button>
-
-              </IconButton>
+                  />
+              </Button>
+              <Button
+                onClick={handleDislikeClick}
+                style={dislikeColor ? colorChange2 : null}
+              >
+                <ThumbDownIcon
+                className="buttonIcon"
+                style={{ fontSize: 15 }}
+                />
+              </Button>
+              <Button>
+                <MessageIcon
+                className="buttonIcon"
+                style={{ fontSize: 15 }}
+                  />
+              </Button>
+                </>
             }
+            key={String(i)}
           />
         </GridListTile>
 

@@ -2,7 +2,7 @@
   background-color: #080308;
   height: 80px;
   display: flex;
-  justify-content: start;
+
   align-items: center;
 }
 
@@ -78,3 +78,4 @@ span {
 a:hover{
   background-color: #1a83ff;
 }
+
