@@ -73,7 +73,6 @@ export const WhiteboardPost = sequelize.define('WhiteboardPost', {
     primaryKey: true,
     references: {
       model: Outfit,
-      key: "id"
     }
   },
   idUser: {
@@ -94,7 +93,7 @@ export const WhiteboardPost = sequelize.define('WhiteboardPost', {
   },
 });
 
-Outfit.belongsTo(WhiteboardPost);
+WhiteboardPost.belongsTo(Outfit);
 // saves all items into 1 outfit
 
 export const Calendar = sequelize.define('Calendar', {
@@ -139,10 +138,10 @@ const Vote = sequelize.define('Vote', {
 
 });
 
-// const database = 'b7gjvli8tydsaa3jdyaa';
+const database = 'b7gjvli8tydsaa3jdyaa';
 
-// sequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
-// sequelize.query(`USE \`${database}\`;`);
+sequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
+sequelize.query(`USE \`${database}\`;`);
 
 // const addItem = async(body: any) => {
 //   const { clothingType, description, price, imageUrl } = body;
