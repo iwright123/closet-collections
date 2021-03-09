@@ -32,7 +32,7 @@ import { addItem, getAllItems, deleteItem } from './helpers/Item';
 
 
 
-import { savePost } from './helpers/WhiteBoardPost'
+import { getAllWhiteboardPosts, savePost } from './helpers/WhiteBoardPost'
 import { saveOutfit, getAllOutfits, deleteOutfit, getUserOutfits } from './helpers/Outfit'
 
 import Find from './api/findastore';
@@ -76,6 +76,12 @@ app.get('/items', (req: any, res: any) => {
    getAllItems()
     .then((data: any) => res.json(data))
     .catch((err: any) => console.warn(err));
+});
+
+app.get('/whiteboardpost', (req: any, res: any) => {
+  getAllWhiteboardPosts()
+   .then((data: any) => res.json(data))
+   .catch((err: any) => console.warn(err));
 });
 
 app.post('/items', (req: any, res: any) => {
