@@ -9,7 +9,7 @@ export const findAStore = (keyword:any) => {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${config.YELP_API}`
   }})
-  .then(({data}) => data)
-  .catch(err => console.error(err))
+    .then(({data}) => data)
+    .catch(err => console.error(err));
 };
 

@@ -1,7 +1,7 @@
 const path = require('path');
-import * as express from "express";
-const app = require("express")()
-const index = require("./routes/index");
+import * as express from 'express';
+const app = require('express')();
+const index = require('./routes/index');
 const port = process.env.PORT || 3000;
 const { GoogleStrategy } = require('./passport.ts');
 const passport = require('passport');
@@ -9,11 +9,11 @@ const session = require('express-session');
 
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const bodyParser  = require('body-parser');
-const dotenv = require('dotenv')
-const { addUser } = require('./db/db.ts')
-const http = require('http').createServer(app)
-const io = require('socket.io')(http)
+const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+const { addUser } = require('./db/db.ts');
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 ////////////////HELPERS////////////////////
 
 
@@ -32,8 +32,8 @@ import { addItem, getAllItems, deleteItem } from './helpers/Item';
 
 
 
-import { getAllWhiteboardPosts, savePost } from './helpers/WhiteBoardPost'
-import { saveOutfit, getAllOutfits, deleteOutfit, getUserOutfits } from './helpers/Outfit'
+import { getAllWhiteboardPosts, savePost } from './helpers/WhiteBoardPost';
+import { saveOutfit, getAllOutfits, deleteOutfit, getUserOutfits } from './helpers/Outfit';
 
 import Find from './api/findastore';
 
@@ -53,39 +53,39 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(cors())
+app.use(cors());
 app.use('/api/search', Find);
 /*******************DATABASE ROUTES ************************************/
 app.get('/outfit/:user', (req: any, res: any) => {
-getUserOutfits(req.cookies.thesis)
-.then((data: any) => res.json(data))
-.catch((err: any) => console.warn(err))
-})
+  getUserOutfits(req.cookies.thesis)
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err));
+});
 app.get('/outfit', (req: any, res: any) => {
   getAllOutfits()
-  .then((data: any) => res.json(data))
+    .then((data: any) => res.json(data))
     .catch((err: any) => console.warn(err));
-})
+});
 app.post('/outfit', (req: any, res: any) => {
   saveOutfit(req.body, req.cookies.thesis)
     .then((data: any) => console.log('Outfit created', data))
-    .catch((err: any) => console.warn(err))
-})
+    .catch((err: any) => console.warn(err));
+});
 
 app.get('/items', (req: any, res: any) => {
-   getAllItems()
+  getAllItems()
     .then((data: any) => res.json(data))
     .catch((err: any) => console.warn(err));
 });
 
 app.get('/whiteboardpost', (req: any, res: any) => {
   getAllWhiteboardPosts()
-   .then((data: any) => res.json(data))
-   .catch((err: any) => console.warn(err));
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err));
 });
 
 app.post('/items', (req: any, res: any) => {
-   addItem(req.body)
+  addItem(req.body)
     .then((data: any) => res.json(data))
     .catch((err: any) => console.warn('HERE ERROR', err));
 
@@ -106,7 +106,7 @@ app.delete('/items/:id', (req: any, res: any) => {
 app.delete('/outfit/:id', (req: any, res: any) => {
   deleteOutfit(req.params)
     .then((data: any) => res.json(data))
-    .catch((err: any) => console.warn(err))
+    .catch((err: any) => console.warn(err));
 });
 /************************************* */
 
@@ -116,7 +116,7 @@ const { Location } = require('./api/geolocation');
 
 app.use('/calendar', CalendarItem);
 app.use('/api/weather', Weather);
-app.use('/api/location', Location)
+app.use('/api/location', Location);
 
 
 /////////GOOGLE AUTH ///////////
@@ -145,8 +145,8 @@ app.get('/auth/google/callback',
     // setting cookie key to thesis and saving the username
     res.cookie('thesis', displayName);
     return addUser(displayName)
-    .then(() =>  res.redirect('/'))
-    .catch((err: string) => console.log('error adding user to db', err))
+      .then(() => res.redirect('/'))
+      .catch((err: string) => console.log('error adding user to db', err));
   });
 
 app.get('/isloggedin', (req: any, res: any) => {
@@ -166,18 +166,18 @@ app.delete('/logout', (req: any, res: any) => {
 ///////////GOOGLE AUTH ^^^^^^///////////
 
 /////////Twilio//////////
-  // app.post('/sms', (req, res) => {
-  //   const { body } = req.body
-  //   console.log('text?>', body)
-  // client.messages.create({
-  //    body: body,
-  //    from: '+15042852518',
-  //    to: '+15047235163'
-  //  })
-  // .then((message: any) => console.log('message sid', message.sid))
-  // .catch((err: any) => console.warn('twilio error', err))
-  // })
-  /////////Twilio//////////
+// app.post('/sms', (req, res) => {
+//   const { body } = req.body
+//   console.log('text?>', body)
+// client.messages.create({
+//    body: body,
+//    from: '+15042852518',
+//    to: '+15047235163'
+//  })
+// .then((message: any) => console.log('message sid', message.sid))
+// .catch((err: any) => console.warn('twilio error', err))
+// })
+/////////Twilio//////////
 
 
 io.on('connection', (socket: any) => {
@@ -186,8 +186,8 @@ io.on('connection', (socket: any) => {
     console.log('user disconnected');
   });
   socket.on('message', ({name, message}) => {
-    console.log('message:', message, 'user', name)
-    io.emit('message', {name, message})
+    console.log('message:', message, 'user', name);
+    io.emit('message', {name, message});
   });
 });
 

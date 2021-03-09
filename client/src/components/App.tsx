@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { ReactElement } from 'react';
 
 import Navbar from './Navbar';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
@@ -8,15 +8,14 @@ import Closet from './Pages/Closet';
 import Calendar from './Calendar';
 import OutfitGrid from './Pages/OutfitGrid';
 import FindAStore from './Pages/FindAStore';
-import Saved from  './Pages/SavedItems';
 // import GoogleButton from 'react-google-button';
 import Logs from './logs/login';
-import Logsout from './logs/Logout'
+import Logsout from './logs/Logout';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import MyOutfit from '../components/Pages/MyOutfit'
+import MyOutfit from '../components/Pages/MyOutfit';
 const { height } = Dimensions.get('screen');
-const axios = require('axios');
-const App = () => {
+import axios from 'axios';
+const App = (): ReactElement => {
 
   const [login, setLogin] = React.useState(false);
 
@@ -32,36 +31,36 @@ const App = () => {
   //     .catch(err => console.warn(err));
   // };
 
-   return (
+  return (
     <>
-    {
-      login === false ?
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/calendar' component={Calendar} />
-          <Route path='/outfits' component={OutfitGrid} />
-          <Route path='/closet' component={Closet} />
-          <Route path='/findastore' component={FindAStore} />
-          <Route path='/login' component={Logs} />
-        </Switch>
-      </Router>
-      :
-      <Router>
-      <Navbar />
-      <Switch>
-        <Route path='/' exact component={Home} />
-        <Route path='/calendar' component={Calendar} />
-        <Route path='/outfits' component={OutfitGrid} />
-        <Route path='/closet' component={Closet} />
-        <Route path='/chat' component={Chat} />
-        <Route path='/findastore' component={FindAStore} />
-        <Route path='/logout' component={Logsout} />
-      </Switch>
-    </Router>
+      {
+        login === false ?
+          <Router>
+            <Navbar />
+            <Switch>
+              <Route path='/' exact component={Home} />
+              <Route path='/calendar' component={Calendar} />
+              <Route path='/outfits' component={OutfitGrid} />
+              <Route path='/closet' component={Closet} />
+              <Route path='/findastore' component={FindAStore} />
+              <Route path='/login' component={Logs} />
+            </Switch>
+          </Router>
+          :
+          <Router>
+            <Navbar />
+            <Switch>
+              <Route path='/' exact component={Home} />
+              <Route path='/calendar' component={Calendar} />
+              <Route path='/outfits' component={OutfitGrid} />
+              <Route path='/closet' component={Closet} />
+              <Route path='/chat' component={Chat} />
+              <Route path='/findastore' component={FindAStore} />
+              <Route path='/logout' component={Logsout} />
+            </Switch>
+          </Router>
 
-    }
+      }
     </>
   );
 };

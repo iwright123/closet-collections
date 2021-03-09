@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -6,13 +6,13 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Button from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import Zoom from 'react-medium-image-zoom'
-import 'react-medium-image-zoom/dist/styles.css'
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
-import { Icon } from "@material-ui/core";
+import { Icon } from '@material-ui/core';
 import MessageIcon from '@material-ui/icons/Message';
 
 //import tileData from './tileData';
@@ -49,31 +49,31 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
 
 const OutfitGrid = () => {
   const classes = useStyles();
-//   const comment = (data: {}) => {
-// axios.post('/comment', data: {})
-// .then(data: {} => console.log(data))
-// .catch(err: {} => console.log('errror', err))
-//   }
-const [images, setImages] = React.useState([]);
-const [likeColor, setLikeColor] = React.useState(false);
-const [dislikeColor, setDislikeColor] = React.useState(false);
+  //   const comment = (data: {}) => {
+  // axios.post('/comment', data: {})
+  // .then(data: {} => console.log(data))
+  // .catch(err: {} => console.log('errror', err))
+  //   }
+  const [images, setImages] = React.useState([]);
+  const [likeColor, setLikeColor] = React.useState(false);
+  const [dislikeColor, setDislikeColor] = React.useState(false);
 
-const colorChange = { color: "yellow"}
-const colorChange2 = { color: "red"}
+  const colorChange = { color: 'yellow'};
+  const colorChange2 = { color: 'red'};
 
-const handleLikeClick = (e) => {
-  setLikeColor(!likeColor);
-}
+  const handleLikeClick = (e) => {
+    setLikeColor(!likeColor);
+  };
 
-const handleDislikeClick = () => {
-  setDislikeColor(!dislikeColor);
-}
+  const handleDislikeClick = () => {
+    setDislikeColor(!dislikeColor);
+  };
 
-useEffect(() => {
-  axios.get('/outfit')
-    .then(({ data }) => setImages(data))
-    .catch((err) => console.warn(err))
-}, []);
+  useEffect(() => {
+    axios.get('/outfit')
+      .then(({ data }) => setImages(data))
+      .catch((err) => console.warn(err));
+  }, []);
 
   return (<div className={classes.root}>
     <h1>Outfits</h1>
@@ -83,54 +83,54 @@ useEffect(() => {
         <ListSubheader component="div"></ListSubheader>
       </GridListTile>
       {
-      images.map((tile, i) => (
+        images.map((tile, i) => (
 
-        <GridListTile key={i}>
-           <Zoom>
-          <img src={tile.imageUrl} />
-           </Zoom>
-          <GridListTileBar
-            title={tile.title}
-            actionIcon={
-              <>
-              {/* <Button>
+          <GridListTile key={i}>
+            <Zoom>
+              <img src={tile.imageUrl} />
+            </Zoom>
+            <GridListTileBar
+              title={tile.title}
+              actionIcon={
+                <>
+                  {/* <Button>
                 <DeleteIcon
                 className="buttonIcon"
                 style={{ fontSize: 15 }}
                  />
               </Button> */}
-              <Button
-              onClick={(() => handleLikeClick(i))}
-              style={likeColor ? colorChange : null}
-              >
-                <ThumbUpIcon
-                className="buttonIcon"
-                style={{ fontSize: 15}}
+                  <Button
+                    onClick={(() => handleLikeClick(i))}
+                    style={likeColor ? colorChange : null}
+                  >
+                    <ThumbUpIcon
+                      className="buttonIcon"
+                      style={{ fontSize: 15}}
 
-                  />
-              </Button>
-              <Button
-                onClick={handleDislikeClick}
-                style={dislikeColor ? colorChange2 : null}
-              >
-                <ThumbDownIcon
-                className="buttonIcon"
-                style={{ fontSize: 15 }}
-                />
-              </Button>
-              <Button>
-                <MessageIcon
-                className="buttonIcon"
-                style={{ fontSize: 15 }}
-                  />
-              </Button>
+                    />
+                  </Button>
+                  <Button
+                    onClick={handleDislikeClick}
+                    style={dislikeColor ? colorChange2 : null}
+                  >
+                    <ThumbDownIcon
+                      className="buttonIcon"
+                      style={{ fontSize: 15 }}
+                    />
+                  </Button>
+                  <Button>
+                    <MessageIcon
+                      className="buttonIcon"
+                      style={{ fontSize: 15 }}
+                    />
+                  </Button>
                 </>
-            }
-            key={String(i)}
-          />
-        </GridListTile>
+              }
+              key={String(i)}
+            />
+          </GridListTile>
 
-      ))}
+        ))}
     </GridList>
 
   </div>
