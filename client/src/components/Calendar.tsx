@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Alert, } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import axios from 'axios';
 import Saved from './Pages/SavedItems';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { setFlagsFromString } from 'v8';
+import { useForm } from "react-hook-form";
 
 
 const items = [
@@ -58,7 +60,9 @@ const Calendar: React.FC = () => {
   const [liked, setLike] = React.useState(false);
   const [phone, setNumber] = React.useState('');
   const [pushNotifications, setNotifications] = React.useState([]);
-  const [page, setPage] = React.useState(false)
+  const [page, setPage] = React.useState(false);
+  const [form, setForm] = React.useState(false);
+  console.log(phone);
 
   const push = (item) => {
     setNotify(true);
@@ -66,7 +70,8 @@ const Calendar: React.FC = () => {
     setNotifications([item.title, item.Subtitle])
 
     const message = {
-      body:`You will receive a reminder for the ${item.title} ${item.subTitle}'s, Thank you!`
+      body:`You will receive a reminder for the ${item.title} ${item.subTitle}'s, Thank you!`,
+      phone: phone
     }
 
     console.log(message)
@@ -97,15 +102,13 @@ const Calendar: React.FC = () => {
 
   return (
     <>
-    <View
-      style={styles.container}>
+    <View style={styles.container}>
 
          <TouchableOpacity onPress={() => setPage(true)}>
-          <Text>Fav Items</Text>
+          <Text>Favorite Items</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => alert('Add your Number!')}>
-          <Text>Add Number</Text>
-          </TouchableOpacity>
+          <input ></input>
+
 
         {
 
@@ -153,7 +156,8 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: 'black'
+    backgroundColor: 'clear',
+    marginVertical: -30
   },
 
   itemInfo: {

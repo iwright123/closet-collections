@@ -72,6 +72,7 @@
     "react-native-super-grid": "^4.1.1",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "^0.15.0",
+    "react-phone-number-input": "^3.1.17",
     "react-router-dom": "^5.2.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.5.0",

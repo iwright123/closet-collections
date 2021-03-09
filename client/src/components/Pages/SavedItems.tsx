@@ -13,9 +13,7 @@ const Saved = () => {
     setPage(true)
 
       setClicked([item.title, item.subTitle, item.imgUrl, item.releaseDate])
-
   }
-
 
   React.useEffect(() => {
     axios.get('/calendar/get')
@@ -28,7 +26,6 @@ return (
  <>
   <View style={styles.container}>
     {
-
       page === false ?
         item.map((item, v) => {
         return <View
@@ -44,9 +41,6 @@ return (
         }) :
         <View style={styles.container}>
          <ExitToAppIcon onClick={() => setPage(false)}/>
-         {
-           console.log(clickedItem)
-         }
             <Image
                 style={{width: 400, height: 330}}
                source={{uri: clickedItem[2]}} />
@@ -55,7 +49,6 @@ return (
               <Text>{clickedItem[3]}</Text>
         </View>
       }
-
   </View>
  </>
 )
@@ -97,13 +90,6 @@ const styles = StyleSheet.create({
     left:0,
 }
 
-
 });
-
-
-
-
-
-
 
 export default Saved;
