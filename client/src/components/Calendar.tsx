@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -97,7 +97,9 @@ const Calendar: React.FC = () => {
     <View
       style={styles.container}>
       <Text style={styles.title}>Upcoming Releases!</Text>
-        <button className='addNumber'>Enter Number</button>
+        <TouchableOpacity onPress={() => alert('Add your Number!')}>
+        <Text>Add Number</Text>
+        </TouchableOpacity>
       {
         items.map((item, v) => {
         return <View
