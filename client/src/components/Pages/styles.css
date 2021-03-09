@@ -113,6 +113,11 @@ label {
   font-size: 14px;
   font-weight: 200;
 }
+
+.add-item-btn {
+  margin-top: 1em;
+}
+
 .add-item-btn {
   margin-top: 1em;
 }
@@ -129,6 +134,13 @@ label {
   background-color: black;
   color: white;
 }
+
 .footer-text {
   font-family: 'Roboto Slab', serif;
+}
+
+.logo {
+  float: right;
+  padding: 66%;
+  position: relative;
 }
