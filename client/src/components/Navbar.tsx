@@ -1,9 +1,9 @@
 //import React, { useState } from 'react';
-import * as React from 'react';
+import React, { ReactElement } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
- import { SidebarData } from './SidebarData';
+import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
 import GoogleButton from 'react-google-button';
@@ -12,23 +12,23 @@ import { set } from 'js-cookie';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
-const Navbar = () => {
+const Navbar = (): ReactElement => {
   const [sidebar, setSidebar] = React.useState(false);
 
   const [login, setLogin] = React.useState(false);
 
   React.useEffect(() => {
     axios.get('/isloggedin')
-    .then(({ data }) => setLogin(data))
-    .catch(err => console.warn(err))
+      .then(({ data }) => setLogin(data))
+      .catch(err => console.warn(err));
   });
 
-  const showSidebar = () => setSidebar(!sidebar);
+  const showSidebar = (): void => setSidebar(!sidebar);
   React.useEffect(() => {
     axios.get('/isloggedin')
-    .then(({ data }) => setLogin(data))
-    .catch(err => console.log('err', err))
-  }, [])
+      .then(({ data }) => setLogin(data))
+      .catch(err => console.log('err', err));
+  }, []);
 
   return (
     <>
@@ -40,11 +40,11 @@ const Navbar = () => {
           </Link>
           <header className="logo">
 
-<img src="https://i.ibb.co/9vTGQyw/Closet-Collection-Logo.png"
-  alt="CC logo"
-  height="60px" width="auto" />
+            <img src="https://i.ibb.co/9vTGQyw/Closet-Collection-Logo.png"
+              alt="CC logo"
+              height="60px" width="auto" />
 
-</header>
+          </header>
         </div>
 
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
@@ -63,12 +63,12 @@ const Navbar = () => {
             })}
             {
               login === true ?
-              <Link className='nav-text' to='/logout'><ExitToAppIcon />,<span>{'Logout'}</span></Link> :
-              <Link className='nav-text' to='/login'><ExitToAppIcon />,<span>{'Login'}</span></Link>
+                <Link className='nav-text' to='/logout'><ExitToAppIcon />,<span>{'Logout'}</span></Link> :
+                <Link className='nav-text' to='/login'><ExitToAppIcon />,<span>{'Login'}</span></Link>
             }
           </ul>
 
-          </nav>
+        </nav>
 
 
 
@@ -78,4 +78,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar
+export default Navbar;

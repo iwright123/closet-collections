@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { ReactElement, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import IconButton from '@material-ui/core/IconButton';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import Zoom from 'react-medium-image-zoom'
-import 'react-medium-image-zoom/dist/styles.css'
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
 import axios from 'axios';
-
+import UsersOutfits from '../models/UsersOutfits';
+import ImageUrl from '../models/ImageUrl';
+import ListSubheader from '@material-ui/core/ListSubheader';
 interface IPost {
   userId: number;
   id?: number;
@@ -40,42 +36,36 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
   },
 }));
 
-
-const MyOutfit = () => {
+const MyOutfit = (): ReactElement => {
   const classes = useStyles();
-//   const comment = (data: {}) => {
-// axios.post('/comment', data: {})
-// .then(data: {} => console.log(data))
-// .catch(err: {} => console.log('errror', err))
-//   }
-const [images, setImages] = React.useState([]);
-useEffect(() => {
-  axios.get('/outfit/:user')
-    .then(({ data }) => setImages(data))
-    .catch((err) => console.warn(err))
-}, []);
+  //   const comment = (data: {}) => {
+  // axios.post('/comment', data: {})
+  // .then(data: {} => console.log(data))
+  // .catch(err: {} => console.log('errror', err))
+  //   }
+  const [images, setImages] = useState([]);
+  useEffect((): void => {
+    axios.get<UsersOutfits[]>('/outfit/:user')
+      .then(({ data }): void => setImages(data))
+      .catch((err) => console.warn(err));
+  }, []);
 
-  return (<div className={classes.root}>
-    <h1>Outfits</h1>
-
-    <GridList cellHeight={300} spacing={30} className={classes.gridList}>
-      <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
-        <ListSubheader component="div"></ListSubheader>
-      </GridListTile>
-      {
-      images.map((tile) => (
-
-        <GridListTile key={tile.imageUrl}>
-           <Zoom>
-          <img src={tile.imageUrl} />
-           </Zoom>
-
+  return (
+    <div className={classes.root}>
+      <h1>Outfits</h1>
+      <GridList cellHeight={300} spacing={30} className={classes.gridList}>
+        <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
+          <ListSubheader component="div"></ListSubheader>
         </GridListTile>
-
-      ))}
-    </GridList>
-
-  </div>
+        {images.map((tile: ImageUrl) => (
+          <GridListTile key={tile.imageUrl}>
+            <Zoom>
+              <img src={tile.imageUrl} />
+            </Zoom>
+          </GridListTile>
+        ))}
+      </GridList>
+    </div>
   );
 };
 
