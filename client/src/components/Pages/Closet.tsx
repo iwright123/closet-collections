@@ -1,8 +1,6 @@
 import * as React from 'react';
-import OutfitGrid from './OutfitGrid';
 import AddItems from './AddItems'
 import { Tabs, useTabState, Panel } from '@bumaga/tabs';
-import * as axios from 'axios'
 import MyOutfit from  '../Pages/MyOutfit'
 import CreateOutfitWhiteBoard from './CreateOutfitWhiteBoard';
 
