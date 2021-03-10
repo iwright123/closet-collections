@@ -62,13 +62,17 @@ const colorChange = { color: "yellow"}
 const colorChange2 = { color: "red"}
 
 const handleLikeClick = (e) => {
+
+  axios.patch('/whiteboardpost')
+    .then(({data}) => console.log("Updated like!"))
+    .catch((err) => console.warn(err));
+
   setLikeColor(!likeColor);
 }
 
 const handleDislikeClick = () => {
   setDislikeColor(!dislikeColor);
 }
-
 useEffect(() => {
   axios.get('/outfit')
     .then(({ data }) => setImages(data))

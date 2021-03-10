@@ -32,7 +32,7 @@ import { addItem, getAllItems, deleteItem } from './helpers/Item';
 
 
 
-import { getAllWhiteboardPosts, savePost } from './helpers/WhiteBoardPost'
+import { getAllWhiteboardPosts, savePost, updateLike } from './helpers/WhiteBoardPost'
 import { saveOutfit, getAllOutfits, deleteOutfit, getUserOutfits } from './helpers/Outfit'
 
 import Find from './api/findastore';
@@ -84,6 +84,11 @@ app.get('/whiteboardpost', (req: any, res: any) => {
    .catch((err: any) => console.warn(err));
 });
 
+app.patch('/whiteboardpost', (req: any, res: any) => {
+  updateLike(req.like)
+    .then((data: any) => res.json(data))
+    .catch((err: any) => console.warn(err));
+})
 app.post('/items', (req: any, res: any) => {
    addItem(req.body)
     .then((data: any) => res.json(data))

@@ -13,6 +13,13 @@ export const savePost = async(body: any) => {
 export const getAllWhiteboardPosts = () => {
   return WhiteboardPost.findAll();
 }
+
+export const updateLike = (body: any) => {
+  const { likes } = body;
+  return WhiteboardPost.findOneAndUpdate({
+    likes: likes
+  })
+}
 //count liked posts
 // export const countLikes = WhiteboardPost.findAll({
 //   attributes: {
