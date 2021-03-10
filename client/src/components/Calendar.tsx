@@ -6,6 +6,8 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import axios from 'axios';
 import Saved from './Pages/SavedItems';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { setFlagsFromString } from 'v8';
+import { useForm } from "react-hook-form";
 
 
 const items = [
@@ -59,6 +61,8 @@ const Calendar: React.FC = () => {
   const [phone, setNumber] = React.useState('');
   const [pushNotifications, setNotifications] = React.useState([]);
   const [page, setPage] = React.useState(false);
+  const [form, setForm] = React.useState(false);
+  console.log(phone);
 
   const push = (item): void => {
     setNotify(true);
@@ -153,7 +157,8 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: 'black'
+    backgroundColor: 'clear',
+    marginVertical: -30
   },
 
   itemInfo: {

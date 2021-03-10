@@ -1,25 +1,24 @@
 import { Router } from 'express';
 const CalendarItem = Router();
-import { Calendar } from '../db/db';
 
 import { addFav, getFavs, removeFav } from '../helpers/calendar';
 
-CalendarItem.get('/get', (req: any, res: any) => {
-  return getFavs()
-    .then((data: any) => res.send(data))
-    .catch((err: string) => console.warn(err));
+export default CalendarItem.get('/get', (req, res) => {
+  return getFavs(req.cookies.thesis)
+    .then((data) => res.send(data))
+    .catch((err) => console.warn(err));
 });
 
-CalendarItem.post('/', (req: any, res: any) => {
-  return addFav(req.body)
-    .then((data: any) => res.send(data))
-    .catch((err: string) => console.warn(err));
+ CalendarItem.post('/', (req, res) => {
+  return addFav(req.body, req.cookies.thesis)
+    .then((data) => res.send(data))
+    .catch((err) => console.warn(err));
 });
 
-CalendarItem.delete('/', (req: any, res: any) => {
+CalendarItem.delete('/', (req, res) => {
   return removeFav(req.body)
-    .then((data: any) => res.send(data))
-    .catch((err: string) => console.warn(err));
+    .then((data) => res.send(data))
+    .catch((err) => console.warn(err));
 });
 
 module.exports = CalendarItem;
