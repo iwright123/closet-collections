@@ -1,5 +1,5 @@
-const { Sequelize } = require('sequelize');
-const mysql = require('mysql2');
+import Sequelize from 'sequelize';
+import mysql from 'mysql2';
 
 const sequelize = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllqetkd', 'vnG2q19b3wbaZXBhVjLY', {
   host: 'bao0spze4uyjnrjcstlm-mysql.services.clever-cloud.com',
@@ -173,11 +173,11 @@ export const addUser = (name: string): void => {
   });
 };
 
-const getFits = () => {
+const getFits = (): void => {
   return WhiteboardPost.findAll();
 };
 
-const getTrash = () => {
+const getTrash = (): void => {
   return WhiteboardPost.findAll();
 };
 

@@ -1,9 +1,9 @@
 
-import React, { DragEvent, MouseEvent, useEffect, useState } from 'react';
+import React, { DragEvent, MouseEvent, ReactElement, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import axios from 'axios';
 
-const Home = () => {
+const Home = (): ReactElement => {
   const [topFits] = React.useState([]);
 
   // let _isMounted = false;

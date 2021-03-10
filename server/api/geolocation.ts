@@ -2,7 +2,7 @@ import { Router } from 'express';
 const Location = Router();
 import { getGeolocationByIP } from '../helpers/geolocation';
 
-Location.post('/', (req, res) => {
+export default Location.post('/', (req, res) => {
   const { ip } = req.body;
 
   return getGeolocationByIP(ip)

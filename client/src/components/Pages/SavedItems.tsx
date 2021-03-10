@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 

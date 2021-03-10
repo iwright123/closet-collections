@@ -1,6 +1,7 @@
 import passport from 'passport';
-import GoogleStrategy from 'passport-google-oauth20'
-import dotenv, { config} from 'dotenv'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+import dotenv, { config} from 'dotenv';
 // Use the GoogleStrategy within Passport.
 //   Strategies in passport require a `verify` function, which accept
 //   credentials (in this case, a token, tokenSecret, and Google profile), and
@@ -10,7 +11,7 @@ passport.use(new GoogleStrategy({
   clientSecret: process.env.clientSecret,
   callbackURL: '/auth/google/callback'
 },
-function(accessToken: any, refreshToken: any, profile: any, done: any ) {
+function(accessToken, refreshToken, profile, done) {
   console.info(profile);
   // profile is google profile
   // done is being passed to the callback url under key user
