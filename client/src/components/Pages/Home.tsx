@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import axios from 'axios';
 
 const Home = () => {
-  const [topFits] = React.useState([])
+  const [topFits] = React.useState([]);
 
   // let _isMounted = false;
 
@@ -41,38 +41,38 @@ const Home = () => {
   //       setDesc(descriptionLowerCase)
   //     }).catch((err: any) => console.warn(err));
   // }
-// useEffect(() => {
-// axios.get('/fits')
-// }, [])
-// const [trash] = React.useState([])
+  // useEffect(() => {
+  // axios.get('/fits')
+  // }, [])
+  // const [trash] = React.useState([])
 
-// useEffect(() => {
-//   axios.get('/trash')
-//   }, [])
+  // useEffect(() => {
+  //   axios.get('/trash')
+  //   }, [])
 
-    // React.useEffect(() => {
-    //   getUserLocation();
-    // });
+  // React.useEffect(() => {
+  //   getUserLocation();
+  // });
 
   return (
     <>
 
       <View style={styles.container}>
-          <Text style={styles.title}>Closet Collections</Text>
+        <Text style={styles.title}>Closet Collections</Text>
         <View>
           {/* <Text style={styles.weather}>Currently {temp} and {desc}</Text> */}
         </View>
         <Image
-              style={{width: 200, height: 200, marginVertical: 75}}
-              source={{uri: 'https://media.gq.com/photos/5cf56d75ba72052c30a43177/master/w_1600%2Cc_limit/Chris-Bosh-Weigh-In-GQ-NBA-Most-Stylish-Player-Bracket-Kyrie-Irving.jpg'}}
-            />
-            <Text style={{marginVertical: -75}}>Top Rated by 87%</Text>
+          style={{width: 200, height: 200, marginVertical: 75}}
+          source={{uri: 'https://media.gq.com/photos/5cf56d75ba72052c30a43177/master/w_1600%2Cc_limit/Chris-Bosh-Weigh-In-GQ-NBA-Most-Stylish-Player-Bracket-Kyrie-Irving.jpg'}}
+        />
+        <Text style={{marginVertical: -75}}>Top Rated by 87%</Text>
 
-            <Image
-              style={{width: 200, height: 200, marginVertical: 100}}
-              source={{uri: 'https://media.gq.com/photos/5cf56d7609bcad6790fdd178/master/w_1600%2Cc_limit/Chris-Bosh-Weigh-In-GQ-NBA-Most-Stylish-Player-Bracket-Dwayne-Wade.jpg'}}
-            />
-            <Text style={{marginVertical: -100}}>Worst Rated by 93%</Text>
+        <Image
+          style={{width: 200, height: 200, marginVertical: 100}}
+          source={{uri: 'https://media.gq.com/photos/5cf56d7609bcad6790fdd178/master/w_1600%2Cc_limit/Chris-Bosh-Weigh-In-GQ-NBA-Most-Stylish-Player-Bracket-Dwayne-Wade.jpg'}}
+        />
+        <Text style={{marginVertical: -100}}>Worst Rated by 93%</Text>
 
       </View>
       {/* <div>
@@ -95,7 +95,7 @@ const Home = () => {
             Since 2021
           </div>
         </footer>
-          </div>
+      </div>
     </>
   );
 };
@@ -105,8 +105,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
   title: {
@@ -118,6 +118,6 @@ const styles = StyleSheet.create({
     fontSize: 20
   }
 
-})
+});
 
 export default Home;

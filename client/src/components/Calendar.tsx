@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Alert, } from 'react-native';
+import React, { ReactElement } from 'react';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -47,10 +47,10 @@ const items = [
     subTitle: 'City Market',
     release: 'March 4th, 2021'
   }
-]
+];
 
 export interface Props {
-  items: object
+  items: any;
 }
 
 const Calendar: React.FC = () => {
@@ -64,59 +64,60 @@ const Calendar: React.FC = () => {
   const [form, setForm] = React.useState(false);
   console.log(phone);
 
-  const push = (item) => {
+  const push = (item): void => {
     setNotify(true);
 
-    setNotifications([item.title, item.Subtitle])
+    setNotifications([item.title, item.Subtitle]);
 
     const message = {
-      body:`You will receive a reminder for the ${item.title} ${item.subTitle}'s, Thank you!`,
-      phone: phone
-    }
+      body: `You will receive a reminder for the ${item.title} ${item.subTitle}'s, Thank you!`
+    };
 
-    console.log(message)
+    console.log(message);
 
     axios.post('/sms', message)
-    .then((data: any) => console.log(data) )
-    .catch((err: string) => console.warn('Error here', err))
-  }
-
-    const favItem = (item) => {
-      setLike(true);
-      setFaveItems([item.title, item.subTitle, item.img, item.release])
-
-      const data = {
-        title: item.title,
-        subTitle: item.subTitle,
-        imgUrl: item.img,
-        releaseDate: item.release
-      }
-
-      axios.post('/calendar', data)
       .then((data: any) => console.log(data) )
-      .catch((err: string) => console.warn('Error here', err))
-    }
+      .catch((err: string) => console.warn('Error here', err));
+  };
 
-    const changeColor = liked ? 'red' : 'grey';
+  const favItem = (item): void => {
+    setLike(true);
+    setFaveItems([item.title, item.subTitle, item.img, item.release]);
+
+    const data = {
+      title: item.title,
+      subTitle: item.subTitle,
+      imgUrl: item.img,
+      releaseDate: item.release
+    };
+
+    axios.post('/calendar', data)
+      .then((data: any) => console.log(data) )
+      .catch((err: string) => console.warn('Error here', err));
+  };
+
+  const changeColor = liked ? 'red' : 'grey';
 
 
   return (
     <>
-    <View style={styles.container}>
+      <View
+        style={styles.container}>
 
-         <TouchableOpacity onPress={() => setPage(true)}>
-          <Text>Favorite Items</Text>
-          </TouchableOpacity>
-          <input ></input>
-
+        <TouchableOpacity onPress={(): void => setPage(true)}>
+          <Text>Fav Items</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={(): void => alert('Add your Number!')}>
+          <Text>Add Number</Text>
+        </TouchableOpacity>
 
         {
 
           page === false ?
 
-          items.map((item, v) => {
-            return <View
-              key={v}>
+            items.map((item, v) => {
+              return <View
+                key={v}>
                 <Image
                   style={{width: 250, height: 250, marginVertical: 10}}
                   source={{uri: item.img}}
@@ -124,21 +125,21 @@ const Calendar: React.FC = () => {
                 <Text style={styles.itemInfo}>{item.title}</Text>
                 <Text style={styles.subItemInfo}>{item.subTitle}</Text>
                 {/* <Text>{item.release}</Text> */}
-                <FavoriteBorderIcon style={{backgroundColor: changeColor}} onClick={() => favItem(item)} />
+                <FavoriteBorderIcon style={{backgroundColor: changeColor}} onClick={(): void => favItem(item)} />
                 <Button
-                  onPress={() => push(item)}
+                  onPress={(): void => push(item)}
                   title='Notify Me!'
                 />
-              </View>
+              </View>;
             }) :
             <View>
-               <ExitToAppIcon onClick={() => setPage(false)}/>
+              <ExitToAppIcon onClick={(): void => setPage(false)}/>
               <Saved />
             </View>
 
 
         }
-    </View>
+      </View>
     </>
   );
 };
@@ -147,8 +148,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
   title: {
@@ -175,8 +176,8 @@ const styles = StyleSheet.create({
   },
 
   saved: {
-    left:0,
-}
+    left: 0,
+  }
 
 
 });

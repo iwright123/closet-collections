@@ -2,7 +2,7 @@ import { Router } from 'express';
 const Weather = Router();
 import { getWeatherByGeoLocation } from '../helpers/weather';
 
-Weather.post('/', (req, res) => {
+export default Weather.post('/', (req, res) => {
   const { latitude, longitude } = req.body;
 
   getWeatherByGeoLocation(latitude, longitude)
