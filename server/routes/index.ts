@@ -1,7 +1,7 @@
 
 import * as express from 'express';
 const router = express.Router();
-router.get('/chat', (req, res) => {
+export default router.get('/chat', (req, res) => {
   res.send({ response: 'I am alive' }).status(200);
 });
 

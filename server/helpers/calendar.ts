@@ -1,6 +1,6 @@
 import { Calendar } from '../db/db';
 
-export const addFav = async(body: any, user: any) => {
+export const addFav = async(body: any, user: any): void => {
   const { title, subTitle, imgUrl, releaseDate } = body;
   const favItem = await Calendar.create({
     title: title,

@@ -1,5 +1,5 @@
-interface Outfit {
-  imageUrl: string
-}
+// interface Outfit {
+//   imageUrl: string
+// }
 
-export default Outfit;
+// export default Outfit;

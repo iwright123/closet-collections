@@ -47,8 +47,8 @@ const items = [
   }
 ];
 
-export interface Props {
-  items: any;
+const Props = {
+  items
 }
 
 const Calendar: React.FC = () => {

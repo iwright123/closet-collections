@@ -1,16 +1,15 @@
 import { Router } from 'express';
 const CalendarItem = Router();
-import { Calendar } from '../db/db';
 
 import { addFav, getFavs, removeFav } from '../helpers/calendar';
 
-CalendarItem.get('/get', (req: any, res: any) => {
+CalendarItem.get('/get', (req, res) => {
   return getFavs()
     .then((data: any) => res.send(data))
     .catch((err: string) => console.warn(err));
 });
 
-CalendarItem.post('/', (req: any, res: any) => {
+CalendarItem.post('/', (req, res) => {
   return addFav(req.body)
     .then((data: any) => res.send(data))
     .catch((err: string) => console.warn(err));

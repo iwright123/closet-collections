@@ -1,19 +1,19 @@
 import useImage from 'use-image';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, ReactElement } from 'react';
 import { Image as KonvaImage, Group } from 'react-konva';
 import { useHoverDirty, useLongPress } from 'react-use';
 
-const CreateOutfitItems = ({ image, onDelete, onDragEnd }) => {
+const CreateOutfitItems = ({ image, onDelete, onDragEnd }): ReactElement => {
   const imageRef = useRef(null);
   const isHovered = useHoverDirty(imageRef);
   const [stickerImage] = useImage(image.src, 'Anonymous');
   const [deleteImage] = useImage('cancel.svg');
   const [showDeleteButton, setShowDeleteButton] = useState(false);
-  const onLongPress = () => {
+  const onLongPress = (): void => {
     setShowDeleteButton(true);
   };
 
-  image.resetButtonRef.current = () => {
+  image.resetButtonRef.current = (): void => {
     setShowDeleteButton(false);
   };
   const longPressEvent = useLongPress(onLongPress, { delay: 200 });
@@ -39,8 +39,8 @@ const CreateOutfitItems = ({ image, onDelete, onDragEnd }) => {
       draggable
       x={image.x}
       y={image.y}
-      onDragStart={() => setIsDragging(true)}
-      onDragEnd={(event) => {
+      onDragStart={(): void => setIsDragging(true)}
+      onDragEnd={(event): void => {
         setIsDragging(false);
         onDragEnd(event);
       }}

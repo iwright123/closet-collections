@@ -1,7 +1,7 @@
-interface Post {
-  likes: boolean,
-  dislikes: boolean,
-  comments: string
-}
+// interface Post {
+//   likes: boolean,
+//   dislikes: boolean,
+//   comments: string
+// }
 
-export default Post;
+// export default Post;

@@ -1,23 +1,34 @@
-const path = require('path');
-import * as express from 'express';
-const app = require('express')();
-const index = require('./routes/index');
-const port = process.env.PORT || 3000;
-const { GoogleStrategy } = require('./passport.ts');
-const passport = require('passport');
-const session = require('express-session');
 
-const cors = require('cors');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
-const { addUser } = require('./db/db.ts');
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+import path from 'path';
+import * as express from 'express';
+import app from 'express'; /* when i switch import express no longer has a () behind it */
+import index from './routes/index';
+
+import { GoogleStrategy } from './passport.ts';
+import passport from 'passport';
+import session from 'express-session';
+
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import {addUser} from './db/db';
+
+
+
+import * as http from 'http';
+http.createServer(app);
+import * as io from 'socket.io';
+io(http);
+
+
+
+
 ////////////////HELPERS////////////////////
 
 
 
+const port = process.env.PORT || 3000;
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;

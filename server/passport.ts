@@ -1,7 +1,6 @@
 import passport from 'passport';
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-require('dotenv').config();
-
+import GoogleStrategy from 'passport-google-oauth20'
+import dotenv, { config} from 'dotenv'
 // Use the GoogleStrategy within Passport.
 //   Strategies in passport require a `verify` function, which accept
 //   credentials (in this case, a token, tokenSecret, and Google profile), and

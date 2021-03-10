@@ -164,7 +164,7 @@ sequelize.query(`USE \`${database}\`;`);
 //   });
 // };
 
-const addUser = (name: string) => {
+export const addUser = (name: string): void => {
   return Users.findOrCreate({
     username: name,
     where: {
@@ -190,7 +190,7 @@ module.exports = {
   Vote,
   getFits,
   getTrash,
-  addUser
+
 };
 
 // sequelize.sync({ force: true })
