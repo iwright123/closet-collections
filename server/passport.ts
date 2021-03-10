@@ -11,7 +11,7 @@ passport.use(new GoogleStrategy({
   clientSecret: process.env.clientSecret,
   callbackURL: '/auth/google/callback'
 },
-function(accessToken: any, refreshToken: any, profile: any, done: any ) {
+function(accessToken, refreshToken, profile, done) {
   console.info(profile);
   // profile is google profile
   // done is being passed to the callback url under key user

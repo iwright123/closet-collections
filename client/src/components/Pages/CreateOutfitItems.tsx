@@ -1,13 +1,13 @@
-import useImage from "use-image";
-import React, { useState, useEffect, useRef } from "react";
-import { Image as KonvaImage, Group } from "react-konva";
-import { useHoverDirty, useLongPress } from "react-use";
+import useImage from 'use-image';
+import React, { useState, useEffect, useRef } from 'react';
+import { Image as KonvaImage, Group } from 'react-konva';
+import { useHoverDirty, useLongPress } from 'react-use';
 
-  const CreateOutfitItems = ({ image, onDelete, onDragEnd }) => {
+const CreateOutfitItems = ({ image, onDelete, onDragEnd }) => {
   const imageRef = useRef(null);
   const isHovered = useHoverDirty(imageRef);
   const [stickerImage] = useImage(image.src, 'Anonymous');
-  const [deleteImage] = useImage("cancel.svg");
+  const [deleteImage] = useImage('cancel.svg');
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const onLongPress = () => {
     setShowDeleteButton(true);
@@ -67,4 +67,4 @@ import { useHoverDirty, useLongPress } from "react-use";
     </Group>
   );
 };
-export default CreateOutfitItems
+export default CreateOutfitItems;

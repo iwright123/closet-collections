@@ -7,4 +7,3 @@ interface ImageUrl {
 }
 
 export default ImageUrl;
-

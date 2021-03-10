@@ -1,7 +1,7 @@
 import * as React from 'react';
-import AddItems from './AddItems'
+import AddItems from './AddItems';
 import { Tabs, useTabState, Panel } from '@bumaga/tabs';
-import MyOutfit from  '../Pages/MyOutfit'
+import MyOutfit from '../Pages/MyOutfit';
 import CreateOutfitWhiteBoard from './CreateOutfitWhiteBoard';
 
 

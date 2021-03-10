@@ -1,6 +1,8 @@
 import { WhiteboardPost } from '../db/db';
+import Post from '../../client/src/components/models/Post';
 
-export const savePost = async(body: any) => {
+/* eslint-disable-next-line */
+export const savePost = async (body: any): Promise<Post> => {
   const { likes, dislikes, comments } = body;
   const newPost = await WhiteboardPost.create({
     likes: likes,
@@ -10,7 +12,8 @@ export const savePost = async(body: any) => {
   return newPost.save();
 };
 
-export const getAllWhiteboardPosts = () => {
+/* eslint-disable-next-line */
+export const getAllWhiteboardPosts = (): any => {
   return WhiteboardPost.findAll();
 }
 

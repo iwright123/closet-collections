@@ -21,17 +21,17 @@ const Logsout = () => {
   };
 
 
-   return (
+  return (
     <div>
       {
         login === true ?
-        <div>
+          <div>
             <Button onClick={() => logout()}>logout</Button>
-        </div>
-        :
-        <div>
+          </div>
+          :
+          <div>
             <a className='loginButton' href="/auth/google"> <GoogleButton /></a>
-        </div>
+          </div>
       }
 
     </div>

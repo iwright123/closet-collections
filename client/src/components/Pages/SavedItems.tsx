@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
@@ -10,57 +13,57 @@ const Saved = () => {
   const [clickedItem, setClicked] = React.useState([]);
 
   const display = (item) => {
-    setPage(true)
+    setPage(true);
 
-      setClicked([item.title, item.subTitle, item.imgUrl, item.releaseDate])
+    setClicked([item.title, item.subTitle, item.imgUrl, item.releaseDate]);
 
-  }
+  };
 
 
   React.useEffect(() => {
     axios.get('/calendar/get')
       .then(({ data }) => setItems(data))
-      .catch((err) => console.warn(err))
-  }, [])
+      .catch((err) => console.warn(err));
+  }, []);
 
 
-return (
- <>
-  <View style={styles.container}>
-    {
+  return (
+    <>
+      <View style={styles.container}>
+        {
 
-      page === false ?
-        item.map((item, v) => {
-        return <View
-          key={v}>
-            <TouchableOpacity
-             onPress={() => display(item)}>
+          page === false ?
+            item.map((item, v) => {
+              return <View
+                key={v}>
+                <TouchableOpacity
+                  onPress={() => display(item)}>
+                  <Image
+                    style={{width: 185, height: 185, marginVertical: 2, marginLeft: 2}}
+                    source={{uri: item.imgUrl}}
+                  />
+                </TouchableOpacity>
+              </View>;
+            }) :
+            <View style={styles.container}>
+              <ExitToAppIcon onClick={() => setPage(false)}/>
+              {
+                console.log(clickedItem)
+              }
               <Image
-              style={{width: 185, height: 185, marginVertical: 2, marginLeft: 2}}
-              source={{uri: item.imgUrl}}
-            />
-            </TouchableOpacity>
-          </View>
-        }) :
-        <View style={styles.container}>
-         <ExitToAppIcon onClick={() => setPage(false)}/>
-         {
-           console.log(clickedItem)
-         }
-            <Image
                 style={{width: 400, height: 330}}
-               source={{uri: clickedItem[2]}} />
+                source={{uri: clickedItem[2]}} />
               <Text style={styles.itemInfo}>{clickedItem[0]}</Text>
               <Text style={styles.subItemInfo}>{clickedItem[1]}</Text>
               <Text>{clickedItem[3]}</Text>
-        </View>
-      }
+            </View>
+        }
 
-  </View>
- </>
-)
+      </View>
+    </>
+  );
 
-}
+};
 
 
 const styles = StyleSheet.create({
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     flexDirection: 'row',
-    flexWrap: "wrap"
+    flexWrap: 'wrap'
   },
 
   title: {
@@ -94,8 +97,8 @@ const styles = StyleSheet.create({
   },
 
   saved: {
-    left:0,
-}
+    left: 0,
+  }
 
 
 });

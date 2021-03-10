@@ -8,4 +8,4 @@ export const getWeatherByGeoLocation = (latitude, longitude) => {
     .then(({ data }) => data)
     .catch((err) => console.error(err));
 
-}
+};

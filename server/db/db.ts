@@ -179,7 +179,7 @@ const getFits = () => {
 
 const getTrash = () => {
   return WhiteboardPost.findAll();
-}
+};
 
 module.exports = {
   Items,
