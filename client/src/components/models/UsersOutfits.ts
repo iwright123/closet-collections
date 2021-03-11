@@ -1,6 +1,6 @@
-// interface UsersOutfits {
-//   user: string,
-//   imageUrl: string
-// }
+interface UsersOutfits {
+  user: string,
+  imageUrl: string
+}
 
-// export default UsersOutfits;
+export default UsersOutfits;
