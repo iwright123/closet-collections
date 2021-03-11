@@ -1,12 +1,13 @@
 import React, { ReactElement } from 'react';
-import io from 'socket.io-client';
+import {io} from 'socket.io-client';
 import moment from 'moment';
+import Message from '../models/Message';
 // const <input  = require('@material-ui/core<input')
-const socket = io.connect('http://localhost:3000');
+const socket = io('http://localhost:3000');
 const Chat = (): ReactElement => {
-  const [state, setState] = React.useState({message: '', name: ''});
+  const [state, setState] = React.useState<Message>({message: '', name: ''});
   const [chat, setChat] = React.useState([]);
-  React.useEffect(() => {
+  React.useEffect((): void => {
     socket.on('message', ({name, message }) => {
       setChat([...chat, {name, message}]);
     });
@@ -20,17 +21,16 @@ const Chat = (): ReactElement => {
     socket.emit('message', {name, message});
     setState({message: '', name});
   };
-  const renderChat = (): void => {
-    return chat.map((message) =>{
+  const renderChat = (): ReactElement[] => {
+    return chat.map((message: Message): ReactElement => (
       <div>
-
         <h1>
           {message.message}
         </h1>
-      </div>;
-    } );
+      </div>
+    ));
   };
-  const time = moment().format('h:mm a');
+  const time: string = moment().format('h:mm a');
   return (
     <div className="card">
 

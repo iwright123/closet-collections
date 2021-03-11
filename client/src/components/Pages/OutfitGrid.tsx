@@ -1,30 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Button from '@material-ui/core/IconButton';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
-import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
-import { Icon } from '@material-ui/core';
 import MessageIcon from '@material-ui/icons/Message';
 
-//import tileData from './tileData';
-
-interface IPost {
-  userId: number;
-  id?: number;
-  title: string;
-  body: string;
-}
-const defaultProps:IPost[] = [];
-const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }; }) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -47,42 +35,40 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
 }));
 
 
-const OutfitGrid = () => {
+const OutfitGrid = (): ReactElement => {
   const classes = useStyles();
   //   const comment = (data: {}) => {
   // axios.post('/comment', data: {})
   // .then(data: {} => console.log(data))
   // .catch(err: {} => console.log('errror', err))
   //   }
-  const [images, setImages] = React.useState([]);
-  const [likeColor, setLikeColor] = React.useState(false);
-  const [dislikeColor, setDislikeColor] = React.useState(false);
+  const [images, setImages] = useState([]);
+  const [likeColor, setLikeColor] = useState(false);
+  const [dislikeColor, setDislikeColor] = useState(false);
 
   const colorChange = { color: 'yellow'};
   const colorChange2 = { color: 'red'};
+  useEffect(() => {
+    axios.get('/outfit')
+      .then(({ data }) => setImages(data))
+      .catch((err) => console.warn(err));
+  }, []);
 
-const handleLikeClick = (e) => {
-
-  axios.patch('/whiteboardpost')
-    .then(({data}) => console.log("Updated like!"))
-    .catch((err) => console.warn(err));
-
-  setLikeColor(!likeColor);
-}
-
-const handleDislikeClick = () => {
-  setDislikeColor(!dislikeColor);
-}
-useEffect(() => {
-  axios.get('/outfit')
-    .then(({ data }) => setImages(data))
-    .catch((err) => console.warn(err))
-}, []);
-  const handleLikeClick = (e) => {
+  const handleLikeClick = (input: number): void => {
+    axios.patch('/whiteboardpost')
+      .then(({data}) => console.log('Updated like!', data, input))
+      .catch((err) => console.warn(err));
     setLikeColor(!likeColor);
   };
 
-  const handleDislikeClick = () => {
+  // const handleDislikeClick = () => {
+  //   setDislikeColor(!dislikeColor);
+  // };
+  // const handleLikeClick = (e) => {
+  //   setLikeColor(!likeColor);
+  // };
+
+  const handleDislikeClick = (): void => {
     setDislikeColor(!dislikeColor);
   };
 
@@ -117,7 +103,7 @@ useEffect(() => {
                  />
               </Button> */}
                   <Button
-                    onClick={(() => handleLikeClick(i))}
+                    onClick={((): void => handleLikeClick(i))}
                     style={likeColor ? colorChange : null}
                   >
                     <ThumbUpIcon

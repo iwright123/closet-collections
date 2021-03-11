@@ -9,9 +9,3 @@ export default Weather.post('/', (req, res) => {
     .then((data: any) => res.json(data))
     .catch((err: any) => console.warn(err));
 });
-
-module.exports = {
-  Weather,
-};
-
-

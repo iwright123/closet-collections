@@ -57,7 +57,7 @@ const MyOutfit = (): ReactElement => {
         <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
           <ListSubheader component="div"></ListSubheader>
         </GridListTile>
-        {images.map((tile: ImageUrl) => (
+        {images.map((tile: UsersOutfits) => (
           <GridListTile key={tile.imageUrl}>
             <Zoom>
               <img src={tile.imageUrl} />

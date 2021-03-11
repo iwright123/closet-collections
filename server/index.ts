@@ -86,14 +86,16 @@ app.get('/whiteboardpost', (req, res) => {
 });
 
 app.patch('/whiteboardpost', (req: any, res: any) => {
-  updateLike(req.like)
+  console.log("Line 89",req)
+;  updateLike(req.like)
     .then((data: any) => res.json(data))
     .catch((err: any) => console.warn(err));
 })
+
 app.post('/items', (req: any, res: any) => {
    addItem(req.body)
     .then((data: any) => res.json(data))
-    .catch((err: any) => console.warn('HERE ERROR', err));
+    .catch((err: any) => console.warn('HERE ERROR', err))});
 
 app.post('/whiteboardpost', (req, res) => {
   savePost(req.body)
@@ -114,14 +116,15 @@ app.delete('/outfit/:id', (req, res) => {
 });
 /************************************* */
 
-import CalendarItem from './routes/calender';
+import { getFavorite, addFavorite, removeFavorite} from './routes/calender';
 import Weather from './api/weather';
 import Location from './api/geolocation';
 
-app.use('/calendar', CalendarItem);
 app.use('/api/weather', Weather);
 app.use('/api/location', Location);
-
+app.use('/calendar', addFavorite);
+app.use('/calendar', getFavorite);
+app.use('/calendar', removeFavorite);
 
 /////////GOOGLE AUTH ///////////
 app.use(
