@@ -4,7 +4,7 @@ import axios from 'axios';
 import GoogleButton from 'react-google-button';
 import { Button } from '@material-ui/core';
 
-const Logs = () => {
+const Logs = (): React.ReactElement => {
   const [login, setLogin] = React.useState(false);
 
   React.useEffect(() => {
@@ -14,7 +14,7 @@ const Logs = () => {
   }, []);
 
 
-  const logout = () => {
+  const logout = (): void => {
     axios.delete('/logout')
       .then(({ data }) => setLogin(data))
       .catch(err => console.warn(err));
@@ -30,7 +30,7 @@ const Logs = () => {
           </div>
           :
           <div>
-            <Button onClick={() => logout()}>logout</Button>
+            <Button onClick={(): void => logout()}>logout</Button>
           </div>
       }
     </div>

@@ -1,6 +1,6 @@
-const axios = require('axios');
+import axios from 'axios';
 
-export const getGeolocationByIP = (userIP) => {
+export const getGeolocationByIP = (userIP: number): unknown => {
 
   const url = `http://api.ipstack.com/${userIP}?access_key=${process.env.access_key}`;
 

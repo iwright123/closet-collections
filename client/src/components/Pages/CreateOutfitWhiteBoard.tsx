@@ -7,15 +7,15 @@ import axios from 'axios';
 import $ from 'jquery';
 
 
-const CreateOutfitWhiteBoard = () => {
+const CreateOutfitWhiteBoard = (): ReactElement => {
 
   const [images, setImages] = useState([]);
   const [outfits, getOutfits] = useState([]);
   const stageRef = React.useRef<any>();
   const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/geonovember/upload';
 
-  const handleExportClick = async() => {
-    const baseUrl = stageRef.current!.getStage().toDataURL({ mimeType: 'image/png', quality: 1 });
+  const handleExportClick = async(): Promise<void> => {
+    const baseUrl = stageRef.current?.getStage().toDataURL({ mimeType: 'image/png', quality: 1 });
     await setImages([]);
     const data = {
       'file': baseUrl,
@@ -36,7 +36,7 @@ const CreateOutfitWhiteBoard = () => {
   };
 
 
-  const addStickerToPanel = ({ src, width, x, y }) => {
+  const addStickerToPanel = ({ src, width, x, y }): void => {
     setImages((currentImages) => [
       ...currentImages,
       {
@@ -75,12 +75,12 @@ const CreateOutfitWhiteBoard = () => {
             $('img').attr('crossOrigin', 'anonymous');
             return (
               <CreateOutfitItems
-                onDelete={() => {
+                onDelete={(): void => {
                   const newImages = [...images];
                   newImages.splice(i, 1);
                   setImages(newImages);
                 }}
-                onDragEnd={(event) => {
+                onDragEnd={(event): void => {
                   image.x = event.target.x();
                   image.y = event.target.y();
                 }}
@@ -98,7 +98,7 @@ const CreateOutfitWhiteBoard = () => {
             <button
               key={i}
               className="button"
-              onMouseDown={() => {
+              onMouseDown={(): void => {
                 addStickerToPanel({
                   src: outfit.imageUrl,
                   width: 75,
