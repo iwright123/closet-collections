@@ -1,8 +1,8 @@
 import { WhiteboardPost } from '../db/db';
-import Post from '../../client/src/components/models/Post';
+
 
 /* eslint-disable-next-line */
-export const savePost = async (body: any): Promise<Post> => {
+export const savePost = async (body: any) => {
   const { likes, dislikes, comments } = body;
   const newPost = await WhiteboardPost.create({
     likes: likes,

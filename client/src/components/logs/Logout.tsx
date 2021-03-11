@@ -2,9 +2,8 @@ import * as React from 'react';
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
 import { Button } from '@material-ui/core';
-import { Redirect } from 'react-router-dom';
 
-const Logsout = () => {
+const Logsout = (): React.ReactElement => {
   const [login, setLogin] = React.useState(false);
 
   React.useEffect(() => {
@@ -14,7 +13,7 @@ const Logsout = () => {
   }, []);
 
 
-  const logout = () => {
+  const logout = ():void => {
     axios.delete('/logout')
       .then(({ data }) => setLogin(data))
       .catch(err => console.warn(err));
@@ -26,7 +25,7 @@ const Logsout = () => {
       {
         login === true ?
           <div>
-            <Button onClick={() => logout()}>logout</Button>
+            <Button onClick={():void => logout()}>logout</Button>
           </div>
           :
           <div>

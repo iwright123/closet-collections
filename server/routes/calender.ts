@@ -9,7 +9,7 @@ export default CalendarItem.get('/get', (req, res) => {
     .catch((err) => console.warn(err));
 });
 
- CalendarItem.post('/', (req, res) => {
+CalendarItem.post('/', (req, res) => {
   return addFav(req.body, req.cookies.thesis)
     .then((data) => res.send(data))
     .catch((err) => console.warn(err));

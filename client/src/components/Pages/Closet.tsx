@@ -5,9 +5,9 @@ import MyOutfit from '../Pages/MyOutfit';
 import CreateOutfitWhiteBoard from './CreateOutfitWhiteBoard';
 
 
-const cn = (...args) => args.filter(Boolean).join(' ');
+const cn = (...args): void => args.filter(Boolean).join(' ');
 
-const ClosetTab = ({ children }) => {
+const ClosetTab = ({ children }): any => {
   const { isActive, onClick } = useTabState();
 
   return (
@@ -17,7 +17,7 @@ const ClosetTab = ({ children }) => {
   );
 };
 
-export default () => (
+export default (): any => (
   <Tabs>
     <div className='tabs'>
       <div className='tab-list'>

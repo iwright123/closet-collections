@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
 }));
 
 
-const OutfitGrid = () => {
+const OutfitGrid = (): any => {
   const classes = useStyles();
   //   const comment = (data: {}) => {
   // axios.post('/comment', data: {})
@@ -61,11 +61,11 @@ const OutfitGrid = () => {
   const colorChange = { color: 'yellow'};
   const colorChange2 = { color: 'red'};
 
-  const handleLikeClick = (e) => {
+  const handleLikeClick = (e): void => {
     setLikeColor(!likeColor);
   };
 
-  const handleDislikeClick = () => {
+  const handleDislikeClick = (): void => {
     setDislikeColor(!dislikeColor);
   };
 
@@ -100,7 +100,7 @@ const OutfitGrid = () => {
                  />
               </Button> */}
                   <Button
-                    onClick={(() => handleLikeClick(i))}
+                    onClick={((): void => handleLikeClick(i))}
                     style={likeColor ? colorChange : null}
                   >
                     <ThumbUpIcon

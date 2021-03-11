@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Calendar } from '../db/db';
 
-export const addFav = async(body: any, user: any) => {
+export const addFav = async(body: unknown, user: unknown) => {
   const { title, subTitle, imgUrl, releaseDate } = body;
   const favItem = await Calendar.create({
     user: user,
@@ -12,13 +14,13 @@ export const addFav = async(body: any, user: any) => {
   return favItem.save();
 };
 
-export const getFavs = (user) => {
+export const getFavs = (user: number): void => {
   return Calendar.findAll({
     where: {user: user}
   });
 };
 
-export const removeFav = (body: any) => {
+export const removeFav = (body: unknown): unknown => {
   const { id } = body;
   return Calendar.destroy({
     where: {
