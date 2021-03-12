@@ -71,11 +71,11 @@ export const WhiteboardPost = sequelize.define('WhiteboardPost', {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-  likes: {
-    type: DataTypes.BOOLEAN,
-    allowNull: true,
+  user: {
+    type: DataTypes.STRING,
+    allowNull: false
   },
-  dislikes: {
+  likes: {
     type: DataTypes.BOOLEAN,
     allowNull: true,
   },

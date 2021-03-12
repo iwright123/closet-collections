@@ -13,9 +13,27 @@ export const savePost = async (body: any) => {
 export const getAllWhiteboardPosts = (): any => {
   return WhiteboardPost.findAll();
 };
-//count liked posts
-// export const countLikes = WhiteboardPost.findAll({
-//   attributes: {
-//     include: [[Sequelize.fn("COUNT", Sequelize.col("whiteboardpost.outfitid")), "sensorCount"]]
-//   }
-// })
+
+export const addFavOutfit = async(body: {
+  idUser: number,
+  likes: boolean,
+  comments: string
+}, user: unknown): Promise<any> => {
+  const idUser = body.idUser;
+  const likes = body.likes;
+  const comments = body.comments;
+
+  const favOutfit = await WhiteboardPost.create({
+    user: user,
+    likes: likes,
+    comments: comments,
+    idUser: idUser
+  });
+  return favOutfit.save();
+};
+
+export const getFavOutfit = (user: number): Promise<any> => {
+  return WhiteboardPost.findAll({
+    where: {user: user}
+  });
+};

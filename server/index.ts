@@ -51,7 +51,7 @@ dotenv.config();
 
 import { addItem, getAllItems, deleteItem } from './helpers/Item';
 
-import { getAllWhiteboardPosts, savePost} from './helpers/WhiteBoardPost';
+import { getAllWhiteboardPosts, savePost, addFavOutfit, getFavOutfit} from './helpers/WhiteBoardPost';
 import { saveOutfit, getAllOutfits, deleteOutfit, getUserOutfits } from './helpers/Outfit';
 
 import Find from './api/findastore';
@@ -129,14 +129,15 @@ app.delete('/outfit/:id', (req: express.Request, res: express.Response): Promise
 });
 /************************************* */
 
-import { getFavorite, addFavorite, removeFavorite} from './routes/calender';
+import CalendarItem from './routes/calender';
 import Weather from './api/weather';
 import Location from './api/geolocation';
+import WhiteboardPost from './routes/whiteboardposts';
 
-// app.use('/calendar', CalendarItem);
+app.use('/calendar', CalendarItem);
 app.use('/api/weather', Weather);
 app.use('/api/location', Location);
-
+app.use('/whiteboardpost', WhiteboardPost);
 /////////GOOGLE AUTH ///////////
 app.use(
   session({

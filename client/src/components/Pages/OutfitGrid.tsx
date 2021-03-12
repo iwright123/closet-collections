@@ -7,10 +7,12 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import Button from '@material-ui/core/IconButton';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import axios from 'axios';
 import MessageIcon from '@material-ui/icons/Message';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import SavedOutfits from '../Pages/SavedOutfits';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
-    color: 'white'
+    color: 'black'
   },
   gridList: {
     width: 1000,
@@ -43,22 +45,36 @@ const OutfitGrid = (): ReactElement => {
   // .catch(err: {} => console.log('errror', err))
   //   }
   const [images, setImages] = useState([]);
-  const [likeColor, setLikeColor] = useState(false);
-  const [dislikeColor, setDislikeColor] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [favOutfits, setFavOutfits] = useState([]);
+  const [page, setPage] = useState(false);
+  //const [dislikeColor, setDislikeColor] = useState(false);
 
-  const colorChange = { color: 'yellow'};
-  const colorChange2 = { color: 'red'};
+  const colorChange = { color: 'red'};
+  //const colorChange2 = { color: 'red'};
   useEffect(() => {
     axios.get('/outfit')
       .then(({ data }) => setImages(data))
       .catch((err) => console.warn(err));
   }, []);
 
-  const handleLikeClick = (input: number): void => {
-    axios.patch('/whiteboardpost')
-      .then(({data}) => console.log('Updated like!', data, input))
-      .catch((err) => console.warn(err));
-    setLikeColor(!likeColor);
+  // const handleLikeClick = (input: number): void => {
+  //   setLikeColor(!likeColor);
+  // };
+  const changeColor = liked ? 'red' : 'white';
+
+  const favOutfit = (item): void => {
+    setLiked(true);
+    setFavOutfits([item.idUser, item.likes, item.comments]);
+    const data = {
+      idUser: item.idUser,
+      likes: item.likes,
+      comments: item.comments
+    };
+
+    axios.post('/whiteboardpost', data)
+      .then((data: any) => console.log('Success', data))
+      .catch((err: string) => console.warn('Error', err));
   };
 
   // const handleDislikeClick = () => {
@@ -68,9 +84,9 @@ const OutfitGrid = (): ReactElement => {
   //   setLikeColor(!likeColor);
   // };
 
-  const handleDislikeClick = (): void => {
-    setDislikeColor(!dislikeColor);
-  };
+  // const handleDislikeClick = (): void => {
+  //   setDislikeColor(!dislikeColor);
+  // };
 
   useEffect(() => {
     axios.get('/outfit')
@@ -78,65 +94,78 @@ const OutfitGrid = (): ReactElement => {
       .catch((err) => console.warn(err));
   }, []);
 
-  return (<div className={classes.root}>
-    <h1>Outfits</h1>
+  return (
+    <div className={classes.root}>
+      <View>
+        <Text>
+          <h1>Outfits</h1>
+        </Text>
+        <TouchableOpacity onPress={(): void => setPage(true)}>
+          <Text>
+          Fav Outfits
+          </Text>
+        </TouchableOpacity>
+        <GridList cellHeight={300} spacing={10} className={classes.gridList}>
+          <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+            <ListSubheader component="div"></ListSubheader>
+          </GridListTile>
 
-    <GridList cellHeight={300} spacing={10} className={classes.gridList}>
-      <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-        <ListSubheader component="div"></ListSubheader>
-      </GridListTile>
-      {
-        images.map((tile, i) => (
-
-          <GridListTile key={i}>
-            <Zoom>
-              <img src={tile.imageUrl} />
-            </Zoom>
-            <GridListTileBar
-              title={tile.title}
-              actionIcon={
-                <>
-                  {/* <Button>
+          {
+            page === false ?
+              images.map((tile, i) => {
+                return <View key={i}>
+                  <GridListTile key={i}>
+                    <Zoom>
+                      <img src={tile.imageUrl} />
+                    </Zoom>
+                    <GridListTileBar
+                      title={tile.title}
+                      actionIcon={
+                        <>
+                          {/* <Button>
                 <DeleteIcon
                 className="buttonIcon"
                 style={{ fontSize: 15 }}
                  />
               </Button> */}
-                  <Button
-                    onClick={((): void => handleLikeClick(i))}
-                    style={likeColor ? colorChange : null}
-                  >
-                    <ThumbUpIcon
-                      className="buttonIcon"
-                      style={{ fontSize: 15}}
 
-                    />
-                  </Button>
-                  <Button
+                          <FavoriteIcon
+                            className="buttonIcon"
+                            style={{ fontSize: 15, backgroundColor: changeColor}}
+                            onClick={(): void => favOutfit(tile)}
+                          />
+
+                          {/* <Button
                     onClick={handleDislikeClick}
                     style={dislikeColor ? colorChange2 : null}
-                  >
+                    >
                     <ThumbDownIcon
-                      className="buttonIcon"
-                      style={{ fontSize: 15 }}
+                    className="buttonIcon"
+                    style={{ fontSize: 15 }}
                     />
-                  </Button>
-                  <Button>
-                    <MessageIcon
-                      className="buttonIcon"
-                      style={{ fontSize: 15 }}
+                  </Button> */}
+                          <Button>
+                            <MessageIcon
+                              className="buttonIcon"
+                              style={{ fontSize: 15 }}
+                            />
+                          </Button>
+                        </>
+                      }
+                      key={String(i)}
                     />
-                  </Button>
-                </>
-              }
-              key={String(i)}
-            />
-          </GridListTile>
+                  </GridListTile>
+                </View>;
 
-        ))}
-    </GridList>
-
-  </div>
+              }) :
+              <View>
+                <ExitToAppIcon onClick={(): void => setPage(false)}/>
+                <SavedOutfits />
+              </View>
+          }
+        </GridList>
+      </View>
+    </div>
   );
 };
 
