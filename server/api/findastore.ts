@@ -1,6 +1,6 @@
 import Router from 'express';
 const Find = Router();
-import { findAStore } from '../helpers/findAStore';
+import { findAStore } from '../helpers/FindAStore';
 
 export default Find.get('/:keyword', (req, res) => {
   const { keyword } = req.params;
