@@ -1,6 +1,4 @@
 import { WhiteboardPost } from '../db/db';
-
-
 /* eslint-disable-next-line */
 export const savePost = async (body: any) => {
   const { likes, dislikes, comments } = body;
@@ -11,18 +9,9 @@ export const savePost = async (body: any) => {
   });
   return newPost.save();
 };
-
 /* eslint-disable-next-line */
 export const getAllWhiteboardPosts = (): any => {
   return WhiteboardPost.findAll();
-};
-
-export const updateLike = (body: any):any => {
-  const { likes } = body;
-  console.log('line 20', body);
-  return WhiteboardPost.findOneAndUpdate({
-    likes: likes
-  });
 };
 //count liked posts
 // export const countLikes = WhiteboardPost.findAll({

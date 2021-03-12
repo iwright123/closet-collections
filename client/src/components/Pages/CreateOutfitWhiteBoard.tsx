@@ -1,4 +1,4 @@
-import React, { createRef, useState, useEffect, useCallback } from 'react';
+import React, { createRef, useState, useEffect, useCallback, ReactElement } from 'react';
 import './styles.css';
 import { Image as KonvaImage, Layer, Stage, Transformer } from 'react-konva';
 import useImage from 'use-image';

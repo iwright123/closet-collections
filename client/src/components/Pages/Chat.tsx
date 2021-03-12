@@ -33,9 +33,7 @@ const Chat = (): ReactElement => {
   const time: string = moment().format('h:mm a');
   return (
     <div className="card">
-
       <form onSubmit={onMessageSubmit}>
-
         <h1>Messenger</h1>
         <div className="name-field">
         </div>

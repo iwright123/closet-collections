@@ -5,7 +5,7 @@ import MyOutfit from '../Pages/MyOutfit';
 import CreateOutfitWhiteBoard from './CreateOutfitWhiteBoard';
 
 
-const cn = (...args): void => args.filter(Boolean).join(' ');
+const cn = (...args): any => args.filter(Boolean).join(' ');
 
 const ClosetTab = ({ children }): any => {
   const { isActive, onClick } = useTabState();

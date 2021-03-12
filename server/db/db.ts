@@ -1,86 +1,86 @@
-import Sequelize from 'sequelize';
+import { DataTypes, Sequelize } from 'sequelize';
 import mysql from 'mysql2';
 
-const sequelize: any = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllqetkd', 'vnG2q19b3wbaZXBhVjLY', {
+const sequelize: Sequelize = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllqetkd', 'vnG2q19b3wbaZXBhVjLY', {
   host: 'bao0spze4uyjnrjcstlm-mysql.services.clever-cloud.com',
   dialect: 'mysql'
 });
 
 const Users = sequelize.define('Users', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
   },
 
   username: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   }
 });
 
 export const Items = sequelize.define('Items', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
     allowNull: false,
   },
   clothingType: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     unique: false
   },
   description: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     unique: false
   },
   price: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     unique: false
   },
   imageUrl: {
-    type: Sequelize.STRING(1000),
+    type: DataTypes.STRING(1000),
     unique: true
   }
 });
 
 export const Outfit = sequelize.define('Outfit', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
   },
   user: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   },
 
   outfitTitle: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     unique: true
   },
   imageUrl: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
   }
 });
 
 export const WhiteboardPost = sequelize.define('WhiteboardPost', {
   idUser: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
   likes: {
-    type: Sequelize.BOOLEAN,
+    type: DataTypes.BOOLEAN,
     allowNull: true,
   },
   dislikes: {
-    type: Sequelize.BOOLEAN,
+    type: DataTypes.BOOLEAN,
     allowNull: true,
   },
   comments: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     unique: true
   },
 });
@@ -90,47 +90,47 @@ WhiteboardPost.belongsTo(Outfit);
 
 export const Calendar = sequelize.define('Calendar', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
   },
 
   user: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   },
 
   title: {
-    type: Sequelize.STRING
+    type: DataTypes.STRING
   },
 
   subTitle: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
   },
 
   imgUrl: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
   },
 
   releaseDate: {
-    type: Sequelize.STRING
+    type: DataTypes.STRING
   }
 });
 
 const Vote = sequelize.define('Vote', {
   idUser: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true
   },
   idPost: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true
   },
   type: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
   },
 
 });
@@ -164,8 +164,8 @@ sequelize.query(`USE \`${database}\`;`);
 //   });
 // };
 
-export const addUser = (name: string): void => {
-  return Users.findOrCreate({
+export const addUser = (name: string): Promise<any> => {
+  return Users.create({
     username: name,
     where: {
       username: name
@@ -173,11 +173,11 @@ export const addUser = (name: string): void => {
   });
 };
 
-const getFits = (): void => {
+const getFits = (): Promise<any> => {
   return WhiteboardPost.findAll();
 };
 
-const getTrash = (): void => {
+const getTrash = (): Promise<any> => {
   return WhiteboardPost.findAll();
 };
 
