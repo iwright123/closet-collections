@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import Router from 'express';
 const Weather = Router();
 import { getWeatherByGeoLocation } from '../helpers/weather';
 
@@ -10,8 +10,8 @@ export default Weather.post('/', (req, res) => {
     .catch((err: any) => console.warn(err));
 });
 
-module.exports = {
-  Weather,
-};
+// module.exports = {
+//   Weather,
+// };
 
 

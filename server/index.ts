@@ -4,7 +4,8 @@ import express from 'express';
 const app = express();
 import index from './routes/index';
 import { Request, Response} from 'express';
-// import { GoogleStrategy } from './passport';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { GoogleStrategy } = require('./passport');
 import passport from 'passport';
 import session from 'express-session';
 
@@ -12,7 +13,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import {addUser} from './db/db';
+import { addUser } from './db/db';
 import { Twilio } from 'twilio';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
@@ -130,9 +131,9 @@ import CalendarItem from './routes/calender';
 import Weather from './api/weather';
 import Location from './api/geolocation';
 
-// app.use('/calendar', CalendarItem);
-// app.use('/api/weather', Weather);
-// app.use('/api/location', Location);
+app.use('/calendar', CalendarItem);
+app.use('/api/weather', Weather);
+app.use('/api/location', Location);
 
 
 /////////GOOGLE AUTH ///////////
