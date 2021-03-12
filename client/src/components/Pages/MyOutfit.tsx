@@ -5,16 +5,9 @@ import GridListTile from '@material-ui/core/GridListTile';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import axios from 'axios';
-import UsersOutfits from '../models/UsersOutfits';
-import ImageUrl from '../models/ImageUrl';
 import ListSubheader from '@material-ui/core/ListSubheader';
-interface IPost {
-  userId: number;
-  id?: number;
-  title: string;
-  body: string;
-}
-const defaultProps:IPost[] = [];
+import UsersOutfits from '../models/UsersOutfits';
+
 const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }; }) => ({
   root: {
     display: 'flex',
@@ -57,7 +50,7 @@ const MyOutfit = (): ReactElement => {
         <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
           <ListSubheader component="div"></ListSubheader>
         </GridListTile>
-        {images.map((tile: ImageUrl) => (
+        {images.map((tile: UsersOutfits) => (
           <GridListTile key={tile.imageUrl}>
             <Zoom>
               <img src={tile.imageUrl} />

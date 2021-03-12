@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './Pages/Home';
 import Chat from './Pages/Chat';
 import Closet from './Pages/Closet';
-import Calendar, { Props } from './Calendar';
+import Calendar from './Calendar';
 import OutfitGrid from './Pages/OutfitGrid';
 import FindAStore from './Pages/FindAStore';
 // import GoogleButton from 'react-google-button';
@@ -15,7 +15,7 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import MyOutfit from '../components/Pages/MyOutfit';
 const { height } = Dimensions.get('screen');
 import axios from 'axios';
-const App = (): ReactElement<Props> => {
+const App = (): ReactElement => {
 
   const [login, setLogin] = React.useState(false);
 

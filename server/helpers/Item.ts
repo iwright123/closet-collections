@@ -1,6 +1,6 @@
 import { Items } from '../db/db';
 
-export const addItem = async(body: any): unknown => {
+export const addItem = async(body: any): Promise<any> => {
   const { clothingType, description, price, imageUrl } = body;
   const newItem = await Items.create({
     clothingType: clothingType,
@@ -11,11 +11,11 @@ export const addItem = async(body: any): unknown => {
   return newItem.save();
 };
 
-export const getAllItems = (): void => {
+export const getAllItems = (): Promise<any> => {
   return Items.findAll();
 };
 
-export const deleteItem = (body: any): void => {
+export const deleteItem = (body: any): Promise<any> => {
   const { id } = body;
   return Items.destroy({
     where: {

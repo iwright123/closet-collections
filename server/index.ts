@@ -13,14 +13,16 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import {addUser} from './db/db';
-
+import { Twilio } from 'twilio';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
-import usersOutfit from '../client/src/components/models/UsersOutfits'
+import usersOutfit from '../client/src/components/models/UsersOutfits';
 const httpServer = createServer();
 
 
-
+dotenv.config({
+  path: path.resolve(__dirname, '../.env'),
+});
 
 
 const io = new Server(httpServer, {
@@ -35,11 +37,12 @@ const port = process.env.PORT || 3000;
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-import client from 'twilio';
-client(accountSid, authToken);
-import MessagingResponse = require('twilio');
-import { twiml } from 'twilio';
-twiml.MessagingResponse;
+const client = new Twilio(accountSid, authToken);
+// import client from 'twilio';
+// client(accountSid, authToken);
+// import MessagingResponse = require('twilio');
+// import { twiml } from 'twilio';
+// twiml.MessagingResponse;
 
 
 dotenv.config();
@@ -79,45 +82,45 @@ app.get('/outfit', (req: Request, res: Response): Promise<any> => {
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });
-app.post('/outfit', (req: Request, res: Response): Promise<any> => {
-  saveOutfit(req.body, req.cookies.thesis)
+app.post('/outfit', (req: Request, res: any): Promise<unknown> => {
+  return saveOutfit(req.body, req.cookies.thesis)
     .then((data) => console.log('Outfit created', data))
     .catch((err) => console.warn(err));
 });
 
 app.get('/items', (req: Request, res: Response) => {
-  getAllItems()
+  return getAllItems()
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });
 
-app.get('/whiteboardpost', (req: Request, res: Response) => {
-  getAllWhiteboardPosts()
+app.get('/whiteboardpost', (req: Request, res: Response): Promise<any> => {
+  return getAllWhiteboardPosts()
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });
 
-app.post('/items', (req: Request, res: Response) => {
-  addItem(req.body)
+app.post('/items', (req: Request, res: Response): Promise<any> => {
+  return addItem(req.body)
     .then((data) => res.json(data))
     .catch((err) => console.warn('HERE ERROR', err));
 
 });
 
-app.post('/whiteboardpost', (req: Request, res: Response) => {
-  savePost(req.body)
+app.post('/whiteboardpost', (req: Request, res: Response): Promise<any> => {
+  return savePost(req.body)
     .then((data) => console.log('Success!', data))
     .catch((err) => console.error(err));
 });
 
-app.delete('/items/:id', (req: Request, res: Response) => {
-  deleteItem(req.params)
+app.delete('/items/:id', (req: Request, res: Response): Promise<any> => {
+  return deleteItem(req.params)
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });
 
-app.delete('/outfit/:id', (req: Request, res: Response) => {
-  deleteOutfit(req.params)
+app.delete('/outfit/:id', (req: express.Request, res: express.Response): Promise<any> => {
+  return deleteOutfit(req.params)
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });
@@ -127,9 +130,9 @@ import CalendarItem from './routes/calender';
 import Weather from './api/weather';
 import Location from './api/geolocation';
 
-app.use('/calendar', CalendarItem);
-app.use('/api/weather', Weather);
-app.use('/api/location', Location);
+// app.use('/calendar', CalendarItem);
+// app.use('/api/weather', Weather);
+// app.use('/api/location', Location);
 
 
 /////////GOOGLE AUTH ///////////
@@ -153,7 +156,7 @@ app.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }), (req: Request, res: Response) => {
+  passport.authenticate('google', { failureRedirect: '/login' }), (req: any, res: Response) => {
 
     const { displayName } = req.user;
     // setting cookie key to thesis and saving the username
@@ -181,16 +184,16 @@ app.delete('/logout', (req: Request, res: Response) => {
 
 /////////Twilio//////////
 // app.post('/sms', (req, res) => {
-//   const { body } = req.body
-//   console.log('text?>', body)
-// client.messages.create({
-//    body: body,
-//    from: '+15042852518',
-//    to: '+15047235163'
-//  })
-// .then((message: any) => console.log('message sid', message.sid))
-// .catch((err: any) => console.warn('twilio error', err))
-// })
+//   const { body } = req.body;
+//   console.log('text?>', body);
+//   client.messages.create({
+//     body: body,
+//     from: '+15042852518',
+//     to: '+15047235163'
+//   })
+//     .then((message: any) => console.log('message sid', message.sid))
+//     .catch((err: any) => console.warn('twilio error', err));
+// });
 /////////Twilio//////////
 
 
@@ -210,7 +213,7 @@ io.on('connection', (socket: Socket) => {
 
 
 
-httpServer.listen(port, () => {
+app.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
 
