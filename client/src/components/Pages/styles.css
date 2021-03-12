@@ -136,9 +136,7 @@ label {
 .footer-text {
   font-family: 'Roboto Slab', serif;
 }
-a :hover {
-  background-color: aqua;
-}
+
 .card {
   display: grid;
   grid-template-columns: 1fr 1fr;
