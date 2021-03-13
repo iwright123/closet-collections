@@ -15,19 +15,19 @@ export const getAllWhiteboardPosts = (): any => {
 };
 
 export const addFavOutfit = async(body: {
-  idUser: number,
+  id: number,
   likes: boolean,
   comments: string
 }, user: unknown): Promise<any> => {
-  const idUser = body.idUser;
+  const id = body.id;
   const likes = body.likes;
   const comments = body.comments;
 
   const favOutfit = await WhiteboardPost.create({
+    id: id,
     user: user,
     likes: likes,
     comments: comments,
-    idUser: idUser
   });
   return favOutfit.save();
 };

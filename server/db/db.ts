@@ -67,13 +67,15 @@ export const Outfit = sequelize.define('Outfit', {
 });
 
 export const WhiteboardPost = sequelize.define('WhiteboardPost', {
-  idUser: {
+  id: {
     type: DataTypes.INTEGER,
-    allowNull: true,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
   },
   user: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   likes: {
     type: DataTypes.BOOLEAN,

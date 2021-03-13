@@ -105,37 +105,38 @@ const OutfitGrid = (): ReactElement => {
           Fav Outfits
           </Text>
         </TouchableOpacity>
-        <GridList cellHeight={300} spacing={10} className={classes.gridList}>
-          <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-            <ListSubheader component="div"></ListSubheader>
-          </GridListTile>
+        <div>
+          <GridList cellHeight={300} spacing={10} className={classes.gridList}>
+            <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+              <ListSubheader component="div"></ListSubheader>
+            </GridListTile>
 
-          {
-            page === false ?
-              images.map((tile, i) => {
-                return <View key={i}>
-                  <GridListTile key={i}>
-                    <Zoom>
-                      <img src={tile.imageUrl} />
-                    </Zoom>
-                    <GridListTileBar
-                      title={tile.title}
-                      actionIcon={
-                        <>
-                          {/* <Button>
+            {
+              page === false ?
+                images.map((tile, i) => {
+                  return <View key={i}>
+                    <GridListTile key={i}>
+                      <Zoom>
+                        <img src={tile.imageUrl} />
+                      </Zoom>
+                      <GridListTileBar
+                        title={tile.title}
+                        actionIcon={
+                          <>
+                            {/* <Button>
                 <DeleteIcon
                 className="buttonIcon"
                 style={{ fontSize: 15 }}
                  />
               </Button> */}
 
-                          <FavoriteIcon
-                            className="buttonIcon"
-                            style={{ fontSize: 15, backgroundColor: changeColor}}
-                            onClick={(): void => favOutfit(tile)}
-                          />
+                            <FavoriteIcon
+                              className="buttonIcon"
+                              style={{ fontSize: 15, color: changeColor}}
+                              onClick={(): void => favOutfit(tile)}
+                            />
 
-                          {/* <Button
+                            {/* <Button
                     onClick={handleDislikeClick}
                     style={dislikeColor ? colorChange2 : null}
                     >
@@ -144,26 +145,27 @@ const OutfitGrid = (): ReactElement => {
                     style={{ fontSize: 15 }}
                     />
                   </Button> */}
-                          <Button>
-                            <MessageIcon
-                              className="buttonIcon"
-                              style={{ fontSize: 15 }}
-                            />
-                          </Button>
-                        </>
-                      }
-                      key={String(i)}
-                    />
-                  </GridListTile>
-                </View>;
+                            <Button>
+                              <MessageIcon
+                                className="buttonIcon"
+                                style={{ fontSize: 15 }}
+                              />
+                            </Button>
+                          </>
+                        }
+                        key={String(i)}
+                      />
+                    </GridListTile>
+                  </View>;
 
-              }) :
-              <View>
-                <ExitToAppIcon onClick={(): void => setPage(false)}/>
-                <SavedOutfits />
-              </View>
-          }
-        </GridList>
+                }) :
+                <View>
+                  <ExitToAppIcon onClick={(): void => setPage(false)}/>
+                  <SavedOutfits />
+                </View>
+            }
+          </GridList>
+        </div>
       </View>
     </div>
   );
