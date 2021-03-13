@@ -1,5 +1,6 @@
 import { DataTypes, Sequelize } from 'sequelize';
 import mysql from 'mysql2';
+import { create } from 'react-test-renderer';
 
 const sequelize: Sequelize = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllqetkd', 'vnG2q19b3wbaZXBhVjLY', {
   host: 'bao0spze4uyjnrjcstlm-mysql.services.clever-cloud.com',
@@ -87,6 +88,25 @@ export const WhiteboardPost = sequelize.define('WhiteboardPost', {
 
 WhiteboardPost.belongsTo(Outfit);
 // saves all items into 1 outfit
+export const Comment = sequelize.define('Comment', {
+  id: {
+
+    type: DataTypes.INTEGER,
+    defaultValue: true,
+    primaryKey: true,
+    autoIncrement: true,
+    unique: true
+  },
+  userName: {
+    type: DataTypes.STRING,
+    unique: false
+  },
+  text: {
+    type: DataTypes.STRING
+  }
+
+
+});
 
 export const Calendar = sequelize.define('Calendar', {
   id: {
@@ -172,13 +192,16 @@ export const addUser = (name: string): Promise<any> => {
     }
   });
 };
-
-const getFits = (): Promise<any> => {
-  return WhiteboardPost.findAll();
+export const postComments = async( body: any): Promise<any> => {
+  const { userName, text} = body;
+  const createComment = await Comment.create({
+    userName: userName,
+    text: text
+  });
+  return createComment.save();
 };
-
-const getTrash = (): Promise<any> => {
-  return WhiteboardPost.findAll();
+export const getComments = (): Promise<any> => {
+  return Comment.findAll();
 };
 
 module.exports = {
@@ -188,9 +211,8 @@ module.exports = {
   Outfit,
   Calendar,
   Vote,
-  getFits,
-  getTrash,
-
+  postComments,
+  getComments
 };
 
 // sequelize.sync({ force: true })

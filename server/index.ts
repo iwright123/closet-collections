@@ -12,12 +12,12 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import {addUser} from './db/db';
+import {addUser, postComments, getComments} from './db/db';
 import { Twilio } from 'twilio';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
 import usersOutfit from '../client/src/components/models/UsersOutfits';
-const httpServer = createServer();
+const httpServer = createServer(app);
 
 
 dotenv.config({
@@ -129,6 +129,7 @@ app.delete('/outfit/:id', (req: express.Request, res: express.Response): Promise
 import CalendarItem from './routes/calender';
 import Weather from './api/weather';
 import Location from './api/geolocation';
+import { AiOutlineOneToOne } from 'react-icons/ai';
 
 // app.use('/calendar', CalendarItem);
 // app.use('/api/weather', Weather);
@@ -208,12 +209,24 @@ io.on('connection', (socket: Socket) => {
   });
 });
 
+app.post('/comment', (req: Request, res: Response):Promise<any> => {
+  //const { userName, text} = req.body;
+
+  return postComments(req.body)
+    .then(data => console.log('comment posted', data))
+    .catch(err => console.log('Error posting comment', err));
+});
+app.get('/comments', (req: Request, res: Response): Promise<any> => {
+  // const { id } = req.body;
+  return getComments()
+    .then(data => console.log('comments:', data))
+    .catch(err => console.log('error getting comments', err));
+});
 
 
 
 
-
-app.listen(port, () => {
+httpServer.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
 

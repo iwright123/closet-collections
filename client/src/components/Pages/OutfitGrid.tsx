@@ -84,7 +84,6 @@ const OutfitGrid = (): any => {
       </GridListTile>
       {
         images.map((tile, i) => (
-
           <GridListTile key={i}>
             <Zoom>
               <img src={tile.imageUrl} />
@@ -97,7 +96,7 @@ const OutfitGrid = (): any => {
                 <DeleteIcon
                 className="buttonIcon"
                 style={{ fontSize: 15 }}
-                 />
+                />
               </Button> */}
                   <Button
                     onClick={((): void => handleLikeClick(i))}
@@ -108,6 +107,7 @@ const OutfitGrid = (): any => {
                       style={{ fontSize: 15}}
 
                     />
+
                   </Button>
                   <Button
                     onClick={handleDislikeClick}
@@ -124,13 +124,32 @@ const OutfitGrid = (): any => {
                       style={{ fontSize: 15 }}
                     />
                   </Button>
+                  <div>
+                    <ul>
+                      <li>Hello</li>
+                      <li>Hello</li>
+                      <li>Hello</li>
+                      <li>Hello</li>
+                      <li>Hello</li>
+                      <li>Hello</li>
+                      <li>Hello</li>
+                      <li>Hello</li>
+                      <li>Hello</li>
+                      <li>Hello</li>
+                      <li>Hello</li>
+                      <li>Hello</li>
+                    </ul>
+                  </div>
+
                 </>
               }
               key={String(i)}
             />
+
           </GridListTile>
 
         ))}
+
     </GridList>
 
   </div>
