@@ -123,6 +123,7 @@ app.delete('/items/:id', (req: Request, res: Response): Promise<any> => {
 });
 
 app.delete('/outfit/:id', (req: express.Request, res: express.Response): Promise<any> => {
+  console.log('LINE 124', req.params);
   return deleteOutfit(req.params)
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
