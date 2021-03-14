@@ -11,6 +11,7 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
 
   const [images, setImages] = useState([]);
   const [outfits, getOutfits] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const stageRef = React.useRef<any>();
   const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/geonovember/upload';
 
@@ -34,7 +35,23 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
       }).catch(err => console.log(err));
 
   };
+  const handleChange = (e: any): any => {
+    setSearchTerm(e.target.value);
+  };
 
+  const handleSearch = (term: string): any => {
+    const result = outfits.filter(outfit => {
+      return outfit.clothingType.toLowerCase().includes(term.toLowerCase()) || outfit.description.toLowerCase().includes(term.toLowerCase());
+    });
+    getOutfits(result);
+    console.log(result);
+  };
+
+  const handleKeyDown = (e: any): any => {
+    if (e.key === 'Enter') {
+      return handleSearch(searchTerm);
+    }
+  };
 
   const addStickerToPanel = ({ src, width, x, y }): void => {
     setImages((currentImages) => [
@@ -92,8 +109,13 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
         </Layer>
       </Stage>
       <h4 className="heading">Tap to add item to outfit!</h4>
+      <div className="search">
+        <input type="text" className="search-input" placeholder="search for item by keyword" value={searchTerm} onChange={handleChange} onKeyDown={handleKeyDown} />
+        {/* <input type="button" className="search-btn" value="Search" onClick={(): any => handleSearch(searchTerm)}></input> */}
+      </div>
       <div className="outfit-item-buttons">
         {outfits.map((outfit, i) => {
+
           return (
             <button
               key={i}

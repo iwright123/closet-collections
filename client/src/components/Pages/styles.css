@@ -181,4 +181,12 @@ h3 {
   margin-left: 2px;
 }
 
-
+.search {
+  width: 400px;
+  }
+  .search .search-input {
+  width:80%;
+  }
+  .search .search-btn {
+  width:20%;
+  }

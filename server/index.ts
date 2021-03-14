@@ -49,7 +49,7 @@ const client = new Twilio(accountSid, authToken);
 dotenv.config();
 ////////////////HELPERS////////////////////
 
-import { addItem, getAllItems, deleteItem } from './helpers/Item';
+import { addItem, getAllItems, deleteItem, searchItems } from './helpers/Item';
 import { getAllWhiteboardPosts, savePost } from './helpers/WhiteBoardPost';
 import { saveOutfit, getAllOutfits, deleteOutfit, getUserOutfits } from './helpers/Outfit';
 import Find from './api/findastore';
@@ -91,6 +91,12 @@ app.post('/outfit', (req: Request, res: any): Promise<unknown> => {
 
 app.get('/items', (req: Request, res: Response) => {
   return getAllItems()
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
+
+app.get('items/search', (req: Request, res: Response) => {
+  return searchItems(req.body)
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });
