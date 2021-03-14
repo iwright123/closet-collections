@@ -7,7 +7,7 @@ import axios from 'axios';
 import Saved from './Pages/SavedItems';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { setFlagsFromString } from 'v8';
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 
 
 const items = [
@@ -62,6 +62,7 @@ const Calendar: React.FC = () => {
   const [pushNotifications, setNotifications] = React.useState([]);
   const [page, setPage] = React.useState(false);
   const [form, setForm] = React.useState(false);
+  const [remind, setRemind] = React.useState([]);
   console.log(phone);
 
   const push = (item): void => {
@@ -73,7 +74,18 @@ const Calendar: React.FC = () => {
       body: `You will receive a reminder for the ${item.title} ${item.subTitle}'s, Thank you!`
     };
 
-    console.log(message);
+    const post = {
+      username: 'anoy',
+      phoneNumber: '+15047235163',
+      notification: `${item.title} ${item.subTitle}'s are releasing tomorrow!`,
+      timeZone: 'central',
+      time: `${item.release}`
+    };
+
+
+    axios.post('/reminder', post)
+      .then((data: any) => console.log(data) )
+      .catch((err: string) => console.warn('Error here', err));
 
     axios.post('/sms', message)
       .then((data: any) => console.log(data) )
