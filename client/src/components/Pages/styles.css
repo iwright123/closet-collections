@@ -183,9 +183,6 @@ h3 {
 
 
 #comments {
-  position: absolute;
-}
-h1 {
-  position: relative;
-  color: black;
+
+ border-style: solid
 }

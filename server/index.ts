@@ -29,7 +29,16 @@ dotenv.config({
 const io = new Server(httpServer, {
   // ...
 });
-
+io.on('connection', (socket: Socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', (): void => {
+    console.log('user disconnected');
+  });
+  socket.on('message', ({name, message}) => {
+    console.log('message:', message, 'user', name);
+    io.emit('message', {name, message});
+  });
+});
 ////////////////HELPERS////////////////////
 
 
@@ -70,7 +79,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(cors());
+//app.use(cors());
 app.use('/api/search', Find);
 /*******************DATABASE ROUTES ************************************/
 app.get('/outfit/:user', (req: Request, res: Response): Promise<usersOutfit> => {
@@ -200,16 +209,6 @@ app.delete('/logout', (req: Request, res: Response) => {
 /////////Twilio//////////
 
 
-io.on('connection', (socket: Socket) => {
-  console.log('a user connected');
-  socket.on('disconnect', (): void => {
-    console.log('user disconnected');
-  });
-  socket.on('message', ({name, message}) => {
-    console.log('message:', message, 'user', name);
-    io.emit('message', {name, message});
-  });
-});
 
 app.post('/comment', (req: Request, res: Response):Promise<any> => {
   //const { userName, text} = req.body;

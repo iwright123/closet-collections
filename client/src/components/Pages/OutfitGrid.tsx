@@ -66,95 +66,151 @@ const OutfitGrid = (): any => {
     setLikeColor(!likeColor);
   };
 
-  const handleDislikeClick = (): void => {
-    setDislikeColor(!dislikeColor);
+  // const handleDislikeClick = (): void => {
+  //   setDislikeColor(!dislikeColor);
+  // };
+  const handleComment = (e): any => {
+    console.log('e', e.target.className);
+    return;
   };
 
   useEffect(() => {
     axios.get('/outfit')
       .then(({ data }) => setImages(data))
       .catch((err) => console.warn(err));
-  }, [likeColor]);
+  }, []);
 
   return (
 
-    images.map(image => {
-      console.log('image', image);
-      <h1>{image}</h1>;
-    }
-    )
 
-  //   images ===  undefined ? <div><h1>Loading</h1></div>:
-  //   <div>
-  //     <GridList cellHeight={300} spacing={10} className={classes.gridList}>
-  //       <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-  //         <ListSubheader component="div"></ListSubheader>
-  //       </GridListTile>
-  //       {
-  //         images.map((tile, i) => (
-  //           <GridListTile key={i}>
-  //             <Zoom>
+    !images.length ? <h1>Loading</h1> :
+    // <div>
+    //   {console.log('images', images)}
+    //   <h1>Why does this work!</h1>
+    //   <div>
+    //     <ul>
+    //         {images.map((image, index) => {
+    //       <li>
 
-  //               <img src={tile.imageUrl} />
-  //             </Zoom>
-  //             <GridListTileBar
-  //               title={tile.title}
-  //               actionIcon={
-  //                 <>
-  //                   {/* <Button>
-  //             <DeleteIcon
-  //             className="buttonIcon"
-  //             style={{ fontSize: 15 }}
-  //             />
-  //           </Button> */}
-  //                   <Button
-  //                     onClick={((): void => handleLikeClick(i))}
-  //                     style={likeColor ? colorChange : null}
-  //                   >
-  //                     <ThumbUpIcon
-  //                       className="buttonIcon"
-  //                       style={{ fontSize: 15}}
-
-  //                     />
-
-  //                   </Button>
-  //                   <Button
-  //                     onClick={handleDislikeClick}
-  //                     style={dislikeColor ? colorChange2 : null}
-  //                   >
-  //                     <ThumbDownIcon
-  //                       className="buttonIcon"
-  //                       style={{ fontSize: 15 }}
-  //                     />
-  //                   </Button>
-  //                   <Button>
-  //                     <MessageIcon
-  //                       className="buttonIcon"
-  //                       style={{ fontSize: 15 }}
-  //                     />
-  //                   </Button>
+    //           <h1>hello</h1>;
 
 
-  //                 </>
-  //               }
-  //               key={String(i)}
-  //             />
+    //       </li>
+    //         })}
 
-  //             <div id='comments' style={{position: 'relative'}}>
-  //               <ul id='comments'>
-  //                 <li>
-  //                   <h1>HEY HEY HEY</h1></li>
-  //               </ul>
-  //             </div>
-  //           </GridListTile>
+    //     </ul>
 
-  //         ))}
-
-  //     </GridList>
-  //   </div>
+    //   </div>
 
 
 
+
+
+
+    //   <div>
+
+    //   </div>
+    // </div>
+
+
+      <div>
+        {/* <GridList cellHeight={300} spacing={10} className={classes.gridList}>
+          <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+            <ListSubheader component="div"></ListSubheader>
+          </GridListTile> */}
+        {
+          images.map((tile, i) => (
+
+            // <GridListTile key={i}>
+            <div id='comments'>
+              <h3>{tile.user}</h3>
+
+              <img src={tile.imageUrl} />
+
+              <Button
+                onClick={((): void => handleLikeClick(i))}
+                style={likeColor ? colorChange : null}
+              >
+                <ThumbUpIcon
+                  className="buttonIcon"
+                  style={{ fontSize: 15}}
+
+                />
+
+              </Button>
+              <Button>
+                <MessageIcon
+                  onClick={handleComment}
+                  className="buttonIcon"
+                  style={{ fontSize: 15 }}
+                />
+              </Button>
+              <div id='comment'>
+                <ul id='commentList'>
+                  <li>Hello</li>
+                  <li>Hello</li>
+                  <li>Hello</li>
+                  <li>Hello</li>
+                  <li>Hello</li>
+                  <li>Hello</li>
+                  <li>Hello</li>
+                  <li>Hello</li>
+                </ul>
+              </div>
+
+            </div>
+            //   <GridListTileBar
+            //     title={tile.title}
+            //     actionIcon={
+            //       <>
+            //         <Button>
+            //           <DeleteIcon
+            //             className="buttonIcon"
+            //             style={{ fontSize: 15 }}
+            //           />
+            //         </Button>
+            //         <Button
+            //           onClick={((): void => handleLikeClick(i))}
+            //           style={likeColor ? colorChange : null}
+            //         >
+            //           <ThumbUpIcon
+            //             className="buttonIcon"
+            //             style={{ fontSize: 15}}
+
+            //           />
+
+            //         </Button>
+            //         <Button
+            //           onClick={handleDislikeClick}
+            //           style={dislikeColor ? colorChange2 : null}
+            //         >
+            //           <ThumbDownIcon
+            //             className="buttonIcon"
+            //             style={{ fontSize: 15 }}
+            //           />
+            //         </Button>
+            //         <Button>
+            //           <MessageIcon
+            //             className="buttonIcon"
+            //             style={{ fontSize: 15 }}
+            //           />
+            //         </Button>
+
+
+            //       </>
+            //     }
+            //     key={String(i)}
+            //   />
+
+
+            // </GridListTile>
+
+          ))}
+
+        {/* //</div></GridList>
+      </div> */}
+
+      </div>
 
   );
 };
