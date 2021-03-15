@@ -99,7 +99,7 @@ const OutfitGrid = (): any => {
                 style={{ fontSize: 15 }}
                  />
               </Button> */}
-                  <Button
+                  {/* <Button
                     onClick={((): void => handleLikeClick(i))}
                     style={likeColor ? colorChange : null}
                   >
@@ -117,7 +117,7 @@ const OutfitGrid = (): any => {
                       className="buttonIcon"
                       style={{ fontSize: 15 }}
                     />
-                  </Button>
+                  </Button> */}
                   <Button>
                     <MessageIcon
                       className="buttonIcon"

@@ -9,7 +9,7 @@ export const schedulerFactory = (): any => {
       new CronJob('00 * * * * *', (): any => {
         console.log('Running Send Notifications Worker for ' +
           moment().format());
-        notificationWorker.run();
+        // notificationWorker.run();
       }, null, true, '');
     },
   };

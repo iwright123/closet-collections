@@ -8,7 +8,7 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 dotenv.config();
 
 mongoose.connect('mongodb://localhost/3000', {useNewUrlParser: true, useUnifiedTopology: true})
-  .then(() => console.log('database connected'))
+  .then(() => console.log('Mongo database connected'))
   .catch((err) => console.warn(err));
 
 const AppointmentSchema: Schema = new mongoose.Schema({
@@ -56,30 +56,33 @@ AppointmentSchema.statics.sendNotifications = (callback): any => {
         to: `+ ${appointment.phoneNumber}`,
         from: '+15042852518',
         /* eslint-disable max-len */
-        body: `Hi ${appointment.name}. Just a reminder that you have an item releasing soon.`,
+        body: `Hi ${appointment.name}. The ${appointment.notification}`,
       /* eslint-enable max-len */
       };
 
       // Send the message!
-      client.messages.create(options, (err, response) => {
-        if (err) {
-        // Just log it for now
-          console.error(err);
-        } else {
-        // Log the last few digits of a phone number
-          let masked = appointment.phoneNumber.substr(0,
-            appointment.phoneNumber.length - 5);
-          masked += '*****';
-          console.log(`Message sent to ${masked}`);
-        }
-      });
+      client.messages.create(options)
+        .then(() => console.info('message sent', options))
+        .catch((err) => console.warn(err));
+      //   if (err) {
+      //   // Just log it for now
+      //     console.error(err);
+      //   } else {
+      //   // Log the last few digits of a phone number
+      //     let masked = appointment.phoneNumber.substr(0,
+      //       appointment.phoneNumber.length - 5);
+      //     masked += '*****';
+      //     console.log(`Message sent to ${masked}`);
+      //   }
+      // });
     });
 
-    // Don't wait on success/failure, just indicate all messages have been
-    // queued for delivery
-    if (callback) {
-      callback.call();
-    }
+    // Don't wait on success/failure, just indicate all messages have been queued for delivery
+    // if (callback) {
+    //   callback.call();
+    // }
+
+    callback ? callback.call() : 'no messages';
 
   };
 
