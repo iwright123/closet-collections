@@ -15,6 +15,7 @@ import axios from 'axios';
 import { Icon } from '@material-ui/core';
 import MessageIcon from '@material-ui/icons/Message';
 
+
 //import tileData from './tileData';
 
 interface IPost {
@@ -124,22 +125,7 @@ const OutfitGrid = (): any => {
                       style={{ fontSize: 15 }}
                     />
                   </Button>
-                  <div>
-                    <ul>
-                      <li>Hello</li>
-                      <li>Hello</li>
-                      <li>Hello</li>
-                      <li>Hello</li>
-                      <li>Hello</li>
-                      <li>Hello</li>
-                      <li>Hello</li>
-                      <li>Hello</li>
-                      <li>Hello</li>
-                      <li>Hello</li>
-                      <li>Hello</li>
-                      <li>Hello</li>
-                    </ul>
-                  </div>
+
 
                 </>
               }
@@ -151,7 +137,11 @@ const OutfitGrid = (): any => {
         ))}
 
     </GridList>
-
+    <div id='comments' style={{position: 'fixed'}}>
+      <ul id='comments'>
+        <li>Hey Hey Hey</li>
+      </ul>
+    </div>
   </div>
   );
 };
