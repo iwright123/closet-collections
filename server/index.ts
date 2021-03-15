@@ -18,7 +18,7 @@ import { Twilio } from 'twilio';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
 import usersOutfit from '../client/src/components/models/UsersOutfits';
-const httpServer = createServer();
+const httpServer = createServer(app);
 
 
 dotenv.config({
@@ -29,7 +29,16 @@ dotenv.config({
 const io = new Server(httpServer, {
   // ...
 });
-
+io.on('connection', (socket: Socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', (): void => {
+    console.log('user disconnected');
+  });
+  socket.on('message', ({name, message}) => {
+    console.log('message:', message, 'user', name);
+    io.emit('message', {name, message});
+  });
+});
 ////////////////HELPERS////////////////////
 
 
@@ -199,23 +208,14 @@ app.delete('/logout', (req: Request, res: Response) => {
 /////////Twilio//////////
 
 
-io.on('connection', (socket: Socket) => {
-  console.log('a user connected');
-  socket.on('disconnect', (): void => {
-    console.log('user disconnected');
-  });
-  socket.on('message', ({name, message}) => {
-    console.log('message:', message, 'user', name);
-    io.emit('message', {name, message});
-  });
-});
 
 
 
 
 
 
-app.listen(port, () => {
+
+httpServer.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
 
