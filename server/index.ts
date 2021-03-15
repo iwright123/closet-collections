@@ -21,7 +21,7 @@ import moment from 'moment';
 import { Appointment } from './db/goose';
 import momentTimeZone from 'moment-timezone';
 
-const httpServer = createServer();
+const httpServer = createServer(app);
 
 
 dotenv.config({
@@ -260,7 +260,7 @@ io.on('connection', (socket: Socket) => {
 
 
 
-app.listen(port, () => {
+httpServer.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
 

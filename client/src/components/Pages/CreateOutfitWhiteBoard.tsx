@@ -5,12 +5,15 @@ import useImage from 'use-image';
 import CreateOutfitItems from './CreateOutfitItems';
 import axios from 'axios';
 import $ from 'jquery';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Alert } from 'react-native';
+import { StylesProvider } from '@material-ui/core';
 
 
 const CreateOutfitWhiteBoard = (): ReactElement => {
 
   const [images, setImages] = useState([]);
   const [outfits, getOutfits] = useState([]);
+  const [font, setFont] = useState(25);
   const stageRef = React.useRef<any>();
   const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/geonovember/upload';
 
@@ -63,6 +66,18 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
       .then(({ data }) => getOutfits(data))
       .catch((err) => console.warn(err));
   }, []);
+
+
+  const larger = (): any => {
+    setFont(40);
+  };
+
+  const smaller = (): any => {
+    setFont(25);
+  };
+
+
+
   return (
     <div>
       <Stage
@@ -91,7 +106,7 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
           })}
         </Layer>
       </Stage>
-      <h4 className="heading">Tap to add item to outfit!</h4>
+      <h4 style={{fontSize: font}}>Tap to add item to outfit!</h4>
       <div className="outfit-item-buttons">
         {outfits.map((outfit, i) => {
           return (
@@ -113,7 +128,17 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
         })}
       </div>
       <div id="buttons"><button id="save" onClick={handleExportClick}>Save Outfit</button></div>
+      <div id='largebutton'><button id='enlarge' onClick={larger}>Enlarge</button></div>
+      <div id='smallButton'><button id='smaller' onClick={smaller}>Return Size</button></div>
     </div>
   );
 };
+
+const styles = StyleSheet.create({
+  normal: {
+    fontSize: 20
+  }
+});
+
+
 export default CreateOutfitWhiteBoard;

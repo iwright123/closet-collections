@@ -63,6 +63,8 @@ const Calendar: React.FC = () => {
   const [page, setPage] = React.useState(false);
   const [form, setForm] = React.useState(false);
   const [remind, setRemind] = React.useState([]);
+  const [fontTitle, setTitle] = React.useState(15);
+  const [fontS, setSTitle] = React.useState(25);
   console.log(phone);
 
   const push = (item): void => {
@@ -110,11 +112,57 @@ const Calendar: React.FC = () => {
 
   const changeColor = liked ? 'red' : 'grey';
 
+  const larger = (): any => {
+    setTitle(40);
+    setSTitle(35);
+  };
+
+  const smaller = (): any => {
+    setTitle(15);
+    setSTitle(15);
+  };
+
+
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: 'white',
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+
+    title: {
+      fontSize: 35
+    },
+
+    button: {
+      backgroundColor: 'clear',
+      marginVertical: -30
+    },
+
+    itemInfo: {
+      flex: 1,
+      fontSize: fontTitle,
+      textAlign: 'center',
+      marginVertical: -10
+    },
+
+    subItemInfo: {
+      flex: 1,
+      fontSize: fontS,
+      textAlign: 'center',
+      marginVertical: 10
+    },
+
+    saved: {
+      left: 0,
+    }
+
+  });
 
   return (
     <>
-      <View
-        style={styles.container}>
+      <View style={styles.container}>
 
         <TouchableOpacity onPress={(): void => setPage(true)}>
           <Text>Fav Items</Text>
@@ -122,8 +170,12 @@ const Calendar: React.FC = () => {
         <TouchableOpacity onPress={(): void => alert('Add your Number!')}>
           <Text>Add Number</Text>
         </TouchableOpacity>
+        <Text>Upcoming Releases</Text>
+        <div id='largebutton'><button id='enlarge' onClick={larger}>Enlarge</button></div>
+        <div id='smallButton'><button id='smaller' onClick={smaller}>Return Size</button></div>
 
         {
+
 
           page === false ?
 
@@ -148,50 +200,10 @@ const Calendar: React.FC = () => {
               <ExitToAppIcon onClick={(): void => setPage(false)}/>
               <Saved />
             </View>
-
-
         }
       </View>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  title: {
-    fontSize: 35
-  },
-
-  button: {
-    backgroundColor: 'clear',
-    marginVertical: -30
-  },
-
-  itemInfo: {
-    flex: 1,
-    fontSize: 15,
-    textAlign: 'center',
-    marginVertical: -10
-  },
-
-  subItemInfo: {
-    flex: 1,
-    fontSize: 25,
-    textAlign: 'center',
-    marginVertical: 10
-  },
-
-  saved: {
-    left: 0,
-  }
-
-
-});
 
 export default Calendar;
