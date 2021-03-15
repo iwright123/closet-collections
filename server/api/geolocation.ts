@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import Router from 'express';
 const Location = Router();
 import { getGeolocationByIP } from '../helpers/geolocation';
 
@@ -10,6 +10,6 @@ export default Location.post('/', (req, res): Promise<any> => {
     .catch(() => res.status(404));
 });
 
-module.exports = {
-  Location,
-};
+// module.exports = {
+//   Location,
+// };

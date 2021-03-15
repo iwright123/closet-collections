@@ -74,75 +74,88 @@ const OutfitGrid = (): any => {
     axios.get('/outfit')
       .then(({ data }) => setImages(data))
       .catch((err) => console.warn(err));
-  }, []);
+  }, [likeColor]);
 
-  return (<div className={classes.root}>
-    <h1>Outfits</h1>
+  return (
 
-    <GridList cellHeight={300} spacing={10} className={classes.gridList}>
-      <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-        <ListSubheader component="div"></ListSubheader>
-      </GridListTile>
-      {
-        images.map((tile, i) => (
-          <GridListTile key={i}>
-            <Zoom>
-              <img src={tile.imageUrl} />
-            </Zoom>
-            <GridListTileBar
-              title={tile.title}
-              actionIcon={
-                <>
-                  {/* <Button>
-                <DeleteIcon
-                className="buttonIcon"
-                style={{ fontSize: 15 }}
-                />
-              </Button> */}
-                  <Button
-                    onClick={((): void => handleLikeClick(i))}
-                    style={likeColor ? colorChange : null}
-                  >
-                    <ThumbUpIcon
-                      className="buttonIcon"
-                      style={{ fontSize: 15}}
+    images.map(image => {
+      console.log('image', image);
+      <h1>{image}</h1>;
+    }
+    )
 
-                    />
+  //   images ===  undefined ? <div><h1>Loading</h1></div>:
+  //   <div>
+  //     <GridList cellHeight={300} spacing={10} className={classes.gridList}>
+  //       <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+  //         <ListSubheader component="div"></ListSubheader>
+  //       </GridListTile>
+  //       {
+  //         images.map((tile, i) => (
+  //           <GridListTile key={i}>
+  //             <Zoom>
 
-                  </Button>
-                  <Button
-                    onClick={handleDislikeClick}
-                    style={dislikeColor ? colorChange2 : null}
-                  >
-                    <ThumbDownIcon
-                      className="buttonIcon"
-                      style={{ fontSize: 15 }}
-                    />
-                  </Button>
-                  <Button>
-                    <MessageIcon
-                      className="buttonIcon"
-                      style={{ fontSize: 15 }}
-                    />
-                  </Button>
+  //               <img src={tile.imageUrl} />
+  //             </Zoom>
+  //             <GridListTileBar
+  //               title={tile.title}
+  //               actionIcon={
+  //                 <>
+  //                   {/* <Button>
+  //             <DeleteIcon
+  //             className="buttonIcon"
+  //             style={{ fontSize: 15 }}
+  //             />
+  //           </Button> */}
+  //                   <Button
+  //                     onClick={((): void => handleLikeClick(i))}
+  //                     style={likeColor ? colorChange : null}
+  //                   >
+  //                     <ThumbUpIcon
+  //                       className="buttonIcon"
+  //                       style={{ fontSize: 15}}
+
+  //                     />
+
+  //                   </Button>
+  //                   <Button
+  //                     onClick={handleDislikeClick}
+  //                     style={dislikeColor ? colorChange2 : null}
+  //                   >
+  //                     <ThumbDownIcon
+  //                       className="buttonIcon"
+  //                       style={{ fontSize: 15 }}
+  //                     />
+  //                   </Button>
+  //                   <Button>
+  //                     <MessageIcon
+  //                       className="buttonIcon"
+  //                       style={{ fontSize: 15 }}
+  //                     />
+  //                   </Button>
 
 
-                </>
-              }
-              key={String(i)}
-            />
+  //                 </>
+  //               }
+  //               key={String(i)}
+  //             />
 
-          </GridListTile>
+  //             <div id='comments' style={{position: 'relative'}}>
+  //               <ul id='comments'>
+  //                 <li>
+  //                   <h1>HEY HEY HEY</h1></li>
+  //               </ul>
+  //             </div>
+  //           </GridListTile>
 
-        ))}
+  //         ))}
 
-    </GridList>
-    <div id='comments' style={{position: 'fixed'}}>
-      <ul id='comments'>
-        <li>Hey Hey Hey</li>
-      </ul>
-    </div>
-  </div>
+  //     </GridList>
+  //   </div>
+
+
+
+
   );
 };
 

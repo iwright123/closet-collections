@@ -10,7 +10,7 @@ export const addFav = async(body: {
 }, user: unknown): Promise<any> => {
   const title = body.title;
   const subTitle = body.subTitle;
-  const imgUrl = body. imgUrl;
+  const imgUrl = body.imgUrl;
   const releaseDate = body.releaseDate;
 
   const favItem = await Calendar.create({

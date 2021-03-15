@@ -4,7 +4,8 @@ import express from 'express';
 const app = express();
 import index from './routes/index';
 import { Request, Response} from 'express';
-// import { GoogleStrategy } from './passport';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { GoogleStrategy } = require('./passport');
 import passport from 'passport';
 import session from 'express-session';
 
@@ -120,6 +121,7 @@ app.delete('/items/:id', (req: Request, res: Response): Promise<any> => {
 });
 
 app.delete('/outfit/:id', (req: express.Request, res: express.Response): Promise<any> => {
+  console.log('LINE 124', req.params);
   return deleteOutfit(req.params)
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
@@ -131,9 +133,9 @@ import Weather from './api/weather';
 import Location from './api/geolocation';
 import { AiOutlineOneToOne } from 'react-icons/ai';
 
-// app.use('/calendar', CalendarItem);
-// app.use('/api/weather', Weather);
-// app.use('/api/location', Location);
+app.use('/calendar', CalendarItem);
+app.use('/api/weather', Weather);
+app.use('/api/location', Location);
 
 
 /////////GOOGLE AUTH ///////////

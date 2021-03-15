@@ -185,8 +185,7 @@ sequelize.query(`USE \`${database}\`;`);
 // };
 
 export const addUser = (name: string): Promise<any> => {
-  return Users.create({
-    username: name,
+  return Users.findOrCreate({
     where: {
       username: name
     }
@@ -212,7 +211,9 @@ module.exports = {
   Calendar,
   Vote,
   postComments,
-  getComments
+  getComments,
+
+  addUser
 };
 
 // sequelize.sync({ force: true })
