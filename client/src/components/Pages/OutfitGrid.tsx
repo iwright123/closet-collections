@@ -14,10 +14,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 import { Icon } from '@material-ui/core';
 import MessageIcon from '@material-ui/icons/Message';
-
-
+import SendIcon from '@material-ui/icons/Send';
+import Message from '../models/Message';
+import {io} from 'socket.io-client';
+import Chat2 from './Chat2';
 //import tileData from './tileData';
-
+const socket = io('http://localhost:3000');
 interface IPost {
   userId: number;
   id?: number;
@@ -58,21 +60,31 @@ const OutfitGrid = (): any => {
   const [images, setImages] = React.useState([]);
   const [likeColor, setLikeColor] = React.useState(false);
   const [dislikeColor, setDislikeColor] = React.useState(false);
-
+  const [state, setState] = React.useState<Message>({message: '', name: ''});
+  const [comment, setComments] = React.useState([]);
   const colorChange = { color: 'yellow'};
   const colorChange2 = { color: 'red'};
 
   const handleLikeClick = (e): void => {
     setLikeColor(!likeColor);
   };
-
+  React.useEffect((): void => {
+    socket.on('comment', ({name, message }) => {
+      setComments([...comment, {name, message}]);
+    });
+  }, [state]);
+  const onTextChange = (e): void => {
+    setState({...state, [e.target.name]: e.target.value});
+  };
+  const onMessageSubmit = (e): void => {
+    e.preventDefault();
+    const {name, message} = state;
+    socket.emit('message', {name, message});
+    setState({message: '', name});
+  };
   // const handleDislikeClick = (): void => {
   //   setDislikeColor(!dislikeColor);
   // };
-  const handleComment = (e): any => {
-    console.log('e', e.target.className);
-    return;
-  };
 
   useEffect(() => {
     axios.get('/outfit')
@@ -120,15 +132,15 @@ const OutfitGrid = (): any => {
           </GridListTile> */}
         {
           images.map((tile, i) => (
-
             // <GridListTile key={i}>
             <div id='comments'>
+              {console.log('tile', tile)}
               <h3>{tile.user}</h3>
 
               <img src={tile.imageUrl} />
 
               <Button
-                onClick={((): void => handleLikeClick(i))}
+                onClick={((): void => console.log('button clicked'))}
                 style={likeColor ? colorChange : null}
               >
                 <ThumbUpIcon
@@ -138,24 +150,20 @@ const OutfitGrid = (): any => {
                 />
 
               </Button>
+              <Chat2></Chat2>
               <Button>
                 <MessageIcon
-                  onClick={handleComment}
+                  onClick={(): void => console.log('nothing')}
                   className="buttonIcon"
                   style={{ fontSize: 15 }}
                 />
               </Button>
               <div id='comment'>
                 <ul id='commentList'>
-                  <li>Hello</li>
-                  <li>Hello</li>
-                  <li>Hello</li>
-                  <li>Hello</li>
-                  <li>Hello</li>
-                  <li>Hello</li>
-                  <li>Hello</li>
+
                   <li>Hello</li>
                 </ul>
+
               </div>
 
             </div>

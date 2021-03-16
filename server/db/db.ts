@@ -86,27 +86,9 @@ export const WhiteboardPost = sequelize.define('WhiteboardPost', {
   },
 });
 
-WhiteboardPost.belongsTo(Outfit);
+// WhiteboardPost.belongsTo(Outfit);
 // saves all items into 1 outfit
-export const Comment = sequelize.define('Comment', {
-  id: {
 
-    type: DataTypes.INTEGER,
-    defaultValue: true,
-    primaryKey: true,
-    autoIncrement: true,
-    unique: true
-  },
-  userName: {
-    type: DataTypes.STRING,
-    unique: false
-  },
-  text: {
-    type: DataTypes.STRING
-  }
-
-
-});
 
 export const Calendar = sequelize.define('Calendar', {
   id: {
@@ -137,6 +119,29 @@ export const Calendar = sequelize.define('Calendar', {
     type: DataTypes.STRING
   }
 });
+
+export const Comment = sequelize.define('Comment', {
+  id: {
+
+    type: DataTypes.INTEGER,
+
+    primaryKey: true,
+    autoIncrement: true,
+    unique: true
+  },
+  userName: {
+    type: DataTypes.STRING,
+    unique: false
+  },
+  text: {
+    type: DataTypes.STRING
+  }
+
+
+});
+
+
+
 
 const Vote = sequelize.define('Vote', {
   idUser: {
