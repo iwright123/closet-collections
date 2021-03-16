@@ -46,6 +46,42 @@ const items = [
     title: 'Dunk Low',
     subTitle: 'City Market',
     release: 'March 4th, 2021'
+  },
+  {
+    img: 'https://i.ibb.co/8mKdjhY/supreme1.jpg',
+    title: 'Hoodie',
+    subTitle: 'Turquoise Supreme',
+    release: 'March 20th, 2021'
+  },
+  {
+    img: 'https://i.ibb.co/0VL79TM/supreme2.jpg',
+    title: 'Peacock Jacket',
+    subtitle: 'Supreme',
+    release: 'March 20th, 2021'
+  },
+  {
+    img: 'https://i.ibb.co/s6Z1DB6/givanchy1.jpg',
+    title: 'Purple tight dress',
+    subtitle: 'Givenchy',
+    release: 'March 2, 2021'
+  },
+  {
+    img: 'https://i.ibb.co/Nt7XL7H/medium-Antegona.jpg',
+    title: 'Medium Antegona',
+    subtitle: 'Givenchy handbag',
+    release: 'September 1, 2021'
+  },
+  {
+    img: 'https://i.ibb.co/vvXY4fF/celine-black1.jpg',
+    title: 'Medium Triomphe',
+    subtitle: 'Celine handbag',
+    release: 'March 5, 2021'
+  },
+  {
+    img: 'https://sneakernews.com/wp-content/uploads/2021/03/adidas-yeezy-foam-runner-sand-relaese-date.jpg?w=1140',
+    title: 'Foam Runner',
+    subtitle: 'Yeezys',
+    release: 'March 26, 2021'
   }
 ];
 
