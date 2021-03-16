@@ -6,8 +6,10 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import axios from 'axios';
 import Saved from './Pages/SavedItems';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { setFlagsFromString } from 'v8';
-import { useForm } from 'react-hook-form';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+
+
 
 
 const items = [
@@ -57,7 +59,7 @@ const Calendar: React.FC = () => {
 
   const [notify, setNotify] = React.useState(false);
   const [favItems, setFaveItems] = React.useState([]);
-  const [liked, setLike] = React.useState(false);
+  const [liked, setLike] = React.useState('');
   const [phone, setNumber] = React.useState('');
   const [pushNotifications, setNotifications] = React.useState([]);
   const [page, setPage] = React.useState(false);
@@ -65,7 +67,7 @@ const Calendar: React.FC = () => {
   const [remind, setRemind] = React.useState([]);
   const [fontTitle, setTitle] = React.useState(15);
   const [fontS, setSTitle] = React.useState(25);
-  console.log(phone);
+
 
   const push = (item): void => {
     setNotify(true);
@@ -95,7 +97,10 @@ const Calendar: React.FC = () => {
   };
 
   const favItem = (item): void => {
-    setLike(true);
+
+    // setLike(true);
+    setLike('red');
+
     setFaveItems([item.title, item.subTitle, item.img, item.release]);
 
     const data = {
@@ -110,7 +115,7 @@ const Calendar: React.FC = () => {
       .catch((err: string) => console.warn('Error here', err));
   };
 
-  const changeColor = liked ? 'red' : 'grey';
+
 
   const larger = (): any => {
     setTitle(40);
@@ -119,7 +124,7 @@ const Calendar: React.FC = () => {
 
   const smaller = (): any => {
     setTitle(15);
-    setSTitle(15);
+    setSTitle(20);
   };
 
 
@@ -162,44 +167,46 @@ const Calendar: React.FC = () => {
 
   return (
     <>
-      <View style={styles.container}>
-
-        <TouchableOpacity onPress={(): void => setPage(true)}>
-          <Text>Fav Items</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={(): void => alert('Add your Number!')}>
-          <Text>Add Number</Text>
-        </TouchableOpacity>
-        <Text>Upcoming Releases</Text>
-        <div id='largebutton'><button id='enlarge' onClick={larger}>Enlarge</button></div>
-        <div id='smallButton'><button id='smaller' onClick={smaller}>Return Size</button></div>
-
+      <View>
         {
-
-
           page === false ?
+            <View style={styles.container}>
+              <TouchableOpacity onPress={(): void => setPage(true)}>
+                <Text>Fav Items</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={(): void => alert('Add your Number!')}>
+                <Text>Add Number</Text>
+              </TouchableOpacity>
+              <Text style={styles.title}>Upcoming Releases!</Text>
+              <div>
+                <ZoomInIcon onClick={larger} />
+                <ZoomOutIcon onClick={smaller} />
+              </div>
 
-            items.map((item, v) => {
-              return <View
-                key={v}>
-                <Image
-                  style={{width: 250, height: 250, marginVertical: 10}}
-                  source={{uri: item.img}}
-                />
-                <Text style={styles.itemInfo}>{item.title}</Text>
-                <Text style={styles.subItemInfo}>{item.subTitle}</Text>
-                {/* <Text>{item.release}</Text> */}
-                <FavoriteBorderIcon style={{backgroundColor: changeColor}} onClick={(): void => favItem(item)} />
-                <Button
-                  onPress={(): void => push(item)}
-                  title='Notify Me!'
-                />
-              </View>;
-            }) :
+              {
+                items.map((item, v) => {
+                  return <View
+                    key={v}>
+                    <Image
+                      style={{width: 250, height: 250, marginVertical: 10}}
+                      source={{uri: item.img}}
+                    />
+                    <Text style={styles.itemInfo}>{item.title}</Text>
+                    <Text style={styles.subItemInfo}>
+                      <FavoriteBorderIcon style={{backgroundColor: liked}} onClick={(): void => favItem(item)} /> {item.subTitle}</Text>
+                    <Button
+                      onPress={(): void => push(item)}
+                      title='Notify Me!'
+                    />
+                  </View>;
+                })
+              }
+            </View> :
             <View>
               <ExitToAppIcon onClick={(): void => setPage(false)}/>
               <Saved />
             </View>
+
         }
       </View>
     </>
