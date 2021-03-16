@@ -190,3 +190,9 @@ h3 {
   .search .search-btn {
   width:20%;
   }
+.logo {
+  position:absolute;
+right:0;
+top:0;
+}
+

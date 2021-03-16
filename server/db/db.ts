@@ -56,26 +56,54 @@ export const Outfit = sequelize.define('Outfit', {
     type: DataTypes.STRING,
     allowNull: false
   },
-
   outfitTitle: {
     type: DataTypes.STRING,
     unique: true
   },
   imageUrl: {
     type: DataTypes.STRING,
+  },
+  likesCount: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
   }
 });
 
-export const WhiteboardPost = sequelize.define('WhiteboardPost', {
-  idUser: {
+export const Likes = sequelize.define('Likes', {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: DataTypes.INTEGER
+  },
+  outfitId: {
     type: DataTypes.INTEGER,
-    allowNull: true,
+  },
+  user: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  favorite: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  }
+});
+
+// Outfit.hasMany(Likes, { foreignKey: 'outfitId'});
+// Likes.belongsTo(Outfit, { foreignKey: 'outfitId'});
+
+export const WhiteboardPost = sequelize.define('WhiteboardPost', {
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  user: {
+    type: DataTypes.STRING,
+    allowNull: true
   },
   likes: {
-    type: DataTypes.BOOLEAN,
-    allowNull: true,
-  },
-  dislikes: {
     type: DataTypes.BOOLEAN,
     allowNull: true,
   },
@@ -116,23 +144,6 @@ export const Calendar = sequelize.define('Calendar', {
   releaseDate: {
     type: DataTypes.STRING
   }
-});
-
-const Vote = sequelize.define('Vote', {
-  idUser: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true
-  },
-  idPost: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true
-  },
-  type: {
-    type: DataTypes.STRING,
-  },
-
 });
 
 const database = 'bao0spze4uyjnrjcstlm';
@@ -186,7 +197,7 @@ module.exports = {
   Users,
   Outfit,
   Calendar,
-  Vote,
+  Likes,
   getFits,
   getTrash,
   addUser
