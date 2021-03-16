@@ -49,38 +49,38 @@ const items = [
   },
   {
     img: 'https://i.ibb.co/8mKdjhY/supreme1.jpg',
-    title: 'Hoodie',
-    subTitle: 'Turquoise Supreme',
+    title: 'Turquoise Supreme',
+    subTitle: 'Hoodie',
     release: 'March 20th, 2021'
   },
   {
     img: 'https://i.ibb.co/0VL79TM/supreme2.jpg',
-    title: 'Peacock Jacket',
-    subtitle: 'Supreme',
+    title: 'Supreme',
+    subTitle: 'Peacock Jacket',
     release: 'March 20th, 2021'
   },
   {
     img: 'https://i.ibb.co/s6Z1DB6/givanchy1.jpg',
-    title: 'Purple tight dress',
-    subtitle: 'Givenchy',
+    title: 'Givenchy',
+    subTitle: 'Purple tight dress',
     release: 'March 2, 2021'
   },
   {
     img: 'https://i.ibb.co/Nt7XL7H/medium-Antegona.jpg',
     title: 'Medium Antegona',
-    subtitle: 'Givenchy handbag',
+    subTitle: 'Givenchy handbag',
     release: 'September 1, 2021'
   },
   {
     img: 'https://i.ibb.co/vvXY4fF/celine-black1.jpg',
     title: 'Medium Triomphe',
-    subtitle: 'Celine handbag',
+    subTitle: 'Celine handbag',
     release: 'March 5, 2021'
   },
   {
     img: 'https://sneakernews.com/wp-content/uploads/2021/03/adidas-yeezy-foam-runner-sand-relaese-date.jpg?w=1140',
-    title: 'Foam Runner',
-    subtitle: 'Yeezys',
+    title: 'Yeezy',
+    subTitle: 'Foam Runner',
     release: 'March 26, 2021'
   }
 ];
@@ -101,6 +101,7 @@ const Calendar: React.FC = () => {
   const [remind, setRemind] = React.useState([]);
   const [fontTitle, setTitle] = React.useState(15);
   const [fontS, setSTitle] = React.useState(25);
+  const [titleFont, setTitleFont] = React.useState(35);
 
 
   const push = (item): void => {
@@ -154,11 +155,13 @@ const Calendar: React.FC = () => {
   const larger = (): any => {
     setTitle(40);
     setSTitle(35);
+    setTitleFont(40);
   };
 
   const smaller = (): any => {
     setTitle(15);
     setSTitle(20);
+    setTitleFont(35);
   };
 
 
@@ -171,7 +174,7 @@ const Calendar: React.FC = () => {
     },
 
     title: {
-      fontSize: 35
+      fontSize: titleFont
     },
 
     button: {

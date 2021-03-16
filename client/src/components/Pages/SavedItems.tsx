@@ -66,21 +66,25 @@ const Saved = () => {
       flex: 1,
       fontSize: fontTitle,
       textAlign: 'center',
-      marginVertical: 35
+      marginVertical: 35,
+      marginLeft: 10
     },
 
     subItemInfo: {
       flex: 1,
       fontSize: fontS,
       textAlign: 'center',
-      marginVertical: 10
+      marginBottom: 10,
+      marginTop: -20,
+      marginLeft: 10
     },
 
     dateInfo: {
       flex: 1,
       fontSize: fontDate,
       textAlign: 'center',
-      marginVertical: 5
+      marginVertical: 5,
+      marginLeft: 10
     },
 
     saved: {
