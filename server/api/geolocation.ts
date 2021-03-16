@@ -9,7 +9,3 @@ export default Location.post('/', (req, res): Promise<any> => {
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(404));
 });
-
-// module.exports = {
-//   Location,
-// };

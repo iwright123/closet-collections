@@ -14,7 +14,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 import { Icon } from '@material-ui/core';
 import MessageIcon from '@material-ui/icons/Message';
-
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 //import tileData from './tileData';
 
 interface IPost {
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
-    color: 'white'
+    color: 'black'
   },
   gridList: {
     width: 1000,
@@ -57,6 +58,8 @@ const OutfitGrid = (): any => {
   const [images, setImages] = React.useState([]);
   const [likeColor, setLikeColor] = React.useState(false);
   const [dislikeColor, setDislikeColor] = React.useState(false);
+  const [font, setFont] = useState(25);
+  const [imgSize, setImgSize] = useState(15);
 
   const colorChange = { color: 'yellow'};
   const colorChange2 = { color: 'red'};
@@ -69,6 +72,15 @@ const OutfitGrid = (): any => {
     setDislikeColor(!dislikeColor);
   };
 
+  const larger = (): any => {
+    setFont(40);
+    setImgSize(40);
+  };
+  const smaller = (): any => {
+    setFont(25);
+    setImgSize(15);
+  };
+
   useEffect(() => {
     axios.get('/outfit')
       .then(({ data }) => setImages(data))
@@ -76,7 +88,10 @@ const OutfitGrid = (): any => {
   }, []);
 
   return (<div className={classes.root}>
-    <h1>Outfits</h1>
+    <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
+    <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
+    <div></div>
+    <h1 style={{fontSize: font}}>Outfits</h1>
 
     <GridList cellHeight={300} spacing={10} className={classes.gridList}>
       <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
@@ -105,7 +120,7 @@ const OutfitGrid = (): any => {
                   >
                     <ThumbUpIcon
                       className="buttonIcon"
-                      style={{ fontSize: 15}}
+                      style={{ fontSize: imgSize}}
 
                     />
                   </Button>
@@ -115,13 +130,13 @@ const OutfitGrid = (): any => {
                   >
                     <ThumbDownIcon
                       className="buttonIcon"
-                      style={{ fontSize: 15 }}
+                      style={{ fontSize: imgSize }}
                     />
                   </Button>
                   <Button>
                     <MessageIcon
                       className="buttonIcon"
-                      style={{ fontSize: 15 }}
+                      style={{ fontSize: imgSize }}
                     />
                   </Button>
                 </>

@@ -181,4 +181,9 @@ h3 {
   margin-left: 2px;
 }
 
+.logo {
+  position:absolute;
+right:0;
+top:0;
+}
 
