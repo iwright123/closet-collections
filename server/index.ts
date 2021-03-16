@@ -8,7 +8,6 @@ import { Request, Response} from 'express';
 const { GoogleStrategy } = require('./passport');
 import passport from 'passport';
 import session from 'express-session';
-
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
@@ -18,6 +17,10 @@ import { Twilio } from 'twilio';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
 import usersOutfit from '../client/src/components/models/UsersOutfits';
+import moment from 'moment';
+import { Appointment } from './db/goose';
+import momentTimeZone from 'moment-timezone';
+
 const httpServer = createServer(app);
 
 
@@ -29,16 +32,7 @@ dotenv.config({
 const io = new Server(httpServer, {
   // ...
 });
-io.on('connection', (socket: Socket) => {
-  console.log('a user connected');
-  socket.on('disconnect', (): void => {
-    console.log('user disconnected');
-  });
-  socket.on('message', ({name, message}) => {
-    console.log('message:', message, 'user', name);
-    io.emit('message', {name, message});
-  });
-});
+
 ////////////////HELPERS////////////////////
 
 
@@ -213,10 +207,61 @@ app.delete('/logout', (req: Request, res: Response) => {
 //     .then((message: any) => console.log('message sid', message.sid))
 //     .catch((err: any) => console.warn('twilio error', err));
 // });
+
+const getTimeZone = (): any => {
+  return momentTimeZone.tz.names();
+};
+
+app.get('/create', (req, res, next) => {
+  res.render('appoinment/create', {
+    timeZone: getTimeZone(),
+    appointment: new Appointment({
+      name: '',
+      phoneNumber: '',
+      notification: '',
+      timeZone: '',
+      time: ''
+    })
+  });
+});
+
+
+app.get('/mongod', (req, res, next) => {
+  Appointment.find({})
+    .then((data) => res.send(data))
+    .catch((err) => console.warn(err));
+});
+
+app.post('/reminder', (req, res, next) => {
+  const { username, phoneNumber, notification, timeZone } = req.body;
+  const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
+  console.log(username);
+
+  const appointment = new Appointment({
+    name: username,
+    phoneNumber: phoneNumber,
+    notification: notification,
+    timeZone: timeZone,
+    time: time});
+  appointment.save()
+    .then(() => console.log('success'))
+    .catch((err) => console.warn(err));
+});
+
+
 /////////Twilio//////////
 
 
-
+io.on('connection', (socket: Socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', (): void => {
+    console.log('user disconnected');
+  });
+  socket.on('message', ({name, message}) => {
+    console.log('message:', message, 'user', name);
+    io.emit('message', {name, message});
+  });
+});
 
 
 
