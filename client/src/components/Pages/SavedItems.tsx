@@ -11,7 +11,7 @@ import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 const Saved = () => {
 
   const [item, setItems] = React.useState([]);
-  const [page, setPage] = React.useState(false);
+  const [page, setPage] = React.useState(true);
   const [clickedItem, setClicked] = React.useState([]);
   const [fontTitle, setTitle] = React.useState(20);
   const [fontS, setSTitle] = React.useState(30);
@@ -19,7 +19,7 @@ const Saved = () => {
 
 
   const display = (item) => {
-    setPage(true);
+    setPage(false);
 
     setClicked([item.title, item.subTitle, item.imgUrl, item.releaseDate]);
 
@@ -99,7 +99,7 @@ const Saved = () => {
       <View style={styles.container}>
         {
 
-          page === false ?
+          page === true ?
             item.map((item, v) => {
               return <View
                 key={v}>
@@ -113,7 +113,6 @@ const Saved = () => {
               </View>;
             }) :
             <View style={styles.saved}>
-
               <div>
                 <ZoomInIcon onClick={larger} />
                 <ZoomOutIcon onClick={smaller} />

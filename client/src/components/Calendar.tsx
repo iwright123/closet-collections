@@ -10,8 +10,6 @@ import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 
 
-
-
 const items = [
   {
     img: 'https://static.nike.com/a/images/t_prod_ss/w_960,c_limit,f_auto/ca0d4ca0-bf29-4e7c-811e-ee2a6219acdc/air-jordan-1-university-blue-release-date.jpg',
@@ -48,6 +46,42 @@ const items = [
     title: 'Dunk Low',
     subTitle: 'City Market',
     release: 'March 4th, 2021'
+  },
+  {
+    img: 'https://i.ibb.co/8mKdjhY/supreme1.jpg',
+    title: 'Hoodie',
+    subTitle: 'Turquoise Supreme',
+    release: 'March 20th, 2021'
+  },
+  {
+    img: 'https://i.ibb.co/0VL79TM/supreme2.jpg',
+    title: 'Peacock Jacket',
+    subtitle: 'Supreme',
+    release: 'March 20th, 2021'
+  },
+  {
+    img: 'https://i.ibb.co/s6Z1DB6/givanchy1.jpg',
+    title: 'Purple tight dress',
+    subtitle: 'Givenchy',
+    release: 'March 2, 2021'
+  },
+  {
+    img: 'https://i.ibb.co/Nt7XL7H/medium-Antegona.jpg',
+    title: 'Medium Antegona',
+    subtitle: 'Givenchy handbag',
+    release: 'September 1, 2021'
+  },
+  {
+    img: 'https://i.ibb.co/vvXY4fF/celine-black1.jpg',
+    title: 'Medium Triomphe',
+    subtitle: 'Celine handbag',
+    release: 'March 5, 2021'
+  },
+  {
+    img: 'https://sneakernews.com/wp-content/uploads/2021/03/adidas-yeezy-foam-runner-sand-relaese-date.jpg?w=1140',
+    title: 'Foam Runner',
+    subtitle: 'Yeezys',
+    release: 'March 26, 2021'
   }
 ];
 
@@ -62,7 +96,7 @@ const Calendar: React.FC = () => {
   const [liked, setLike] = React.useState('');
   const [phone, setNumber] = React.useState('');
   const [pushNotifications, setNotifications] = React.useState([]);
-  const [page, setPage] = React.useState(false);
+  const [page, setPage] = React.useState(true);
   const [form, setForm] = React.useState(false);
   const [remind, setRemind] = React.useState([]);
   const [fontTitle, setTitle] = React.useState(15);
@@ -169,9 +203,10 @@ const Calendar: React.FC = () => {
     <>
       <View>
         {
-          page === false ?
+
+          page === true ?
             <View style={styles.container}>
-              <TouchableOpacity onPress={(): void => setPage(true)}>
+              <TouchableOpacity onPress={(): void => setPage(false)}>
                 <Text>Fav Items</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={(): void => alert('Add your Number!')}>
@@ -203,7 +238,7 @@ const Calendar: React.FC = () => {
               }
             </View> :
             <View>
-              <ExitToAppIcon onClick={(): void => setPage(false)}/>
+              <ExitToAppIcon onClick={(): void => setPage(true)}/>
               <Saved />
             </View>
 

@@ -26,3 +26,13 @@ export const deleteOutfit = (body: any): Promise<any> => {
     }
   });
 };
+
+export const updateFav = (body: any, id: any): Promise<any> => {
+  const { favorite } = body;
+  return Outfit.update({
+    favorite: favorite },
+  {where: {
+    id: id
+  }
+  });
+};

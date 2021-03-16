@@ -53,8 +53,10 @@ dotenv.config();
 ////////////////HELPERS////////////////////
 
 import { addItem, getAllItems, deleteItem } from './helpers/Item';
-import { getAllWhiteboardPosts, savePost } from './helpers/WhiteBoardPost';
-import { saveOutfit, getAllOutfits, deleteOutfit, getUserOutfits } from './helpers/Outfit';
+
+//import { getAllWhiteboardPosts, savePost} from './helpers/WhiteBoardPost';
+import { saveOutfit, getAllOutfits, deleteOutfit, getUserOutfits, updateFav} from './helpers/Outfit';
+import { getLikes, saveLikes } from './helpers/Likes';
 import Find from './api/findastore';
 
 ////////////////HELPERS////////////////////
@@ -98,11 +100,11 @@ app.get('/items', (req: Request, res: Response) => {
     .catch((err) => console.warn(err));
 });
 
-app.get('/whiteboardpost', (req: Request, res: Response): Promise<any> => {
-  return getAllWhiteboardPosts()
-    .then((data) => res.json(data))
-    .catch((err) => console.warn(err));
-});
+// app.get('/whiteboardpost', (req: Request, res: Response): Promise<any> => {
+//   return getAllWhiteboardPosts()
+//     .then((data) => res.json(data))
+//     .catch((err) => console.warn(err));
+// });
 
 app.post('/items', (req: Request, res: Response): Promise<any> => {
   return addItem(req.body)
@@ -111,10 +113,16 @@ app.post('/items', (req: Request, res: Response): Promise<any> => {
 
 });
 
-app.post('/whiteboardpost', (req: Request, res: Response): Promise<any> => {
-  return savePost(req.body)
-    .then((data) => console.log('Success!', data))
-    .catch((err) => console.error(err));
+app.get('/likes', (req: Request, res: Response): Promise<any> => {
+  return getLikes(req.cookies.thesis)
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
+
+app.post('/likes', (req: Request, res: Response): Promise<any> => {
+  return saveLikes(req.body, req.cookies.thesis)
+    .then((data) => console.log('Likes created', data))
+    .catch((err) => console.warn(err));
 });
 
 app.delete('/items/:id', (req: Request, res: Response): Promise<any> => {
@@ -134,12 +142,12 @@ app.delete('/outfit/:id', (req: express.Request, res: express.Response): Promise
 import CalendarItem from './routes/calender';
 import Weather from './api/weather';
 import Location from './api/geolocation';
+//import WhiteboardPost from './routes/whiteboardposts';
 
 app.use('/calendar', CalendarItem);
 app.use('/api/weather', Weather);
 app.use('/api/location', Location);
-
-
+//app.use('/whiteboardpost', WhiteboardPost);
 /////////GOOGLE AUTH ///////////
 app.use(
   session({
