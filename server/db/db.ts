@@ -6,19 +6,18 @@ const sequelize: Sequelize = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllq
   host: 'bao0spze4uyjnrjcstlm-mysql.services.clever-cloud.com',
   dialect: 'mysql'
 });
-
+const db = {};
 const Users = sequelize.define('Users', {
   id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    allowNull: false,
-    primaryKey: true
+    type: DataTypes.UUID,
+    primaryKey: true,
+    defaultValue: DataTypes.UUIDV4,
+    allowNull: false
   },
-
   username: {
     type: DataTypes.STRING,
-    allowNull: false
-  }
+
+  },
 });
 
 export const Items = sequelize.define('Items', {
@@ -68,9 +67,15 @@ export const Outfit = sequelize.define('Outfit', {
 });
 
 export const WhiteboardPost = sequelize.define('WhiteboardPost', {
-  idUser: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
+  id: {
+    type: DataTypes.UUID,
+    primaryKey: true,
+    defaultValue: DataTypes.UUIDV4,
+    allowNull: false
+  },
+  userId: {
+    type: DataTypes.UUID,
+    allowNull: false
   },
   likes: {
     type: DataTypes.BOOLEAN,
@@ -80,13 +85,45 @@ export const WhiteboardPost = sequelize.define('WhiteboardPost', {
     type: DataTypes.BOOLEAN,
     allowNull: true,
   },
-  comments: {
-    type: DataTypes.STRING,
-    unique: true
+  content: {
+    type: DataTypes.TEXT,
   },
 });
 
-// WhiteboardPost.belongsTo(Outfit);
+
+export const Comment = sequelize.define('Comment', {
+  id: {
+    type: DataTypes.UUID,
+    primaryKey: true,
+    defaultValue: DataTypes.UUIDV4,
+    allowNull: false
+  },
+  postId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+    defaultValue: DataTypes.UUIDV4,
+  },
+  content: {
+    type: DataTypes.TEXT,
+
+  },
+  commenterUsername: {
+    type: DataTypes.STRING,
+
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+  updatedAt: DataTypes.DATE,
+  deletedAt: DataTypes.DATE
+
+
+});
+Users.hasMany(Outfit);
+Outfit.belongsTo(Users);
+WhiteboardPost.belongsTo(Outfit);
+Comment.belongsTo(WhiteboardPost);
 // saves all items into 1 outfit
 
 
@@ -120,25 +157,6 @@ export const Calendar = sequelize.define('Calendar', {
   }
 });
 
-export const Comment = sequelize.define('Comment', {
-  id: {
-
-    type: DataTypes.INTEGER,
-
-    primaryKey: true,
-    autoIncrement: true,
-    unique: true
-  },
-  userName: {
-    type: DataTypes.STRING,
-    unique: false
-  },
-  text: {
-    type: DataTypes.STRING
-  }
-
-
-});
 
 
 
