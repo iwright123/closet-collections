@@ -85,7 +85,7 @@ export const WhiteboardPost = sequelize.define('WhiteboardPost', {
   },
 });
 
-WhiteboardPost.belongsTo(Outfit);
+// WhiteboardPost.belongsTo(Outfit);
 // saves all items into 1 outfit
 
 export const Calendar = sequelize.define('Calendar', {
