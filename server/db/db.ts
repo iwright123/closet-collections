@@ -1,23 +1,23 @@
 import { DataTypes, Sequelize } from 'sequelize';
 import mysql from 'mysql2';
+import { create } from 'react-test-renderer';
 
 const sequelize: Sequelize = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllqetkd', 'vnG2q19b3wbaZXBhVjLY', {
   host: 'bao0spze4uyjnrjcstlm-mysql.services.clever-cloud.com',
   dialect: 'mysql'
 });
-
+const db = {};
 const Users = sequelize.define('Users', {
   id: {
     type: DataTypes.INTEGER,
-    autoIncrement: true,
+    primaryKey: true,
     allowNull: false,
-    primaryKey: true
+    autoIncrement: true
   },
-
   username: {
     type: DataTypes.STRING,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 });
 
 export const Items = sequelize.define('Items', {
@@ -107,18 +107,47 @@ export const WhiteboardPost = sequelize.define('WhiteboardPost', {
     type: DataTypes.BOOLEAN,
     allowNull: true,
   },
-  comments: {
-    type: DataTypes.STRING,
-    unique: true
+  content: {
+    type: DataTypes.TEXT,
   },
 });
 
-// WhiteboardPost.belongsTo(Outfit);
+
+export const Comment = sequelize.define('Comment', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false,
+  },
+  postId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+    defaultValue: DataTypes.UUID,
+  },
+  text: {
+    type: DataTypes.TEXT,
+
+  },
+  userName: {
+    type: DataTypes.STRING,
+
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+
+
+});
+
 // saves all items into 1 outfit
+
 
 export const Calendar = sequelize.define('Calendar', {
   id: {
     type: DataTypes.INTEGER,
+
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
@@ -182,13 +211,17 @@ export const addUser = (name: string): Promise<any> => {
     }
   });
 };
-
-const getFits = (): Promise<any> => {
-  return WhiteboardPost.findAll();
+export const postComments = async( body: any): Promise<any> => {
+  const { userName, text} = body;
+  console.log({userName, text});
+  const createComment = await Comment.create({
+    userName: userName,
+    text: text
+  });
+  return createComment.save();
 };
-
-const getTrash = (): Promise<any> => {
-  return WhiteboardPost.findAll();
+export const getComments = (): Promise<any> => {
+  return Comment.findAll();
 };
 
 module.exports = {
@@ -198,8 +231,8 @@ module.exports = {
   Outfit,
   Calendar,
   Likes,
-  getFits,
-  getTrash,
+  getComments,
+  postComments,
   addUser
 };
 

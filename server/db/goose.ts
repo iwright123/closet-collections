@@ -88,10 +88,21 @@ AppointmentSchema.statics.sendNotifications = (callback): any => {
 
 };
 //export const Appointment = mongoose.model('Appointment', AppointmentSchema);
-
 // module.exports = {
 //   Appointment,
 //   sendNotifications
 // };
+
+const commentSchema = new mongoose.Schema({
+  outfitID: Number,
+  name: String,
+  text: String,
+});
+const likeSchema = new mongoose.Schema({
+  name: String,
+  outfitId: Number
+});
+export const Like = mongoose.model('Like', likeSchema);
+export const Comment = mongoose.model('Comment', commentSchema);
 
 

@@ -4,14 +4,12 @@ import moment from 'moment';
 import Message from '../models/Message';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
-
 // const <input  = require('@material-ui/core<input')
 const socket = io('http://localhost:3000');
 const Chat = (): ReactElement => {
   const [state, setState] = React.useState<Message>({message: '', name: ''});
   const [chat, setChat] = React.useState([]);
   const [font, setFont] = React.useState(32);
-
   React.useEffect((): void => {
     socket.on('message', ({name, message }) => {
       setChat([...chat, {name, message}]);
@@ -29,13 +27,10 @@ const Chat = (): ReactElement => {
   const larger = (): any => {
     setFont(50);
   };
-
   const smaller = (): any => {
     setFont(25);
   };
   const renderChat = (): ReactElement[] => {
-
-
     return chat.map((message: Message): ReactElement => (
       <div>
         <h1>
