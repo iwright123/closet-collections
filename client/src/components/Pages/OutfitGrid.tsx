@@ -16,6 +16,8 @@ import { Icon } from '@material-ui/core';
 import MessageIcon from '@material-ui/icons/Message';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import Footer from './Footer';
+
 //import tileData from './tileData';
 
 interface IPost {
@@ -32,7 +34,8 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
-    color: 'black'
+    color: 'black',
+    paddingBottom: 60
   },
   gridList: {
     width: 1000,
@@ -87,34 +90,38 @@ const OutfitGrid = (): any => {
       .catch((err) => console.warn(err));
   }, []);
 
-  return (<div className={classes.root}>
-    <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
-    <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
-    <div></div>
-    <h1 style={{fontSize: font}}>Outfits</h1>
+  return (
+    <div className='main container'>
 
-    <GridList cellHeight={300} spacing={10} className={classes.gridList}>
-      <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-        <ListSubheader component="div"></ListSubheader>
-      </GridListTile>
-      {
-        images.map((tile, i) => (
 
-          <GridListTile key={i}>
-            <Zoom>
-              <img src={tile.imageUrl} />
-            </Zoom>
-            <GridListTileBar
-              title={tile.title}
-              actionIcon={
-                <>
-                  {/* <Button>
+      <div className={classes.root}>
+        <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
+        <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
+        <div></div>
+        <h1 style={{fontSize: font}}>Outfits</h1>
+
+        <GridList cellHeight={300} spacing={10} className={classes.gridList}>
+          <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+            <ListSubheader component="div"></ListSubheader>
+          </GridListTile>
+          {
+            images.map((tile, i) => (
+
+              <GridListTile key={i}>
+                <Zoom>
+                  <img src={tile.imageUrl} />
+                </Zoom>
+                <GridListTileBar
+                  title={tile.title}
+                  actionIcon={
+                    <>
+                      {/* <Button>
                 <DeleteIcon
                 className="buttonIcon"
                 style={{ fontSize: 15 }}
                  />
               </Button> */}
-                  {/* <Button
+                      {/* <Button
                     onClick={((): void => handleLikeClick(i))}
                     style={likeColor ? colorChange : null}
                   >
@@ -133,22 +140,23 @@ const OutfitGrid = (): any => {
                       style={{ fontSize: imgSize }}
                     />
                   </Button> */}
-                  <Button>
-                    <MessageIcon
-                      className="buttonIcon"
-                      style={{ fontSize: imgSize }}
-                    />
-                  </Button>
-                </>
-              }
-              key={String(i)}
-            />
-          </GridListTile>
+                      <Button>
+                        <MessageIcon
+                          className="buttonIcon"
+                          style={{ fontSize: imgSize }}
+                        />
+                      </Button>
+                    </>
+                  }
+                  key={String(i)}
+                />
+              </GridListTile>
 
-        ))}
-    </GridList>
-
-  </div>
+            ))}
+        </GridList>
+        <Footer></Footer>
+      </div>
+    </div>
   );
 };
 

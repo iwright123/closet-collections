@@ -8,7 +8,7 @@ import Saved from './Pages/SavedItems';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
-
+import Footer from './Pages/Footer';
 
 const items = [
   {
@@ -236,14 +236,18 @@ const Calendar: React.FC = () => {
                   </View>;
                 })
               }
+              <Footer></Footer>
             </View> :
             <View>
               <ExitToAppIcon onClick={(): void => setPage(true)}/>
               <Saved />
+              <Footer></Footer>
             </View>
 
         }
       </View>
+
+
     </>
   );
 };

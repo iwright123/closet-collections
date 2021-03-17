@@ -32,7 +32,7 @@ const App = (): ReactElement => {
   // };
 
   return (
-    <>
+    <div className='main container'>
       {
         login === false ?
           <Router>
@@ -61,7 +61,7 @@ const App = (): ReactElement => {
           </Router>
 
       }
-    </>
+    </div>
   );
 };
 

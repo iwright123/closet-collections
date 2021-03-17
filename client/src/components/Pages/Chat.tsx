@@ -4,6 +4,7 @@ import moment from 'moment';
 import Message from '../models/Message';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import Footer from './Footer';
 
 // const <input  = require('@material-ui/core<input')
 const socket = io('http://localhost:3000');
@@ -86,6 +87,8 @@ const Chat = (): ReactElement => {
           </ul>
         </div>
       </div>
+      <Footer></Footer>
+
     </div>
   );
 };

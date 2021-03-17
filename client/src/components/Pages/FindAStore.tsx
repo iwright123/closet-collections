@@ -2,7 +2,7 @@ import React, { useState, } from 'react';
 import axios from 'axios';
 import SearchBar from 'material-ui-search-bar';
 import Button from '@material-ui/core/Button';
-
+import Footer from './Footer';
 interface findAStore{
   keyword: any
 }
@@ -45,6 +45,7 @@ const findAStore = (): any => {
           return null;
         })}
       </div>
+      <Footer></Footer>
     </div>
   );
 };
