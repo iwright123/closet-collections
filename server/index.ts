@@ -12,7 +12,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import { addUser } from './db/db';
+import {addUser, postComments, getComments} from './db/db';
 import { Twilio } from 'twilio';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
@@ -52,7 +52,7 @@ const client = new Twilio(accountSid, authToken);
 dotenv.config();
 ////////////////HELPERS////////////////////
 
-import { addItem, getAllItems, deleteItem } from './helpers/Item';
+import { addItem, getAllItems, deleteItem, searchItems } from './helpers/Item';
 
 //import { getAllWhiteboardPosts, savePost} from './helpers/WhiteBoardPost';
 import { saveOutfit, getAllOutfits, deleteOutfit, getUserOutfits, updateFav} from './helpers/Outfit';
@@ -75,7 +75,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(cors());
+//app.use(cors());
 app.use('/api/search', Find);
 /*******************DATABASE ROUTES ************************************/
 app.get('/outfit/:user', (req: Request, res: Response): Promise<usersOutfit> => {
@@ -99,6 +99,13 @@ app.get('/items', (req: Request, res: Response) => {
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });
+
+app.get('items/search', (req: Request, res: Response) => {
+  return searchItems(req.body)
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
+
 
 // app.get('/whiteboardpost', (req: Request, res: Response): Promise<any> => {
 //   return getAllWhiteboardPosts()
@@ -142,7 +149,7 @@ app.delete('/outfit/:id', (req: express.Request, res: express.Response): Promise
 import CalendarItem from './routes/calender';
 import Weather from './api/weather';
 import Location from './api/geolocation';
-//import WhiteboardPost from './routes/whiteboardposts';
+import { AiOutlineOneToOne } from 'react-icons/ai';
 
 app.use('/calendar', CalendarItem);
 app.use('/api/weather', Weather);
@@ -253,24 +260,43 @@ app.post('/reminder', (req, res, next) => {
 
 /////////Twilio//////////
 
-
 io.on('connection', (socket: Socket) => {
-  console.log('a user connected');
+
   socket.on('disconnect', (): void => {
     console.log('user disconnected');
   });
   socket.on('message', ({name, message}) => {
-    console.log('message:', message, 'user', name);
+    console.log('LINE 267', {name, message});
     io.emit('message', {name, message});
+  });
+  socket.on('comment', ({name, comment}) => {
+    console.log('LINE 271', {comment, name});
+    io.emit('comment', {name, comment});
+
   });
 });
 
 
 
+app.post('/comment', (req: Request, res: Response):Promise<any> => {
+  //const { userName, text} = req.body;
+  console.log('LINE 280', req.body);
+  return postComments(req.body)
+    .then(data => console.log('posted comment 288', data))
+    .catch(err => console.log('Error posting comment', err));
+});
+app.get('/comments', (req: Request, res: Response): Promise<any> => {
+  // const { id } = req.body;
+  console.log('Inside get comments');
+  return getComments()
+    .then(data => res.send(data))
+    .catch(err => console.log('error getting comments', err));
+});
 
 
 
-httpServer.listen(port, () => {
+
+httpServer.listen(3000, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
 
