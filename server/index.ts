@@ -52,7 +52,7 @@ const client = new Twilio(accountSid, authToken);
 dotenv.config();
 ////////////////HELPERS////////////////////
 
-import { addItem, getAllItems, deleteItem } from './helpers/Item';
+import { addItem, getAllItems, deleteItem, searchItems } from './helpers/Item';
 
 //import { getAllWhiteboardPosts, savePost} from './helpers/WhiteBoardPost';
 import { saveOutfit, getAllOutfits, deleteOutfit, getUserOutfits, updateFav} from './helpers/Outfit';
@@ -99,6 +99,13 @@ app.get('/items', (req: Request, res: Response) => {
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });
+
+app.get('items/search', (req: Request, res: Response) => {
+  return searchItems(req.body)
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
+
 
 // app.get('/whiteboardpost', (req: Request, res: Response): Promise<any> => {
 //   return getAllWhiteboardPosts()
@@ -257,12 +264,13 @@ io.on('connection', (socket: Socket) => {
     console.log('user disconnected');
   });
   socket.on('message', ({name, message}) => {
-    console.log({name, message});
+    console.log('LINE 267', {name, message});
     io.emit('message', {name, message});
   });
   socket.on('comment', ({name, comment}) => {
-    console.log({comment, name});
+    console.log('LINE 271', {comment, name});
     io.emit('comment', {name, comment});
+
   });
 });
 
@@ -270,13 +278,14 @@ io.on('connection', (socket: Socket) => {
 
 app.post('/comment', (req: Request, res: Response):Promise<any> => {
   //const { userName, text} = req.body;
-
+  console.log('LINE 280', req.body);
   return postComments(req.body)
-    .then(data => console.log('posted comment', data))
+    .then(data => console.log('posted comment 288', data))
     .catch(err => console.log('Error posting comment', err));
 });
 app.get('/comments', (req: Request, res: Response): Promise<any> => {
   // const { id } = req.body;
+  console.log('Inside get comments');
   return getComments()
     .then(data => res.send(data))
     .catch(err => console.log('error getting comments', err));

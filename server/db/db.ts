@@ -4,7 +4,13 @@ import { create } from 'react-test-renderer';
 
 const sequelize: Sequelize = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllqetkd', 'vnG2q19b3wbaZXBhVjLY', {
   host: 'bao0spze4uyjnrjcstlm-mysql.services.clever-cloud.com',
-  dialect: 'mysql'
+  dialect: 'mysql',
+  pool: {
+    max: 20,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
 });
 const db = {};
 const Users = sequelize.define('Users', {
@@ -123,13 +129,13 @@ export const Comment = sequelize.define('Comment', {
   postId: {
     type: DataTypes.UUID,
     allowNull: true,
-    defaultValue: DataTypes.UUID4,
+    defaultValue: DataTypes.UUID,
   },
-  text: {
+  comment: {
     type: DataTypes.TEXT,
 
   },
-  userName: {
+  name: {
     type: DataTypes.STRING,
 
   },
@@ -212,15 +218,16 @@ export const addUser = (name: string): Promise<any> => {
   });
 };
 export const postComments = async( body: any): Promise<any> => {
-  const { userName, text} = body;
-  console.log({userName, text});
+  const { name, comment} = body;
+  console.log({name, comment});
   const createComment = await Comment.create({
-    userName: userName,
-    text: text
+    name: name,
+    comment: comment
   });
   return createComment.save();
 };
 export const getComments = (): Promise<any> => {
+  console.log(Comment.findAll());
   return Comment.findAll();
 };
 

@@ -17,7 +17,7 @@ import MessageIcon from '@material-ui/icons/Message';
 import SendIcon from '@material-ui/icons/Send';
 import Message from '../models/Message';
 import {io} from 'socket.io-client';
-import Chat2 from './Comments';
+import Comments from './Comments';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 //import tileData from './tileData';
@@ -130,7 +130,7 @@ const OutfitGrid = (): any => {
                 />
 
               </Button>
-              <Chat2></Chat2>
+              <Comments></Comments>
               <Button>
                 <MessageIcon
                   onClick={(): void => console.log('nothing')}
