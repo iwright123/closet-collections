@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import {io} from 'socket.io-client';
-
+import moment from 'moment';
 import Message from '../models/Message';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
@@ -30,14 +30,22 @@ const Chat = (): ReactElement => {
   const smaller = (): any => {
     setFont(25);
   };
-
-
+  const renderChat = (): ReactElement[] => {
+    return chat.map((message: Message): ReactElement => (
+      <div>
+        <h1>
+          {message.message}
+        </h1>
+      </div>
+    ));
+  };
+  const time: string = moment().format('h:mm a');
   return (
     <div>
       <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
       <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
       <div className="card">
-        <form id='formCard' onSubmit={onMessageSubmit}>
+        <form onSubmit={onMessageSubmit}>
           <h1 style={{fontSize: font}}>Messenger</h1>
           <div className="name-field">
           </div>
@@ -59,7 +67,7 @@ const Chat = (): ReactElement => {
           </div>
           <button>Send Message</button>
         </form>
-        <div>
+        <div className="render-chat">
           <h1 style={{fontSize: font}}>Chat Log</h1>
           <ul id='message-log'>
             {chat.map((message, index) => {
@@ -67,7 +75,7 @@ const Chat = (): ReactElement => {
                 {/* <span id='messagename'>{message.name}</span>
             <span id='message'>{message.message}</span>
             <span id='time'>{moment().format('h:mm a')}</span> */}
-                {`${message.name}: ${message.message}`}
+                {`${message.name}: ${message.message} ${moment().format('h:mm a')}`}
               </div>;
             })}
           </ul>

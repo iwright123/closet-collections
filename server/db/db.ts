@@ -9,14 +9,14 @@ const sequelize: Sequelize = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllq
 const db = {};
 const Users = sequelize.define('Users', {
   id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     primaryKey: true,
-    defaultValue: DataTypes.UUID4,
-    allowNull: false
+    allowNull: false,
+    autoIncrement: true
   },
   username: {
     type: DataTypes.STRING,
-
+    allowNull: false,
   },
 });
 
@@ -56,32 +56,54 @@ export const Outfit = sequelize.define('Outfit', {
     type: DataTypes.STRING,
     allowNull: false
   },
-
   outfitTitle: {
     type: DataTypes.STRING,
     unique: true
   },
   imageUrl: {
     type: DataTypes.STRING,
+  },
+  likesCount: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
   }
 });
 
+export const Likes = sequelize.define('Likes', {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: DataTypes.INTEGER
+  },
+  outfitId: {
+    type: DataTypes.INTEGER,
+  },
+  user: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  favorite: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  }
+});
+
+// Outfit.hasMany(Likes, { foreignKey: 'outfitId'});
+// Likes.belongsTo(Outfit, { foreignKey: 'outfitId'});
+
 export const WhiteboardPost = sequelize.define('WhiteboardPost', {
   id: {
-    type: DataTypes.UUID,
-    primaryKey: true,
-    defaultValue: DataTypes.UUID4,
-    allowNull: false
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
   },
-  userId: {
-    type: DataTypes.UUID,
-    allowNull: false
+  user: {
+    type: DataTypes.STRING,
+    allowNull: true
   },
   likes: {
-    type: DataTypes.BOOLEAN,
-    allowNull: true,
-  },
-  dislikes: {
     type: DataTypes.BOOLEAN,
     allowNull: true,
   },
@@ -153,27 +175,6 @@ export const Calendar = sequelize.define('Calendar', {
   }
 });
 
-
-
-
-
-const Vote = sequelize.define('Vote', {
-  idUser: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true
-  },
-  idPost: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true
-  },
-  type: {
-    type: DataTypes.STRING,
-  },
-
-});
-
 const database = 'bao0spze4uyjnrjcstlm';
 
 sequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
@@ -229,9 +230,9 @@ module.exports = {
   Users,
   Outfit,
   Calendar,
-  Vote,
-  postComments,
+  Likes,
   getComments,
+  postComments,
   addUser
 };
 

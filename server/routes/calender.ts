@@ -20,5 +20,3 @@ CalendarItem.delete('/', (req, res) => {
     .then((data) => res.send(data))
     .catch((err) => console.warn(err));
 });
-
-// module.exports = CalendarItem;
