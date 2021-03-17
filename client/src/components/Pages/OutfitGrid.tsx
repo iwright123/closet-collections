@@ -17,7 +17,7 @@ import MessageIcon from '@material-ui/icons/Message';
 import SendIcon from '@material-ui/icons/Send';
 import Message from '../models/Message';
 import {io} from 'socket.io-client';
-import Chat2 from './Chat2';
+import Chat2 from './Comments';
 //import tileData from './tileData';
 const socket = io('http://localhost:3000');
 interface IPost {

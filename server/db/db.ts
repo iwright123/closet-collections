@@ -11,7 +11,7 @@ const Users = sequelize.define('Users', {
   id: {
     type: DataTypes.UUID,
     primaryKey: true,
-    defaultValue: DataTypes.UUIDV4,
+    defaultValue: DataTypes.UUID4,
     allowNull: false
   },
   username: {
@@ -70,7 +70,7 @@ export const WhiteboardPost = sequelize.define('WhiteboardPost', {
   id: {
     type: DataTypes.UUID,
     primaryKey: true,
-    defaultValue: DataTypes.UUIDV4,
+    defaultValue: DataTypes.UUID4,
     allowNull: false
   },
   userId: {
@@ -93,21 +93,21 @@ export const WhiteboardPost = sequelize.define('WhiteboardPost', {
 
 export const Comment = sequelize.define('Comment', {
   id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
     primaryKey: true,
-    defaultValue: DataTypes.UUIDV4,
-    allowNull: false
+    allowNull: false,
   },
   postId: {
     type: DataTypes.UUID,
     allowNull: true,
-    defaultValue: DataTypes.UUIDV4,
+    defaultValue: DataTypes.UUID4,
   },
-  content: {
+  text: {
     type: DataTypes.TEXT,
 
   },
-  commenterUsername: {
+  userName: {
     type: DataTypes.STRING,
 
   },
@@ -115,21 +115,17 @@ export const Comment = sequelize.define('Comment', {
     type: DataTypes.DATE,
     allowNull: false
   },
-  updatedAt: DataTypes.DATE,
-  deletedAt: DataTypes.DATE
 
 
 });
-Users.hasMany(Outfit);
-Outfit.belongsTo(Users);
-WhiteboardPost.belongsTo(Outfit);
-Comment.belongsTo(WhiteboardPost);
+
 // saves all items into 1 outfit
 
 
 export const Calendar = sequelize.define('Calendar', {
   id: {
     type: DataTypes.INTEGER,
+
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
@@ -216,6 +212,7 @@ export const addUser = (name: string): Promise<any> => {
 };
 export const postComments = async( body: any): Promise<any> => {
   const { userName, text} = body;
+  console.log({userName, text});
   const createComment = await Comment.create({
     userName: userName,
     text: text
@@ -235,7 +232,6 @@ module.exports = {
   Vote,
   postComments,
   getComments,
-
   addUser
 };
 

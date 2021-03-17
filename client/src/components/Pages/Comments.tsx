@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import {io} from 'socket.io-client';
 import moment from 'moment';
 import Message from '../models/Message';
+import axios from 'axios';
 // const <input  = require('@material-ui/core<input')
 const socket = io('http://localhost:3000');
 const Chat2 = (): ReactElement => {
@@ -18,9 +19,19 @@ const Chat2 = (): ReactElement => {
   const onMessageSubmit = (e): void => {
     e.preventDefault();
     const {name, message} = state;
+    axios.post('/comment', message);
     socket.emit('message', {name, message});
     setState({message: '', name});
   };
+  React.useEffect((): any => {
+    axios.get('/comments').then((data: any) => {
+
+      const {userName, text} = data;
+      console.log('HEYYYYYYYYYYYY', {userName, text});
+      setChat([...chat, {name: userName, message: text}]);
+    }
+    );
+  }, []);
   // const renderChat = (): ReactElement[] => {
   //   return chat.map((message: Message): ReactElement => (
   //     <div>

@@ -214,20 +214,20 @@ app.post('/comment', (req: Request, res: Response):Promise<any> => {
   //const { userName, text} = req.body;
 
   return postComments(req.body)
-    .then(data => console.log('comment posted', data))
+    .then(data => console.log('posted comment', data))
     .catch(err => console.log('Error posting comment', err));
 });
 app.get('/comments', (req: Request, res: Response): Promise<any> => {
   // const { id } = req.body;
   return getComments()
-    .then(data => console.log('comments:', data))
+    .then(data => res.send(data))
     .catch(err => console.log('error getting comments', err));
 });
 
 
 
 
-httpServer.listen(port, () => {
+httpServer.listen(3000, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
 
