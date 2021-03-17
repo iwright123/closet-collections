@@ -25,7 +25,7 @@ export default (): any => (
 
         <ClosetTab>My Outfits</ClosetTab>
 
-        <ClosetTab>Add Items to Closet</ClosetTab>
+        <ClosetTab>Add Items</ClosetTab>
 
       </div>
 

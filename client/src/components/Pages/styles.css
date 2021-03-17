@@ -172,8 +172,12 @@ button {
 
 h3 {
   color: #2f72da;
+  font-family: 'Roboto Slab', serif;
 }
 
+h4 {
+  font-family: 'Roboto Slab', serif;
+}
 .message {
   right: 1px
 }
@@ -187,3 +191,12 @@ right:0;
 top:0;
 }
 
+.tabs {
+  font-family: 'Roboto Slab', serif;
+  background-color: 'black';
+
+}
+.tab-list {
+  font-family: 'Roboto Slab', serif;
+  background-color: 'black';
+}

@@ -7,7 +7,8 @@ import axios from 'axios';
 import $ from 'jquery';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Alert } from 'react-native';
 import { StylesProvider } from '@material-ui/core';
-
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 
 const CreateOutfitWhiteBoard = (): ReactElement => {
 
@@ -80,6 +81,9 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
 
   return (
     <div>
+      <div id="buttons"><button id="save" onClick={handleExportClick}>Save Outfit</button>
+        <ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon>
+        <ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
       <Stage
         width={400}
         height={400}
@@ -127,9 +131,16 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
           );
         })}
       </div>
-      <div id="buttons"><button id="save" onClick={handleExportClick}>Save Outfit</button></div>
-      <div id='largebutton'><button id='enlarge' onClick={larger}>Enlarge</button></div>
-      <div id='smallButton'><button id='smaller' onClick={smaller}>Return Size</button></div>
+      <div className='footer'>
+        <footer id="footer">
+          <div className='footer-text'>
+            Closet Collections
+          </div>
+          <div className='footer-text'>
+            Since 2021
+          </div>
+        </footer>
+      </div>
     </div>
   );
 };
