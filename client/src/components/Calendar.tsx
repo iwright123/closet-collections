@@ -169,13 +169,15 @@ const Calendar: React.FC = () => {
       justifyContent: 'center',
       alignItems: 'center'
     },
-
+    buttonContainer: {
+      flexDirection: 'row'
+    },
     title: {
       fontSize: 35
     },
 
     button: {
-      backgroundColor: 'clear',
+      backgroundColor: '#7ED957',
       marginVertical: -30
     },
 
@@ -206,17 +208,18 @@ const Calendar: React.FC = () => {
 
           page === true ?
             <View style={styles.container}>
-              <TouchableOpacity onPress={(): void => setPage(false)}>
-                <Text>Fav Items</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={(): void => alert('Add your Number!')}>
-                <Text>Add Number</Text>
-              </TouchableOpacity>
-              <Text style={styles.title}>Upcoming Releases!</Text>
               <div>
                 <ZoomInIcon onClick={larger} />
                 <ZoomOutIcon onClick={smaller} />
               </div>
+              <TouchableOpacity style={styles.buttonContainer}>
+
+                <Button title="Fav Items" color={'#000000'} onPress={(): void => setPage(false)}></Button>
+
+                <Button title="Add Number" color={'#000000'} onPress={(): void => alert('Add your Number!')}>Add Number</Button>
+              </TouchableOpacity>
+              <Text style={styles.title}>Upcoming Releases!</Text>
+
 
               {
                 items.map((item, v) => {
@@ -230,6 +233,7 @@ const Calendar: React.FC = () => {
                     <Text style={styles.subItemInfo}>
                       <FavoriteBorderIcon style={{backgroundColor: liked}} onClick={(): void => favItem(item)} /> {item.subTitle}</Text>
                     <Button
+                      color={'#000000'}
                       onPress={(): void => push(item)}
                       title='Notify Me!'
                     />
