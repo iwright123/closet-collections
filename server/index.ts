@@ -210,22 +210,22 @@ app.delete('/logout', (req: Request, res: Response) => {
 //     .catch((err: any) => console.warn('twilio error', err));
 // });
 
-const getTimeZone = (): any => {
-  return momentTimeZone.tz.names();
-};
+// const getTimeZone = (): any => {
+//   return momentTimeZone.tz.names();
+// };
 
-app.get('/create', (req, res, next) => {
-  res.render('appoinment/create', {
-    timeZone: getTimeZone(),
-    appointment: new Appointment({
-      name: '',
-      phoneNumber: '',
-      notification: '',
-      timeZone: '',
-      time: ''
-    })
-  });
-});
+// app.get('/create', (req, res, next) => {
+//   res.render('appoinment/create', {
+//     timeZone: getTimeZone(),
+//     appointment: new Appointment({
+//       name: '',
+//       phoneNumber: '',
+//       notification: '',
+//       timeZone: '',
+//       time: ''
+//     })
+//   });
+// });
 
 
 app.get('/mongod', (req, res, next) => {
