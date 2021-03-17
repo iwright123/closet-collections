@@ -1,42 +1,46 @@
 import React, { ReactElement } from 'react';
 import {io} from 'socket.io-client';
 import moment from 'moment';
-import Message from '../models/Message';
+import Comment from '../models/Comment';
 import axios from 'axios';
+
 // const <input  = require('@material-ui/core<input')
 const socket = io('http://localhost:3000');
-const Chat2 = (): ReactElement => {
-  const [state, setState] = React.useState<Message>({message: '', name: ''});
+const Comments = (): ReactElement => {
+  const [state, setState] = React.useState<Comment>({comment: '', name: ''});
   const [chat, setChat] = React.useState([]);
   React.useEffect((): void => {
-    socket.on('message', ({name, message }) => {
-      setChat([...chat, {name, message}]);
+    socket.on('comment', ({name, comment }) => {
+      setChat([...chat, {name, comment}]);
     });
   }, [state]);
   const onTextChange = (e): void => {
     setState({...state, [e.target.name]: e.target.value});
   };
-  const onMessageSubmit = (e): void => {
+  const onCommentSubmit = (e): void => {
     e.preventDefault();
-    const {name, message} = state;
-    axios.post('/comment', message);
-    socket.emit('message', {name, message});
-    setState({message: '', name});
+    const {name, comment} = state;
+    axios.post('/comment', {name, comment});
+    socket.emit('comment', {name, comment});
+    setState({comment: '', name});
   };
   React.useEffect((): any => {
-    axios.get('/comments').then((data: any) => {
-
-      const {userName, text} = data;
-      console.log('HEYYYYYYYYYYYY', {userName, text});
-      setChat([...chat, {name: userName, message: text}]);
+    axios.get('/comments').then((comments: any) => {
+      const { data } = comments;
+      console.log(data, 'lien 29');
+      data.forEach(function (msg) {
+        const {name, comment} = msg;
+        console.log('HEYYYYYYYYYYYY', {name, comment});
+        setChat([...chat, {name, comment}]);
+      });
     }
     );
   }, []);
   // const renderChat = (): ReactElement[] => {
-  //   return chat.map((message: Message): ReactElement => (
+  //   return chat.map((comment: comment): ReactElement => (
   //     <div>
   //       <h1>
-  //         {message.message}
+  //         {comment.comment}
   //       </h1>
   //     </div>
   //   ));
@@ -45,20 +49,21 @@ const Chat2 = (): ReactElement => {
   return (
     <div>
 
-
+      {console.log('CHAT', chat)}
       <ul>
-        {chat.map((message, index) => {
+        {chat.map((comment, index) => {
+          console.log('comment', comment);
           return <div key={index}>
-            {/* <span id='messagename'>{message.name}</span>
-            <span id='message'>{message.message}</span>
+            {/* <span id='commentname'>{comment.name}</span>
+            <span id='comment'>{comment.comment}</span>
             <span id='time'>{moment().format('h:mm a')}</span> */}
-            {`${message.name}: ${message.message} ${moment().format('h:mm a')}`}
+            {`${comment.name}: ${comment.comment} ${moment().format('h:mm a')}`}
           </div>;
         })}
       </ul>
 
-      <form onSubmit={onMessageSubmit}>
-        <h1>Messenges</h1>
+      <form onSubmit={onCommentSubmit}>
+        <h1>Post a Comment</h1>
 
 
         <div>
@@ -70,17 +75,17 @@ const Chat2 = (): ReactElement => {
 
           />
           <input
-            placeholder='enter message'
-            name="message"
+            placeholder='enter comment'
+            name="comment"
             onChange={(e): void => onTextChange(e)}
-            value={state.message}
+            value={state.comment}
 
           />
         </div>
-        <button>Send Message</button>
+        <button>Send comment</button>
       </form>
 
     </div>
   );
 };
-export default Chat2;
+export default Comments;

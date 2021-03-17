@@ -264,12 +264,13 @@ io.on('connection', (socket: Socket) => {
     console.log('user disconnected');
   });
   socket.on('message', ({name, message}) => {
-    console.log({name, message});
+    console.log('LINE 267', {name, message});
     io.emit('message', {name, message});
   });
   socket.on('comment', ({name, comment}) => {
-    console.log({comment, name});
+    console.log('LINE 271', {comment, name});
     io.emit('comment', {name, comment});
+
   });
 });
 
@@ -277,13 +278,14 @@ io.on('connection', (socket: Socket) => {
 
 app.post('/comment', (req: Request, res: Response):Promise<any> => {
   //const { userName, text} = req.body;
-
+  console.log('LINE 280', req.body);
   return postComments(req.body)
-    .then(data => console.log('posted comment', data))
+    .then(data => console.log('posted comment 288', data))
     .catch(err => console.log('Error posting comment', err));
 });
 app.get('/comments', (req: Request, res: Response): Promise<any> => {
   // const { id } = req.body;
+  console.log('Inside get comments');
   return getComments()
     .then(data => res.send(data))
     .catch(err => console.log('error getting comments', err));
