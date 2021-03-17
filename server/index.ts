@@ -193,6 +193,8 @@ app.delete('/logout', (req: Request, res: Response) => {
   res.clearCookie('thesis');
   res.json(false);
 });
+
+
 ///////////GOOGLE AUTH ^^^^^^///////////
 
 /////////Twilio//////////
@@ -233,16 +235,16 @@ app.get('/mongod', (req, res, next) => {
 });
 
 app.post('/reminder', (req, res, next) => {
-  const { username, phoneNumber, notification, timeZone } = req.body;
-  const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
-  console.log(username);
-
+  const { phoneNumber, notification } = req.body;
+  const time = moment(req.body.time, 'MMMM-Do-YYYY hh:mma');
+  const sendNotification = moment(req.body.sendNotification, 'MMMM-Do-YYYY');
+  console.log(time);
   const appointment = new Appointment({
-    name: username,
     phoneNumber: phoneNumber,
     notification: notification,
-    timeZone: timeZone,
-    time: time});
+    sendNotification: sendNotification,
+    time: time
+  });
   appointment.save()
     .then(() => console.log('success'))
     .catch((err) => console.warn(err));

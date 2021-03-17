@@ -3,7 +3,13 @@ import mysql from 'mysql2';
 
 const sequelize: Sequelize = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllqetkd', 'vnG2q19b3wbaZXBhVjLY', {
   host: 'bao0spze4uyjnrjcstlm-mysql.services.clever-cloud.com',
-  dialect: 'mysql'
+  dialect: 'mysql',
+  pool: {
+    max: 20,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
 });
 
 const Users = sequelize.define('Users', {
