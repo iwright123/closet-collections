@@ -58,7 +58,7 @@ const Home = (): ReactElement => {
     <>
 
       <View style={styles.container}>
-        <Text style={styles.title}>Closet Collections</Text>
+        <Text style={{fontSize: 40, fontFamily: 'Roboto Slab'}}>Closet Collections</Text>
         <View>
           {/* <Text style={styles.weather}>Currently {temp} and {desc}</Text> */}
         </View>
@@ -66,13 +66,13 @@ const Home = (): ReactElement => {
           style={{width: 200, height: 200, marginVertical: 75}}
           source={{uri: 'https://media.gq.com/photos/5cf56d75ba72052c30a43177/master/w_1600%2Cc_limit/Chris-Bosh-Weigh-In-GQ-NBA-Most-Stylish-Player-Bracket-Kyrie-Irving.jpg'}}
         />
-        <Text style={{marginVertical: -75}}>Top Rated by 87%</Text>
+        <Text style={{marginVertical: -75, fontSize: 20, fontFamily: 'Roboto Slab', }}>Top Rated by 87%</Text>
 
         <Image
           style={{width: 200, height: 200, marginVertical: 100}}
           source={{uri: 'https://media.gq.com/photos/5cf56d7609bcad6790fdd178/master/w_1600%2Cc_limit/Chris-Bosh-Weigh-In-GQ-NBA-Most-Stylish-Player-Bracket-Dwayne-Wade.jpg'}}
         />
-        <Text style={{marginVertical: -100}}>Worst Rated by 93%</Text>
+        <Text style={{marginVertical: -100, fontSize: 20, fontFamily: 'Roboto Slab', }}>Worst Rated by 93%</Text>
 
       </View>
       {/* <div>

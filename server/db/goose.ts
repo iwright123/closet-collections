@@ -112,9 +112,9 @@ const getComments = (): Promise<any> => {
     .catch((err) => console.warn(err));
 };
 
-const postComments = (body: any): Promise<any> => {
-  const newComment = new Comment({
-    outfitID
-  });
-};
+// const postComments = (body: any): Promise<any> => {
+//   const newComment = new Comment({
+//     outfitID
+//   });
+// };
 

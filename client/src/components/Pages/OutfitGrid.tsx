@@ -20,6 +20,8 @@ import {io} from 'socket.io-client';
 import Comments from './Comments';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import Footer from './Footer';
+
 //import tileData from './tileData';
 const socket = io('http://localhost:3000');
 interface IPost {
@@ -36,7 +38,8 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
-    color: 'black'
+    color: 'black',
+    paddingBottom: 60
   },
   gridList: {
     width: 1000,
@@ -107,7 +110,6 @@ const OutfitGrid = (): any => {
   }, []);
 
   return (
-
 
     !images.length ? <h1>Loading</h1> :
       <div className={classes.root}>
