@@ -241,12 +241,14 @@ app.get('/mongod', (req, res, next) => {
     .catch((err) => console.warn(err));
 });
 
+
 app.post('/reminder', (req, res, next) => {
   const { phoneNumber, notification } = req.body;
   const time = moment(req.body.time, 'MMMM-Do-YYYY hh:mma');
   const sendNotification = moment(req.body.sendNotification, 'MMMM-Do-YYYY');
-  console.log(time);
+
   const appointment = new Appointment({
+    username: req.cookies.thesis,
     phoneNumber: phoneNumber,
     notification: notification,
     sendNotification: sendNotification,
@@ -255,6 +257,7 @@ app.post('/reminder', (req, res, next) => {
   appointment.save()
     .then(() => console.log('success'))
     .catch((err) => console.warn(err));
+
 });
 
 
