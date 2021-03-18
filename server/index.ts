@@ -205,17 +205,17 @@ app.delete('/logout', (req: Request, res: Response) => {
 ///////////GOOGLE AUTH ^^^^^^///////////
 
 /////////Twilio//////////
-// app.post('/sms', (req, res) => {
-//   const { body } = req.body;
-//   console.log('text?>', body);
-//   client.messages.create({
-//     body: body,
-//     from: '+15042852518',
-//     to: '+15047235163'
-//   })
-//     .then((message: any) => console.log('message sid', message.sid))
-//     .catch((err: any) => console.warn('twilio error', err));
-// });
+app.post('/sms', (req, res) => {
+  const { body, phone } = req.body;
+  console.log('text?>', phone);
+  // client.messages.create({
+  //   body: body,
+  //   from: '+15042852518',
+  //   to: phone
+  // })
+  //   .then((message: any) => console.log('message sid', message.sid))
+  //   .catch((err: any) => console.warn('twilio error', err));
+});
 
 // const getTimeZone = (): any => {
 //   return momentTimeZone.tz.names();

@@ -40,7 +40,6 @@ export const notificationCheck = (): any => {
       needToSend.push(data);
       // loop all data
       needToSend.forEach((data) => {
-        //console.log(data);
         // now loop single object of data
         data.forEach((obj) => {
           // checks usernames so it sends correct notifications to correct user
@@ -53,6 +52,7 @@ export const notificationCheck = (): any => {
             const releaseDate = moment(obj.time).format('L');
             // assign today to the days date with the L format
             const today = moment().format('L');
+
             /*
             if the day before release is the same as todays date and the day before the release is equal to the day that a notification needs to be send out (one day prior to release)
             */
@@ -78,36 +78,18 @@ export const notificationCheck = (): any => {
 };
 
 // Appointment.remove({
-//   phoneNumber: '+15047235163'
+//   phoneNumber: '+15047235161'
 // }).then(() => console.log('deleted'));
 
 notificationCheck();
 // set function to run every 24 hours
-//setInterval(notificationCheck, 10000);
+const twentyFour = 1000 * 60 * 60 * 24;
 
+//setInterval(notificationCheck, twentyFour);
 
-
-const commentSchema = new mongoose.Schema({
-  outfitID: Number,
-  name: String,
-  text: String,
-});
 const likeSchema = new mongoose.Schema({
   name: String,
   outfitId: Number
 });
-export const Like = mongoose.model('Like', likeSchema);
-export const Comment = mongoose.model('Comment', commentSchema);
 
-const getComments = (): Promise<any> => {
-  return Comment.find({})
-    .then((data) => console.log(data))
-    .catch((err) => console.warn(err));
-};
-
-// const postComments = (body: any): Promise<any> => {
-//   const newComment = new Comment({
-//     outfitID
-//   });
-// };
 

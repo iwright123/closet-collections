@@ -1,7 +1,5 @@
 import React, { ReactElement } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import axios from 'axios';
 import Saved from './Pages/SavedItems';
@@ -23,6 +21,7 @@ const Calendar: React.FC = () => {
   const [favItems, setFaveItems] = React.useState([]);
   const [liked, setLike] = React.useState('');
   const [phone, setNumber] = React.useState('');
+  const [dummyNumber, setPhone] = React.useState('');
   // const [pushNotifications, setNotifications] = React.useState([]);
   const [page, setPage] = React.useState(true);
   const [fontTitle, setTitle] = React.useState(15);
@@ -31,33 +30,32 @@ const Calendar: React.FC = () => {
 
   const push = (item): void => {
     setNotify(true);
-
-    //setNotifications([item.title, item.Subtitle]);
+    console.log(phone);
 
     const message = {
+      phone: `+1${phone}`,
       body: `You will receive a reminder for the ${item.title} ${item.subTitle}'s, Thank you!`
     };
 
     const post = {
-      phoneNumber: '+15047235163',
+      phoneNumber: `+1${phone}`,
       notification: `${item.title} ${item.subTitle}'s are releasing tomorrow!`,
       sendNotification: `${item.sendReminder}`,
       time: `${item.release}`
     };
 
-
     axios.post('/reminder', post)
-      .then((data: any) => console.log(data) )
+      .then((data: any) => console.log(data))
       .catch((err: string) => console.warn('Error here', err));
 
     axios.post('/sms', message)
-      .then((data: any) => console.log(data) )
+      .then((data: any) => console.log(data))
       .catch((err: string) => console.warn('Error here', err));
+
   };
 
   const favItem = (item): void => {
 
-    // setLike(true);
     setLike('red');
 
     setFaveItems([item.title, item.subTitle, item.img, item.release]);
@@ -74,8 +72,6 @@ const Calendar: React.FC = () => {
       .catch((err: string) => console.warn('Error here', err));
   };
 
-
-
   const larger = (): any => {
     setTitle(40);
     setSTitle(35);
@@ -87,6 +83,12 @@ const Calendar: React.FC = () => {
     setSTitle(20);
     setTitleFont(35);
   };
+
+  const handleChange = (e): any => {
+    setNumber(e.target.value);
+    setPhone(e.target.value);
+  };
+
 
   const useStyles = makeStyles({
     root: {
@@ -155,11 +157,21 @@ const Calendar: React.FC = () => {
               <TouchableOpacity style={styles.buttonContainer}>
 
                 <Button className={classes.root} style={{backgroundColor: '#000000'}} onClick={(): void => setPage(false)}>Fav Items</Button>
-
-                <Button className={classes.root} style={{backgroundColor: '#000000'}} onClick={(): void => alert('Add your Number!')}>Add Number</Button>
+                <div>
+                  <input
+                    type='text'
+                    placeholder ='Add phone number'
+                    value={ dummyNumber }
+                    onChange={(e): any => handleChange(e)}
+                    onKeyDown={(e): any => {
+                      if (e.key === 'Enter') {
+                        setPhone('');
+                      }
+                    }}
+                    className={classes.root} style={{backgroundColor: '#000000'}} ></input>
+                </div>
               </TouchableOpacity>
               <Text style={styles.title}>Upcoming Releases!</Text>
-
 
               {
                 items.map((item, v) => {
@@ -189,8 +201,6 @@ const Calendar: React.FC = () => {
 
         }
       </View>
-
-
     </>
   );
 };
