@@ -53,7 +53,6 @@ export const notificationCheck = (): any => {
             const releaseDate = moment(obj.time).format('L');
             // assign today to the days date with the L format
             const today = moment().format('L');
-
             /*
             if the day before release is the same as todays date and the day before the release is equal to the day that a notification needs to be send out (one day prior to release)
             */

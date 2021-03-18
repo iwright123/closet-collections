@@ -117,7 +117,7 @@ const AddItems: React.FC = () => {
             use_filename={ false }
           />
         </div>
-        <button className="add-item-btn">Add Item</button>
+        <button className="add-item-btn" style={{backgroundColor: '#000000', color: '#7ed957'}}>Add Item</button>
       </form>
     </div>
   );

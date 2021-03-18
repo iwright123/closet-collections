@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -9,6 +9,9 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import { items } from '../../../releaseData/calendarItems';
+import Footer from './Pages/Footer';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
 const Props = {
   items
@@ -85,6 +88,19 @@ const Calendar: React.FC = () => {
     setTitleFont(35);
   };
 
+  const useStyles = makeStyles({
+    root: {
+      background: '#000000',
+      border: 0,
+      borderRadius: 3,
+      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+      color: '#7ed957',
+      height: 48,
+      padding: '0 30px',
+    },
+  });
+
+  const classes = useStyles();
 
   const styles = StyleSheet.create({
     container: {
@@ -93,13 +109,15 @@ const Calendar: React.FC = () => {
       justifyContent: 'center',
       alignItems: 'center'
     },
-
+    buttonContainer: {
+      flexDirection: 'row'
+    },
     title: {
       fontSize: titleFont
     },
 
     button: {
-      backgroundColor: 'clear',
+      backgroundColor: '#7ED957',
       marginVertical: -30
     },
 
@@ -130,17 +148,18 @@ const Calendar: React.FC = () => {
 
           page === true ?
             <View style={styles.container}>
-              <TouchableOpacity onPress={(): void => setPage(false)}>
-                <Text>Fav Items</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={(): void => alert('Add your Number!')}>
-                <Text>Add Number</Text>
-              </TouchableOpacity>
-              <Text style={styles.title}>Upcoming Releases!</Text>
               <div>
                 <ZoomInIcon onClick={larger} />
                 <ZoomOutIcon onClick={smaller} />
               </div>
+              <TouchableOpacity style={styles.buttonContainer}>
+
+                <Button className={classes.root} style={{backgroundColor: '#000000'}} onClick={(): void => setPage(false)}>Fav Items</Button>
+
+                <Button className={classes.root} style={{backgroundColor: '#000000'}} onClick={(): void => alert('Add your Number!')}>Add Number</Button>
+              </TouchableOpacity>
+              <Text style={styles.title}>Upcoming Releases!</Text>
+
 
               {
                 items.map((item, v) => {
@@ -153,21 +172,25 @@ const Calendar: React.FC = () => {
                     <Text style={styles.itemInfo}>{item.title}</Text>
                     <Text style={styles.subItemInfo}>
                       <FavoriteBorderIcon style={{backgroundColor: liked}} onClick={(): void => favItem(item)} /> {item.subTitle}</Text>
-                    <Button
-                      onPress={(): void => push(item)}
-                      title='Notify Me!'
-                    />
+                    <Button className={classes.root}
+                      style={{backgroundColor: '#000000'}}
+                      onClick={(): void => push(item)}> Notify me!
+                    </Button>
                   </View>;
                 })
               }
+              <Footer></Footer>
             </View> :
             <View>
               <ExitToAppIcon onClick={(): void => setPage(true)}/>
               <Saved />
+              <Footer></Footer>
             </View>
 
         }
       </View>
+
+
     </>
   );
 };
