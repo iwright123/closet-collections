@@ -6,7 +6,7 @@ const sequelize: Sequelize = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllq
   host: 'bao0spze4uyjnrjcstlm-mysql.services.clever-cloud.com',
   dialect: 'mysql',
   pool: {
-    max: 20,
+    max: 30,
     min: 0,
     acquire: 30000,
     idle: 10000
