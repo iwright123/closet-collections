@@ -71,7 +71,7 @@ const Chat = (): ReactElement => {
               id="outlined-multiline-static"
             />
           </div>
-          <button>Send Message</button>
+          <button style={{backgroundColor: '#000000', color: '#7ed957'}}>Send Message</button>
         </form>
         <div className="render-chat">
           <h1 style={{fontSize: font}}>Chat Log</h1>

@@ -121,7 +121,9 @@ label {
   margin-top: 1em;
 }
 
-
+.tabs {
+  color: '#000000'
+}
 #welcome {
   font-family: 'Roboto Slab', serif;
   text-align: center;

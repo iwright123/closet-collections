@@ -5,13 +5,30 @@ import Button from '@material-ui/core/Button';
 import Footer from './Footer';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 interface findAStore{
   keyword: any
 }
 const findAStore = (): any => {
   const [keyword, setKeyword] = React.useState<string>();
   const [results, setResults] = React.useState([]);
+  const [font, setFont] = React.useState(35);
+  const [fontName, setFontName] = React.useState(25);
+  const [fontDets, setFontDets] = React.useState(20);
 
+  const larger = (): any => {
+    setFont(50);
+    setFontName(40);
+    setFontDets(35);
+  };
+
+  const smaller = (): any => {
+    setFont(35);
+    setFontName(25);
+    setFontDets(20);
+
+  };
   const useStyles = makeStyles({
     root: {
       background: '#000000',
@@ -28,8 +45,11 @@ const findAStore = (): any => {
 
   return (
     <div>
-
-      <h1>Find A Store</h1>
+      <div>
+        <ZoomInIcon onClick={larger} />
+        <ZoomOutIcon onClick={smaller} />
+      </div>
+      <h1 style={{fontSize: font}}>Find A Store</h1>
       <SearchBar
         value={keyword}
         onChange={(e): void => setKeyword(e)}
@@ -52,10 +72,10 @@ const findAStore = (): any => {
             return (
               <div key={String(i)}>
                 <div key={String(i)}>
-                  <h2> Name: {data.name}</h2>
-                  <h3>Address: {data.location.address1} {data.location.city} {data.location.state} {data.location.zip_code}</h3>
-                  <h3>Phone Number: {data.phone}</h3>
-                  <h3>Rating: {data.rating}</h3>
+                  <h2 style={{fontSize: fontName}}> Name: {data.name}</h2>
+                  <h3 style={{fontSize: fontDets}}>Address: {data.location.address1} {data.location.city} {data.location.state} {data.location.zip_code}</h3>
+                  <h3 style={{fontSize: fontDets}}>Phone Number: {data.phone}</h3>
+                  <h3 style={{fontSize: fontDets}}>Rating: {data.rating}</h3>
                 </div>
                 <br></br>
               </div>
