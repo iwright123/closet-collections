@@ -158,7 +158,7 @@ label {
   margin: 30px;
   min-height: 300rem;
 }
-form {
+.formCard {
   max-height: 900px;
   height: 900px;
   max-width: 350px;
@@ -201,6 +201,15 @@ h4 {
   margin-left: 2px;
 }
 
+.search {
+  width: 400px;
+  }
+  .search .search-input {
+  width:80%;
+  }
+  .search .search-btn {
+  width:20%;
+  }
 .logo {
   position:absolute;
 right:0;
@@ -215,4 +224,9 @@ top:0;
 .tab-list {
   font-family: 'Roboto Slab', serif;
   background-color: 'black';
+}
+#commentList {
+background-color: burlywood;
+ border-style: solid;
+
 }

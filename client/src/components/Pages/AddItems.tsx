@@ -25,6 +25,8 @@ const AddItems: React.FC = () => {
   } = useForm<Item>();
 
   const onSubmit = (data: Item, e): void => {
+    console.log('DATA', data);
+    data['comments'] = [];
     axios.post('/items', data)
       .then(data => console.info(data))
       .catch(err => console.warn(err));

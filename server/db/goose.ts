@@ -3,6 +3,7 @@ import { Schema, Model, model } from 'mongoose';
 import moment from 'moment';
 import Twilio from 'twilio';
 import dotenv from 'dotenv';
+import { AnyAaaaRecord } from 'node:dns';
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 dotenv.config();
@@ -88,10 +89,32 @@ AppointmentSchema.statics.sendNotifications = (callback): any => {
 
 };
 //export const Appointment = mongoose.model('Appointment', AppointmentSchema);
-
 // module.exports = {
 //   Appointment,
 //   sendNotifications
 // };
 
+const commentSchema = new mongoose.Schema({
+  outfitID: Number,
+  name: String,
+  text: String,
+});
+const likeSchema = new mongoose.Schema({
+  name: String,
+  outfitId: Number
+});
+export const Like = mongoose.model('Like', likeSchema);
+export const Comment = mongoose.model('Comment', commentSchema);
+
+const getComments = (): Promise<any> => {
+  return Comment.find({})
+    .then((data) => console.log(data))
+    .catch((err) => console.warn(err));
+};
+
+// const postComments = (body: any): Promise<any> => {
+//   const newComment = new Comment({
+//     outfitID
+//   });
+// };
 

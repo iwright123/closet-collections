@@ -1,4 +1,5 @@
 import { Items } from '../db/db';
+import { Op } from 'sequelize';
 
 export const addItem = async(body: any): Promise<any> => {
   const { clothingType, description, price, imageUrl } = body;
@@ -24,3 +25,14 @@ export const deleteItem = (body: any): Promise<any> => {
   });
 };
 
+export const searchItems = (params: any): Promise<any> => {
+  const { query } = params;
+  return Items.findAll({
+    where: {
+      [Op.or]: [
+        {clothingType: {[Op.like]: `%${query}%`}},
+        {description: {[Op.like]: `%${query}%`}}
+      ]
+    }
+  });
+};

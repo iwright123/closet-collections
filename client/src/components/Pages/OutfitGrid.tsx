@@ -14,12 +14,16 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 import { Icon } from '@material-ui/core';
 import MessageIcon from '@material-ui/icons/Message';
+import SendIcon from '@material-ui/icons/Send';
+import Message from '../models/Message';
+import {io} from 'socket.io-client';
+import Comments from './Comments';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import Footer from './Footer';
 
 //import tileData from './tileData';
-
+const socket = io('http://localhost:3000');
 interface IPost {
   userId: number;
   id?: number;
@@ -61,6 +65,8 @@ const OutfitGrid = (): any => {
   const [images, setImages] = React.useState([]);
   const [likeColor, setLikeColor] = React.useState(false);
   const [dislikeColor, setDislikeColor] = React.useState(false);
+  const [state, setState] = React.useState<Message>({message: '', name: ''});
+  const [comment, setComments] = React.useState([]);
   const [font, setFont] = useState(25);
   const [imgSize, setImgSize] = useState(15);
 
@@ -70,10 +76,23 @@ const OutfitGrid = (): any => {
   const handleLikeClick = (e): void => {
     setLikeColor(!likeColor);
   };
-
-  const handleDislikeClick = (): void => {
-    setDislikeColor(!dislikeColor);
+  React.useEffect((): void => {
+    socket.on('comment', ({name, message }) => {
+      setComments([...comment, {name, message}]);
+    });
+  }, [state]);
+  const onTextChange = (e): void => {
+    setState({...state, [e.target.name]: e.target.value});
   };
+  const onMessageSubmit = (e): void => {
+    e.preventDefault();
+    const {name, message} = state;
+    socket.emit('message', {name, message});
+    setState({message: '', name});
+  };
+  // const handleDislikeClick = (): void => {
+  //   setDislikeColor(!dislikeColor);
+  // };
 
   const larger = (): any => {
     setFont(40);
@@ -91,72 +110,39 @@ const OutfitGrid = (): any => {
   }, []);
 
   return (
-    <div className='main container'>
 
-
+    !images.length ? <h1>Loading</h1> :
       <div className={classes.root}>
         <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
         <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
-        <div></div>
         <h1 style={{fontSize: font}}>Outfits</h1>
-
-        <GridList cellHeight={300} spacing={10} className={classes.gridList}>
-          <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-            <ListSubheader component="div"></ListSubheader>
-          </GridListTile>
-          {
-            images.map((tile, i) => (
-
-              <GridListTile key={i}>
-                <Zoom>
-                  <img src={tile.imageUrl} />
-                </Zoom>
-                <GridListTileBar
-                  title={tile.title}
-                  actionIcon={
-                    <>
-                      {/* <Button>
-                <DeleteIcon
-                className="buttonIcon"
-                style={{ fontSize: 15 }}
-                 />
-              </Button> */}
-                      {/* <Button
-                    onClick={((): void => handleLikeClick(i))}
-                    style={likeColor ? colorChange : null}
-                  >
-                    <ThumbUpIcon
-                      className="buttonIcon"
-                      style={{ fontSize: imgSize}}
-
-                    />
-                  </Button>
-                  <Button
-                    onClick={handleDislikeClick}
-                    style={dislikeColor ? colorChange2 : null}
-                  >
-                    <ThumbDownIcon
-                      className="buttonIcon"
-                      style={{ fontSize: imgSize }}
-                    />
-                  </Button> */}
-                      <Button>
-                        <MessageIcon
-                          className="buttonIcon"
-                          style={{ fontSize: imgSize }}
-                        />
-                      </Button>
-                    </>
-                  }
-                  key={String(i)}
+        {
+          images.map((tile, i) => (
+            // <GridListTile key={i}>
+            <div id='comments'>
+              <h3>{tile.user}</h3>
+              <img src={tile.imageUrl} />
+              <Button
+                onClick={((): void => console.log('button clicked'))}
+                style={likeColor ? colorChange : null}
+              >
+                <ThumbUpIcon
+                  className="buttonIcon"
+                  style={{ fontSize: 15}}
                 />
-              </GridListTile>
 
-            ))}
-        </GridList>
-        <Footer></Footer>
+              </Button>
+              <Comments></Comments>
+              <Button>
+                <MessageIcon
+                  onClick={(): void => console.log('nothing')}
+                  className="buttonIcon"
+                  style={{ fontSize: 15 }}
+                />
+              </Button>
+            </div>
+          ) )}
       </div>
-    </div>
   );
 };
 
