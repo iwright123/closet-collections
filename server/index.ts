@@ -200,6 +200,8 @@ app.delete('/logout', (req: Request, res: Response) => {
   res.clearCookie('thesis');
   res.json(false);
 });
+
+
 ///////////GOOGLE AUTH ^^^^^^///////////
 
 /////////Twilio//////////
@@ -215,22 +217,22 @@ app.delete('/logout', (req: Request, res: Response) => {
 //     .catch((err: any) => console.warn('twilio error', err));
 // });
 
-const getTimeZone = (): any => {
-  return momentTimeZone.tz.names();
-};
+// const getTimeZone = (): any => {
+//   return momentTimeZone.tz.names();
+// };
 
-app.get('/create', (req, res, next) => {
-  res.render('appoinment/create', {
-    timeZone: getTimeZone(),
-    appointment: new Appointment({
-      name: '',
-      phoneNumber: '',
-      notification: '',
-      timeZone: '',
-      time: ''
-    })
-  });
-});
+// app.get('/create', (req, res, next) => {
+//   res.render('appoinment/create', {
+//     timeZone: getTimeZone(),
+//     appointment: new Appointment({
+//       name: '',
+//       phoneNumber: '',
+//       notification: '',
+//       timeZone: '',
+//       time: ''
+//     })
+//   });
+// });
 
 
 app.get('/mongod', (req, res, next) => {
@@ -239,20 +241,23 @@ app.get('/mongod', (req, res, next) => {
     .catch((err) => console.warn(err));
 });
 
+
 app.post('/reminder', (req, res, next) => {
-  const { username, phoneNumber, notification, timeZone } = req.body;
-  const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
-  console.log(username);
+  const { phoneNumber, notification } = req.body;
+  const time = moment(req.body.time, 'MMMM-Do-YYYY hh:mma');
+  const sendNotification = moment(req.body.sendNotification, 'MMMM-Do-YYYY');
 
   const appointment = new Appointment({
-    name: username,
+    username: req.cookies.thesis,
     phoneNumber: phoneNumber,
     notification: notification,
-    timeZone: timeZone,
-    time: time});
+    sendNotification: sendNotification,
+    time: time
+  });
   appointment.save()
     .then(() => console.log('success'))
     .catch((err) => console.warn(err));
+
 });
 
 

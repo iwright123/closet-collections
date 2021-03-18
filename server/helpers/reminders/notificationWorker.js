@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import { sendNotifications } from '../../db/goose';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const sendNotifications = require('../../db/goose');
 
 export const notificationWorker = () => {
   return {
