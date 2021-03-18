@@ -221,6 +221,7 @@ export const postComments = async( body: any): Promise<any> => {
   const { name, comment} = body;
   console.log({name, comment});
   const createComment = await Comment.create({
+//maybe need an outfit id here?
     name: name,
     comment: comment
   });

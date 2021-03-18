@@ -20,6 +20,7 @@ import {io} from 'socket.io-client';
 import Comments from './Comments';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import { title } from 'node:process';
 //import tileData from './tileData';
 const socket = io('http://localhost:3000');
 interface IPost {
@@ -130,7 +131,7 @@ const OutfitGrid = (): any => {
                 />
 
               </Button>
-              <Comments></Comments>
+              <Comments ></Comments>
               <Button>
                 <MessageIcon
                   onClick={(): void => console.log('nothing')}

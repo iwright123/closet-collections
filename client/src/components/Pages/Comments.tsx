@@ -6,7 +6,7 @@ import axios from 'axios';
 
 // const <input  = require('@material-ui/core<input')
 const socket = io('http://localhost:3000');
-const Comments = (): ReactElement => {
+const Comments = ({}): ReactElement => {
   const [state, setState] = React.useState<Comment>({comment: '', name: ''});
   const [chat, setChat] = React.useState([]);
   React.useEffect((): void => {
@@ -20,6 +20,7 @@ const Comments = (): ReactElement => {
   const onCommentSubmit = (e): void => {
     e.preventDefault();
     const {name, comment} = state;
+    const outfitID =
     axios.post('/comment', {name, comment});
     socket.emit('comment', {name, comment});
     setState({comment: '', name});
