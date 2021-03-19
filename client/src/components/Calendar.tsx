@@ -30,7 +30,7 @@ const Calendar: React.FC = () => {
 
   const push = (item): void => {
     setNotify(true);
-    console.log(phone);
+
 
     const message = {
       phone: `+1${phone}`,

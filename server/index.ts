@@ -18,8 +18,9 @@ import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
 import usersOutfit from '../client/src/components/models/UsersOutfits';
 import moment from 'moment';
-import { Appointment } from './db/goose';
-import momentTimeZone from 'moment-timezone';
+import { Appointment, connectDB } from './db/goose';
+
+connectDB();
 
 const httpServer = createServer(app);
 
@@ -207,7 +208,6 @@ app.delete('/logout', (req: Request, res: Response) => {
 /////////Twilio//////////
 app.post('/sms', (req, res) => {
   const { body, phone } = req.body;
-  console.log('text?>', phone);
   // client.messages.create({
   //   body: body,
   //   from: '+15042852518',
@@ -216,23 +216,6 @@ app.post('/sms', (req, res) => {
   //   .then((message: any) => console.log('message sid', message.sid))
   //   .catch((err: any) => console.warn('twilio error', err));
 });
-
-// const getTimeZone = (): any => {
-//   return momentTimeZone.tz.names();
-// };
-
-// app.get('/create', (req, res, next) => {
-//   res.render('appoinment/create', {
-//     timeZone: getTimeZone(),
-//     appointment: new Appointment({
-//       name: '',
-//       phoneNumber: '',
-//       notification: '',
-//       timeZone: '',
-//       time: ''
-//     })
-//   });
-// });
 
 
 app.get('/mongod', (req, res, next) => {
@@ -259,9 +242,8 @@ app.post('/reminder', (req, res, next) => {
     .catch((err) => console.warn(err));
 
 });
-
-
 /////////Twilio//////////
+
 
 io.on('connection', (socket: Socket) => {
 
