@@ -127,9 +127,9 @@ export const Comment = sequelize.define('Comment', {
     allowNull: false,
   },
   postId: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     allowNull: true,
-    defaultValue: DataTypes.UUID,
+
   },
   comment: {
     type: DataTypes.TEXT,
@@ -159,7 +159,7 @@ export const Calendar = sequelize.define('Calendar', {
     primaryKey: true
   },
 
-  user: {
+  postId: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -217,13 +217,15 @@ export const addUser = (name: string): Promise<any> => {
     }
   });
 };
-export const postComments = async( body: any): Promise<any> => {
-  const { name, comment} = body;
-  console.log({name, comment});
+export const postComments = async( body: any, name: any): Promise<any> => {
+  const { comment, postId} = body;
+  console.log('LOOOK HERE NOW ', {name, comment, postId});
   const createComment = await Comment.create({
-//maybe need an outfit id here?
+    //maybe need an outfit id here?
+
     name: name,
-    comment: comment
+    comment: comment,
+    postId: postId
   });
   return createComment.save();
 };
@@ -231,7 +233,7 @@ export const getComments = (): Promise<any> => {
   console.log(Comment.findAll());
   return Comment.findAll();
 };
-
+//map through outfits, includß
 module.exports = {
   Items,
   WhiteboardPost,

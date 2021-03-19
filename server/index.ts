@@ -279,11 +279,11 @@ io.on('connection', (socket: Socket) => {
 app.post('/comment', (req: Request, res: Response):Promise<any> => {
   //const { userName, text} = req.body;
   console.log('LINE 280', req.body);
-  return postComments(req.body)
+  return postComments(req.body, req.cookies.thesis)
     .then(data => console.log('posted comment 288', data))
     .catch(err => console.log('Error posting comment', err));
 });
-app.get('/comments', (req: Request, res: Response): Promise<any> => {
+app.get('/comments', (req: Request, res: Response): any => {
   // const { id } = req.body;
   console.log('Inside get comments');
   return getComments()
