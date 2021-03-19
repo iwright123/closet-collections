@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
 
 
 const OutfitGrid = (): any => {
-
+  const [likes, setLike] = React.useState([]);
   const classes = useStyles();
   const [images, setImages] = React.useState([]);
   const [likeColor, setLikeColor] = React.useState(false);
@@ -73,11 +73,14 @@ const OutfitGrid = (): any => {
   const handleLikeClick = (e): void => {
     setLikeColor(!likeColor);
   };
-  const onMessageSubmit = (e): void => {
+
+  const onMessageSubmit = (e, outfitId): any => {
     e.preventDefault();
     const {message} = state;
-    axios.post('/comment', {comment: message});
-
+    console.log('state', state);
+    return axios.post('/comment', {comment: message, postId: outfitId})
+      .then(() => grabComments())
+      .catch(err => console.log('err somewhere on message submit', err));
   };
   const handleCommentChange = (e): void => {
     console.log(e.target.value);
@@ -94,15 +97,20 @@ const OutfitGrid = (): any => {
   };
   const grabComments = (): Promise<any> => {
     return axios.get('/comments')
-      .then(({data}) => setComments(data))
-      .then(data => console.log(comment, data))
+      .then(comments => setComments(comments.data))
+      .then(data => console.log('this is after the comments are set in the grab comments', data))
       .catch(err => console.log('error getting comments', err));
   };
-  const submitComment = (comment): Promise<any> => {
-    return axios.post('/comment', comment)
-      .then(data => console.log('This came back from Posting a comment:', data))
-      .catch(err => console.log('Error submitting comment', err));
+  const updateLike = (id): Promise<any> => {
+
+    return axios.patch(`/outfit/${id}`)
+      .then(() => setLikeColor(!likeColor))
+      // .then(setState({...state, [e.target.name]: e.target.value}))
+      .catch(err => console.log('there was an error updating the like', err));
   };
+
+
+
   useEffect(() => {
     axios.get('/outfit')
       .then(({ data }) => setImages(data))
@@ -113,7 +121,7 @@ const OutfitGrid = (): any => {
     axios.get('/comments')
       .then(comments => setComments(comments.data))
       .catch(err => console.log('err getting comments try 1', err));
-  }, [comment]);
+  }, []);
   return (
     !images.length ? <h1>Loading</h1> :
       <div className={classes.root}>
@@ -123,16 +131,18 @@ const OutfitGrid = (): any => {
         {
           images.map((tile, i) => (
             <div id='comments' key={i}>
+              {console.log('Tiles should have different post ids!!!', tile)}
               <h3>{tile.user}</h3>
               <img src={tile.imageUrl} />
               <Button
-                onClick={((): void => console.log('button clicked'))}
+                onClick={((id): Promise<any> => updateLike(tile.id))}
                 style={likeColor ? colorChange : null}
               >
                 <ThumbUpIcon
                   className="buttonIcon"
                   style={{ fontSize: 15}}
                 />
+                <span>{tile.likesCount}</span>
               </Button>
               <Button onClick={(): any => grabComments()}>
                 <MessageIcon
@@ -142,18 +152,18 @@ const OutfitGrid = (): any => {
               </Button>
               <div id='lookhere'>
                 <input type='text' value={state.message} name='message' placeholder='comment' onChange={handleCommentChange} />
-                <button type='submit' onClick={onMessageSubmit}>SendComment</button>
+                <button type='submit' value={tile.id} onClick={(e): any => onMessageSubmit(e, tile.id)}>SendComment</button>
 
                 <ul>
                   {comment.map((comment, index) => {
-                    return <div key={index}>
-                      {comment.id}
-                      {comment.name}
-                      {comment.comment}
-                    </div>;
+                    if (comment.postId === tile.id) {
+                      return <div key={index}>
+                        {`${comment.name}:    ${comment.comment}`}
+                      </div>;
 
+                    }
                   })}
-                </ul>;
+                </ul>
 
 
               </div>

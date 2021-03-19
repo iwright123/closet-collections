@@ -95,8 +95,6 @@ export const Likes = sequelize.define('Likes', {
   }
 });
 
-// Outfit.hasMany(Likes, { foreignKey: 'outfitId'});
-// Likes.belongsTo(Outfit, { foreignKey: 'outfitId'});
 
 export const WhiteboardPost = sequelize.define('WhiteboardPost', {
   id: {
@@ -233,6 +231,9 @@ export const getComments = (): Promise<any> => {
   console.log(Comment.findAll());
   return Comment.findAll();
 };
+export const updateLike = (id): Promise<any> => {
+  return Outfit.increment('likesCount', {where: {id: id}});
+};
 //map through outfits, includß
 module.exports = {
   Items,
@@ -243,7 +244,8 @@ module.exports = {
   Likes,
   getComments,
   postComments,
-  addUser
+  addUser,
+  updateLike
 };
 
 // sequelize.sync({ force: true })
@@ -254,4 +256,6 @@ module.exports = {
 sequelize.authenticate()
   .then(() => console.log('Connection has been established successfully.'))
   .catch((err: string) => console.error('Unable to connect to the database:', err));
+
+
 
