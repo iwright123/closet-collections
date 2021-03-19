@@ -5,6 +5,7 @@ import Message from '../models/Message';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import Footer from './Footer';
+import Grid from '@material-ui/core/Grid';
 
 // const <input  = require('@material-ui/core<input')
 const socket = io('http://localhost:3000');
@@ -12,6 +13,8 @@ const Chat = (): ReactElement => {
   const [state, setState] = React.useState<Message>({message: '', name: ''});
   const [chat, setChat] = React.useState([]);
   const [font, setFont] = React.useState(32);
+  const [input, setInput] = React.useState(14);
+
   React.useEffect((): void => {
     socket.on('message', ({name, message }) => {
       setChat([...chat, {name, message}]);
@@ -28,10 +31,13 @@ const Chat = (): ReactElement => {
   };
   const larger = (): any => {
     setFont(50);
+    setInput(24);
   };
   const smaller = (): any => {
     setFont(25);
+    setInput(14);
   };
+
   const renderChat = (): ReactElement[] => {
     return chat.map((message: Message): ReactElement => (
       <div>
@@ -44,10 +50,11 @@ const Chat = (): ReactElement => {
   const time: string = moment().format('h:mm a');
   return (
     <div>
+
       <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
       <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
       <div className="card">
-        <form onSubmit={onMessageSubmit}>
+        <form onSubmit={onMessageSubmit} >
           <h1 style={{fontSize: font}}>Messenger</h1>
           <div className="name-field">
           </div>
@@ -58,6 +65,7 @@ const Chat = (): ReactElement => {
               onChange={(e): void => onTextChange(e)}
               value={state.name}
               id="outlined-multiline-static"
+              style={{fontSize: input, backgroundColor: '#000000', color: '#7ed957'}}
             />
             <input
               placeholder='enter message'
@@ -65,12 +73,15 @@ const Chat = (): ReactElement => {
               onChange={(e): void => onTextChange(e)}
               value={state.message}
               id="outlined-multiline-static"
+              style={{fontSize: input, backgroundColor: '#000000', color: '#7ed957'}}
             />
           </div>
-          <button style={{backgroundColor: '#000000', color: '#7ed957'}}>Send Message</button>
+          <button id='submit' style={{backgroundColor: '#000000', color: '#7ed957'}}>Send Message</button>
         </form>
-        <div className="render-chat">
-          <h1 style={{fontSize: font}}>Chat Log</h1>
+
+        <div className="render-chat"
+        >
+          <h1 style={{fontSize: font, }}>Chat Log</h1>
           <ul id='message-log'>
             {chat.map((message, index) => {
               return <div key={index}>
