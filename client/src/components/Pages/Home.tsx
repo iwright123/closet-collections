@@ -13,7 +13,7 @@ import Grid from '@material-ui/core/Grid';
 
 const Home = (): ReactElement => {
 
-  let _isMounted = false;
+  const _isMounted = false;
 
   const [topOutfit, setTopOutFit] = React.useState([]);
   const [images, setImages] = React.useState([]);
@@ -29,43 +29,43 @@ const Home = (): ReactElement => {
   const [likeCount, setCount] = React.useState(0);
 
 
-  const getUserLocation = (): any => {
-    //get user's ip address
-    return axios.get('https://api.ipify.org')
-    // get location data by ip address
-      .then(({ data }) => axios.post('/api/location', { ip: data }))
-      .then(({ data: { latitude, longitude } }) => {
+  // const getUserLocation = (): any => {
+  //   //get user's ip address
+  //   return axios.get('https://api.ipify.org')
+  //   // get location data by ip address
+  //     .then(({ data }) => axios.post('/api/location', { ip: data }))
+  //     .then(({ data: { latitude, longitude } }) => {
 
-        setLat(latitude);
-        setLong(longitude);
+  //       setLat(latitude);
+  //       setLong(longitude);
 
-        getWeatherByUserLocation(latitude, longitude);
+  //       getWeatherByUserLocation(latitude, longitude);
 
-      }).catch((err) => console.warn(err));
-  };
-
-
-  const getWeatherByUserLocation = (latitude, longitude): any => {
-    _isMounted = true;
-    axios.post('/api/weather', { latitude, longitude })
-      .then(({ data: { data } }) => {
-        _isMounted = false;
-        const { temp, weather } = data[0];
-        const { description } = weather;
-        const descriptionLowerCase = description.toLowerCase();
-        // change temperature to fahrenheit
-        const newTemp = Math.round(temp * (9 / 5) + 32);
-
-        setTemp(`${newTemp}°F`);
-        setDesc(descriptionLowerCase);
-
-      }).catch((err) => console.warn(err));
-  };
+  //     }).catch((err) => console.warn(err));
+  // };
 
 
-  React.useEffect(() => {
-    getUserLocation();
-  });
+  // const getWeatherByUserLocation = (latitude, longitude): any => {
+  //   _isMounted = true;
+  //   axios.post('/api/weather', { latitude, longitude })
+  //     .then(({ data: { data } }) => {
+  //       _isMounted = false;
+  //       const { temp, weather } = data[0];
+  //       const { description } = weather;
+  //       const descriptionLowerCase = description.toLowerCase();
+  //       // change temperature to fahrenheit
+  //       const newTemp = Math.round(temp * (9 / 5) + 32);
+
+  //       setTemp(`${newTemp}°F`);
+  //       setDesc(descriptionLowerCase);
+
+  //     }).catch((err) => console.warn(err));
+  // };
+
+
+  // React.useEffect(() => {
+  //   getUserLocation();
+  // });
 
 
   React.useEffect(() => {
@@ -123,7 +123,7 @@ const Home = (): ReactElement => {
         <Grid container justify = "center" spacing={3}>
           <div id='magnifier'><ZoomInIcon id='enlarge' onClick={larger} fontSize="small">Enlarge</ZoomInIcon>
             <ZoomOutIcon id='smaller' onClick={smaller} fontSize="small">Return Size</ZoomOutIcon></div>
-          <h2 style={{fontSize: font}}>Currently {temp} and {desc}</h2>
+          {/* <h2 style={{fontSize: font}}>Currently {temp} and {desc}</h2> */}
           <br></br>
           <h1 style={{fontSize: fonth2}}>Top Rated Outfit </h1>
           <h4 style={{fontSize: fonth4}}> {`This outfit has ${images.sort((a, b) => b.likesCount - a.likesCount)[0].likesCount} likes` }</h4>
@@ -136,7 +136,7 @@ const Home = (): ReactElement => {
           </Box>
           <h2 style={{fontSize: fonth2}}>Suggested Outfit Of The Day</h2>
           <Box border={1} width="75%" height="65%" display="block" boxShadow={2}>
-            <span><img className="photo" src={images[random()].imageUrl}/></span>
+            {/* <span><img className="photo" src={images[random()].imageUrl}/></span> */}
           </Box>
         </Grid>
         <Footer></Footer>
