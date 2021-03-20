@@ -96,11 +96,12 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
 
 
   return (
-    <div>
+    <div id="createOutfitWhiteBoard">
       <div id="buttons">
         <ZoomInIcon id='enlarge' onClick={larger} fontSize="large"></ZoomInIcon>
         <ZoomOutIcon id='smaller' onClick={smaller} fontSize="large"></ZoomOutIcon></div>
       <Stage
+        style={{border: '1px solid black'}}
         width={400}
         height={400}
         ref={stageRef}
@@ -126,12 +127,11 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
           })}
         </Layer>
       </Stage>
-
+      <div id="buttons"><button id="save" onClick={handleExportClick} style={{marginLeft: '125px', backgroundColor: '#000000', color: '#7ed957'}}>Save Outfit</button></div>
       <h4 style={{fontSize: font}}>Tap to add item to outfit!</h4>
       <div className="search">
-        <input type="text" className="search-input" placeholder="search for item by keyword" value={searchTerm} onChange={handleChange} onKeyDown={handleKeyDown} />
+        <input autoComplete="off" type="text" className="search-input" placeholder="search for item by keyword" value={searchTerm} onChange={handleChange} onKeyDown={handleKeyDown} />
       </div>
-      <TouchableOpacity onPress={handleExportClick}><Text>Save Outfit</Text></TouchableOpacity>
       <div className="outfit-item-buttons">
         {outfits.map((outfit, i) => {
 
