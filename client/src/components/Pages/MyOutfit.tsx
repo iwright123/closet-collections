@@ -79,7 +79,7 @@ const MyOutfit = (): ReactElement => {
       <ZoomInIcon onClick={larger} />
       <ZoomOutIcon onClick={smaller} />
 
-      <GridList cellHeight={300} spacing={30} className={classes.gridList}>
+      <GridList cellHeight={150} spacing={30} className={classes.gridList}>
         <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
           <ListSubheader component="div"></ListSubheader>
         </GridListTile>

@@ -144,39 +144,50 @@ const OutfitGrid = (): any => {
   return (
     !images.length ? <h1>There Are No Top Outfits At This Time</h1> :
       <div className={classes.root}>
-        <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="small">Enlarge</ZoomInIcon></div>
-        <div><ZoomOutIcon id='smaller' onClick={smaller} fontSize="small">Return Size</ZoomOutIcon></div>
+        <div id='zoompublic'><ZoomInIcon id='enlarge' onClick={larger} fontSize="small">Enlarge</ZoomInIcon>
+          <ZoomOutIcon id='smaller' onClick={smaller} fontSize="small">Return Size</ZoomOutIcon></div>
         <br></br>
-        <h1 style={{fontSize: font}}>Outfits</h1>
+
         {
           images.map((tile, i) => (
             <div id='comments' key={i}>
-              <h3>{tile.user}</h3>
-              <img src={tile.imageUrl} />
-              <Button
-                onClick={((id): Promise<any> => updateLike(tile.id))}
-                style={likeColor ? colorChange : null}
-              >
-                <ThumbUpIcon
-                  className="buttonIcon"
-                  style={{ fontSize: 15}}
-                />
-                <span>{tile.likesCount}</span>
-              </Button>
-              <Button onClick={(): any => grabComments()}>
-                <MessageIcon
-                  className="buttonIcon"
-                  style={{ fontSize: 15 }}
-                />
-              </Button>
+              <div>
+                <h3 id='publicName'>{tile.user}</h3>
+                <img src={tile.imageUrl} />
+                <div id='publicactions'>
+                  <Button
+                    onClick={((id): Promise<any> => updateLike(tile.id))}
+                    style={{
+                      color: 'black'
+                    }}
+                  >
+                    <ThumbUpIcon
+                      className="buttonIcon"
+                      style={{ fontSize: 15}}
+                    />
+                    <span>{tile.likesCount}</span>
+                  </Button>
+                  <Button id='displaymessage'style={{color: 'black'}} onClick={(): any => grabComments()}>
+                    <MessageIcon
+                      className="buttonIcon"
+                      style={{ fontSize: 20 }}
+                    />
+                  </Button>
+
+                </div>
+
+              </div>
               <div id='lookhere'>
-                <input type='text' value={state.message} name='message' placeholder='comment' onChange={handleCommentChange} />
-                <button type='submit' value={tile.id} onClick={(e): any => onMessageSubmit(e, tile.id)}>SendComment</button>
+                <div id='sendcomment'>
+                  <input type='text' value={state.message} name='message' placeholder='comment' onChange={handleCommentChange} />
+                  <Button id='sending' type='submit' style={{color: 'black'}} value={tile.id} onClick={(e): any => onMessageSubmit(e, tile.id)}><SendIcon/></Button>
+
+                </div>
 
                 <ul>
                   {comment.map((comment, index) => {
                     if (Number(comment.postId) === tile.id || String(comment.postId) === tile.id) {
-                      return <div key={index}>
+                      return <div key={index} id='commentsd'>
                         {`${comment.name}:    ${comment.comment}`}
                       </div>;
 
