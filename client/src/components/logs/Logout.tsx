@@ -25,6 +25,8 @@ const Logsout = (): React.ReactElement => {
       {
         login === true ?
           <div>
+            <h1>Goodbye!</h1>
+            <p>Thank you for visiting Closet Collections, Hope to see you back soon!</p>
             <Button onClick={():void => logout()}>logout</Button>
           </div>
           :

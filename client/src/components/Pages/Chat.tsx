@@ -63,8 +63,10 @@ const Chat = (): ReactElement => {
 
     <div>
 
-      <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
-      <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
+      <div>
+        <ZoomInIcon onClick={larger} />
+        <ZoomOutIcon onClick={smaller} />
+      </div>
       <div className="card">
         <form onSubmit={onMessageSubmit} >
           <h1 style={{fontSize: font}}>Messenger</h1>

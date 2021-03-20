@@ -13,8 +13,8 @@ import Grid from '@material-ui/core/Grid';
 
 const Home = (): ReactElement => {
 
-  const _isMounted = false;
-
+  // let _isMounted = false;
+  const [mysteryImg, setMysteryImg] = React.useState('');
   const [topOutfit, setTopOutFit] = React.useState([]);
   const [images, setImages] = React.useState([]);
   const [font, setFont] = useState(25);
@@ -61,8 +61,6 @@ const Home = (): ReactElement => {
 
   //     }).catch((err) => console.warn(err));
   // };
-
-
   // React.useEffect(() => {
   //   getUserLocation();
   // });
@@ -97,6 +95,25 @@ const Home = (): ReactElement => {
     Math.floor(Math.random() * images.length - 1);
   };
 
+
+  useEffect(() => {
+
+    axios.get('/outfit')
+      .then(({ data }) => setMysteryImg(data[Math.floor(Math.random() * data.length - 1)].imageUrl))
+      .catch((err) => console.warn(err));
+
+  }, []);
+
+
+  useEffect(() => {
+
+    axios.get('/outfit')
+      .then(({ data }) => setImages(data))
+      .catch((err) => console.warn(err));
+
+  }, []);
+
+
   const styles = StyleSheet.create({
     container: {
       backgroundColor: 'white',
@@ -115,18 +132,20 @@ const Home = (): ReactElement => {
     }
 
   });
-
+  console.log('mystery', mysteryImg);
   return (
 
     !images.length ? <h1>Loading</h1> :
       <>
         <Grid container justify = "center" spacing={3}>
-          <div id='magnifier'><ZoomInIcon id='enlarge' onClick={larger} fontSize="small">Enlarge</ZoomInIcon>
-            <ZoomOutIcon id='smaller' onClick={smaller} fontSize="small">Return Size</ZoomOutIcon></div>
           {/* <h2 style={{fontSize: font}}>Currently {temp} and {desc}</h2> */}
-          <br></br>
-          <h1 style={{fontSize: fonth2}}>Top Rated Outfit </h1>
-          <h4 style={{fontSize: fonth4}}> {`This outfit has ${images.sort((a, b) => b.likesCount - a.likesCount)[0].likesCount} likes` }</h4>
+
+          <div id='magnifier'>
+            <ZoomInIcon onClick={larger} />
+            <ZoomOutIcon onClick={smaller} />
+            <h1 style={{fontSize: fonth2}}>Top Rated Outfit </h1>
+          </div>
+          <h4 style={{fontSize: fonth4, paddingBottom: 0}}> {`This outfit has ${images.sort((a, b) => b.likesCount - a.likesCount)[0].likesCount} likes` }</h4>
 
           <Box border={1} width="75%" boxShadow={2} display="block" height="65%">
             <img className="photo" alt="outfit" src={
@@ -136,9 +155,10 @@ const Home = (): ReactElement => {
           </Box>
           <h2 style={{fontSize: fonth2}}>Suggested Outfit Of The Day</h2>
           <Box border={1} width="75%" height="65%" display="block" boxShadow={2}>
-            {/* <span><img className="photo" src={images[random()].imageUrl}/></span> */}
+            <span><img className="photo" src={mysteryImg} /></span>
           </Box>
         </Grid>
+        <Box p={9} />
         <Footer></Footer>
       </>
   );

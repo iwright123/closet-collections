@@ -1,5 +1,6 @@
 import { DataTypes, Sequelize } from 'sequelize';
 import mysql from 'mysql2';
+import { unique } from 'jquery';
 
 
 const sequelize: Sequelize = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllqetkd', 'vnG2q19b3wbaZXBhVjLY', {
