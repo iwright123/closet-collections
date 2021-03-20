@@ -149,10 +149,12 @@ const Calendar: React.FC = () => {
 
           page === true ?
             <View style={styles.container}>
-              <div>
-                <ZoomInIcon onClick={larger} />
-                <ZoomOutIcon onClick={smaller} />
+              <div id='magnify'>
+                <ZoomInIcon style={{left: 0}} onClick={larger} />
+                <ZoomOutIcon style={{left:0}}onClick={smaller} />
+
               </div>
+
               <TouchableOpacity style={styles.buttonContainer}>
 
                 <Button className={classes.root} style={{backgroundColor: '#000000'}} onClick={(): void => setPage(false)}>Items</Button>

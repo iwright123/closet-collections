@@ -145,8 +145,10 @@ const OutfitGrid = (): any => {
   return (
     !images.length ? <h1>There Are No Top Outfits At This Time</h1> :
       <div className={classes.root}>
-        <div id='zoompublic'><ZoomInIcon id='enlarge' onClick={larger} fontSize="small">Enlarge</ZoomInIcon>
-          <ZoomOutIcon id='smaller' onClick={smaller} fontSize="small">Return Size</ZoomOutIcon></div>
+        <div id='magnify'>
+          <ZoomInIcon onClick={larger} />
+          <ZoomOutIcon onClick={smaller} />
+        </div>
         <br></br>
 
         {

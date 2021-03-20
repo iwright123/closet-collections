@@ -91,6 +91,7 @@ body {
 .photo {
   height: 100%;
   width: 100%;
+
 }
 .outfit-item-buttons {
   overflow-x: scroll;
@@ -330,4 +331,12 @@ padding: 0;
 }
 .tab-list {
   margin-left: 45px;
+}
+#magnify {
+  left: 0;
+  position: absolute
+}
+#magnifier {
+width: 100%;
+
 }
