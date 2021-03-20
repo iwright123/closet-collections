@@ -175,7 +175,6 @@ label {
 }
 
 button {
-  margin-top: 20px;
   padding: 10px;
   background: transparent;
   border-radius: 5px;
@@ -259,4 +258,42 @@ top:0;
 #commentList {
 background-color: burlywood;
  border-style: solid;
+}
+.AddItem input[type=text] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+}
+.search input[type=text] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+}
+.search input:focus {
+  outline: none !important;
+    border-bottom: 1px solid #7ed957;
+}
+.AddItem input:focus {
+  outline: none !important;
+    border-bottom: 1px solid #7ed957;
+}
+.AddItem {
+  padding: 10px;
+  margin: 5px;
+}
+
+#createOutfitWhiteBoard {
+  padding: 10px;
+  margin: 5px;
+}
+
+#outfits {
+  border: 1px solid black;
+}
+.my-outfits {
+  padding: 10px;
+  margin: 5px;
+}
+.tab-list {
+  margin-left: 45px;
 }
