@@ -196,7 +196,6 @@ const Calendar: React.FC = () => {
               <Saved />
             </View>
         }
-        <Footer></Footer>
       </View>
     </>
   );
