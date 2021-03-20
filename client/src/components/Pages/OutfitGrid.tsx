@@ -80,7 +80,7 @@ const OutfitGrid = (): any => {
   const onMessageSubmit = (e, outfitId): any => {
     e.preventDefault();
     const {message} = state;
-    console.log('state', state);
+    // console.log('state', state);
     return axios.post('/comment', {comment: message, postId: outfitId})
       .then(() => grabComments())
       .catch(err => console.log('err somewhere on message submit', err));
@@ -150,7 +150,6 @@ const OutfitGrid = (): any => {
         {
           images.map((tile, i) => (
             <div id='comments' key={i}>
-              {console.log('Tiles should have different post ids!!!', tile)}
               <h3>{tile.user}</h3>
               <img src={tile.imageUrl} />
               <Button
@@ -175,7 +174,7 @@ const OutfitGrid = (): any => {
 
                 <ul>
                   {comment.map((comment, index) => {
-                    if (comment.postId === tile.id) {
+                    if (Number(comment.postId) === tile.id || String(comment.postId) === tile.id) {
                       return <div key={index}>
                         {`${comment.name}:    ${comment.comment}`}
                       </div>;

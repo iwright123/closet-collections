@@ -23,7 +23,9 @@ const Home = (): ReactElement => {
     setImgSize(15);
   };
 
-
+  const topRated = (): any => {
+    return images.sort((a, b) => b.likesCount - a.likesCount);
+  };
 
   const random = (): number => {
     return Math.floor(Math.random() * images.length - 1);
@@ -42,31 +44,31 @@ const Home = (): ReactElement => {
 
   return (
 
-    // !images.length ? <h1>Loading</h1> :
-    <>
-      <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
-      <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
-      <Text style={styles.title}>Top Rated Outfit</Text>
-      {/* <div>{'This outfit has' + ' ' + images[0].likesCount + ' ' + 'likes' }</div> */}
-      {/* <img src={
-        images[0].imageUrl}/> */}
+    !images.length ? <h1>Loading</h1> :
+      <>
+        <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
+        <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
+        <Text style={styles.title}>Top Rated Outfit</Text>
+        <div>{'This outfit has' + ' ' + images[0].likesCount + ' ' + 'likes' }</div>
+        <img src={
+          images.sort((a, b) => b.likesCount - a.likesCount)[0].imageUrl}/>
 
-      {console.log('images', images)}
+        {console.log('images', images)}
 
-      <h1>Suggested Outfit Of The Day</h1>
-      {/* <span><img src={images[random()].imageUrl}/></span> */}
+        <h1>Suggested Outfit Of The Day</h1>
+        <span><img src={images[random()].imageUrl}/></span>
 
-      <div className='footer'>
-        <footer id="footer">
-          <div className='footer-text'>
+        <div className='footer'>
+          <footer id="footer">
+            <div className='footer-text'>
             Closet Collections
-          </div>
-          <div className='footer-text'>
+            </div>
+            <div className='footer-text'>
             Since 2021
-          </div>
-        </footer>
-      </div>
-    </>
+            </div>
+          </footer>
+        </div>
+      </>
   );
 };
 

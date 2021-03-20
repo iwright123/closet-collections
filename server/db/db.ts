@@ -116,7 +116,6 @@ export const Comment = sequelize.define('Comment', {
 
 });
 
-
 export const Calendar = sequelize.define('Calendar', {
   id: {
     type: DataTypes.INTEGER,
