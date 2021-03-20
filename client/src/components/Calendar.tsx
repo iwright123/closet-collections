@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import axios from 'axios';
 import Saved from './Pages/SavedItems';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -10,6 +9,7 @@ import { items } from '../../../releaseData/calendarItems';
 import Footer from './Pages/Footer';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const Props = {
   items
@@ -55,7 +55,7 @@ const Calendar: React.FC = () => {
   };
 
   const favItem = (item): void => {
-
+    alert(`${item.title} ${item.subTitle} has been added to items`);
     setLike('red');
 
     setFaveItems([item.title, item.subTitle, item.img, item.release]);
@@ -156,7 +156,7 @@ const Calendar: React.FC = () => {
               </div>
               <TouchableOpacity style={styles.buttonContainer}>
 
-                <Button className={classes.root} style={{backgroundColor: '#000000'}} onClick={(): void => setPage(false)}>Fav Items</Button>
+                <Button className={classes.root} style={{backgroundColor: '#000000'}} onClick={(): void => setPage(false)}>Items</Button>
                 <div>
                   <input
                     type='text'
@@ -183,7 +183,7 @@ const Calendar: React.FC = () => {
                     />
                     <Text style={styles.itemInfo}>{item.title}</Text>
                     <Text style={styles.subItemInfo}>
-                      <FavoriteBorderIcon style={{backgroundColor: liked}} onClick={(): void => favItem(item)} /> {item.subTitle}</Text>
+                      <FavoriteIcon onClick={(): void => favItem(item)} /> {item.subTitle}</Text>
                     <Button className={classes.root}
                       style={{backgroundColor: '#000000'}}
                       onClick={(): void => push(item)}> Notify me!
