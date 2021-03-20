@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, EffectCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -21,6 +21,7 @@ import {io} from 'socket.io-client';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import { title } from 'node:process';
+// import { getLikes } from 'server/helpers/Likes';
 
 //import tileData from './tileData';
 const socket = io('http://localhost:3000');
@@ -59,7 +60,7 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
 
 
 const OutfitGrid = (): any => {
-  const [likes, setLike] = React.useState([]);
+  const [likes, setLike] = React.useState(0);
   const classes = useStyles();
   const [images, setImages] = React.useState([]);
   const [likeColor, setLikeColor] = React.useState(false);
@@ -68,7 +69,7 @@ const OutfitGrid = (): any => {
   const [comment, setComments] = React.useState([]);
   const [font, setFont] = useState(25);
   const [imgSize, setImgSize] = useState(15);
-  const colorChange = { color: 'yellow'};
+  const colorChange = { color: 'black'};
   const colorChange2 = { color: 'red'};
   const handleLikeClick = (e): void => {
     setLikeColor(!likeColor);
@@ -101,21 +102,37 @@ const OutfitGrid = (): any => {
       .then(data => console.log('this is after the comments are set in the grab comments', data))
       .catch(err => console.log('error getting comments', err));
   };
+  const grabLikes = (id): Promise<any> => {
+    return axios.get(`/likes/${id}`)
+      .then(likes => {
+        console.log('this is likes', likes.data[0].likesCount);
+        setLike(likes.data[0].likesCount);
+      })
+      // .then(data => console.log('this is after the comments are set in the grab comments', data))
+      .catch(err => console.log('error getting comments', err));
+  };
   const updateLike = (id): Promise<any> => {
 
     return axios.patch(`/outfit/${id}`)
-      .then(() => setLikeColor(!likeColor))
-      // .then(setState({...state, [e.target.name]: e.target.value}))
+      .then((data) => {
+        setLikeColor(!likeColor);
+        getFits();
+      })
       .catch(err => console.log('there was an error updating the like', err));
   };
 
-
-
-  useEffect(() => {
-    axios.get('/outfit')
+  const getFits = (): Promise<any> => {
+    return axios.get('/outfit')
       .then(({ data }) => setImages(data))
 
       .catch((err) => console.warn(err));
+  };
+
+  // useEffect(() => {
+  //  return grabLikes(0);
+  // }, []);
+  useEffect(() => {
+    getFits();
   }, []);
   useEffect(() => {
     axios.get('/comments')

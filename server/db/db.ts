@@ -234,6 +234,12 @@ export const getComments = (): Promise<any> => {
 export const updateLike = (id): Promise<any> => {
   return Outfit.increment('likesCount', {where: {id: id}});
 };
+export const setLike = (id): Promise<any> => {
+  return Outfit.findAll({where: {
+    id: id
+  }, attributes: ['likesCount']});
+
+};
 //map through outfits, includß
 module.exports = {
   Items,
@@ -245,7 +251,8 @@ module.exports = {
   getComments,
   postComments,
   addUser,
-  updateLike
+  updateLike,
+  setLike
 };
 
 // sequelize.sync({ force: true })

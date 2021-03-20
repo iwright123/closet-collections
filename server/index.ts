@@ -12,7 +12,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import {addUser, postComments, getComments, updateLike} from './db/db';
+import {addUser, postComments, getComments, updateLike, setLike} from './db/db';
 import { Twilio } from 'twilio';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
@@ -278,10 +278,18 @@ app.patch('/outfit/:id', (req: Request, res: Response) => {
 
   const {id} = req.params;
   return updateLike(id)
-    .then(data => console.log('this is sent back from updating like'))
+    .then(data => res.send(data))
     .catch(err => console.log('error updating like', err));
 });
+app.get('/likes/:id', (req: Request, res: Response): Promise<any> => {
 
+
+  const {id} = req.params;
+  console.log('IDDDD', id);
+  return setLike(id)
+    .then(data => res.send(data))
+    .catch(err => console.log('this is the error updating the like', err));
+});
 app.post('/comment', (req: Request, res: Response):Promise<any> => {
   //const { userName, text} = req.body;
   console.log('LINE 280', req.body);
@@ -291,7 +299,7 @@ app.post('/comment', (req: Request, res: Response):Promise<any> => {
 });
 app.get('/comments', (req: Request, res: Response): any => {
   const { id } = req.body;
-  console.log('Inside get comments', id);
+
   return getComments()
     .then(data => res.send(data))
     .catch(err => console.log('error getting comments', err));

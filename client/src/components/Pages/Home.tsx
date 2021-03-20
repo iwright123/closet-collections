@@ -7,6 +7,7 @@ import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 
 const Home = (): ReactElement => {
+  const [topOutfit, setTopOutFit] = React.useState([]);
   const [images, setImages] = React.useState([]);
   const [font, setFont] = useState(25);
   const [imgSize, setImgSize] = useState(15);
@@ -18,40 +19,42 @@ const Home = (): ReactElement => {
     setFont(25);
     setImgSize(15);
   };
+  const topRated = (array): any => {
+    array.reduce((acc, val) => {
+      if (val.likesCount > acc.likesCount) {
+        acc = val;
+      }
+      return acc;
+    }, {});
+  };
+  const random = (): number => {
+    return Math.floor(Math.random() * images.length - 1);
+  };
   useEffect(() => {
+
     axios.get('/outfit')
       .then(({ data }) => setImages(data))
-
       .catch((err) => console.warn(err));
   }, []);
-  const topRatedOutfit = images.reduce((acc, val) => {
-    if (val.likesCount > acc.likesCount) {
-      acc = val;
-    }
-    return acc;
-  });
   return (
     !images.length ? <h1>Loading</h1> :
-      <View>
-        <>
-          {console.log('this is the top rated outfit', topRatedOutfit, images)}
-          <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
-          <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
-          <Text style={styles.title}>Top Rated Outfit</Text>
-          {
-            images.map((tile, i) => (
-              <div>
-                <View>
+      <>
 
-                </View>
-                <Image
-                  style={{width: 200, height: 200, marginVertical: 75}}
-                  source={{uri: tile.imageUrl}}
-                />
-                <Text style={{marginVertical: -75}}>Top Rated</Text>
-              </div>
-            ) )}
-        </>
+
+
+
+        <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
+        <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
+        <Text style={styles.title}>Top Rated Outfit</Text>
+        <div>{'This outfit has' + ' ' + images[0].likesCount + ' ' + 'likes' }</div>
+        <img src={images[0].imageUrl}/>
+        {console.log(topRated(images))}
+
+
+        <h1>Suggested Outfit Of The Day</h1>
+        <span><img src={images.sort((a , b): any => {
+          a.likesCount > b.likesCount ? 1 : -1;
+        })[0].imageUrl}/></span>
 
         <div className='footer'>
           <footer id="footer">
@@ -63,8 +66,7 @@ const Home = (): ReactElement => {
             </div>
           </footer>
         </div>
-      </View>
-
+      </>
   );
 };
 
