@@ -73,38 +73,26 @@ const MyOutfit = (): ReactElement => {
   }, []);
   return (
 
-    <div className={classes.root}>
-      <h1 style={{fontSize: font}}>Outfits</h1>
+    <div className="my-outfits">
 
       <ZoomInIcon onClick={larger} />
       <ZoomOutIcon onClick={smaller} />
 
-      <GridList cellHeight={150} spacing={30} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
-          <ListSubheader component="div"></ListSubheader>
-        </GridListTile>
-        {images.map((tile: UsersOutfits, i) => (
-          <GridListTile key={i}>
-            <Zoom>
-              <img src={tile.imageUrl} />
-            </Zoom>
-            <GridListTileBar
-              actionIcon={
-                <>
-                  <Button
-                    onClick={(():void => handleDelete(tile, i))}
-                  >
-                    <DeleteIcon
-                      className="buttonIcon"
-                      style={{fontSize: 15}}
-                    />
-                  </Button>
-                </>
-              }
-            />
-          </GridListTile>
-        ))}
-      </GridList>
+
+      {images.map((tile: UsersOutfits, i) => (
+        <div id="outfits" key={i}>
+          <Zoom>
+            <img src={tile.imageUrl} />
+          </Zoom>
+          <Button
+            onClick={(():void => handleDelete(tile, i))}
+          >
+            <DeleteIcon
+              className="buttonIcon"
+              style={{fontSize: 30}}/>
+          </Button>
+        </div>
+      ))}
     </div>
   );
 };
