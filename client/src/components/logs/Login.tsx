@@ -1,4 +1,3 @@
-// import React, { useEffect, useState } from 'react';
 import * as React from 'react';
 import axios from 'axios';
 import GoogleButton from 'react-google-button';

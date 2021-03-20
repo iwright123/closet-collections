@@ -1,6 +1,6 @@
 import { DataTypes, Sequelize } from 'sequelize';
 import mysql from 'mysql2';
-import { create } from 'react-test-renderer';
+
 
 const sequelize: Sequelize = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllqetkd', 'vnG2q19b3wbaZXBhVjLY', {
   host: 'bao0spze4uyjnrjcstlm-mysql.services.clever-cloud.com',
@@ -12,7 +12,7 @@ const sequelize: Sequelize = new Sequelize('bao0spze4uyjnrjcstlm', 'us5tvpffhllq
     idle: 10000
   }
 });
-const db = {};
+
 const Users = sequelize.define('Users', {
   id: {
     type: DataTypes.INTEGER,
@@ -20,35 +20,43 @@ const Users = sequelize.define('Users', {
     allowNull: false,
     autoIncrement: true
   },
+
   username: {
     type: DataTypes.STRING,
     allowNull: false,
   },
+
 });
 
 export const Items = sequelize.define('Items', {
+
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
     allowNull: false,
   },
+
   clothingType: {
     type: DataTypes.STRING,
     unique: false
   },
+
   description: {
     type: DataTypes.STRING,
     unique: false
   },
+
   price: {
     type: DataTypes.INTEGER,
     unique: false
   },
+
   imageUrl: {
     type: DataTypes.STRING(1000),
     unique: true
   }
+
 });
 
 export const Outfit = sequelize.define('Outfit', {
@@ -58,62 +66,25 @@ export const Outfit = sequelize.define('Outfit', {
     allowNull: false,
     primaryKey: true
   },
+
   user: {
     type: DataTypes.STRING,
     allowNull: false
   },
+
   outfitTitle: {
     type: DataTypes.STRING,
     unique: true
   },
+
   imageUrl: {
     type: DataTypes.STRING,
   },
+
   likesCount: {
     type: DataTypes.INTEGER,
     defaultValue: 0,
   }
-});
-
-export const Likes = sequelize.define('Likes', {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: DataTypes.INTEGER
-  },
-  outfitId: {
-    type: DataTypes.INTEGER,
-  },
-  user: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  favorite: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
-  }
-});
-
-
-export const WhiteboardPost = sequelize.define('WhiteboardPost', {
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  user: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  likes: {
-    type: DataTypes.BOOLEAN,
-    allowNull: true,
-  },
-  content: {
-    type: DataTypes.TEXT,
-  },
 });
 
 
@@ -145,19 +116,16 @@ export const Comment = sequelize.define('Comment', {
 
 });
 
-// saves all items into 1 outfit
-
 
 export const Calendar = sequelize.define('Calendar', {
   id: {
     type: DataTypes.INTEGER,
-
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
   },
 
-  postId: {
+  user: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -184,29 +152,6 @@ const database = 'bao0spze4uyjnrjcstlm';
 sequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
 sequelize.query(`USE \`${database}\`;`);
 
-// const addItem = async(body: any) => {
-//   const { clothingType, description, price, imageUrl } = body;
-//    const newItem = await Items.create({
-//      clothingType: clothingType,
-//      description: description,
-//      price: price,
-//      imageUrl: imageUrl
-//    });
-//   return newItem.save();
-// };
-
-// const getAllItems = async() => {
-//   return await Items.findAll();
-// };
-
-// const deleteItem = (body: any) => {
-//   const { id } = body;
-//   return Items.destroy({
-//     where: {
-//       id: id
-//     }
-//   });
-// };
 
 export const addUser = (name: string): Promise<any> => {
   return Users.findOrCreate({
@@ -215,39 +160,40 @@ export const addUser = (name: string): Promise<any> => {
     }
   });
 };
+
 export const postComments = async( body: any, name: any): Promise<any> => {
   const { comment, postId} = body;
-  console.log('LOOOK HERE NOW ', {name, comment, postId});
+
   const createComment = await Comment.create({
     //maybe need an outfit id here?
-
     name: name,
     comment: comment,
     postId: postId
   });
   return createComment.save();
 };
+
 export const getComments = (): Promise<any> => {
   console.log(Comment.findAll());
   return Comment.findAll();
 };
+
 export const updateLike = (id): Promise<any> => {
   return Outfit.increment('likesCount', {where: {id: id}});
 };
+
 export const setLike = (id): Promise<any> => {
   return Outfit.findAll({where: {
     id: id
   }, attributes: ['likesCount']});
 
 };
-//map through outfits, includß
+
 module.exports = {
   Items,
-  WhiteboardPost,
   Users,
   Outfit,
   Calendar,
-  Likes,
   getComments,
   postComments,
   addUser,

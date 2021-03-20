@@ -22,7 +22,6 @@ const Calendar: React.FC = () => {
   const [liked, setLike] = React.useState('');
   const [phone, setNumber] = React.useState('');
   const [dummyNumber, setPhone] = React.useState('');
-  // const [pushNotifications, setNotifications] = React.useState([]);
   const [page, setPage] = React.useState(true);
   const [fontTitle, setTitle] = React.useState(15);
   const [fontS, setSTitle] = React.useState(25);
@@ -191,14 +190,11 @@ const Calendar: React.FC = () => {
                   </View>;
                 })
               }
-              <Footer></Footer>
             </View> :
             <View>
               <ExitToAppIcon onClick={(): void => setPage(true)}/>
               <Saved />
-              <Footer></Footer>
             </View>
-
         }
       </View>
     </>

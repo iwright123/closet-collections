@@ -14,7 +14,7 @@ const Saved = () => {
   const [page, setPage] = React.useState(true);
   const [clickedItem, setClicked] = React.useState([]);
   const [fontTitle, setTitle] = React.useState(20);
-  const [fontS, setSTitle] = React.useState(30);
+  const [fontS, setSTitle] = React.useState(35);
   const [fontDate, setDate] = React.useState(20);
 
 
@@ -34,7 +34,7 @@ const Saved = () => {
 
   const larger = (): any => {
     setTitle(40);
-    setSTitle(45);
+    setSTitle(50);
     setDate(40);
   };
 

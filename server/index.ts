@@ -34,9 +34,6 @@ const io = new Server(httpServer, {
   // ...
 });
 
-////////////////HELPERS////////////////////
-
-
 
 const port = process.env.PORT || 3000;
 
@@ -51,15 +48,11 @@ const client = new Twilio(accountSid, authToken);
 
 
 dotenv.config();
+
 ////////////////HELPERS////////////////////
-
 import { addItem, getAllItems, deleteItem, searchItems } from './helpers/Item';
-
-//import { getAllWhiteboardPosts, savePost} from './helpers/WhiteBoardPost';
 import { saveOutfit, getAllOutfits, deleteOutfit, getUserOutfits, updateFav} from './helpers/Outfit';
-import { getLikes, saveLikes } from './helpers/Likes';
 import Find from './api/findastore';
-
 ////////////////HELPERS////////////////////
 
 dotenv.config();
@@ -76,9 +69,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
 app.use(bodyParser.json());
-//app.use(cors());
 app.use('/api/search', Find);
+
+
 /*******************DATABASE ROUTES ************************************/
+
 app.get('/outfit/:user', (req: Request, res: Response): Promise<usersOutfit> => {
   return getUserOutfits(req.cookies.thesis)
     .then((data): any => res.json(data))
@@ -107,13 +102,6 @@ app.get('items/search', (req: Request, res: Response) => {
     .catch((err) => console.warn(err));
 });
 
-
-// app.get('/whiteboardpost', (req: Request, res: Response): Promise<any> => {
-//   return getAllWhiteboardPosts()
-//     .then((data) => res.json(data))
-//     .catch((err) => console.warn(err));
-// });
-
 app.post('/items', (req: Request, res: Response): Promise<any> => {
   return addItem(req.body)
     .then((data) => res.json(data))
@@ -121,17 +109,17 @@ app.post('/items', (req: Request, res: Response): Promise<any> => {
 
 });
 
-app.get('/likes', (req: Request, res: Response): Promise<any> => {
-  return getLikes(req.cookies.thesis)
-    .then((data) => res.json(data))
-    .catch((err) => console.warn(err));
-});
+// app.get('/likes', (req: Request, res: Response): Promise<any> => {
+//   return getLikes(req.cookies.thesis)
+//     .then((data) => res.json(data))
+//     .catch((err) => console.warn(err));
+// });
 
-app.post('/likes', (req: Request, res: Response): Promise<any> => {
-  return saveLikes(req.body, req.cookies.thesis)
-    .then((data) => console.log('Likes created', data))
-    .catch((err) => console.warn(err));
-});
+// app.post('/likes', (req: Request, res: Response): Promise<any> => {
+//   return saveLikes(req.body, req.cookies.thesis)
+//     .then((data) => console.log('Likes created', data))
+//     .catch((err) => console.warn(err));
+// });
 
 app.delete('/items/:id', (req: Request, res: Response): Promise<any> => {
   return deleteItem(req.params)
@@ -145,18 +133,19 @@ app.delete('/outfit/:id', (req: express.Request, res: express.Response): Promise
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });
+
 /************************************* */
 
 import CalendarItem from './routes/calender';
 import Weather from './api/weather';
 import Location from './api/geolocation';
-import { AiOutlineOneToOne } from 'react-icons/ai';
 
 app.use('/calendar', CalendarItem);
 app.use('/api/weather', Weather);
 app.use('/api/location', Location);
-//app.use('/whiteboardpost', WhiteboardPost);
+
 /////////GOOGLE AUTH ///////////
+
 app.use(
   session({
     secret: process.env.clientSecret,
@@ -206,6 +195,7 @@ app.delete('/logout', (req: Request, res: Response) => {
 ///////////GOOGLE AUTH ^^^^^^///////////
 
 /////////Twilio//////////
+
 app.post('/sms', (req, res) => {
   const { body, phone } = req.body;
   // client.messages.create({
@@ -247,51 +237,43 @@ app.post('/reminder', (req, res, next) => {
 
 io.on('connection', (socket: Socket) => {
 
-  socket.on('disconnect', (): void => {
-    console.log('user disconnected');
-  });
   socket.on('message', ({name, message}) => {
-    console.log('LINE 267', {name, message});
     io.emit('message', {name, message});
   });
   socket.on('comment', ({name, comment}) => {
-    console.log('LINE 271', {comment, name});
     io.emit('comment', {name, comment});
-
   });
 });
 
 app.patch('/outfit/:id', (req: Request, res: Response) => {
 
-  const {id} = req.params;
+  const { id } = req.params;
   return updateLike(id)
     .then(data => res.send(data))
     .catch(err => console.log('error updating like', err));
 });
 app.get('/likes/:id', (req: Request, res: Response): Promise<any> => {
 
+  const { id } = req.params;
 
-  const {id} = req.params;
-  console.log('IDDDD', id);
   return setLike(id)
     .then(data => res.send(data))
     .catch(err => console.log('this is the error updating the like', err));
 });
+
 app.post('/comment', (req: Request, res: Response):Promise<any> => {
-  //const { userName, text} = req.body;
-  console.log('LINE 280', req.body);
+
   return postComments(req.body, req.cookies.thesis)
     .then(data => res.send(data))
     .catch(err => console.log('Error posting comment', err));
 });
+
 app.get('/comments', (req: Request, res: Response): any => {
-  const { id } = req.body;
 
   return getComments()
     .then(data => res.send(data))
     .catch(err => console.log('error getting comments', err));
 });
-
 
 
 
