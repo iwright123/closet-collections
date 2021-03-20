@@ -88,6 +88,10 @@ body {
   height: 100px;
 }
 
+.photo {
+  height: 100%;
+  width: 100%;
+}
 .outfit-item-buttons {
   overflow-x: scroll;
   overflow-y: hidden;
@@ -194,18 +198,32 @@ button {
 }
 h1 {
   text-align: center;
+
+}
+h2 {
+  color: #000000;
+  font-family: 'Roboto Slab', serif;
+  text-align: center;
+  padding: 25px;
+}
+.h2 {
+  padding: 0px;
 }
 h3 {
   color: #000000;
   font-family: 'Roboto Slab', serif;
+  text-align: center;
+  padding: 15px;
 }
+
 h4 {
   color: #000000;
   font-family: 'Roboto Slab', serif;
   text-align: center;
+  padding: 25px;
 }
-h4 {
-  font-family: 'Roboto Slab', serif;
+#magnifier {
+  padding: 10px;
 }
 .message {
   right: 1px
