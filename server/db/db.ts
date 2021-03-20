@@ -145,19 +145,15 @@ export const Comment = sequelize.define('Comment', {
 
 });
 
-// saves all items into 1 outfit
-
-
 export const Calendar = sequelize.define('Calendar', {
   id: {
     type: DataTypes.INTEGER,
-
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
   },
 
-  postId: {
+  user: {
     type: DataTypes.STRING,
     allowNull: false
   },

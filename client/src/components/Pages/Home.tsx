@@ -23,7 +23,9 @@ const Home = (): ReactElement => {
     setImgSize(15);
   };
 
-
+  const topRated = (): any => {
+    return images.sort((a, b) => b.likesCount - a.likesCount);
+  };
 
   const random = (): number => {
     return Math.floor(Math.random() * images.length - 1);
@@ -49,7 +51,7 @@ const Home = (): ReactElement => {
         <Text style={styles.title}>Top Rated Outfit</Text>
         <div>{'This outfit has' + ' ' + images[0].likesCount + ' ' + 'likes' }</div>
         <img src={
-          images[0].imageUrl}/>
+          images.sort((a, b) => b.likesCount - a.likesCount)[0].imageUrl}/>
 
         {console.log('images', images)}
 
