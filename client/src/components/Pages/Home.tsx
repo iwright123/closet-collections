@@ -5,6 +5,7 @@ import axios from 'axios';
 import { title } from 'node:process';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import Footer from './Footer';
 
 const Home = (): ReactElement => {
 
@@ -57,17 +58,7 @@ const Home = (): ReactElement => {
 
         <h1>Suggested Outfit Of The Day</h1>
         <span><img src={images[random()].imageUrl}/></span>
-
-        <div className='footer'>
-          <footer id="footer">
-            <div className='footer-text'>
-            Closet Collections
-            </div>
-            <div className='footer-text'>
-            Since 2021
-            </div>
-          </footer>
-        </div>
+        <Footer></Footer>
       </>
   );
 };

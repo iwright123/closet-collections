@@ -187,6 +187,7 @@ const OutfitGrid = (): any => {
               </div>
             </div>
           ) )}
+        <Footer></Footer>
       </div>
   );
 };
