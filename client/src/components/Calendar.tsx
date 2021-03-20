@@ -197,6 +197,7 @@ const Calendar: React.FC = () => {
             </View>
         }
       </View>
+      <Footer></Footer>
     </>
   );
 };

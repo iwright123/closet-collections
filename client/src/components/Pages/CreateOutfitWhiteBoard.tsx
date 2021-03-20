@@ -8,7 +8,7 @@ import $ from 'jquery';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
-
+import Footer from './Footer';
 
 const CreateOutfitWhiteBoard = (): ReactElement => {
 
@@ -153,6 +153,7 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
           );
         })}
       </div>
+      <Footer></Footer>
     </div>
   );
 };
