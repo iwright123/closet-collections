@@ -129,7 +129,7 @@ label {
   text-align: center;
 }
 #footer {
-  position:relative;
+  position: fixed;
   left:0;
   bottom:0;
   right:0;
@@ -188,6 +188,9 @@ button {
 #submit {
   margin-left: 30%;
 }
+h1 {
+  text-align: center;
+}
 h3 {
   color: #000000;
   font-family: 'Roboto Slab', serif;
@@ -230,5 +233,4 @@ top:0;
 #commentList {
 background-color: burlywood;
  border-style: solid;
-
 }

@@ -47,8 +47,8 @@ const Home = (): ReactElement => {
 
     !images.length ? <h1>Loading</h1> :
       <>
-        <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
-        <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
+        <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="small">Enlarge</ZoomInIcon></div>
+        <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="small">Return Size</ZoomOutIcon></div>
         <Text style={styles.title}>Top Rated Outfit</Text>
         <div>{'This outfit has' + ' ' + images[0].likesCount + ' ' + 'likes' }</div>
         <img src={

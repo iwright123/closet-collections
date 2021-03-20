@@ -98,8 +98,8 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
   return (
     <div>
       <div id="buttons">
-        <ZoomInIcon id='enlarge' onClick={larger} fontSize="large"></ZoomInIcon>
-        <ZoomOutIcon id='smaller' onClick={smaller} fontSize="large"></ZoomOutIcon></div>
+        <ZoomInIcon id='enlarge' onClick={larger} fontSize="small"></ZoomInIcon>
+        <ZoomOutIcon id='smaller' onClick={smaller} fontSize="small"></ZoomOutIcon></div>
       <Stage
         width={400}
         height={400}
@@ -153,7 +153,6 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
           );
         })}
       </div>
-      <Footer></Footer>
     </div>
   );
 };
