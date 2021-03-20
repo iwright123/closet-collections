@@ -140,7 +140,7 @@ const OutfitGrid = (): any => {
       .catch(err => console.log('err getting comments try 1', err));
   }, []);
   return (
-    !images.length ? <h1>Loading</h1> :
+    !images.length ? <h1>There Are No Top Outfits At This Time</h1> :
       <div className={classes.root}>
         <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
         <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>

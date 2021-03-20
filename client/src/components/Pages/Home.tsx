@@ -7,26 +7,24 @@ import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 
 const Home = (): ReactElement => {
+
   const [topOutfit, setTopOutFit] = React.useState([]);
   const [images, setImages] = React.useState([]);
   const [font, setFont] = useState(25);
   const [imgSize, setImgSize] = useState(15);
+
   const larger = (): any => {
     setFont(40);
     setImgSize(40);
   };
+
   const smaller = (): any => {
     setFont(25);
     setImgSize(15);
   };
-  const topRated = (array): any => {
-    array.reduce((acc, val) => {
-      if (val.likesCount > acc.likesCount) {
-        acc = val;
-      }
-      return acc;
-    }, {});
-  };
+
+
+
   const random = (): number => {
     return Math.floor(Math.random() * images.length - 1);
   };
@@ -35,26 +33,28 @@ const Home = (): ReactElement => {
     axios.get('/outfit')
       .then(({ data }) => setImages(data))
       .catch((err) => console.warn(err));
+
+
+
   }, []);
+
+
+
   return (
+
     !images.length ? <h1>Loading</h1> :
       <>
-
-
-
-
         <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
         <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
         <Text style={styles.title}>Top Rated Outfit</Text>
         <div>{'This outfit has' + ' ' + images[0].likesCount + ' ' + 'likes' }</div>
-        <img src={images[0].imageUrl}/>
-        {console.log(topRated(images))}
+        <img src={
+          images[0].imageUrl}/>
 
+        {console.log('images', images)}
 
         <h1>Suggested Outfit Of The Day</h1>
-        <span><img src={images.sort((a , b): any => {
-          a.likesCount > b.likesCount ? 1 : -1;
-        })[0].imageUrl}/></span>
+        <span><img src={images[random()].imageUrl}/></span>
 
         <div className='footer'>
           <footer id="footer">
