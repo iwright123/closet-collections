@@ -21,7 +21,7 @@ const phantom = {
 
 const Footer = (): ReactElement => {
   return (
-    <div style={phantom}>
+    <div id= 'footer' style={phantom}>
       <footer style={phantom} id="footer">
         <div className='footer-text'>
       Closet Collections

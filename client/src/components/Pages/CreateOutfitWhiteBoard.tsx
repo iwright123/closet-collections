@@ -8,7 +8,7 @@ import $ from 'jquery';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
-
+import Footer from './Footer';
 
 const CreateOutfitWhiteBoard = (): ReactElement => {
 
@@ -98,8 +98,8 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
   return (
     <div id="createOutfitWhiteBoard">
       <div id="buttons">
-        <ZoomInIcon id='enlarge' onClick={larger} fontSize="large"></ZoomInIcon>
-        <ZoomOutIcon id='smaller' onClick={smaller} fontSize="large"></ZoomOutIcon></div>
+        <ZoomInIcon id='enlarge' onClick={larger} fontSize="small"></ZoomInIcon>
+        <ZoomOutIcon id='smaller' onClick={smaller} fontSize="small"></ZoomOutIcon></div>
       <Stage
         style={{border: '1px solid black'}}
         width={400}

@@ -84,7 +84,6 @@ const findAStore = (): any => {
           return null;
         })}
       </div>
-      <Footer></Footer>
 
     </div>
   );

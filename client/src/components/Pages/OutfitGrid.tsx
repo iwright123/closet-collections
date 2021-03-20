@@ -144,8 +144,9 @@ const OutfitGrid = (): any => {
   return (
     !images.length ? <h1>There Are No Top Outfits At This Time</h1> :
       <div className={classes.root}>
-        <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
-        <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
+        <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="small">Enlarge</ZoomInIcon></div>
+        <div><ZoomOutIcon id='smaller' onClick={smaller} fontSize="small">Return Size</ZoomOutIcon></div>
+        <br></br>
         <h1 style={{fontSize: font}}>Outfits</h1>
         {
           images.map((tile, i) => (
