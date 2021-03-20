@@ -68,7 +68,8 @@ const Saved = () => {
       fontSize: fontTitle,
       textAlign: 'center',
       marginVertical: 35,
-      marginLeft: 10
+      marginLeft: 10,
+      fontFamily: 'Roboto Slab',
     },
 
     subItemInfo: {
@@ -77,7 +78,8 @@ const Saved = () => {
       textAlign: 'center',
       marginBottom: 10,
       marginTop: -20,
-      marginLeft: 10
+      marginLeft: 10,
+      fontFamily: 'Roboto Slab',
     },
 
     dateInfo: {
@@ -85,7 +87,8 @@ const Saved = () => {
       fontSize: fontDate,
       textAlign: 'center',
       marginVertical: 5,
-      marginLeft: 10
+      marginLeft: 10,
+      fontFamily: 'Roboto Slab',
     },
 
     saved: {

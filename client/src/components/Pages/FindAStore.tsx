@@ -72,9 +72,9 @@ const findAStore = (): any => {
             return (
               <div key={String(i)}>
                 <div key={String(i)}>
-                  <h2 style={{fontSize: fontName}}> Name: {data.name}</h2>
-                  <h3 style={{fontSize: fontDets}}>Address: {data.location.address1} {data.location.city} {data.location.state} {data.location.zip_code}</h3>
-                  <h3 style={{fontSize: fontDets}}>Phone Number: {data.phone}</h3>
+                  <h2 style={{fontSize: fontName}}>{data.name}</h2>
+                  <h3 style={{fontSize: fontDets}}>{data.location.address1} {data.location.city} {data.location.state} {data.location.zip_code}</h3>
+                  <h3 style={{fontSize: fontDets}}>{data.phone}</h3>
                   <h3 style={{fontSize: fontDets}}>Rating: {data.rating}</h3>
                 </div>
                 <br></br>

@@ -26,6 +26,9 @@ const Home = (): ReactElement => {
   const [temp, setTemp] = React.useState('');
   const [desc, setDesc] = React.useState('');
 
+  const [likeCount, setCount] = React.useState(0);
+
+
   // const getUserLocation = (): any => {
   //   //get user's ip address
   //   return axios.get('https://api.ipify.org')
@@ -63,6 +66,13 @@ const Home = (): ReactElement => {
   // });
 
 
+  React.useEffect(() => {
+    axios.get('/outfit')
+      .then(({ data }) => setImages(data))
+      .catch((err) => console.warn(err));
+  }, []);
+
+
   const larger = (): any => {
     setFont(40);
     setImgSize(40);
@@ -81,8 +91,8 @@ const Home = (): ReactElement => {
     return images.sort((a, b) => b.likesCount - a.likesCount);
   };
 
-  const random = (): number => {
-    return Math.floor(Math.random() * images.length - 1);
+  const random = (): any => {
+    Math.floor(Math.random() * images.length - 1);
   };
 
 
@@ -127,7 +137,6 @@ const Home = (): ReactElement => {
 
     !images.length ? <h1>Loading</h1> :
       <>
-
         <Grid container justify = "center" spacing={3}>
           {/* <h2 style={{fontSize: font}}>Currently {temp} and {desc}</h2> */}
 

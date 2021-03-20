@@ -181,16 +181,16 @@ const OutfitGrid = (): any => {
 
               </div>
               <div id='lookhere'>
-                <div id='sendcomment'>
-                  <input type='text' value={state.message} name='message' placeholder='comment' onChange={handleCommentChange} />
-                  <Button id='sending' type='submit' style={{color: 'black'}} value={tile.id} onClick={(e): any => onMessageSubmit(e, tile.id)}><SendIcon/></Button>
-
-                </div>
 
                 <ul>
                   {display && comment.map((comment, index) => {
                     if (Number(comment.postId) === tile.id || String(comment.postId) === tile.id) {
                       return <div key={index} id='commentsd'>
+                        <div id='sendcomment'>
+                          <input type='text' value={state.message} name='message' placeholder='comment' onChange={handleCommentChange} />
+                          <Button id='sending' type='submit' style={{color: 'black'}} value={tile.id} onClick={(e): any => onMessageSubmit(e, tile.id)}><SendIcon/></Button>
+
+                        </div>
                         {`${comment.name}:    ${comment.comment}`}
                       </div>;
 
