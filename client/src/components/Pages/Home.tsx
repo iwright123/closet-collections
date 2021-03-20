@@ -22,6 +22,8 @@ const Home = (): ReactElement => {
   const [temp, setTemp] = React.useState('');
   const [desc, setDesc] = React.useState('');
 
+  const [likeCount, setCount] = React.useState(0);
+
   const getUserLocation = (): any => {
     //get user's ip address
     return axios.get('https://api.ipify.org')
@@ -56,6 +58,20 @@ const Home = (): ReactElement => {
   };
 
 
+  React.useEffect(() => {
+    getUserLocation();
+  });
+
+
+  React.useEffect(() => {
+
+    axios.get('/outfit')
+      .then(({ data }) => setImages(data))
+      .catch((err) => console.warn(err));
+
+  }, []);
+
+
   const larger = (): any => {
     setFont(40);
     setImgSize(40);
@@ -70,26 +86,11 @@ const Home = (): ReactElement => {
     return images.sort((a, b) => b.likesCount - a.likesCount);
   };
 
-  const random = (): number => {
-    return Math.floor(Math.random() * images.length - 1);
+  const random = (images): any => {
+    images[Math.floor(Math.random() * images.length - 1)].imageUrl;
   };
 
-  React.useEffect(() => {
-    getUserLocation();
-  });
-
-
-
-
-  useEffect(() => {
-
-    axios.get('/outfit')
-      .then(({ data }) => setImages(data))
-      .catch((err) => console.warn(err));
-
-  }, []);
-
-
+  console.log(images, 'here');
 
   return (
 
@@ -105,7 +106,7 @@ const Home = (): ReactElement => {
           images.sort((a, b) => b.likesCount - a.likesCount)[0].imageUrl}/>
 
         <Text>Suggested Outfit Of The Day</Text>
-        <span><img src={images[random()].imageUrl}/></span>
+        {/* <span><img src={random(images)}/></span> */}
         <Footer></Footer>
       </View>
   );
