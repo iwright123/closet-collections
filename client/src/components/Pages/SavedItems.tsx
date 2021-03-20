@@ -7,6 +7,7 @@ import axios from 'axios';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import Footer from './Footer';
 
 const Saved = () => {
 

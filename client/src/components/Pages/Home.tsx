@@ -95,10 +95,11 @@ const Home = (): ReactElement => {
   return (
 
     !images.length ? <h1>Loading</h1> :
+
       <View style={styles.container}>
         <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
         <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
-        <Text>Currently {temp} and {desc}</Text>
+        <Text>Currently {temp} and {desc}</Text>      
         <Text style={styles.title}>Top Rated Outfit</Text>
         <Text>{`This outfit has ${images.sort((a, b) => b.likesCount - a.likesCount)[0].likesCount} likes` }</Text>
 

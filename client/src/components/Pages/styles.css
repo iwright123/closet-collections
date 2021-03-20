@@ -129,7 +129,7 @@ label {
   text-align: center;
 }
 #footer {
-  position:relative;
+  position: fixed;
   left:0;
   bottom:0;
   right:0;
@@ -171,7 +171,6 @@ label {
 }
 
 button {
-  margin-top: 20px;
   padding: 10px;
   background: transparent;
   border-radius: 5px;
@@ -187,6 +186,9 @@ button {
 }
 #submit {
   margin-left: 30%;
+}
+h1 {
+  text-align: center;
 }
 h3 {
   color: #000000;
@@ -230,5 +232,42 @@ top:0;
 #commentList {
 background-color: burlywood;
  border-style: solid;
+}
+.AddItem input[type=text] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+}
+.search input[type=text] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+}
+.search input:focus {
+  outline: none !important;
+    border-bottom: 1px solid #7ed957;
+}
+.AddItem input:focus {
+  outline: none !important;
+    border-bottom: 1px solid #7ed957;
+}
+.AddItem {
+  padding: 10px;
+  margin: 5px;
+}
 
+#createOutfitWhiteBoard {
+  padding: 10px;
+  margin: 5px;
+}
+
+#outfits {
+  border: 1px solid black;
+}
+.my-outfits {
+  padding: 10px;
+  margin: 5px;
+}
+.tab-list {
+  margin-left: 45px;
 }

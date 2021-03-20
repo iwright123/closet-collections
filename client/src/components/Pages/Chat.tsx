@@ -106,7 +106,6 @@ const Chat = (): ReactElement => {
           </ul>
         </div>
       </div>
-      <Footer></Footer>
 
     </div>
   );

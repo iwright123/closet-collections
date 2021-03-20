@@ -12,7 +12,6 @@ type imageUrl = string;
 type Item = {
   clothingType: clothingType;
   description: description;
-  price: price;
   imageUrl: imageUrl;
 };
 
@@ -42,7 +41,7 @@ const AddItems: React.FC = () => {
   };
   return (
     <div className="AddItem">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-item">
           <label>
             Clothing Type:
@@ -70,16 +69,6 @@ const AddItems: React.FC = () => {
         {errors.description && <div>Description is required.</div>}
         <div className="form-item">
           <label>
-            Price:
-            <input
-              type="text"
-              name="price"
-              ref={register({ required: false })}
-            />
-          </label>
-        </div>
-        <div className="form-item">
-          <label>
           Image URL:
             <input
               type="text"
@@ -100,12 +89,14 @@ const AddItems: React.FC = () => {
             uploadPreset={ 'smiuh98k' }
             buttonText={ 'Open' }
             style={ {
-              color: 'white',
-              border: 'none',
-              width: '75px',
-              backgroundColor: '#bee3db',
-              borderRadius: '4px',
-              height: '25px'
+              color: '#7ed957',
+              width: '65px',
+              backgroundColor: 'black',
+              marginLeft: '5px',
+              height: '35px',
+              padding: '10px',
+              textAlign: 'center',
+              verticalAlign: 'middle'
             } }
             folder={ 'demo' }
             cropping={ false }
