@@ -5,9 +5,10 @@ import useImage from 'use-image';
 import CreateOutfitItems from './CreateOutfitItems';
 import axios from 'axios';
 import $ from 'jquery';
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+
 
 const CreateOutfitWhiteBoard = (): ReactElement => {
 
@@ -47,7 +48,6 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
       return outfit.clothingType.toLowerCase().includes(term.toLowerCase()) || outfit.description.toLowerCase().includes(term.toLowerCase());
     });
     getOutfits(result);
-    console.log(result);
   };
 
   const handleKeyDown = (e: any): any => {
@@ -97,7 +97,7 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
 
   return (
     <div>
-      <div id="buttons"><button id="save" onClick={handleExportClick} style={{backgroundColor: '#000000', color: '#7ed957'}}>Save Outfit</button>
+      <div id="buttons">
         <ZoomInIcon id='enlarge' onClick={larger} fontSize="large"></ZoomInIcon>
         <ZoomOutIcon id='smaller' onClick={smaller} fontSize="large"></ZoomOutIcon></div>
       <Stage
@@ -131,6 +131,7 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
       <div className="search">
         <input type="text" className="search-input" placeholder="search for item by keyword" value={searchTerm} onChange={handleChange} onKeyDown={handleKeyDown} />
       </div>
+      <TouchableOpacity onPress={handleExportClick}><Text>Save Outfit</Text></TouchableOpacity>
       <div className="outfit-item-buttons">
         {outfits.map((outfit, i) => {
 
@@ -151,16 +152,6 @@ const CreateOutfitWhiteBoard = (): ReactElement => {
             </button>
           );
         })}
-      </div>
-      <div className='footer'>
-        <footer id="footer">
-          <div className='footer-text'>
-            Closet Collections
-          </div>
-          <div className='footer-text'>
-            Since 2021
-          </div>
-        </footer>
       </div>
     </div>
   );

@@ -9,7 +9,10 @@ import Grid from '@material-ui/core/Grid';
 
 // const <input  = require('@material-ui/core<input')
 const socket = io('http://localhost:3000');
+// const socket = io('https://closet-collections.uc.r.appspot.com');
+
 const Chat = (): ReactElement => {
+
   const [state, setState] = React.useState<Message>({message: '', name: ''});
   const [chat, setChat] = React.useState([]);
   const [font, setFont] = React.useState(32);
@@ -20,25 +23,30 @@ const Chat = (): ReactElement => {
       setChat([...chat, {name, message}]);
     });
   }, [state]);
+
   const onTextChange = (e): void => {
     setState({...state, [e.target.name]: e.target.value});
   };
+
   const onMessageSubmit = (e): void => {
     e.preventDefault();
     const {name, message} = state;
     socket.emit('message', {name, message});
     setState({message: '', name});
   };
+
   const larger = (): any => {
     setFont(50);
     setInput(24);
   };
+
   const smaller = (): any => {
     setFont(25);
     setInput(14);
   };
 
   const renderChat = (): ReactElement[] => {
+
     return chat.map((message: Message): ReactElement => (
       <div>
         <h1>
@@ -46,9 +54,13 @@ const Chat = (): ReactElement => {
         </h1>
       </div>
     ));
+
   };
+
   const time: string = moment().format('h:mm a');
+
   return (
+
     <div>
 
       <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>

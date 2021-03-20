@@ -8,9 +8,16 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 dotenv.config();
 
-mongoose.connect('mongodb://localhost/3000', {useNewUrlParser: true, useUnifiedTopology: true})
-  .then(() => console.log('Mongo database connected'))
-  .catch((err) => console.warn(err));
+const uri = 'mongodb+srv://iwright123:thesis@cluster0.aqhkv.mongodb.net/notidatabase?retryWrites=true&w=majority';
+
+export const connectDB = async (): Promise<any> => {
+  try {
+    mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+    console.log('MongoDB connected');
+  } catch (err) {
+    console.warn(err);
+  }
+};
 
 const AppointmentSchema: Schema = new mongoose.Schema({
   username: String,
