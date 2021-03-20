@@ -41,12 +41,6 @@ export const SidebarData = [
     icon: <SearchIcon style={{color: '#7ed957' }} />,
     link: '/findastore'
   }
-  // {
-  //   cName: 'nav-text',
-  //   title: 'Logout',
-  //   icon: <ExitToAppIcon />,
-  //   link: '/logout'
-  // },
 ];
 
 
