@@ -73,6 +73,7 @@ const OutfitGrid = (): any => {
   const [imgSize, setImgSize] = useState(15);
   const colorChange = { color: 'black'};
   const colorChange2 = { color: 'red'};
+  const [display, setDisplay] = React.useState(false);
   const handleLikeClick = (e): void => {
     setLikeColor(!likeColor);
   };
@@ -89,6 +90,11 @@ const OutfitGrid = (): any => {
     console.log(e.target.value);
     setState({...state, [e.target.name]: e.target.value});
   };
+  // const displayChange = (): any => {
+  //   setDisplay(
+  //    setState({display});
+  //   );
+  // };
 
   const larger = (): any => {
     setFont(40);
@@ -167,7 +173,7 @@ const OutfitGrid = (): any => {
                     />
                     <span>{tile.likesCount}</span>
                   </Button>
-                  <Button id='displaymessage'style={{color: 'black'}} onClick={(): any => grabComments()}>
+                  <Button id='displaymessage'style={{color: 'black'}} onClick={(): any => setDisplay(!display)}>
                     <MessageIcon
                       className="buttonIcon"
                       style={{ fontSize: 20 }}
@@ -185,7 +191,7 @@ const OutfitGrid = (): any => {
                 </div>
 
                 <ul>
-                  {comment.map((comment, index) => {
+                  {display && comment.map((comment, index) => {
                     if (Number(comment.postId) === tile.id || String(comment.postId) === tile.id) {
                       return <div key={index} id='commentsd'>
                         {`${comment.name}:    ${comment.comment}`}
