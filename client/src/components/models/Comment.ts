@@ -1,6 +1,7 @@
 interface Comment {
   comment: string,
-  name: string
+  name: string,
+  postId: number
 }
 
 export default Comment;
