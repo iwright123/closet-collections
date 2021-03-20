@@ -2,101 +2,71 @@
 import React, { DragEvent, MouseEvent, ReactElement, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import axios from 'axios';
+import { title } from 'node:process';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 
 const Home = (): ReactElement => {
-  const [topFits] = React.useState([]);
 
-  // let _isMounted = false;
+  const [topOutfit, setTopOutFit] = React.useState([]);
+  const [images, setImages] = React.useState([]);
+  const [font, setFont] = useState(25);
+  const [imgSize, setImgSize] = useState(15);
 
-  // const [longitude, setLong] = React.useState(0);
-  // const [latitude, setLat] = React.useState(0);
-  // const [temp, setTemp] = React.useState('');
-  // const [desc, setDesc] = React.useState('');
+  const larger = (): any => {
+    setFont(40);
+    setImgSize(40);
+  };
+
+  const smaller = (): any => {
+    setFont(25);
+    setImgSize(15);
+  };
 
 
-  // const getUserLocation = () => {
-  //    //get user's ip address
-  //    return axios.get('https://api.ipify.org')
-  //    // get location data by ip address
-  //      .then(({ data }) => axios.post('/api/location', { ip: data }))
-  //      .then(({ data: { latitude, longitude } }) => {
-  //        setLat(latitude)
-  //        setLong(longitude)
-  //        getWeatherByUserLocation(latitude, longitude);
-  //      })
-  //      .catch((err) => console.warn(err));
-  // }
 
-  // const getWeatherByUserLocation = (latitude, longitude) => {
-  //   _isMounted = true;
-  //   axios.post('/api/weather', { latitude, longitude })
-  //     .then(({ data: { data } }) => {
-  //       _isMounted = false;
-  //       const { temp, weather } = data[0];
-  //       const { description } = weather;
-  //       const descriptionLowerCase = description.toLowerCase();
-  //       // change temperature to fahrenheit
-  //       let newTemp = Math.round(temp * (9 / 5) + 32);
-  //       setTemp(`${newTemp}°F`)
-  //       setDesc(descriptionLowerCase)
-  //     }).catch((err: any) => console.warn(err));
-  // }
-  // useEffect(() => {
-  // axios.get('/fits')
-  // }, [])
-  // const [trash] = React.useState([])
+  const random = (): number => {
+    return Math.floor(Math.random() * images.length - 1);
+  };
+  useEffect(() => {
 
-  // useEffect(() => {
-  //   axios.get('/trash')
-  //   }, [])
+    axios.get('/outfit')
+      .then(({ data }) => setImages(data))
+      .catch((err) => console.warn(err));
 
-  // React.useEffect(() => {
-  //   getUserLocation();
-  // });
+
+
+  }, []);
+
+
 
   return (
-    <>
 
-      <View style={styles.container}>
-        <Text style={{fontSize: 40, fontFamily: 'Roboto Slab'}}>Closet Collections</Text>
-        <View>
-          {/* <Text style={styles.weather}>Currently {temp} and {desc}</Text> */}
-        </View>
-        <Image
-          style={{width: 200, height: 200, marginVertical: 75}}
-          source={{uri: 'https://media.gq.com/photos/5cf56d75ba72052c30a43177/master/w_1600%2Cc_limit/Chris-Bosh-Weigh-In-GQ-NBA-Most-Stylish-Player-Bracket-Kyrie-Irving.jpg'}}
-        />
-        <Text style={{marginVertical: -75, fontSize: 20, fontFamily: 'Roboto Slab', }}>Top Rated by 87%</Text>
+    !images.length ? <h1>Loading</h1> :
+      <>
+        <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="large">Enlarge</ZoomInIcon></div>
+        <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="large">Return Size</ZoomOutIcon></div>
+        <Text style={styles.title}>Top Rated Outfit</Text>
+        <div>{'This outfit has' + ' ' + images[0].likesCount + ' ' + 'likes' }</div>
+        <img src={
+          images[0].imageUrl}/>
 
-        <Image
-          style={{width: 200, height: 200, marginVertical: 100}}
-          source={{uri: 'https://media.gq.com/photos/5cf56d7609bcad6790fdd178/master/w_1600%2Cc_limit/Chris-Bosh-Weigh-In-GQ-NBA-Most-Stylish-Player-Bracket-Dwayne-Wade.jpg'}}
-        />
-        <Text style={{marginVertical: -100, fontSize: 20, fontFamily: 'Roboto Slab', }}>Worst Rated by 93%</Text>
+        {console.log('images', images)}
 
-      </View>
-      {/* <div>
-        <div>
-          <h1>This is the section where Top Outfits should be displayed</h1>
-        </div>
-        <div>
-          <h1>This is the section where Worst Outfits should be displayed</h1>
-        </div>
-        <div>
-          <h1>This is the section where suggested Outfits should be displayed</h1>
-        </div>
-      </div> */}
-      <div className='footer'>
-        <footer id="footer">
-          <div className='footer-text'>
+        <h1>Suggested Outfit Of The Day</h1>
+        <span><img src={images[random()].imageUrl}/></span>
+
+        <div className='footer'>
+          <footer id="footer">
+            <div className='footer-text'>
             Closet Collections
-          </div>
-          <div className='footer-text'>
+            </div>
+            <div className='footer-text'>
             Since 2021
-          </div>
-        </footer>
-      </div>
-    </>
+            </div>
+          </footer>
+        </div>
+      </>
   );
 };
 
