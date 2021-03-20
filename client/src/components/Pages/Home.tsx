@@ -6,6 +6,8 @@ import { title } from 'node:process';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import Footer from './Footer';
+import { borders } from '@material-ui/system';
+import Box from '@material-ui/core/Box';
 
 const Home = (): ReactElement => {
 
@@ -47,17 +49,20 @@ const Home = (): ReactElement => {
 
     !images.length ? <h1>Loading</h1> :
       <>
-        <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="small">Enlarge</ZoomInIcon></div>
-        <div id='smallButton'><ZoomOutIcon id='smaller' onClick={smaller} fontSize="small">Return Size</ZoomOutIcon></div>
-        <Text style={styles.title}>Top Rated Outfit</Text>
-        <div>{'This outfit has' + ' ' + images[0].likesCount + ' ' + 'likes' }</div>
-        <img src={
-          images.sort((a, b) => b.likesCount - a.likesCount)[0].imageUrl}/>
+        <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="small">Enlarge</ZoomInIcon>
+          <ZoomOutIcon id='smaller' onClick={smaller} fontSize="small">Return Size</ZoomOutIcon></div>
+        <h1>Top Rated Outfit </h1>
+        <h4> {'This outfit has' + ' ' + images[0].likesCount + ' ' + 'likes' }</h4>
+        <Box border={1}>
+          <img src={
+            images.sort((a, b) => b.likesCount - a.likesCount)[0].imageUrl}/>
 
-        {console.log('images', images)}
-
+          {console.log('images', images)}
+        </Box>
         <h1>Suggested Outfit Of The Day</h1>
-        <span><img src={images[random()].imageUrl}/></span>
+        <Box border={1}>
+          <span><img src={images[random()].imageUrl}/></span>
+        </Box>
         <Footer></Footer>
       </>
   );
