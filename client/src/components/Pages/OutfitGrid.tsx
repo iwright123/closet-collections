@@ -113,10 +113,8 @@ const OutfitGrid = (): any => {
   const grabLikes = (id): Promise<any> => {
     return axios.get(`/likes/${id}`)
       .then(likes => {
-        console.log('this is likes', likes.data[0].likesCount);
         setLike(likes.data[0].likesCount);
       })
-      // .then(data => console.log('this is after the comments are set in the grab comments', data))
       .catch(err => console.log('error getting comments', err));
   };
   const updateLike = (id): Promise<any> => {
@@ -136,9 +134,6 @@ const OutfitGrid = (): any => {
       .catch((err) => console.warn(err));
   };
 
-  // useEffect(() => {
-  //  return grabLikes(0);
-  // }, []);
   useEffect(() => {
     getFits();
   }, []);
