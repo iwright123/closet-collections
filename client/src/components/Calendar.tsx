@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import axios from 'axios';
 import Saved from './Pages/SavedItems';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -10,6 +9,7 @@ import { items } from '../../../releaseData/calendarItems';
 import Footer from './Pages/Footer';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const Props = {
   items
@@ -22,7 +22,6 @@ const Calendar: React.FC = () => {
   const [liked, setLike] = React.useState('');
   const [phone, setNumber] = React.useState('');
   const [dummyNumber, setPhone] = React.useState('');
-  // const [pushNotifications, setNotifications] = React.useState([]);
   const [page, setPage] = React.useState(true);
   const [fontTitle, setTitle] = React.useState(15);
   const [fontS, setSTitle] = React.useState(25);
@@ -30,7 +29,7 @@ const Calendar: React.FC = () => {
 
   const push = (item): void => {
     setNotify(true);
-    console.log(phone);
+
 
     const message = {
       phone: `+1${phone}`,
@@ -55,7 +54,7 @@ const Calendar: React.FC = () => {
   };
 
   const favItem = (item): void => {
-
+    alert(`${item.title} ${item.subTitle} has been added to items`);
     setLike('red');
 
     setFaveItems([item.title, item.subTitle, item.img, item.release]);
@@ -156,7 +155,7 @@ const Calendar: React.FC = () => {
               </div>
               <TouchableOpacity style={styles.buttonContainer}>
 
-                <Button className={classes.root} style={{backgroundColor: '#000000'}} onClick={(): void => setPage(false)}>Fav Items</Button>
+                <Button className={classes.root} style={{backgroundColor: '#000000'}} onClick={(): void => setPage(false)}>Items</Button>
                 <div>
                   <input
                     type='text'
@@ -183,7 +182,7 @@ const Calendar: React.FC = () => {
                     />
                     <Text style={styles.itemInfo}>{item.title}</Text>
                     <Text style={styles.subItemInfo}>
-                      <FavoriteBorderIcon style={{backgroundColor: liked}} onClick={(): void => favItem(item)} /> {item.subTitle}</Text>
+                      <FavoriteIcon onClick={(): void => favItem(item)} /> {item.subTitle}</Text>
                     <Button className={classes.root}
                       style={{backgroundColor: '#000000'}}
                       onClick={(): void => push(item)}> Notify me!
@@ -191,14 +190,11 @@ const Calendar: React.FC = () => {
                   </View>;
                 })
               }
-              <Footer></Footer>
             </View> :
             <View>
               <ExitToAppIcon onClick={(): void => setPage(true)}/>
               <Saved />
-              <Footer></Footer>
             </View>
-
         }
       </View>
     </>

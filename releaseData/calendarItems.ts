@@ -82,6 +82,31 @@ export const items = [
     subTitle: 'Foam Runner',
     sendReminder: 'March 25th, 2021',
     release: 'March 26th, 2021'
-  }
+  },
+
+  {
+    img: 'https://static.nike.com/a/images/t_prod_ss/w_640,c_limit,f_auto/d6bca3bd-3fd1-4ab3-a359-af02b14fef06/sb-dunk-low-pro-blue-chill-release-date.jpg',
+    title: 'SB Dunk Low Pro',
+    subTitle: 'Blue Chill',
+    sendReminder: 'March 14, 2021',
+    release: 'March 15, 2021'
+  },
+
+  {
+    img: 'https://static.nike.com/a/images/w_960,c_limit,f_auto/f922e4a3-7902-4c3c-bfaf-6dbf97d73df8/nocta-apparel-collection-release-date.jpg',
+    title: 'Apparel Collection',
+    subTitle: 'NOCTA',
+    sendReminder: 'March 16, 2021',
+    release: 'March 17, 2021'
+  },
+
+  {
+    img: 'https://static.nike.com/a/images/w_960,c_limit,f_auto/498737ff-4856-4ff7-9d13-8f10711c53f1/air-max-95-x-kim-jones-total-orange-release-date.png',
+    title: 'Air Max 95 x Kim Jones',
+    subTitle: 'Total Orange',
+    sendReminder: 'March 22, 2021',
+    release: 'March 23, 2021'
+  },
+
 ];
 

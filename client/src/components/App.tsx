@@ -1,5 +1,4 @@
 import React, { ReactElement } from 'react';
-
 import Navbar from './Navbar';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './Pages/Home';
@@ -8,13 +7,11 @@ import Closet from './Pages/Closet';
 import Calendar from './Calendar';
 import OutfitGrid from './Pages/OutfitGrid';
 import FindAStore from './Pages/FindAStore';
-// import GoogleButton from 'react-google-button';
 import Logs from './logs/login';
 import Logsout from './logs/Logout';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import MyOutfit from '../components/Pages/MyOutfit';
-const { height } = Dimensions.get('screen');
 import axios from 'axios';
+
+
 const App = (): ReactElement => {
 
   const [login, setLogin] = React.useState(false);
@@ -24,12 +21,6 @@ const App = (): ReactElement => {
       .then(({ data }) => setLogin(data))
       .catch((err) => console.warn(err));
   }, []);
-
-  // const logout = () => {
-  //   axios.delete('/logout')
-  //     .then(({ data }) => setLogin(data))
-  //     .catch(err => console.warn(err));
-  // };
 
   return (
     <div className='main container'>
