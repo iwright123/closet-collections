@@ -4,14 +4,13 @@ import { Tabs, useTabState, Panel } from '@bumaga/tabs';
 import MyOutfit from '../Pages/MyOutfit';
 import CreateOutfitWhiteBoard from './CreateOutfitWhiteBoard';
 
-
 const cn = (...args): any => args.filter(Boolean).join(' ');
 
 const ClosetTab = ({ children }): any => {
   const { isActive, onClick } = useTabState();
 
   return (
-    <button className={cn('tab', isActive && 'active')} onClick={onClick}>
+    <button className={cn('tab', isActive && 'active')} style={{backgroundColor: '#000000', color: '#7ed957'}}onClick={onClick}>
       {children}
     </button>
   );
@@ -25,7 +24,7 @@ export default (): any => (
 
         <ClosetTab>My Outfits</ClosetTab>
 
-        <ClosetTab>Add Items to Closet</ClosetTab>
+        <ClosetTab>Add Items</ClosetTab>
 
       </div>
 

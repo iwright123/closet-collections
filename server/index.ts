@@ -200,37 +200,39 @@ app.delete('/logout', (req: Request, res: Response) => {
   res.clearCookie('thesis');
   res.json(false);
 });
+
+
 ///////////GOOGLE AUTH ^^^^^^///////////
 
 /////////Twilio//////////
-// app.post('/sms', (req, res) => {
-//   const { body } = req.body;
-//   console.log('text?>', body);
-//   client.messages.create({
-//     body: body,
-//     from: '+15042852518',
-//     to: '+15047235163'
-//   })
-//     .then((message: any) => console.log('message sid', message.sid))
-//     .catch((err: any) => console.warn('twilio error', err));
-// });
-
-const getTimeZone = (): any => {
-  return momentTimeZone.tz.names();
-};
-
-app.get('/create', (req, res, next) => {
-  res.render('appoinment/create', {
-    timeZone: getTimeZone(),
-    appointment: new Appointment({
-      name: '',
-      phoneNumber: '',
-      notification: '',
-      timeZone: '',
-      time: ''
-    })
-  });
+app.post('/sms', (req, res) => {
+  const { body, phone } = req.body;
+  console.log('text?>', phone);
+  // client.messages.create({
+  //   body: body,
+  //   from: '+15042852518',
+  //   to: phone
+  // })
+  //   .then((message: any) => console.log('message sid', message.sid))
+  //   .catch((err: any) => console.warn('twilio error', err));
 });
+
+// const getTimeZone = (): any => {
+//   return momentTimeZone.tz.names();
+// };
+
+// app.get('/create', (req, res, next) => {
+//   res.render('appoinment/create', {
+//     timeZone: getTimeZone(),
+//     appointment: new Appointment({
+//       name: '',
+//       phoneNumber: '',
+//       notification: '',
+//       timeZone: '',
+//       time: ''
+//     })
+//   });
+// });
 
 
 app.get('/mongod', (req, res, next) => {
@@ -239,20 +241,23 @@ app.get('/mongod', (req, res, next) => {
     .catch((err) => console.warn(err));
 });
 
+
 app.post('/reminder', (req, res, next) => {
-  const { username, phoneNumber, notification, timeZone } = req.body;
-  const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
-  console.log(username);
+  const { phoneNumber, notification } = req.body;
+  const time = moment(req.body.time, 'MMMM-Do-YYYY hh:mma');
+  const sendNotification = moment(req.body.sendNotification, 'MMMM-Do-YYYY');
 
   const appointment = new Appointment({
-    name: username,
+    username: req.cookies.thesis,
     phoneNumber: phoneNumber,
     notification: notification,
-    timeZone: timeZone,
-    time: time});
+    sendNotification: sendNotification,
+    time: time
+  });
   appointment.save()
     .then(() => console.log('success'))
     .catch((err) => console.warn(err));
+
 });
 
 

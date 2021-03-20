@@ -63,8 +63,8 @@ const Navbar = (): ReactElement => {
             })}
             {
               login === true ?
-                <Link className='nav-text' to='/logout'><ExitToAppIcon />,<span>{'Logout'}</span></Link> :
-                <Link className='nav-text' to='/login'><ExitToAppIcon />,<span>{'Login'}</span></Link>
+                <Link className='nav-text' to='/logout'><ExitToAppIcon style={{color: '#7ed957'}}/><span>{'Logout'}</span></Link> :
+                <Link className='nav-text' to='/login'><ExitToAppIcon/><span>{'Login'}</span></Link>
             }
           </ul>
 

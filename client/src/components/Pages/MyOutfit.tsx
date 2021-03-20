@@ -10,6 +10,8 @@ import axios from 'axios';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import UsersOutfits from '../models/UsersOutfits';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 
 const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }; }) => ({
   root: {
@@ -32,7 +34,20 @@ const useStyles = makeStyles((theme: { palette: { background: { paper: any; }; }
   },
 }));
 
+
+
 const MyOutfit = (): ReactElement => {
+
+  const larger = (): any => {
+    setFont(50);
+
+  };
+
+  const smaller = (): any => {
+    setFont(35);
+  };
+
+  const [font, setFont] = React.useState(35);
   const classes = useStyles();
   //   const comment = (data: {}) => {
   // axios.post('/comment', data: {})
@@ -57,8 +72,13 @@ const MyOutfit = (): ReactElement => {
       .catch((err) => console.warn(err));
   }, []);
   return (
+
     <div className={classes.root}>
-      <h1>Outfits</h1>
+      <h1 style={{fontSize: font}}>Outfits</h1>
+
+      <ZoomInIcon onClick={larger} />
+      <ZoomOutIcon onClick={smaller} />
+
       <GridList cellHeight={300} spacing={30} className={classes.gridList}>
         <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
           <ListSubheader component="div"></ListSubheader>

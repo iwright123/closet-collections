@@ -4,6 +4,8 @@ import moment from 'moment';
 import Message from '../models/Message';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import Footer from './Footer';
+
 // const <input  = require('@material-ui/core<input')
 const socket = io('http://localhost:3000');
 const Chat = (): ReactElement => {
@@ -65,7 +67,7 @@ const Chat = (): ReactElement => {
               id="outlined-multiline-static"
             />
           </div>
-          <button>Send Message</button>
+          <button style={{backgroundColor: '#000000', color: '#7ed957'}}>Send Message</button>
         </form>
         <div className="render-chat">
           <h1 style={{fontSize: font}}>Chat Log</h1>
@@ -81,6 +83,8 @@ const Chat = (): ReactElement => {
           </ul>
         </div>
       </div>
+      <Footer></Footer>
+
     </div>
   );
 };

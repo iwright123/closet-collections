@@ -3,9 +3,12 @@ syl* {
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto Slab', serif;;
 }
 
+.main-container {
+  padding-bottom:60px
+}
 .menu-container {
   position: relative;
   display: flex;
@@ -118,12 +121,25 @@ label {
   margin-top: 1em;
 }
 
-
+.tabs {
+  color: '#000000'
+}
 #welcome {
   font-family: 'Roboto Slab', serif;
   text-align: center;
 }
 #footer {
+  position:relative;
+  left:0;
+  bottom:0;
+  right:0;
+  display:block;
+  width:100%;
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+.footer{
   position:absolute;
   bottom:0;
   display:block;
@@ -132,7 +148,6 @@ label {
   background-color: black;
   color: white;
 }
-
 .footer-text {
   font-family: 'Roboto Slab', serif;
 }
@@ -161,6 +176,7 @@ button {
   padding: 10px;
   background: transparent;
   border-radius: 5px;
+  font-family: 'Roboto Slab', serif;
 }
 
 .render-chat {
@@ -171,9 +187,13 @@ button {
 }
 
 h3 {
-  color: #2f72da;
+  color: #000000;
+  font-family: 'Roboto Slab', serif;
 }
 
+h4 {
+  font-family: 'Roboto Slab', serif;
+}
 .message {
   right: 1px
 }
@@ -196,6 +216,15 @@ right:0;
 top:0;
 }
 
+.tabs {
+  font-family: 'Roboto Slab', serif;
+  background-color: 'black';
+
+}
+.tab-list {
+  font-family: 'Roboto Slab', serif;
+  background-color: 'black';
+}
 #commentList {
 background-color: burlywood;
  border-style: solid;
