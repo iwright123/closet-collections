@@ -3,7 +3,7 @@ import axios from 'axios';
 import GoogleButton from 'react-google-button';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Footer from '../Pages/Footer';
 import Box from '@material-ui/core/Box';
 
@@ -22,8 +22,6 @@ const Logsout = (): React.ReactElement => {
       .then(({ data }) => setLogin(data))
       .catch(err => console.warn(err));
   };
-
-  // <a href="https://ibb.co/CtDPvpZ"><img src="https://i.ibb.co/g7h4wbp/Closet-Collection-Logo.png" alt="Closet-Collection-Logo" border="0"></a>
 
   const useStyles = makeStyles({
     root: {

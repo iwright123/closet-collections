@@ -133,7 +133,6 @@ const Saved = () => {
               <Text style={styles.dateInfo}>{clickedItem[3]}</Text>
             </View>
         }
-
       </View>
     </>
   );
