@@ -23,7 +23,7 @@ import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import { title } from 'node:process';
 // import { getLikes } from 'server/helpers/Likes';
 import Footer from './Footer';
-
+import { StyleSheet } from 'react-native';
 //import tileData from './tileData';
 const socket = io('http://localhost:3000');
 interface IPost {
@@ -70,9 +70,12 @@ const OutfitGrid = (): any => {
   const [state, setState] = React.useState<Message>({message: '', name: ''});
   const [comment, setComments] = React.useState([]);
   const [font, setFont] = useState(25);
-  const [imgSize, setImgSize] = useState(15);
+  const [imgSize, setImgSize] = useState(250);
   const colorChange = { color: 'black'};
   const colorChange2 = { color: 'red'};
+  const [display, setDisplay] = React.useState(false);
+
+  const [input, setInput] = React.useState(14);
   const handleLikeClick = (e): void => {
     setLikeColor(!likeColor);
   };
@@ -89,14 +92,19 @@ const OutfitGrid = (): any => {
     console.log(e.target.value);
     setState({...state, [e.target.name]: e.target.value});
   };
+  // const displayChange = (): any => {
+  //   setDisplay(
+  //    setState({display});
+  //   );
+  // };
 
   const larger = (): any => {
     setFont(40);
-    setImgSize(40);
+    setImgSize(300);
   };
   const smaller = (): any => {
     setFont(25);
-    setImgSize(15);
+    setImgSize(25);
   };
   const grabComments = (): Promise<any> => {
     return axios.get('/comments')
@@ -128,6 +136,8 @@ const OutfitGrid = (): any => {
       .catch((err) => console.warn(err));
   };
 
+
+
   useEffect(() => {
     getFits();
   }, []);
@@ -136,42 +146,72 @@ const OutfitGrid = (): any => {
       .then(comments => setComments(comments.data))
       .catch(err => console.log('err getting comments try 1', err));
   }, []);
+
+  const styles = StyleSheet.create({
+    title: {
+      fontSize: font,
+      fontFamily: 'Roboto Slab',
+    },
+    itemInfo: {
+      flex: 1,
+      fontSize: imgSize,
+
+      fontFamily: 'Roboto Slab',
+    }
+  });
+
   return (
     !images.length ? <h1>There Are No Top Outfits At This Time</h1> :
       <div className={classes.root}>
-        <div id='largebutton'><ZoomInIcon id='enlarge' onClick={larger} fontSize="small">Enlarge</ZoomInIcon></div>
-        <div><ZoomOutIcon id='smaller' onClick={smaller} fontSize="small">Return Size</ZoomOutIcon></div>
+        <div id='magnify'>
+          <ZoomInIcon onClick={larger} />
+          <ZoomOutIcon onClick={smaller} />
+        </div>
         <br></br>
-        <h1 style={{fontSize: font}}>Outfits</h1>
+
         {
           images.map((tile, i) => (
             <div id='comments' key={i}>
-              <h3>{tile.user}</h3>
-              <img src={tile.imageUrl} />
-              <Button
-                onClick={((id): Promise<any> => updateLike(tile.id))}
-                style={likeColor ? colorChange : null}
-              >
-                <ThumbUpIcon
-                  className="buttonIcon"
-                  style={{ fontSize: 15}}
-                />
-                <span>{tile.likesCount}</span>
-              </Button>
-              <Button onClick={(): any => grabComments()}>
-                <MessageIcon
-                  className="buttonIcon"
-                  style={{ fontSize: 15 }}
-                />
-              </Button>
+              <div>
+                <h3 style={{fontSize: font}} id='publicName'>{tile.user}</h3>
+                <img style={{height: imgSize}} src={tile.imageUrl} alt='item info' />
+                <div id='publicactions'>
+                  <Button
+                    onClick={((id): Promise<any> => updateLike(tile.id))}
+                    style={{
+                      color: 'black'
+                    }}
+                  >
+                    <ThumbUpIcon
+                      className="buttonIcon"
+                      style={{ fontSize: 15}}
+                    />
+                    <span>{tile.likesCount}</span>
+                  </Button>
+                  <Button id='displaymessage'style={{color: 'black'}} onClick={(): any => setDisplay(!display)}>
+                    <MessageIcon
+                      className="buttonIcon"
+                      style={{ fontSize: 20 }}
+                    />
+                  </Button>
+
+                </div>
+
+              </div>
               <div id='lookhere'>
-                <input type='text' value={state.message} name='message' placeholder='comment' onChange={handleCommentChange} />
-                <button type='submit' value={tile.id} onClick={(e): any => onMessageSubmit(e, tile.id)}>SendComment</button>
 
                 <ul>
-                  {comment.map((comment, index) => {
+                  <div id='sendcomment'>
+                    <input autoComplete="off" type="text" className="commentInput" placeholder='comment' value={state.message} onChange={handleCommentChange}/>
+                    <Button type='submit' style={{color: 'black'}} value={tile.id} onClick={(e): any => onMessageSubmit(e, tile.id)}><SendIcon/></Button>
+
+
+
+
+                  </div>
+                  {display && comment.map((comment, index) => {
                     if (Number(comment.postId) === tile.id || String(comment.postId) === tile.id) {
-                      return <div key={index}>
+                      return <div key={index} id='commentsd'>
                         {`${comment.name}:    ${comment.comment}`}
                       </div>;
 

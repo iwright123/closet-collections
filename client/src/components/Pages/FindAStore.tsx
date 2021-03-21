@@ -34,7 +34,7 @@ const findAStore = (): any => {
       background: '#000000',
       border: 0,
       borderRadius: 3,
-      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+      boxShadow: '0 3px 5px 2px rgba(255, 255, 255, .3)',
       color: '#7ed957',
       height: 48,
       padding: '0 30px',
@@ -72,9 +72,9 @@ const findAStore = (): any => {
             return (
               <div key={String(i)}>
                 <div key={String(i)}>
-                  <h2 style={{fontSize: fontName}}> Name: {data.name}</h2>
-                  <h3 style={{fontSize: fontDets}}>Address: {data.location.address1} {data.location.city} {data.location.state} {data.location.zip_code}</h3>
-                  <h3 style={{fontSize: fontDets}}>Phone Number: {data.phone}</h3>
+                  <h2 style={{fontSize: fontName}}>{data.name}</h2>
+                  <h3 style={{fontSize: fontDets}}>{data.location.address1} {data.location.city} {data.location.state} {data.location.zip_code}</h3>
+                  <h3 style={{fontSize: fontDets}}>{data.phone}</h3>
                   <h3 style={{fontSize: fontDets}}>Rating: {data.rating}</h3>
                 </div>
                 <br></br>

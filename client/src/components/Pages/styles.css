@@ -3,7 +3,7 @@ syl* {
 }
 
 body {
-  font-family: 'Roboto Slab', serif;;
+  font-family: 'Roboto Slab'
 }
 
 .main-container {
@@ -91,6 +91,7 @@ body {
 .photo {
   height: 100%;
   width: 100%;
+
 }
 .outfit-item-buttons {
   overflow-x: scroll;
@@ -105,7 +106,7 @@ input {
   box-sizing: border-box;
   width: 100%;
   border-radius: 4px;
-  border: 1px solid rgb(26, 25, 25);
+  /* border: 1px solid rgb(26, 25, 25); */
   padding: 10px 15px;
   margin-bottom: 10px;
   font-size: 14px;
@@ -259,6 +260,40 @@ top:0;
 background-color: burlywood;
  border-style: solid;
 }
+#publicName {
+
+text-align: center;
+
+}
+#zoompublic {
+  width: 100%;
+  margin-left: 0;
+}
+#likebutton {
+  border-radius: 0%;
+}
+#publicactions {
+  text-align: center;
+}
+#displaymessage {
+margin-right: 6%;
+border-radius: 0%;
+height: 20px;
+width: 20px;
+
+}
+#sending {
+margin-right: 3%;
+}
+#commentsd {
+  text-align: center;
+}
+#sendcomment {
+  display: flex;
+}
+span {
+padding: 0;
+}
 .AddItem input[type=text] {
   background: transparent;
   border: none;
@@ -296,4 +331,30 @@ background-color: burlywood;
 }
 .tab-list {
   margin-left: 45px;
+}
+#magnify {
+  left: 0;
+  position: absolute;
+  display: flex;
+  width: 100%
+}
+#magnifier {
+width: 100%;
+
+}
+#comments {
+  border-bottom: 1px solid #aaa;
+  width: 100%;
+
+}
+#lookhere input:focus {
+  outline: none !important;
+    border: 1px solid #7ed957;
+}
+.commentInput {
+  width: 90%;
+  margin-right: 0;
+}
+.sendcomment {
+  display: flex;
 }

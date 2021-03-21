@@ -94,10 +94,11 @@ const Calendar: React.FC = () => {
       background: '#000000',
       border: 0,
       borderRadius: 3,
-      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+      boxShadow: '0 3px 5px 2px rgba(255, 255, 255, .3)',
       color: '#7ed957',
       height: 48,
       padding: '0 30px',
+      fontFamily: 'Roboto Slab',
     },
   });
 
@@ -108,37 +109,40 @@ const Calendar: React.FC = () => {
       backgroundColor: 'white',
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      fontFamily: 'Roboto Slab',
     },
     buttonContainer: {
       flexDirection: 'row'
     },
     title: {
-      fontSize: titleFont
+      fontSize: titleFont,
+      alignSelf: 'center',
+      fontFamily: 'Roboto Slab',
     },
 
     button: {
       backgroundColor: '#7ED957',
-      marginVertical: -30
+      marginVertical: -30,
+      alignSelf: 'center'
     },
 
     itemInfo: {
       flex: 1,
       fontSize: fontTitle,
       textAlign: 'center',
-      marginVertical: -10
+      marginVertical: -10,
+      fontFamily: 'Roboto Slab',
     },
 
     subItemInfo: {
       flex: 1,
       fontSize: fontS,
       textAlign: 'center',
-      marginVertical: 10
+      marginVertical: 10,
+      fontFamily: 'Roboto Slab',
     },
 
-    saved: {
-      left: 0,
-    }
 
   });
 
@@ -148,48 +152,51 @@ const Calendar: React.FC = () => {
         {
 
           page === true ?
-            <View style={styles.container}>
+            <View>
               <div>
-                <ZoomInIcon onClick={larger} />
+                <ZoomInIcon style={{alignSelf: 'left'}} onClick={larger} />
                 <ZoomOutIcon onClick={smaller} />
               </div>
-              <TouchableOpacity style={styles.buttonContainer}>
 
-                <Button className={classes.root} style={{backgroundColor: '#000000'}} onClick={(): void => setPage(false)}>Items</Button>
-                <div>
-                  <input
-                    type='text'
-                    placeholder ='Add phone number'
-                    value={ dummyNumber }
-                    onChange={(e): any => handleChange(e)}
-                    onKeyDown={(e): any => {
-                      if (e.key === 'Enter') {
-                        setPhone('');
-                      }
-                    }}
-                    className={classes.root} style={{backgroundColor: '#000000'}} ></input>
-                </div>
-              </TouchableOpacity>
-              <Text style={styles.title}>Upcoming Releases!</Text>
+              <View style={styles.container}>
+                <TouchableOpacity style={styles.buttonContainer}>
 
-              {
-                items.map((item, v) => {
-                  return <View
-                    key={v}>
-                    <Image
-                      style={{width: 250, height: 250, marginVertical: 10}}
-                      source={{uri: item.img}}
-                    />
-                    <Text style={styles.itemInfo}>{item.title}</Text>
-                    <Text style={styles.subItemInfo}>
-                      <FavoriteIcon onClick={(): void => favItem(item)} /> {item.subTitle}</Text>
-                    <Button className={classes.root}
-                      style={{backgroundColor: '#000000'}}
-                      onClick={(): void => push(item)}> Notify me!
-                    </Button>
-                  </View>;
-                })
-              }
+                  <Button className={classes.root} style={{backgroundColor: '#000000'}} onClick={(): void => setPage(false)}>Items</Button>
+                  <div>
+                    <input
+                      type='text'
+                      placeholder ='Add phone number'
+                      value={ dummyNumber }
+                      onChange={(e): any => handleChange(e)}
+                      onKeyDown={(e): any => {
+                        if (e.key === 'Enter') {
+                          setPhone('');
+                        }
+                      }}
+                      className={classes.root} style={{backgroundColor: '#000000'}} ></input>
+                  </div>
+                </TouchableOpacity>
+                <Text style={styles.title}>Upcoming Releases!</Text>
+
+                {
+                  items.map((item, v) => {
+                    return <View
+                      key={v}>
+                      <Image
+                        style={{width: 250, height: 250, marginVertical: 10, alignSelf: 'center'}}
+                        source={{uri: item.img}}
+                      />
+                      <Text style={styles.itemInfo}>{item.title}</Text>
+                      <Text style={styles.subItemInfo}>
+                        <FavoriteIcon onClick={(): void => favItem(item)} /> {item.subTitle}</Text>
+                      <Button className={classes.root}
+                        style={{backgroundColor: '#000000'}}
+                        onClick={(): void => push(item)}> Notify me!
+                      </Button>
+                    </View>;
+                  })
+                }
+              </View>
             </View> :
             <View>
               <ExitToAppIcon onClick={(): void => setPage(true)}/>
