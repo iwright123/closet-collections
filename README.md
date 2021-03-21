@@ -1,5 +1,5 @@
-# ClosetCollections
-Fashion application with the latest releases.
+# ClosetCollections <a href="https://closet-collections-308301.uc.r.appspot.com/"><img src="https://i.ibb.co/zRR5Nd4/barkpoint.png" width=35 height=35></img><a>
+Fashion application with the latest clothing and apparel releases.
 
 # Description
 Closet Collections is designed to allow the user to curate a collection of clothing items and create/save outfits based on those items.
@@ -121,5 +121,4 @@ The calendar feature displays to the user new and upcoming releases based on cur
 Closet Collections utilizes Sequelize and the use of Clever-Cloud  for storage needs.
 # APIs
 Google Auth
-IPStack
-Weatherbit
+
