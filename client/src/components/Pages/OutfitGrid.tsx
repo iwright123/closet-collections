@@ -23,7 +23,7 @@ import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import { title } from 'node:process';
 // import { getLikes } from 'server/helpers/Likes';
 import Footer from './Footer';
-
+import { StyleSheet } from 'react-native';
 //import tileData from './tileData';
 const socket = io('http://localhost:3000');
 interface IPost {
@@ -70,10 +70,12 @@ const OutfitGrid = (): any => {
   const [state, setState] = React.useState<Message>({message: '', name: ''});
   const [comment, setComments] = React.useState([]);
   const [font, setFont] = useState(25);
-  const [imgSize, setImgSize] = useState(15);
+  const [imgSize, setImgSize] = useState(250);
   const colorChange = { color: 'black'};
   const colorChange2 = { color: 'red'};
   const [display, setDisplay] = React.useState(false);
+
+  const [input, setInput] = React.useState(14);
   const handleLikeClick = (e): void => {
     setLikeColor(!likeColor);
   };
@@ -98,11 +100,11 @@ const OutfitGrid = (): any => {
 
   const larger = (): any => {
     setFont(40);
-    setImgSize(40);
+    setImgSize(300);
   };
   const smaller = (): any => {
     setFont(25);
-    setImgSize(15);
+    setImgSize(25);
   };
   const grabComments = (): Promise<any> => {
     return axios.get('/comments')
@@ -134,6 +136,8 @@ const OutfitGrid = (): any => {
       .catch((err) => console.warn(err));
   };
 
+
+
   useEffect(() => {
     getFits();
   }, []);
@@ -142,6 +146,20 @@ const OutfitGrid = (): any => {
       .then(comments => setComments(comments.data))
       .catch(err => console.log('err getting comments try 1', err));
   }, []);
+
+  const styles = StyleSheet.create({
+    title: {
+      fontSize: font,
+      fontFamily: 'Roboto Slab',
+    },
+    itemInfo: {
+      flex: 1,
+      fontSize: imgSize,
+
+      fontFamily: 'Roboto Slab',
+    }
+  });
+
   return (
     !images.length ? <h1>There Are No Top Outfits At This Time</h1> :
       <div className={classes.root}>
@@ -155,8 +173,8 @@ const OutfitGrid = (): any => {
           images.map((tile, i) => (
             <div id='comments' key={i}>
               <div>
-                <h3 id='publicName'>{tile.user}</h3>
-                <img src={tile.imageUrl} />
+                <h3 style={{fontSize: font}} id='publicName'>{tile.user}</h3>
+                <img style={{height: imgSize}} src={tile.imageUrl} alt='item info' />
                 <div id='publicactions'>
                   <Button
                     onClick={((id): Promise<any> => updateLike(tile.id))}
@@ -183,14 +201,17 @@ const OutfitGrid = (): any => {
               <div id='lookhere'>
 
                 <ul>
+                  <div id='sendcomment'>
+                    <input autoComplete="off" type="text" className="commentInput" placeholder='comment' value={state.message} onChange={handleCommentChange}/>
+                    <Button type='submit' style={{color: 'black'}} value={tile.id} onClick={(e): any => onMessageSubmit(e, tile.id)}><SendIcon/></Button>
+
+
+
+
+                  </div>
                   {display && comment.map((comment, index) => {
                     if (Number(comment.postId) === tile.id || String(comment.postId) === tile.id) {
                       return <div key={index} id='commentsd'>
-                        <div id='sendcomment'>
-                          <input type='text' value={state.message} name='message' placeholder='comment' onChange={handleCommentChange} />
-                          <Button id='sending' type='submit' style={{color: 'black'}} value={tile.id} onClick={(e): any => onMessageSubmit(e, tile.id)}><SendIcon/></Button>
-
-                        </div>
                         {`${comment.name}:    ${comment.comment}`}
                       </div>;
 

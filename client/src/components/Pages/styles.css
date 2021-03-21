@@ -273,13 +273,13 @@ text-align: center;
   border-radius: 0%;
 }
 #publicactions {
-  text-align: right;
+  text-align: center;
 }
 #displaymessage {
 margin-right: 6%;
 border-radius: 0%;
 height: 20px;
-width: 20px
+width: 20px;
 
 }
 #sending {
@@ -334,9 +334,27 @@ padding: 0;
 }
 #magnify {
   left: 0;
-  position: absolute
+  position: absolute;
+  display: flex;
+  width: 100%
 }
 #magnifier {
 width: 100%;
 
+}
+#comments {
+  border-bottom: 1px solid #aaa;
+  width: 100%;
+
+}
+#lookhere input:focus {
+  outline: none !important;
+    border: 1px solid #7ed957;
+}
+.commentInput {
+  width: 90%;
+  margin-right: 0;
+}
+.sendcomment {
+  display: flex;
 }
